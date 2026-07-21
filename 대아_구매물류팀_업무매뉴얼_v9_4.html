@@ -375,8 +375,19 @@
   .pg-btn.active .pg-btn-en { color:rgba(255,255,255,.72); }
   .pg-btn .pg-btn-tx { min-width:0; }
 
-  /* detail panel */
-  .pg-detail { margin-top:24px; }
+  /* detail view (품목 클릭 시 이동) */
+  .pg-back { display:inline-flex; align-items:center; gap:6px; background:var(--white);
+        border:1px solid var(--border); color:var(--navy2); font-family:inherit; font-size:13px;
+        font-weight:600; padding:8px 16px; border-radius:9px; cursor:pointer; margin-bottom:18px; transition:all .15s; }
+  .pg-back:hover { background:var(--navy2); color:#fff; border-color:var(--navy2); }
+  .pg-nav { display:flex; gap:10px; margin-top:20px; }
+  .pg-navbtn { flex:1; background:var(--white); border:1px solid var(--border); color:var(--navy);
+        font-family:inherit; font-size:13px; font-weight:600; padding:12px 14px; border-radius:11px;
+        cursor:pointer; text-align:center; transition:all .15s; }
+  .pg-navbtn:hover:not(:disabled) { border-color:var(--navy3); box-shadow:0 4px 12px rgba(27,58,107,.13); }
+  .pg-navbtn:disabled { opacity:.4; cursor:default; }
+  .pg-navbtn.ghost { flex:0 0 auto; background:var(--soft); color:var(--navy2); }
+  .pg-detail { margin-top:0; }
   .pg-card { display:none; }
   .pg-card.active { display:block; animation:fadeIn .22s; }
   .pg-part { display:grid; grid-template-columns:300px 1fr; gap:26px; align-items:center;
@@ -1236,8 +1247,9 @@ Thanks. / Best Regards, Hyoju</div></div>
     <!-- ════ VENDORS ════ -->
     <!-- ════ 부품 도감 (품명 정보) ════ -->
     <div id="page-parts" class="page">
-      <div class="hero"><span class="he">🔩</span><div class="chapter-label">Reference · 품명 정보</div><h2>부품 도감</h2><p>하우징·터미널·전선 등 15종 부품을 그림으로 익힙니다. 아래 <strong>버튼을 하나씩 클릭</strong>하면 해당 부품의 도면·설명·대표 품번·취급 MAKER가 나타납니다.</p></div>
+      <div class="hero"><span class="he">🔩</span><div class="chapter-label">Reference · 품명 정보</div><h2>부품 도감</h2><p>하우징·터미널·전선 등 15종 부품을 그림으로 익힙니다. 아래에서 <strong>품목을 클릭</strong>하면 해당 부품의 상세 페이지(도면·설명·대표 품번·취급 MAKER)로 이동합니다.</p></div>
       <div class="pg">
+        <div id="pg-list">
         <div class="pg-read"><b>그림 읽는 법</b> — <b>빗금(///)이 쳐진 부분 = 금속</b>(전기가 흐르는 곳), 매끈한 회색 = 플라스틱/절연. <b>진한 파란색</b>은 그 부품의 핵심 포인트입니다.</div>
 
         <div class="pg-cat">
@@ -1273,6 +1285,10 @@ Thanks. / Best Regards, Hyoju</div></div>
           </div>
         </div>
 
+        </div><!-- /pg-list -->
+
+        <div id="pg-view" style="display:none">
+          <button class="pg-back" onclick="partsBackToList()">← 품목 목록으로 돌아가기</button>
         <div class="pg-detail">
 
           <div class="pg-card active" id="pgc-hsg"><div class="pg-part">
@@ -1663,6 +1679,14 @@ Thanks. / Best Regards, Hyoju</div></div>
 
         </div><!-- /pg-detail -->
 
+        <div class="pg-nav">
+          <button class="pg-navbtn" id="pg-prev" onclick="partsStep(-1)">← 이전</button>
+          <button class="pg-navbtn ghost" onclick="partsBackToList()">☰ 품목 목록</button>
+          <button class="pg-navbtn" id="pg-next" onclick="partsStep(1)">다음 →</button>
+        </div>
+        </div><!-- /pg-view -->
+
+        <div id="pg-extra">
         <div class="divider"></div>
         <div class="pg-cat-lbl" style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--navy3);margin:0 2px 12px;">거래처 카드 — 아이콘 삽입 예시</div>
         <div class="pg-vcard">
@@ -1677,6 +1701,7 @@ Thanks. / Best Regards, Hyoju</div></div>
           <div class="tbl-wrap"><table><thead><tr><th>대표 품번</th><th>종류</th><th>메모</th></tr></thead><tbody><tr><td>5557-20R</td><td>HOUSING</td><td>Mini-Fit 계열</td></tr><tr><td>51065-0500</td><td>HOUSING</td><td>MOLEX</td></tr><tr><td>173977-6</td><td>CONNECTOR</td><td>AMP 2.0mm, AWG#26</td></tr><tr><td>1-171822-0</td><td>HOUSING</td><td>AMP (앞 1- = 릴/수량)</td></tr></tbody></table></div>
           <div style="margin-top:10px;font-size:12px;color:var(--gray)">거래처코드 연결: <span class="pill" style="background:var(--soft);border:1px solid var(--line);color:var(--navy2);padding:4px 11px;border-radius:980px;font-weight:600;display:inline-block;margin:3px 4px 0 0">한국몰렉스·반도기전·뉴콘 → MOLEX</span><span class="pill" style="background:var(--soft);border:1px solid var(--line);color:var(--navy2);padding:4px 11px;border-radius:980px;font-weight:600;display:inline-block;margin:3px 4px 0 0">반도기전(김해) → AMP</span></div>
         </div>
+        </div><!-- /pg-extra -->
       </div><!-- /pg -->
     </div>
 
@@ -1844,13 +1869,42 @@ const pageTitles = {
   parts:'부품 도감 (품명 정보)', vendors:'매입업체 정보', items:'거래처별 품목코드'
 };
 
+const PART_ORDER = ['hsg','term','wafer','tpa','seal','conn','wire','tube','sleeve','tie','tape','sponge','core','fuse','label'];
+const PART_NAMES = {hsg:'하우징',term:'터미널',wafer:'웨이퍼',tpa:'TPA',seal:'씰',conn:'커넥터',wire:'전선',tube:'튜브',sleeve:'슬리브',tie:'케이블 타이',tape:'테이프',sponge:'스펀지',core:'페라이트 코어',fuse:'퓨즈',label:'라벨'};
+let currentPart = null;
+
 function showPart(id){
+  currentPart = id;
   document.querySelectorAll('#page-parts .pg-card').forEach(c => c.classList.remove('active'));
   document.querySelectorAll('#page-parts .pg-btn').forEach(b => b.classList.remove('active'));
   const card = document.getElementById('pgc-' + id);
   if(card) card.classList.add('active');
   const btn = document.querySelector('#page-parts .pg-btn[data-part="' + id + '"]');
   if(btn) btn.classList.add('active');
+  // 목록 뷰 숨기고 상세 뷰로 이동
+  document.getElementById('pg-list').style.display = 'none';
+  document.getElementById('pg-extra').style.display = 'none';
+  document.getElementById('pg-view').style.display = 'block';
+  // 이전/다음 버튼 라벨·활성 상태
+  const i = PART_ORDER.indexOf(id);
+  const prev = document.getElementById('pg-prev'), next = document.getElementById('pg-next');
+  if(i > 0){ prev.disabled = false; prev.textContent = '← ' + PART_NAMES[PART_ORDER[i-1]]; }
+  else { prev.disabled = true; prev.textContent = '← 이전'; }
+  if(i < PART_ORDER.length-1){ next.disabled = false; next.textContent = PART_NAMES[PART_ORDER[i+1]] + ' →'; }
+  else { next.disabled = true; next.textContent = '다음 →'; }
+  window.scrollTo(0, 0);
+}
+function partsStep(d){
+  const i = PART_ORDER.indexOf(currentPart), n = i + d;
+  if(n >= 0 && n < PART_ORDER.length) showPart(PART_ORDER[n]);
+}
+function partsBackToList(){
+  const view = document.getElementById('pg-view');
+  if(!view) return;
+  view.style.display = 'none';
+  document.getElementById('pg-list').style.display = 'block';
+  document.getElementById('pg-extra').style.display = 'block';
+  window.scrollTo(0, 0);
 }
 let visited = new Set(['home']);
 let currentPage = 'home';
@@ -1864,6 +1918,7 @@ function goto(id) {
   document.getElementById('page-title').textContent = pageTitles[id];
   currentPage = id;
   visited.add(id);
+  if(id==='parts') partsBackToList();
   if(id==='items') initItems();
   if(id==='erpshots') fillErpShots();
   if(id==='sim') initSim();
