@@ -349,6 +349,81 @@
   .erp-sum-row b { color:var(--navy); font-size:13px; }
   .erp-sum-row span { color:#555; font-size:11px; }
 
+  /* ══════ 부품 도감 (품명 정보) ══════ */
+  .pg { --accent:#2E5C8A; --soft:#EEF3FA; --soft2:#F7FAFD; --ink:#1B3A6B;
+        --ink2:#4A5568; --ink3:#8A94A6; --line:#D0DFF0; --red:#C62828; }
+  .pg .pg-read { background:var(--tip); border-left:3px solid var(--tipborder);
+        border-radius:8px; padding:12px 16px; font-size:12.5px; color:#555; line-height:1.7; margin:4px 0 20px; }
+  .pg .pg-read b { color:var(--navy); }
+
+  /* category groups of buttons */
+  .pg-cat { margin-bottom:16px; }
+  .pg-cat > .pg-cat-lbl { font-size:11px; font-weight:700; letter-spacing:.5px;
+        text-transform:uppercase; color:var(--navy3); margin:0 2px 9px; display:flex; align-items:center; gap:7px; }
+  .pg-cat > .pg-cat-lbl::after { content:''; flex:1; height:1px; background:var(--border); }
+  .pg-btns { display:grid; grid-template-columns:repeat(auto-fill,minmax(128px,1fr)); gap:9px; }
+  .pg-btn { display:flex; align-items:center; gap:9px; background:var(--white);
+        border:1px solid var(--border); border-radius:11px; padding:11px 13px; cursor:pointer;
+        font-family:inherit; font-size:13px; font-weight:600; color:var(--navy); text-align:left;
+        transition:all .16s; box-shadow:0 1px 2px rgba(0,0,0,.04); }
+  .pg-btn:hover { border-color:var(--navy3); box-shadow:0 4px 12px rgba(27,58,107,.13); transform:translateY(-2px); }
+  .pg-btn.active { background:var(--navy2); border-color:var(--navy2); color:#fff; box-shadow:0 5px 15px rgba(27,58,107,.28); }
+  .pg-btn svg { width:30px; height:30px; flex-shrink:0; background:var(--soft);
+        border:1px solid var(--line); border-radius:8px; padding:4px; transition:all .16s; }
+  .pg-btn.active svg { background:rgba(255,255,255,.18); border-color:rgba(255,255,255,.35); stroke:#fff; }
+  .pg-btn .pg-btn-en { display:block; font-size:10px; font-weight:500; color:var(--ink3); margin-top:1px; }
+  .pg-btn.active .pg-btn-en { color:rgba(255,255,255,.72); }
+  .pg-btn .pg-btn-tx { min-width:0; }
+
+  /* detail panel */
+  .pg-detail { margin-top:24px; }
+  .pg-card { display:none; }
+  .pg-card.active { display:block; animation:fadeIn .22s; }
+  .pg-part { display:grid; grid-template-columns:300px 1fr; gap:26px; align-items:center;
+        background:var(--white); border:1px solid var(--border); border-radius:14px;
+        padding:24px 26px; box-shadow:0 2px 10px rgba(27,58,107,.07); }
+  @media(max-width:720px){ .pg-part { grid-template-columns:1fr; gap:14px; } }
+  .pg .dia { background:var(--soft); border:1px solid var(--line); border-radius:14px;
+        padding:16px; display:flex; align-items:center; justify-content:center; }
+  .pg .dia svg { width:100%; height:auto; display:block; }
+  .pg .tag { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.4px;
+        color:var(--navy2); background:var(--soft); border:1px solid var(--line); padding:3px 10px; border-radius:7px; }
+  .pg .p-h4 { font-size:19px; font-weight:700; color:var(--navy); margin:10px 0 4px; }
+  .pg .enname { font-size:12.5px; color:var(--ink3); font-weight:500; margin-left:8px; }
+  .pg .small { font-size:13.5px; color:var(--gray); line-height:1.75; margin:8px 0 4px; }
+  .pg .small b { color:var(--navy); font-weight:600; }
+  .pg .rowlbl { font-size:11px; font-weight:700; letter-spacing:.3px; text-transform:uppercase;
+        color:var(--ink3); margin:15px 0 5px; }
+  .pg .pno { display:inline-block; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+        font-size:12px; background:var(--lightgray); border:1px solid var(--border); color:var(--navy);
+        padding:3px 9px; border-radius:7px; margin:3px 5px 0 0; }
+  .pg .pill { display:inline-block; font-size:12px; background:var(--soft); border:1px solid var(--line);
+        color:var(--navy2); padding:4px 11px; border-radius:980px; margin:4px 5px 0 0; font-weight:600; }
+  .pg svg text { font-family:'Malgun Gothic','맑은 고딕',sans-serif; font-size:11px; fill:var(--ink2); }
+  .pg svg .ac { fill:var(--accent); }
+  .pg svg .acl { font-weight:600; fill:var(--accent); }
+
+  /* vendor-card example */
+  .pg-vcard { background:var(--white); border:1px solid var(--border); border-radius:14px;
+        padding:24px 26px; box-shadow:0 2px 10px rgba(27,58,107,.07); margin-top:14px; }
+  .pg-vcard .kicker { display:inline-flex; align-items:center; gap:9px; font-size:11px; font-weight:700;
+        letter-spacing:.5px; color:var(--navy2); text-transform:uppercase; margin-bottom:10px; }
+  .pg-vcard .kicker::before { content:''; width:20px; height:1px; background:var(--navy2); }
+  .pg-vcard h3 { font-size:20px; font-weight:700; color:var(--navy); margin-bottom:12px; }
+  .pg-vcard .icons { display:flex; gap:8px; flex-wrap:wrap; margin:2px 0 16px; }
+  .pg-vcard .icons svg { width:36px; height:36px; background:var(--soft); border:1px solid var(--line);
+        border-radius:9px; padding:5px; }
+  .pg-vcard .cards2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0; }
+  @media(max-width:600px){ .pg-vcard .cards2 { grid-template-columns:1fr; } }
+  .pg-vcard .mini { background:var(--soft); border-radius:12px; padding:16px 18px; }
+  .pg-vcard .mini .mtag { font-size:11px; font-weight:700; letter-spacing:.3px; color:var(--navy2); }
+  .pg-vcard .mini h4 { font-size:14px; font-weight:700; color:var(--navy); margin:5px 0 6px; }
+  .pg-vcard .mini p { font-size:12.5px; color:var(--gray); line-height:1.6; margin:0; }
+  .pg-vcard .buy { background:var(--greenbg); border-left:3px solid var(--green); border-radius:8px;
+        padding:13px 16px; margin:16px 0; font-size:13px; color:#3a4a3a; line-height:1.7; }
+  .pg-vcard .buy .nt { font-size:11px; font-weight:700; text-transform:uppercase; color:var(--green); margin-bottom:5px; letter-spacing:.4px; }
+  .pg-vcard .buy b { color:var(--navy); }
+
 </style>
 </head>
 <body>
@@ -393,6 +468,7 @@
     <div class="nav-item" data-page="checklist" onclick="goto('checklist')"><span class="icon">✅</span> 주간 체크리스트</div>
 
     <div class="nav-section">참고 정보</div>
+    <div class="nav-item" data-page="parts" onclick="goto('parts')"><span class="icon">🔩</span> 부품 도감 (품명 정보) <span class="num">15</span></div>
     <div class="nav-item" data-page="vendors" onclick="goto('vendors')"><span class="icon">🏢</span> 매입업체 정보 <span class="num">31</span></div>
     <div class="nav-item" data-page="items" onclick="goto('items')"><span class="icon">🗃️</span> 거래처별 품목코드 <span class="num" id="nav-item-count">9천+</span></div>
   </div>
@@ -435,6 +511,7 @@
         <div class="home-card" onclick="goto('p1')"><div class="icon2">📋</div><h3>ERP 상세 작업</h3><p>수주·입고·출고·품목코드 화면 클릭 절차</p><span class="tag">실전 클릭</span></div>
         <div class="home-card" onclick="goto('macro')"><div class="icon2">⚙️</div><h3>자동화 매크로</h3><p>직접 제작한 Excel VBA 매크로 운영 안내</p><span class="tag">12개 모듈</span></div>
         <div class="home-card" onclick="goto('email')"><div class="icon2">✉️</div><h3>표준 이메일 양식</h3><p>국문(대아홀딩스)·영문(태국 법인) 작성 규칙</p><span class="tag">국문·영문</span></div>
+        <div class="home-card" onclick="goto('parts')"><div class="icon2">🔩</div><h3>부품 도감 (품명 정보)</h3><p>하우징·터미널·전선 등 15종 부품을 그림으로 하나씩 클릭 학습</p><span class="tag">버튼 학습</span></div>
         <div class="home-card" onclick="goto('vendors')"><div class="icon2">🏢</div><h3>매입업체·품목 정보</h3><p>31개 업체 품목 검색</p><span class="tag">검색 가능</span></div>
         <div class="home-card" onclick="goto('items')"><div class="icon2">🗃️</div><h3>거래처별 품목코드</h3><p>ERP 전체 품목코드를 거래처별로 검색·조회</p><span class="tag" id="home-item-tag">전체 품목</span></div>
       </div>
@@ -1157,6 +1234,452 @@ Thanks. / Best Regards, Hyoju</div></div>
     </div>
 
     <!-- ════ VENDORS ════ -->
+    <!-- ════ 부품 도감 (품명 정보) ════ -->
+    <div id="page-parts" class="page">
+      <div class="hero"><span class="he">🔩</span><div class="chapter-label">Reference · 품명 정보</div><h2>부품 도감</h2><p>하우징·터미널·전선 등 15종 부품을 그림으로 익힙니다. 아래 <strong>버튼을 하나씩 클릭</strong>하면 해당 부품의 도면·설명·대표 품번·취급 MAKER가 나타납니다.</p></div>
+      <div class="pg">
+        <div class="pg-read"><b>그림 읽는 법</b> — <b>빗금(///)이 쳐진 부분 = 금속</b>(전기가 흐르는 곳), 매끈한 회색 = 플라스틱/절연. <b>진한 파란색</b>은 그 부품의 핵심 포인트입니다.</div>
+
+        <div class="pg-cat">
+          <div class="pg-cat-lbl">커넥터 계열</div>
+          <div class="pg-btns">
+            <button class="pg-btn active" data-part="hsg" onclick="showPart('hsg')"><svg viewBox="0 0 40 40" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="14" width="26" height="18" rx="3"/><path d="M14 14 v-4 h12 v4"/><line x1="13" y1="20" x2="13" y2="26"/><line x1="20" y1="20" x2="20" y2="26"/><line x1="27" y1="20" x2="27" y2="26"/></svg><span class="pg-btn-tx">하우징<span class="pg-btn-en">HOUSING</span></span></button>
+            <button class="pg-btn" data-part="term" onclick="showPart('term')"><svg viewBox="0 0 40 40" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="16" width="9" height="9" rx="1.5"/><path d="M16 25 l3 -8 M24 25 l-3 -8"/><path d="M16 25 q4 3 8 0"/><line x1="24" y1="20.5" x2="35" y2="20.5"/></svg><span class="pg-btn-tx">터미널<span class="pg-btn-en">TERMINAL</span></span></button>
+            <button class="pg-btn" data-part="wafer" onclick="showPart('wafer')"><svg viewBox="0 0 40 40" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="11" y="10" width="18" height="9" rx="2"/><line x1="14" y1="19" x2="14" y2="28"/><line x1="20" y1="19" x2="20" y2="28"/><line x1="26" y1="19" x2="26" y2="28"/><line x1="8" y1="30" x2="32" y2="30"/></svg><span class="pg-btn-tx">웨이퍼<span class="pg-btn-en">WAFER</span></span></button>
+            <button class="pg-btn" data-part="tpa" onclick="showPart('tpa')"><svg viewBox="0 0 40 40" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="18" width="24" height="14" rx="2"/><line x1="14" y1="24" x2="14" y2="30"/><line x1="20" y1="24" x2="20" y2="30"/><line x1="26" y1="24" x2="26" y2="30"/><rect x="12" y="9" width="16" height="4" rx="1"/><path d="M20 4 v3 M17.5 5.5 l2.5 2.5 2.5 -2.5"/></svg><span class="pg-btn-tx">TPA<span class="pg-btn-en">2차 잠금</span></span></button>
+            <button class="pg-btn" data-part="seal" onclick="showPart('seal')"><svg viewBox="0 0 40 40" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="20" x2="34" y2="20"/><ellipse cx="16" cy="20" rx="4" ry="8"/><ellipse cx="22" cy="20" rx="4" ry="8"/><ellipse cx="28" cy="20" rx="4" ry="8"/></svg><span class="pg-btn-tx">씰<span class="pg-btn-en">SEAL</span></span></button>
+            <button class="pg-btn" data-part="conn" onclick="showPart('conn')"><svg viewBox="0 0 40 40" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12 h9 v5 h-4 v6 h4 v5 h-9"/><path d="M33 12 h-9 v5 h4 v6 h-4 v5 h9"/></svg><span class="pg-btn-tx">커넥터<span class="pg-btn-en">완성 결합</span></span></button>
+          </div>
+        </div>
+
+        <div class="pg-cat">
+          <div class="pg-cat-lbl">전선 · 부자재</div>
+          <div class="pg-btns">
+            <button class="pg-btn" data-part="wire" onclick="showPart('wire')"><svg viewBox="0 0 40 40" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="20" r="12"/><circle cx="20" cy="20" r="6"/><circle cx="20" cy="20" r="1.6" fill="#1d1d1f"/></svg><span class="pg-btn-tx">전선<span class="pg-btn-en">WIRE</span></span></button>
+            <button class="pg-btn" data-part="tube" onclick="showPart('tube')"><svg viewBox="0 0 40 40" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="20" x2="35" y2="20"/><rect x="12" y="14" width="16" height="12" rx="6"/></svg><span class="pg-btn-tx">튜브<span class="pg-btn-en">TUBE</span></span></button>
+            <button class="pg-btn" data-part="sleeve" onclick="showPart('sleeve')"><svg viewBox="0 0 40 40" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="20" x2="35" y2="20"/><rect x="12" y="14" width="16" height="12" rx="3"/><line x1="18" y1="20" x2="22" y2="20"/></svg><span class="pg-btn-tx">슬리브<span class="pg-btn-en">SLEEVE</span></span></button>
+            <button class="pg-btn" data-part="tie" onclick="showPart('tie')"><svg viewBox="0 0 40 40" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="14" x2="34" y2="14"/><line x1="6" y1="20" x2="34" y2="20"/><line x1="6" y1="26" x2="34" y2="26"/><rect x="17" y="9" width="6" height="21" rx="1.5"/><rect x="15.5" y="28" width="9" height="6" rx="1"/></svg><span class="pg-btn-tx">케이블 타이<span class="pg-btn-en">TIE</span></span></button>
+            <button class="pg-btn" data-part="tape" onclick="showPart('tape')"><svg viewBox="0 0 40 40" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="20" r="9"/><circle cx="16" cy="20" r="3.5"/><path d="M25 17 h9 v6 h-9"/></svg><span class="pg-btn-tx">테이프<span class="pg-btn-en">TAPE</span></span></button>
+            <button class="pg-btn" data-part="sponge" onclick="showPart('sponge')"><svg viewBox="0 0 40 40" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 24 h18 l6 -6 h-18 z"/><path d="M8 24 v6 h18 v-6"/><path d="M26 24 v6 l6 -6 v-6"/></svg><span class="pg-btn-tx">스펀지<span class="pg-btn-en">SPONGE</span></span></button>
+          </div>
+        </div>
+
+        <div class="pg-cat">
+          <div class="pg-cat-lbl">코어 · 퓨즈 · 라벨</div>
+          <div class="pg-btns">
+            <button class="pg-btn" data-part="core" onclick="showPart('core')"><svg viewBox="0 0 40 40" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="20" r="11"/><circle cx="20" cy="20" r="4.5"/><line x1="4" y1="20" x2="36" y2="20"/></svg><span class="pg-btn-tx">페라이트 코어<span class="pg-btn-en">F/CORE</span></span></button>
+            <button class="pg-btn" data-part="fuse" onclick="showPart('fuse')"><svg viewBox="0 0 40 40" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="15" width="20" height="10" rx="5"/><rect x="6" y="15" width="5" height="10" rx="1.5"/><rect x="29" y="15" width="5" height="10" rx="1.5"/><path d="M12 20 q4 -3 8 0 q4 3 8 0"/></svg><span class="pg-btn-tx">퓨즈<span class="pg-btn-en">FUSE</span></span></button>
+            <button class="pg-btn" data-part="label" onclick="showPart('label')"><svg viewBox="0 0 40 40" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="11" width="22" height="18" rx="2"/><line x1="13" y1="17" x2="27" y2="17"/><line x1="13" y1="21" x2="23" y2="21"/><path d="M31 11 l-5 0 5 5 z" fill="#1d1d1f"/></svg><span class="pg-btn-tx">라벨<span class="pg-btn-en">LABEL</span></span></button>
+          </div>
+        </div>
+
+        <div class="pg-detail">
+
+          <div class="pg-card active" id="pgc-hsg"><div class="pg-part">
+            <div class="dia">
+            <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+              <rect x="70" y="45" width="150" height="100" rx="10" fill="#fff" stroke="#1d1d1f" stroke-width="2"/>
+              <path d="M120 45 L120 30 Q120 24 128 24 L172 24 Q180 24 180 30 L180 45" fill="none" stroke="#1d1d1f" stroke-width="2"/>
+              <text x="150" y="19" text-anchor="middle" class="acl">잠금 레버</text>
+              <g stroke="#86868b" stroke-width="1.6" fill="var(--soft2)">
+                <rect x="92" y="66" width="20" height="20" rx="3"/><rect x="122" y="66" width="20" height="20" rx="3"/>
+                <rect x="152" y="66" width="20" height="20" rx="3"/><rect x="182" y="66" width="20" height="20" rx="3"/>
+                <rect x="92" y="104" width="20" height="20" rx="3"/><rect x="122" y="104" width="20" height="20" rx="3"/>
+                <rect x="152" y="104" width="20" height="20" rx="3"/><rect x="182" y="104" width="20" height="20" rx="3"/>
+              </g>
+              <rect x="182" y="104" width="20" height="20" rx="3" fill="none" stroke="var(--accent)" stroke-width="2"/>
+              <path d="M262 114 L210 114" stroke="var(--accent)" stroke-width="1.4" marker-end="url(#arw)"/>
+              <text x="264" y="110" class="acl">단자</text><text x="264" y="123" class="ac">삽입구(극)</text>
+              <text x="52" y="99" text-anchor="end">플라스틱</text><text x="52" y="112" text-anchor="end">몸체</text>
+              <line x1="55" y1="95" x2="72" y2="95" stroke="#d2d2d7"/>
+              <defs><marker id="arw" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--accent)"/></marker></defs>
+            </svg>
+            </div>
+            <div>
+              <span class="tag">A-1</span>
+              <div class="p-h4">하우징 <span class="enname">HOUSING · 하우징</span></div>
+              <p class="small">단자를 꽂아 넣는 <b>플라스틱 껍데기</b>. 구멍 하나하나가 '극(極, cavity)'이고, 위쪽 <b>잠금 레버</b>로 짝(상대 커넥터)과 딸깍 결합됩니다. 극수(2극·4극·6극…)가 곧 규격.</p>
+              <div class="rowlbl">품번에서 이렇게</div>
+              <span class="pno">MG610398</span><span class="pno">5557-20R</span><span class="pno">SMW250-11</span>
+              <div class="rowlbl">대아 취급 MAKER</div>
+              <span class="pill">KET</span><span class="pill">MOLEX</span><span class="pill">YEONHO</span><span class="pill">KUM</span>
+            </div>
+          </div></div>
+
+          <div class="pg-card" id="pgc-term"><div class="pg-part">
+            <div class="dia">
+            <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="hatch" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="6" stroke="#b0b0b6" stroke-width="1"/></pattern>
+                <marker id="arw2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--accent)"/></marker>
+              </defs>
+              <rect x="34" y="72" width="60" height="42" rx="4" fill="url(#hatch)" stroke="#1d1d1f" stroke-width="2"/>
+              <line x1="30" y1="93" x2="34" y2="93" stroke="#1d1d1f" stroke-width="2"/>
+              <path d="M110 92 L118 66 M110 92 L118 118 M134 92 L126 66 M134 92 L126 118" stroke="#1d1d1f" stroke-width="2" fill="none"/>
+              <path d="M110 92 Q122 100 134 92" fill="url(#hatch)" stroke="#1d1d1f" stroke-width="2"/>
+              <path d="M150 92 L158 62 M150 92 L158 122 M182 92 L174 62 M182 92 L174 122" stroke="#1d1d1f" stroke-width="2" fill="none"/>
+              <path d="M150 92 Q166 102 182 92" fill="url(#hatch)" stroke="#1d1d1f" stroke-width="2"/>
+              <line x1="182" y1="92" x2="266" y2="92" stroke="#c98a3a" stroke-width="5"/>
+              <line x1="210" y1="92" x2="266" y2="92" stroke="#1d1d1f" stroke-width="10" stroke-linecap="round" opacity=".12"/>
+              <text x="266" y="80" text-anchor="end">전선</text>
+              <text x="64" y="132" text-anchor="middle" class="acl">접촉부</text><text x="64" y="145" text-anchor="middle" class="ac">(짝과 맞물림)</text>
+              <text x="122" y="52" text-anchor="middle">피복</text><text x="122" y="145" text-anchor="middle">압착부</text>
+              <text x="166" y="48" text-anchor="middle" class="acl">심선</text><text x="166" y="140" text-anchor="middle" class="acl">압착부</text>
+              <path d="M166 126 L166 116" stroke="var(--accent)" stroke-width="1.4" marker-end="url(#arw2)"/>
+            </svg>
+            </div>
+            <div>
+              <span class="tag">A-2 · 압착의 핵심</span>
+              <div class="p-h4">터미널 <span class="enname">TERMINAL · 단자</span></div>
+              <p class="small">전선 끝에 압착하는 <b>금속 단자</b>. 세 구간 — <b>접촉부</b>(짝과 전기적으로 맞물림), <b>피복 압착부</b>, <b>심선 압착부</b>. 5부 '압착'은 이 두 압착부를 제대로 눌렀는가가 전부입니다.</p>
+              <div class="rowlbl">품번에서 이렇게</div>
+              <span class="pno">ST710095-3</span><span class="pno">YRT110-05(M)E</span><span class="pno">7114-4101-02</span>
+              <div class="rowlbl">대아 취급 MAKER</div>
+              <span class="pill">KET</span><span class="pill">AMP</span><span class="pill">YEONHO</span><span class="pill">YAZAKI</span>
+            </div>
+          </div></div>
+
+          <div class="pg-card" id="pgc-wafer"><div class="pg-part">
+            <div class="dia">
+            <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+              <defs><pattern id="hatch3" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="6" stroke="#b0b0b6" stroke-width="1"/></pattern></defs>
+              <rect x="40" y="130" width="220" height="20" rx="3" fill="var(--soft2)" stroke="#86868b" stroke-width="1.6"/>
+              <text x="252" y="167" text-anchor="end" class="ac">기판(PCB)</text>
+              <rect x="96" y="58" width="108" height="46" rx="6" fill="#fff" stroke="#1d1d1f" stroke-width="2"/>
+              <g stroke="#1d1d1f" stroke-width="3">
+                <line x1="112" y1="104" x2="112" y2="140"/><line x1="132" y1="104" x2="132" y2="140"/>
+                <line x1="152" y1="104" x2="152" y2="140"/><line x1="172" y1="104" x2="172" y2="140"/><line x1="192" y1="104" x2="192" y2="140"/>
+              </g>
+              <rect x="106" y="70" width="12" height="10" fill="url(#hatch3)" stroke="none"/>
+              <text x="150" y="46" text-anchor="middle" class="acl">기판에 직접 실장</text>
+              <text x="228" y="122" class="ac">핀(금속)</text>
+              <line x1="192" y1="122" x2="224" y2="120" stroke="#d2d2d7"/>
+            </svg>
+            </div>
+            <div>
+              <span class="tag">A-3</span>
+              <div class="p-h4">웨이퍼 <span class="enname">WAFER · 기판 헤더</span></div>
+              <p class="small">하우징이 전선에 붙는다면, 웨이퍼는 <b>기판(PCB)에 직접 납땜/실장</b>되는 쪽. 전선 커넥터가 여기에 꽂힙니다. 직각형(라이트앵글)과 직선형 구분이 도면 포인트.</p>
+              <div class="rowlbl">품번에서 이렇게</div>
+              <span class="pno">YH396-05V</span><span class="pno">35150-0292</span>
+              <div class="rowlbl">대아 취급 MAKER</div>
+              <span class="pill">YEONHO</span><span class="pill">MOLEX</span><span class="pill">HANLIM</span>
+            </div>
+          </div></div>
+
+          <div class="pg-card" id="pgc-tpa"><div class="pg-part">
+            <div class="dia">
+            <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+              <defs><marker id="arw4" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--accent)"/></marker></defs>
+              <rect x="60" y="66" width="150" height="80" rx="9" fill="#fff" stroke="#1d1d1f" stroke-width="2"/>
+              <g stroke="#86868b" stroke-width="1.5" fill="var(--soft2)">
+                <rect x="80" y="88" width="18" height="36" rx="3"/><rect x="106" y="88" width="18" height="36" rx="3"/>
+                <rect x="132" y="88" width="18" height="36" rx="3"/><rect x="158" y="88" width="18" height="36" rx="3"/>
+              </g>
+              <rect x="96" y="34" width="80" height="16" rx="4" fill="var(--accent)" opacity=".9"/>
+              <path d="M108 50 L108 62 M132 50 L132 62 M156 50 L156 62" stroke="var(--accent)" stroke-width="2"/>
+              <path d="M136 20 L136 30" stroke="var(--accent)" stroke-width="1.6" marker-end="url(#arw4)"/>
+              <text x="180" y="30" class="acl">2차 잠금 삽입</text>
+              <text x="248" y="112" text-anchor="end">단자</text><text x="248" y="125" text-anchor="end">밀림 방지</text>
+              <line x1="212" y1="112" x2="230" y2="110" stroke="#d2d2d7"/>
+            </svg>
+            </div>
+            <div>
+              <span class="tag">A-4</span>
+              <div class="p-h4">TPA / 리테이너 <span class="enname">TPA · 2차 잠금</span></div>
+              <p class="small">하우징에 꽂은 단자가 빠지지 않도록 <b>한 번 더 걸어주는 부품</b>(Terminal Position Assurance). 하우징과 <b>세트로 매칭</b>되며 별도 품번 — 빠뜨리기 쉬우니 주의.</p>
+              <div class="rowlbl">품번에서 이렇게</div>
+              <span class="pno">35748-0210</span><span class="pno">HLP0908-03</span>
+              <div class="rowlbl">대아 취급 MAKER</div>
+              <span class="pill">MOLEX</span><span class="pill">YEONHO</span><span class="pill">KET</span><span class="pill">TSE</span>
+            </div>
+          </div></div>
+
+          <div class="pg-card" id="pgc-seal"><div class="pg-part">
+            <div class="dia">
+            <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+              <line x1="30" y1="95" x2="270" y2="95" stroke="#c98a3a" stroke-width="6"/>
+              <g stroke="#1d1d1f" stroke-width="2" fill="var(--soft)">
+                <ellipse cx="120" cy="95" rx="10" ry="26"/><ellipse cx="135" cy="95" rx="10" ry="26"/><ellipse cx="150" cy="95" rx="10" ry="26"/>
+              </g>
+              <rect x="112" y="69" width="46" height="52" fill="none"/>
+              <text x="135" y="52" text-anchor="middle" class="acl">방수 고무 씰</text>
+              <path d="M135 58 L135 68" stroke="var(--accent)" stroke-width="1.4"/>
+              <path d="M186 82 h34 v26 h-34 z" fill="none" stroke="#86868b" stroke-width="1.6"/>
+              <text x="203" y="132" text-anchor="middle">단자(앞)</text>
+              <text x="272" y="88" text-anchor="end">전선</text>
+              <text x="150" y="145" text-anchor="middle" class="small" style="font-size:10.5px">주름(립)이 커넥터 안쪽을 밀봉</text>
+            </svg>
+            </div>
+            <div>
+              <span class="tag">A-5</span>
+              <div class="p-h4">씰 <span class="enname">SEAL · 방수 씰</span></div>
+              <p class="small">전선에 끼우는 <b>고무 밀봉재</b>. 단자를 압착하기 <b>전에 먼저 끼워야</b> 하고, 주름(립)이 하우징 안쪽을 막아 물·먼지를 차단. 자동차/방수 커넥터의 필수 구성.</p>
+              <div class="rowlbl">품번에서 이렇게</div>
+              <span class="pno">7158-3031-90</span><span class="pno">SL-15TF</span>
+              <div class="rowlbl">대아 취급 MAKER</div>
+              <span class="pill">YAZAKI</span><span class="pill">KET</span><span class="pill">SL</span><span class="pill">APTIV</span>
+            </div>
+          </div></div>
+
+          <div class="pg-card" id="pgc-conn"><div class="pg-part">
+            <div class="dia">
+            <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+              <defs><marker id="arw6" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--accent)"/></marker></defs>
+              <path d="M40 62 h78 v14 h-14 v38 h14 v14 h-78 z" fill="#fff" stroke="#1d1d1f" stroke-width="2"/>
+              <line x1="24" y1="82" x2="40" y2="82" stroke="#c98a3a" stroke-width="4"/>
+              <line x1="24" y1="108" x2="40" y2="108" stroke="#c98a3a" stroke-width="4"/>
+              <text x="72" y="150" text-anchor="middle">암(female)</text>
+              <path d="M260 62 h-78 v14 h14 v38 h-14 v14 h78 z" fill="#fff" stroke="#1d1d1f" stroke-width="2"/>
+              <line x1="276" y1="82" x2="260" y2="82" stroke="#c98a3a" stroke-width="4"/>
+              <line x1="276" y1="108" x2="260" y2="108" stroke="#c98a3a" stroke-width="4"/>
+              <text x="228" y="150" text-anchor="middle">수(male)</text>
+              <path d="M132 95 L156 95" stroke="var(--accent)" stroke-width="1.6" marker-end="url(#arw6)"/>
+              <path d="M168 95 L144 95" stroke="var(--accent)" stroke-width="1.6" marker-end="url(#arw6)"/>
+              <text x="150" y="42" text-anchor="middle" class="acl">딸깍 결합</text>
+            </svg>
+            </div>
+            <div>
+              <span class="tag">A-6 · 조립 결과</span>
+              <div class="p-h4">커넥터(결합) <span class="enname">CONNECTOR · 완성 결합</span></div>
+              <p class="small">하우징 + 단자 + 전선이 모여 한쪽 커넥터가 되고, <b>암·수 두 커넥터가 맞물려</b> 회로를 잇습니다. 리스트에서 'CONNECTOR'는 보통 세트/완성 상태 품목.</p>
+              <div class="rowlbl">품번에서 이렇게</div>
+              <span class="pno">173977-6</span><span class="pno">7282-3443-60</span>
+              <div class="rowlbl">대아 취급 MAKER</div>
+              <span class="pill">AMP</span><span class="pill">MOLEX</span><span class="pill">YAZAKI</span><span class="pill">STOCKO</span>
+            </div>
+          </div></div>
+
+          <div class="pg-card" id="pgc-wire"><div class="pg-part">
+            <div class="dia">
+            <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+              <line x1="30" y1="150" x2="200" y2="60" stroke="#1d1d1f" stroke-width="16" opacity=".10"/>
+              <line x1="30" y1="150" x2="200" y2="60" stroke="#86868b" stroke-width="15" fill="none"/>
+              <circle cx="215" cy="95" r="52" fill="#fff" stroke="#1d1d1f" stroke-width="2"/>
+              <circle cx="215" cy="95" r="30" fill="none" stroke="#86868b" stroke-width="1.6"/>
+              <g fill="#c98a3a"><circle cx="215" cy="95" r="6"/><circle cx="203" cy="88" r="6"/><circle cx="227" cy="88" r="6"/><circle cx="203" cy="102" r="6"/><circle cx="227" cy="102" r="6"/><circle cx="215" cy="79" r="6"/><circle cx="215" cy="111" r="6"/></g>
+              <text x="215" y="40" text-anchor="middle">절연 피복(색상)</text>
+              <path d="M215 45 L215 44" stroke="#d2d2d7"/>
+              <line x1="252" y1="120" x2="272" y2="140" stroke="#d2d2d7"/>
+              <text x="274" y="152" class="acl">SQ = 도체</text><text x="274" y="165" class="ac">단면적(㎟)</text>
+            </svg>
+            </div>
+            <div>
+              <span class="tag">B-1</span>
+              <div class="p-h4">전선 <span class="enname">WIRE · 전선</span></div>
+              <p class="small">가운데 구리 심선(도체) + 바깥 절연 피복. <b>SQ 숫자 = 도체 단면적(㎟)</b>이라 굵기 = 흘릴 수 있는 전류. 관리는 <b>SQ(또는 AWG) × 색상</b> 조합으로.</p>
+              <div class="rowlbl">품번에서 이렇게</div>
+              <span class="pno">DIWF 0.5SQ BLU</span><span class="pno">AVS 0.3SQ BLK</span><span class="pno">SRPW 1.0 RED</span>
+              <div class="rowlbl">대아 취급 MAKER</div>
+              <span class="pill">KYUNG SHIN</span><span class="pill">LS CABLE</span><span class="pill">SAMPOONG</span><span class="pill">BOSUNG</span>
+            </div>
+          </div></div>
+
+          <div class="pg-card" id="pgc-tube"><div class="pg-part">
+            <div class="dia">
+            <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+              <defs><marker id="arw8" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="var(--accent)"/></marker></defs>
+              <line x1="20" y1="70" x2="120" y2="70" stroke="#c98a3a" stroke-width="5"/>
+              <rect x="46" y="52" width="52" height="36" rx="8" fill="none" stroke="#86868b" stroke-width="2" stroke-dasharray="5 4"/>
+              <text x="72" y="110" text-anchor="middle">가열 전 (헐렁)</text>
+              <line x1="180" y1="70" x2="280" y2="70" stroke="#c98a3a" stroke-width="5"/>
+              <rect x="206" y="60" width="52" height="20" rx="9" fill="var(--soft)" stroke="#1d1d1f" stroke-width="2"/>
+              <text x="232" y="110" text-anchor="middle" class="acl">가열 후 (밀착)</text>
+              <path d="M130 70 L172 70" stroke="var(--accent)" stroke-width="1.6" marker-end="url(#arw8)"/>
+              <text x="151" y="60" text-anchor="middle" class="ac">열</text>
+              <text x="150" y="150" text-anchor="middle" class="small" style="font-size:10.5px">이음부 절연·보호 / 코루게이트는 굵은 배선 다발용</text>
+            </svg>
+            </div>
+            <div>
+              <span class="tag">B-2</span>
+              <div class="p-h4">튜브 <span class="enname">TUBE · 수축/보호 튜브</span></div>
+              <p class="small"><b>열수축 튜브</b>는 끼운 뒤 열을 주면 오그라들어 이음부를 절연·보호. 이때 <b>가열 전 안지름(ID)</b>으로 규격을 봅니다. 코루게이트/PP 튜브는 배선 다발 외피용.</p>
+              <div class="rowlbl">품번에서 이렇게</div>
+              <span class="pno">3.5mm A-4 (KDK)</span><span class="pno">VIT-600 #1</span><span class="pno">CORRUGATE ø10.0</span>
+              <div class="rowlbl">대아 취급 MAKER</div>
+              <span class="pill">KDK</span><span class="pill">DAEMYUNG</span><span class="pill">BUNYOUNG</span><span class="pill">DAE-A IND.</span>
+            </div>
+          </div></div>
+
+          <div class="pg-card" id="pgc-sleeve"><div class="pg-part">
+            <div class="dia">
+            <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+              <line x1="24" y1="95" x2="276" y2="95" stroke="#c98a3a" stroke-width="6"/>
+              <rect x="104" y="72" width="92" height="46" rx="10" fill="#fff" stroke="#1d1d1f" stroke-width="2"/>
+              <text x="150" y="101" text-anchor="middle" class="acl" style="font-size:15px;letter-spacing:2px">A1</text>
+              <text x="150" y="52" text-anchor="middle">마킹 슬리브</text>
+              <path d="M150 58 L150 70" stroke="#d2d2d7"/>
+              <text x="150" y="146" text-anchor="middle" class="small" style="font-size:10.5px">전선에 끼워 회로 번호를 표시 · 절연</text>
+            </svg>
+            </div>
+            <div>
+              <span class="tag">B-3</span>
+              <div class="p-h4">슬리브 <span class="enname">SLEEVE · 마킹/절연 튜브</span></div>
+              <p class="small">전선에 끼워 <b>회로 번호·기호를 표기</b>하거나 부분 절연하는 짧은 튜브. 규격(안지름)·색상으로 관리. 대일CST가 전문(DFF/DFA/DDITC 계열).</p>
+              <div class="rowlbl">품번에서 이렇게</div>
+              <span class="pno">DFF18-3.0(UL)</span><span class="pno">DDITC 1.25 BLU</span>
+              <div class="rowlbl">대아 취급 MAKER</div>
+              <span class="pill">DAEIL CST</span>
+            </div>
+          </div></div>
+
+          <div class="pg-card" id="pgc-tie"><div class="pg-part">
+            <div class="dia">
+            <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+              <g stroke="#c98a3a" stroke-width="5"><line x1="30" y1="78" x2="270" y2="78"/><line x1="30" y1="90" x2="270" y2="90"/><line x1="30" y1="102" x2="270" y2="102"/><line x1="30" y1="114" x2="270" y2="114"/></g>
+              <rect x="132" y="60" width="16" height="72" rx="5" fill="none" stroke="#1d1d1f" stroke-width="2"/>
+              <rect x="126" y="126" width="28" height="20" rx="4" fill="var(--accent)"/>
+              <text x="140" y="52" text-anchor="middle" class="acl">타이 헤드에서 조임</text>
+              <path d="M140 132 L140 138" stroke="#fff" stroke-width="1.5"/>
+              <text x="272" y="70" text-anchor="end">배선 다발</text>
+            </svg>
+            </div>
+            <div>
+              <span class="tag">B-4</span>
+              <div class="p-h4">케이블 타이 <span class="enname">TIE · 결속 밴드</span></div>
+              <p class="small">여러 전선을 <b>한 다발로 묶어 고정</b>. 길이·색상·내열 등급으로 관리. 트리타이·클립타이 등 형태 다양. 위성단자·조은전자 경유가 많음.</p>
+              <div class="rowlbl">품번에서 이렇게</div>
+              <span class="pno">TREE TIE 170mm</span><span class="pno">GB110</span>
+              <div class="rowlbl">대아 취급 MAKER</div>
+              <span class="pill">CAIS</span><span class="pill">KUM</span><span class="pill">WESUNG</span>
+            </div>
+          </div></div>
+
+          <div class="pg-card" id="pgc-tape"><div class="pg-part">
+            <div class="dia">
+            <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+              <g stroke="#c98a3a" stroke-width="5"><line x1="30" y1="84" x2="270" y2="84"/><line x1="30" y1="96" x2="270" y2="96"/><line x1="30" y1="108" x2="270" y2="108"/></g>
+              <g stroke="#1d1d1f" stroke-width="2" fill="none">
+                <ellipse cx="120" cy="96" rx="7" ry="26"/><ellipse cx="140" cy="96" rx="7" ry="26"/>
+                <ellipse cx="160" cy="96" rx="7" ry="26"/><ellipse cx="180" cy="96" rx="7" ry="26"/>
+              </g>
+              <rect x="113" y="70" width="74" height="52" fill="var(--accent)" opacity=".08"/>
+              <text x="150" y="52" text-anchor="middle" class="acl">테이프로 감아 보호</text>
+              <text x="150" y="150" text-anchor="middle" class="small" style="font-size:10.5px">하네스 테이프 · UL 테이프 · 필라멘트 · 글라스</text>
+            </svg>
+            </div>
+            <div>
+              <span class="tag">B-5</span>
+              <div class="p-h4">테이프 <span class="enname">TAPE · 하네스 테이프</span></div>
+              <p class="small">배선 다발을 <b>감아 보호·고정</b>. 하네스 테이프(마감), UL 테이프(인증), 필라멘트·글라스(고정/내열) 등 용도별. 태양기전이 여러 브랜드를 종합 납품.</p>
+              <div class="rowlbl">품번에서 이렇게</div>
+              <span class="pno">SMART UL TAPE 19mm</span><span class="pno">AT TAPE No.231</span>
+              <div class="rowlbl">대아 취급 MAKER</div>
+              <span class="pill">TAEYOUNG</span><span class="pill">DUCKSUNG</span><span class="pill">TAEYANG(허브)</span>
+            </div>
+          </div></div>
+
+          <div class="pg-card" id="pgc-sponge"><div class="pg-part">
+            <div class="dia">
+            <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+              <path d="M70 120 L200 120 L230 92 L100 92 Z" fill="var(--soft)" stroke="#1d1d1f" stroke-width="2"/>
+              <path d="M200 120 L200 148 L230 120 L230 92 Z" fill="var(--soft2)" stroke="#1d1d1f" stroke-width="2"/>
+              <path d="M70 120 L70 148 L200 148 L200 120 Z" fill="#fff" stroke="#1d1d1f" stroke-width="2"/>
+              <g fill="#d2d2d7"><circle cx="95" cy="134" r="2.5"/><circle cx="120" cy="130" r="2.5"/><circle cx="150" cy="136" r="2.5"/><circle cx="175" cy="131" r="2.5"/></g>
+              <text x="245" y="105" class="acl">두께(T)</text>
+              <path d="M242 108 L232 112" stroke="var(--accent)" stroke-width="1.2"/>
+              <text x="135" y="172" text-anchor="middle" class="small" style="font-size:10.5px">가로 × 세로 × 두께 로 관리</text>
+            </svg>
+            </div>
+            <div>
+              <span class="tag">B-6</span>
+              <div class="p-h4">스펀지 <span class="enname">SPONGE · 완충 패드</span></div>
+              <p class="small">배선/부품 사이의 <b>완충·소음 방지·간격 유지</b>용 폼. 접착 유무, 색상, <b>가로×세로×두께</b>로 규격 관리. 백산 등 브랜드가 태양기전 경유.</p>
+              <div class="rowlbl">품번에서 이렇게</div>
+              <span class="pno">SPONGE 60*79*3T</span>
+              <div class="rowlbl">대아 취급 MAKER</div>
+              <span class="pill">BAEG SAN</span><span class="pill">TAEYANG(허브)</span>
+            </div>
+          </div></div>
+
+          <div class="pg-card" id="pgc-core"><div class="pg-part">
+            <div class="dia">
+            <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="150" cy="95" r="58" fill="var(--soft)" stroke="#1d1d1f" stroke-width="2"/>
+              <circle cx="150" cy="95" r="22" fill="#fff" stroke="#1d1d1f" stroke-width="2"/>
+              <line x1="30" y1="95" x2="270" y2="95" stroke="#c98a3a" stroke-width="6"/>
+              <circle cx="150" cy="95" r="22" fill="none" stroke="#1d1d1f" stroke-width="2"/>
+              <text x="150" y="42" text-anchor="middle" class="acl">외경 × 내경 × 높이</text>
+              <path d="M150 47 L150 37" stroke="#d2d2d7"/>
+              <text x="272" y="86" text-anchor="end">전선 통과</text>
+              <text x="150" y="172" text-anchor="middle" class="small" style="font-size:10.5px">노이즈(고주파) 억제 · 재질 Ni/Mn</text>
+            </svg>
+            </div>
+            <div>
+              <span class="tag">C-1</span>
+              <div class="p-h4">페라이트 코어 <span class="enname">F/CORE · 노이즈 코어</span></div>
+              <p class="small">전선을 관통시켜 <b>고주파 노이즈를 억제</b>하는 자성체 링(또는 분할형 클램프). <b>품번보다 치수(외경×내경×높이)와 재질(Ni/Mn)</b>이 핵심 — 임피던스/주파수 스펙 확인.</p>
+              <div class="rowlbl">품번에서 이렇게</div>
+              <span class="pno">BNF-18</span><span class="pno">OR19x11-13H</span><span class="pno">CM4520TS</span>
+              <div class="rowlbl">대아 취급 MAKER</div>
+              <span class="pill">FEELUX</span><span class="pill">TAEJIN</span><span class="pill">SAMWHA</span><span class="pill">E-TECH</span><span class="pill">SME</span>
+            </div>
+          </div></div>
+
+          <div class="pg-card" id="pgc-fuse"><div class="pg-part">
+            <div class="dia">
+            <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+              <defs><pattern id="hatchF" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="6" stroke="#b0b0b6" stroke-width="1"/></pattern></defs>
+              <rect x="90" y="76" width="120" height="38" rx="19" fill="#fff" stroke="#1d1d1f" stroke-width="2"/>
+              <rect x="78" y="76" width="20" height="38" rx="6" fill="url(#hatchF)" stroke="#1d1d1f" stroke-width="2"/>
+              <rect x="202" y="76" width="20" height="38" rx="6" fill="url(#hatchF)" stroke="#1d1d1f" stroke-width="2"/>
+              <path d="M98 95 q26 -14 52 0 q26 14 52 0" fill="none" stroke="var(--accent)" stroke-width="2"/>
+              <text x="150" y="52" text-anchor="middle" class="acl">가는 선(엘리먼트)이 과전류에 끊김</text>
+              <path d="M150 58 L150 88" stroke="#d2d2d7"/>
+              <text x="150" y="146" text-anchor="middle" class="small" style="font-size:10.5px">정격 전압/전류(예 250V 10A) · 글라스/세라믹/써멀</text>
+            </svg>
+            </div>
+            <div>
+              <span class="tag">C-2</span>
+              <div class="p-h4">퓨즈 <span class="enname">FUSE · 퓨즈</span></div>
+              <p class="small">과전류가 흐르면 <b>내부 선이 끊겨 회로를 차단</b>. <b>정격 전압/전류</b>가 곧 규격. 글라스·세라믹(리텔퓨즈)과 온도 퓨즈(성우실업)로 나뉨 — '성우=전선'이 아니라 <b>퓨즈</b>.</p>
+              <div class="rowlbl">품번에서 이렇게</div>
+              <span class="pno">SW-105T 250V 10A</span><span class="pno">GLASS FUSE 218 3.15</span>
+              <div class="rowlbl">대아 취급 MAKER</div>
+              <span class="pill">SUNG WOO</span><span class="pill">LITTELFUSE</span>
+            </div>
+          </div></div>
+
+          <div class="pg-card" id="pgc-label"><div class="pg-part">
+            <div class="dia">
+            <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+              <rect x="78" y="52" width="144" height="86" rx="8" fill="#fff" stroke="#1d1d1f" stroke-width="2"/>
+              <g stroke="#86868b" stroke-width="2"><line x1="96" y1="74" x2="204" y2="74"/><line x1="96" y1="90" x2="180" y2="90"/></g>
+              <g stroke="#1d1d1f" stroke-width="2"><line x1="96" y1="106" x2="96" y2="124"/><line x1="102" y1="106" x2="102" y2="124"/><line x1="110" y1="106" x2="110" y2="124"/><line x1="116" y1="106" x2="116" y2="124"/><line x1="124" y1="106" x2="124" y2="124"/><line x1="130" y1="106" x2="130" y2="124"/></g>
+              <path d="M222 52 L202 52 L222 72 Z" fill="var(--accent)" opacity=".85"/>
+              <text x="150" y="160" text-anchor="middle" class="small" style="font-size:10.5px">규격·회로·인증 정보 식별 표기</text>
+            </svg>
+            </div>
+            <div>
+              <span class="tag">C-3</span>
+              <div class="p-h4">라벨 <span class="enname">LABEL · 식별 라벨</span></div>
+              <p class="small">제품·회로·인증 정보를 <b>표기하는 스티커</b>. 양면·단면, 내열·내약품 등급으로 관리. 세일테크가 라벨 전문(대아 취급 194종).</p>
+              <div class="rowlbl">품번에서 이렇게</div>
+              <span class="pno">LABEL AMP REM MAX 0.3A</span>
+              <div class="rowlbl">대아 취급 MAKER</div>
+              <span class="pill">SAEIL</span>
+            </div>
+          </div></div>
+
+        </div><!-- /pg-detail -->
+
+        <div class="divider"></div>
+        <div class="pg-cat-lbl" style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--navy3);margin:0 2px 12px;">거래처 카드 — 아이콘 삽입 예시</div>
+        <div class="pg-vcard">
+          <div class="kicker">글로벌 MAKER ①</div>
+          <h3>MOLEX · AMP (TE Connectivity)</h3>
+          <div class="icons"><svg viewBox="0 0 40 40" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="14" width="26" height="18" rx="3"/><path d="M14 14 v-4 h12 v4"/><line x1="13" y1="20" x2="13" y2="26"/><line x1="20" y1="20" x2="20" y2="26"/><line x1="27" y1="20" x2="27" y2="26"/></svg><svg viewBox="0 0 40 40" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="16" width="9" height="9" rx="1.5"/><path d="M16 25 l3 -8 M24 25 l-3 -8"/><path d="M16 25 q4 3 8 0"/><line x1="24" y1="20.5" x2="35" y2="20.5"/></svg><svg viewBox="0 0 40 40" fill="none" stroke="#1d1d1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="11" y="10" width="18" height="9" rx="2"/><line x1="14" y1="19" x2="14" y2="28"/><line x1="20" y1="19" x2="20" y2="28"/><line x1="26" y1="19" x2="26" y2="28"/><line x1="8" y1="30" x2="32" y2="30"/></svg></div>
+          <div class="cards2">
+            <div class="mini"><div class="mtag">MOLEX (미국)</div><h4>종합 커넥터 메이커</h4><p>Wire-to-Wire·Wire-to-Board 전 분야. Mini-Fit(5557/5559)·Micro-Fit·KK 시리즈.</p></div>
+            <div class="mini"><div class="mtag">AMP = TE (미국)</div><h4>세계 최대 커넥터</h4><p>'AMP'는 TE의 브랜드. 스트립형 터미널+압착 자동화로 하네스 대량생산을 연 회사.</p></div>
+          </div>
+          <div class="buy"><div class="nt">구매 담당자 포인트</div>리스트의 <b>'AMP'는 곧 TE</b>. MOLEX 품번은 <b>숫자 계열</b>(예 5557-20R), 시리즈로 궁합을 맞추면 대체 확인이 쉽습니다.</div>
+          <div class="tbl-wrap"><table><thead><tr><th>대표 품번</th><th>종류</th><th>메모</th></tr></thead><tbody><tr><td>5557-20R</td><td>HOUSING</td><td>Mini-Fit 계열</td></tr><tr><td>51065-0500</td><td>HOUSING</td><td>MOLEX</td></tr><tr><td>173977-6</td><td>CONNECTOR</td><td>AMP 2.0mm, AWG#26</td></tr><tr><td>1-171822-0</td><td>HOUSING</td><td>AMP (앞 1- = 릴/수량)</td></tr></tbody></table></div>
+          <div style="margin-top:10px;font-size:12px;color:var(--gray)">거래처코드 연결: <span class="pill" style="background:var(--soft);border:1px solid var(--line);color:var(--navy2);padding:4px 11px;border-radius:980px;font-weight:600;display:inline-block;margin:3px 4px 0 0">한국몰렉스·반도기전·뉴콘 → MOLEX</span><span class="pill" style="background:var(--soft);border:1px solid var(--line);color:var(--navy2);padding:4px 11px;border-radius:980px;font-weight:600;display:inline-block;margin:3px 4px 0 0">반도기전(김해) → AMP</span></div>
+        </div>
+      </div><!-- /pg -->
+    </div>
+
     <div id="page-vendors" class="page">
       <div class="hero"><span class="he">🏢</span><div class="chapter-label">Reference</div><h2>매입업체 정보</h2><p>31개 매입업체의 코드·담당자·연락처 정보입니다. 아래에서 검색할 수 있습니다.</p></div>
       <input type="text" id="vendor-search" placeholder="🔍  업체명, 코드, 담당자, MAKER 검색..." oninput="filterVendors(this.value)">
@@ -1311,15 +1834,24 @@ const taeyangItems = [
   {name:'VIT-600 1/2 BLK (ID12.0, T=1.0)',cat:'TUBE',maker:'대명전기'},
   {name:'VIT-600 1/2 CLR (ID12.0, T=1.0)',cat:'TUBE',maker:'대명전기'},
 ];
-const pages = ['home','overview','codes','erp','erpshots','sim','flow','s1','s2','s3','s3a','s4','s5','s6','s6b','s7','p1','p2','p3','p4','macro','email','checklist','vendors','items'];
+const pages = ['home','overview','codes','erp','erpshots','sim','flow','s1','s2','s3','s3a','s4','s5','s6','s6b','s7','p1','p2','p3','p4','macro','email','checklist','parts','vendors','items'];
 const pageTitles = {
   home:'목차 홈', overview:'매뉴얼 개요', codes:'기준 정보 (코드 체계)', erp:'ERP 시스템 화면', erpshots:'실제 ERP 화면 (WOW)', sim:'ERP 실습모드',
   flow:'전체 업무 흐름', s1:'② 요청 접수', s2:'③ 선박·에어 리스트 정리', s3:'④ 협력사 발주', s3a:'④-A 주간 분할 납품 요청',
   s4:'⑤ 입고', s5:'⑥ 출고', s6:'⑦ 거래명세서·마감', s6b:'⑦-B 통관관리·인보이스 발행', s7:'⑧ 인보이스 대사',
   p1:'① 주문서 접수 (수주 등록)', p2:'전산 입고잡기', p3:'전산 출고하기', p4:'품목코드 부여',
   macro:'업무 자동화 매크로', email:'표준 이메일 양식', checklist:'주간 업무 체크리스트',
-  vendors:'매입업체 정보', items:'거래처별 품목코드'
+  parts:'부품 도감 (품명 정보)', vendors:'매입업체 정보', items:'거래처별 품목코드'
 };
+
+function showPart(id){
+  document.querySelectorAll('#page-parts .pg-card').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('#page-parts .pg-btn').forEach(b => b.classList.remove('active'));
+  const card = document.getElementById('pgc-' + id);
+  if(card) card.classList.add('active');
+  const btn = document.querySelector('#page-parts .pg-btn[data-part="' + id + '"]');
+  if(btn) btn.classList.add('active');
+}
 let visited = new Set(['home']);
 let currentPage = 'home';
 
