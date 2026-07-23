@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>대아홀딩스 구매·물류팀 업무 매뉴얼</title>
 <style>
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css");
   * { margin:0; padding:0; box-sizing:border-box; }
   :root {
     --navy:#1B3A6B; --navy2:#2E5C8A; --navy3:#4A7AAD; --navy4:#7EB3E8;
@@ -16,8 +17,11 @@
     --warn:#FFF3E0; --warnborder:#E65100;
     --erpbg:#EAF1FB; --erphdr:#34598C; --erpfield:#FFFDF2;
     --pink:#FCE4EC; --yellow:#FFF9C4; --skyblue:#DDEBF7;
+    --font:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,system-ui,'Segoe UI',Roboto,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Noto Sans CJK KR',sans-serif;
+    --mono:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;
   }
-  body { font-family:'Malgun Gothic','맑은 고딕','Apple SD Gothic Neo',sans-serif; background:var(--lightgray); color:var(--text); display:flex; min-height:100vh; -webkit-font-smoothing:antialiased; }
+  body { font-family:var(--font); background:var(--lightgray); color:var(--text); display:flex; min-height:100vh; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility; letter-spacing:-0.01em; }
+  table, .erp-grid, .tbl, .items-stats .stat b, .item-code, .pno, .code-chip, .vcode, .vcnt { font-variant-numeric:tabular-nums; }
 
   /* ── SIDEBAR ── */
   #sidebar {
@@ -152,7 +156,7 @@
   .code-step .badge2 { background:var(--navy); color:#fff; border-radius:8px; padding:4px 10px; font-size:12px; font-weight:700; white-space:nowrap; flex-shrink:0; margin-top:2px; }
   .code-step .body h4 { font-size:14px; font-weight:700; color:var(--navy); margin-bottom:6px; }
   .code-step .body p { font-size:13px; color:var(--gray); line-height:1.6; }
-  .code-step .body .ex { background:var(--lightgray); border-radius:6px; padding:8px 12px; margin-top:8px; font-size:12px; color:var(--navy); font-family:monospace; }
+  .code-step .body .ex { background:var(--lightgray); border-radius:6px; padding:8px 12px; margin-top:8px; font-size:12px; color:var(--navy); font-family:var(--mono); }
 
   /* filter buttons */
   .filter-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; }
@@ -252,7 +256,7 @@
   .vgroup-body table { font-size:12px; }
   .vgroup-body th { background:var(--navy3); padding:7px 12px; font-size:11px; }
   .vgroup-body td { padding:6px 12px; font-size:12px; }
-  .item-code { font-family:monospace; font-weight:700; color:var(--navy2); white-space:nowrap; }
+  .item-code { font-family:var(--mono); font-weight:700; color:var(--navy2); white-space:nowrap; }
   .acct-chip { display:inline-block; font-size:10px; padding:1px 7px; border-radius:5px; background:var(--lightgray); color:var(--gray); }
   .acct-chip.raw { background:#FFF3E0; color:var(--amber); }
   .load-more { text-align:center; padding:11px; font-size:12px; color:var(--navy2); cursor:pointer; background:var(--lightgray); border-top:1px solid var(--border); font-weight:600; }
@@ -263,7 +267,7 @@
   .erp-toc-btn:hover { background:var(--navy2); color:#fff; border-color:var(--navy2); }
   .shot-block { background:var(--white); border:1px solid var(--border); border-radius:13px; padding:20px 22px; margin-bottom:20px; box-shadow:0 1px 3px rgba(0,0,0,.05); scroll-margin-top:74px; }
   .shot-head { display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap; }
-  .shot-head .shot-code { background:var(--navy); color:#fff; font-size:11px; font-weight:700; padding:3px 9px; border-radius:6px; font-family:monospace; flex-shrink:0; }
+  .shot-head .shot-code { background:var(--navy); color:#fff; font-size:11px; font-weight:700; padding:3px 9px; border-radius:6px; font-family:var(--mono); flex-shrink:0; }
   .shot-head h3 { font-size:16px; font-weight:700; color:var(--navy); }
   .shot-head .shot-step-tag { margin-left:auto; background:var(--accent); color:var(--navy2); font-size:11px; font-weight:700; padding:3px 11px; border-radius:10px; }
   .shot-desc { font-size:13px; color:var(--gray); line-height:1.65; margin-bottom:12px; }
@@ -281,7 +285,7 @@
   .sim-guide .gnum { display:inline-block; background:var(--navy2); color:#fff; width:18px; height:18px; line-height:18px; text-align:center; border-radius:50%; font-size:11px; margin-right:5px; }
 
   /* Windows 클래식 윈도우 */
-  .win { border:2px solid #0a246a; border-radius:4px; overflow:hidden; background:#d4d0c8; font-family:'Tahoma','Malgun Gothic',sans-serif; box-shadow:0 6px 24px rgba(0,0,0,.25); max-width:820px; }
+  .win { border:2px solid #0a246a; border-radius:4px; overflow:hidden; background:#d4d0c8; font-family:'Tahoma',var(--font); box-shadow:0 6px 24px rgba(0,0,0,.25); max-width:820px; }
   .win-title { background:linear-gradient(180deg,#0a5cc8,#063d8a); color:#fff; padding:5px 8px; font-size:12px; font-weight:700; display:flex; align-items:center; }
   .win-title .win-btns { margin-left:auto; display:flex; gap:3px; }
   .win-title .win-btns i { width:17px; height:15px; background:#cdd7e8; color:#063d8a; font-style:normal; font-size:10px; display:flex; align-items:center; justify-content:center; border:1px solid #fff; border-radius:2px; }
@@ -326,7 +330,7 @@
   /* 팝업 */
   .sim-popup-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:200; align-items:center; justify-content:center; }
   .sim-popup-overlay.show { display:flex; }
-  .sim-popup { background:#d4d0c8; border:2px solid #0a246a; border-radius:4px; width:min(560px,92vw); box-shadow:0 10px 40px rgba(0,0,0,.4); font-family:'Tahoma','Malgun Gothic',sans-serif; }
+  .sim-popup { background:#d4d0c8; border:2px solid #0a246a; border-radius:4px; width:min(560px,92vw); box-shadow:0 10px 40px rgba(0,0,0,.4); font-family:'Tahoma',var(--font); }
   .sim-popup-title { background:linear-gradient(180deg,#0a5cc8,#063d8a); color:#fff; padding:5px 10px; font-size:12px; font-weight:700; }
   .sim-popup-body { padding:12px; max-height:50vh; overflow-y:auto; }
   .sim-popup-foot { padding:8px 12px; display:flex; gap:8px; justify-content:flex-end; border-top:1px solid #aca899; }
@@ -416,7 +420,7 @@
         padding:3px 9px; border-radius:7px; margin:3px 5px 0 0; }
   .pg .pill { display:inline-block; font-size:12px; background:var(--soft); border:1px solid var(--line);
         color:var(--navy2); padding:4px 11px; border-radius:980px; margin:4px 5px 0 0; font-weight:600; }
-  .pg svg text { font-family:'Malgun Gothic','맑은 고딕',sans-serif; font-size:11px; fill:var(--ink2); }
+  .pg svg text { font-family:var(--font); font-size:11px; fill:var(--ink2); }
   .pg svg .ac { fill:var(--accent); }
   .pg svg .acl { font-weight:600; fill:var(--accent); }
 
@@ -608,7 +612,7 @@
           <div class="sub-step"><div class="dot"></div><span>발주 일자 기준 해당 월 단가를 사용한다.</span></div>
           <div class="sub-step"><div class="dot"></div><span><strong>× 1.06</strong> — 6% 마진 반영</span></div>
         </div>
-        <div class="ex" style="margin-top:12px;font-family:monospace;font-size:12px;background:var(--lightgray);border-radius:6px;padding:10px 14px;color:var(--navy);">예시) 입고단가 530원, 환율 1,380원/USD → ( 530 ÷ 1,380 ) × 1.06 ≈ <strong>$0.407 USD</strong></div>
+        <div class="ex" style="margin-top:12px;font-family:var(--mono);font-size:12px;background:var(--lightgray);border-radius:6px;padding:10px 14px;color:var(--navy);">예시) 입고단가 530원, 환율 1,380원/USD → ( 530 ÷ 1,380 ) × 1.06 ≈ <strong>$0.407 USD</strong></div>
       </div>
     </div>
 
@@ -1188,7 +1192,7 @@ Thanks.</div></div>
         <div class="code-step"><div class="badge2">[1] 품목코드 생성</div><div class="body"><h4>품목코드 신규 생성</h4><p>품목코드 밑 공백 클릭 → 입력 버튼 → 아래 항목 입력 후 저장</p><div class="sub-steps" style="margin-top:8px"><div class="sub-step"><div class="dot"></div><span><strong>품목코드</strong> — 10씩 증가하여 부여</span></div><div class="sub-step"><div class="dot"></div><span><strong>품목명</strong> — 부여된 Item Name 입력</span></div><div class="sub-step"><div class="dot"></div><span><strong>규격</strong> — Part Name 입력</span></div><div class="sub-step"><div class="dot"></div><span><strong>재고단위</strong> — Pcs</span></div><div class="sub-step"><div class="dot"></div><span><strong>시작일자</strong> — 입력 당월의 1일로 지정</span></div></div><div class="ex">예시) S720-000010 → S720-000020 → S720-000030 (10씩 증가)</div></div></div>
         <div class="code-step"><div class="badge2">[2] 품목계정</div><div class="body"><h4>품목계정 등록</h4><p>품목계정 밑 공백 클릭 → 입력 → 저장</p></div></div>
         <div class="code-step"><div class="badge2">[3] 주거래처</div><div class="body"><h4>주거래처 등록</h4><p>주작업장 밑 공백 클릭 → 입력 → 아래 항목만 입력 후 저장 (그 아래칸들은 입력 X)</p><div class="sub-steps" style="margin-top:8px"><div class="sub-step"><div class="dot"></div><span><strong>주거래처</strong> = 업체코드</span></div><div class="sub-step"><div class="dot"></div><span><strong>구매단위</strong> = Pcs</span></div></div></div></div>
-        <div class="code-step"><div class="badge2">[4] 거래처코드</div><div class="body"><h4>거래처코드 및 단가 등록</h4><p>거래처코드 밑 공란 클릭 → 입력 → 아래 항목 입력 후 저장</p><div class="sub-steps" style="margin-top:8px"><div class="sub-step"><div class="dot"></div><span><strong>거래처코드</strong> = 업체코드</span></div><div class="sub-step"><div class="dot"></div><span><strong>적용일자</strong> = 입력 당월의 1일</span></div><div class="sub-step"><div class="dot"></div><span><strong>단가</strong> = 개당 단가 (pcs당 가격)</span></div></div><div style="margin-top:16px;background:var(--light);border:1.5px solid var(--navy3);border-radius:10px;padding:16px 18px;"><div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;">🇹🇭 태국 단가 산출 공식</div><div style="background:var(--white);border-radius:8px;padding:12px 16px;text-align:center;border:1px solid var(--border);"><span style="font-size:18px;font-weight:700;color:var(--navy2);letter-spacing:.5px;">태국단가 = ( 입고단가 ÷ 환율 ) × 1.06</span></div><div class="sub-steps" style="margin-top:12px;"><div class="sub-step"><div class="dot"></div><span><strong>입고단가</strong> — 당월 단가 (pcs당 원화 단가)</span></div><div class="sub-step"><div class="dot"></div><span><strong>환율</strong> — 적용 당월 원/달러(USD) 환율</span></div><div class="sub-step"><div class="dot"></div><span><strong>× 1.06</strong> — 6% 마진 반영</span></div></div><div class="ex" style="margin-top:10px;font-family:monospace;font-size:12px;background:var(--lightgray);border-radius:6px;padding:9px 12px;color:var(--navy);">예시) 입고단가 530원, 환율 1,380원/USD → ( 530 ÷ 1,380 ) × 1.06 ≈ <strong>$0.407 USD</strong></div></div></div></div>
+        <div class="code-step"><div class="badge2">[4] 거래처코드</div><div class="body"><h4>거래처코드 및 단가 등록</h4><p>거래처코드 밑 공란 클릭 → 입력 → 아래 항목 입력 후 저장</p><div class="sub-steps" style="margin-top:8px"><div class="sub-step"><div class="dot"></div><span><strong>거래처코드</strong> = 업체코드</span></div><div class="sub-step"><div class="dot"></div><span><strong>적용일자</strong> = 입력 당월의 1일</span></div><div class="sub-step"><div class="dot"></div><span><strong>단가</strong> = 개당 단가 (pcs당 가격)</span></div></div><div style="margin-top:16px;background:var(--light);border:1.5px solid var(--navy3);border-radius:10px;padding:16px 18px;"><div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;">🇹🇭 태국 단가 산출 공식</div><div style="background:var(--white);border-radius:8px;padding:12px 16px;text-align:center;border:1px solid var(--border);"><span style="font-size:18px;font-weight:700;color:var(--navy2);letter-spacing:.5px;">태국단가 = ( 입고단가 ÷ 환율 ) × 1.06</span></div><div class="sub-steps" style="margin-top:12px;"><div class="sub-step"><div class="dot"></div><span><strong>입고단가</strong> — 당월 단가 (pcs당 원화 단가)</span></div><div class="sub-step"><div class="dot"></div><span><strong>환율</strong> — 적용 당월 원/달러(USD) 환율</span></div><div class="sub-step"><div class="dot"></div><span><strong>× 1.06</strong> — 6% 마진 반영</span></div></div><div class="ex" style="margin-top:10px;font-family:var(--mono);font-size:12px;background:var(--lightgray);border-radius:6px;padding:9px 12px;color:var(--navy);">예시) 입고단가 530원, 환율 1,380원/USD → ( 530 ÷ 1,380 ) × 1.06 ≈ <strong>$0.407 USD</strong></div></div></div></div>
       </div>
     </div>
 
