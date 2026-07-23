@@ -17,7 +17,7 @@
     --warn:#FFF3E0; --warnborder:#E65100;
     --erpbg:#EAF1FB; --erphdr:#34598C; --erpfield:#FFFDF2;
     --pink:#FCE4EC; --yellow:#FFF9C4; --skyblue:#DDEBF7;
-    --font:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,system-ui,'Segoe UI',Roboto,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Noto Sans CJK KR',sans-serif;
+    --font:'Aptos','Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,system-ui,'Segoe UI',Roboto,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Noto Sans CJK KR',sans-serif;
     --mono:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;
   }
   body { font-family:var(--font); background:var(--lightgray); color:var(--text); display:flex; min-height:100vh; text-rendering:optimizeLegibility; letter-spacing:-0.01em; }
@@ -256,7 +256,7 @@
   .vgroup-body table { font-size:12px; }
   .vgroup-body th { background:var(--navy3); padding:7px 12px; font-size:11px; }
   .vgroup-body td { padding:6px 12px; font-size:12px; }
-  .item-code { font-family:var(--mono); font-weight:700; color:#141414; white-space:nowrap; }
+  .item-code { font-family:var(--font); font-weight:700; color:#141414; white-space:nowrap; letter-spacing:0; }
   .acct-chip { display:inline-block; font-size:10px; padding:1px 7px; border-radius:5px; background:var(--lightgray); color:var(--gray); }
   .acct-chip.raw { background:#FFF3E0; color:var(--amber); }
   .load-more { text-align:center; padding:11px; font-size:12px; color:var(--navy2); cursor:pointer; background:var(--lightgray); border-top:1px solid var(--border); font-weight:600; }
@@ -415,7 +415,7 @@
   .pg .small b { color:var(--navy); font-weight:600; }
   .pg .rowlbl { font-size:11px; font-weight:700; letter-spacing:.3px; text-transform:uppercase;
         color:var(--ink3); margin:15px 0 5px; }
-  .pg .pno { display:inline-block; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  .pg .pno { display:inline-block; font-family:var(--font);
         font-size:12px; background:var(--lightgray); border:1px solid var(--border); color:var(--navy);
         padding:3px 9px; border-radius:7px; margin:3px 5px 0 0; }
   .pg .pill { display:inline-block; font-size:12px; background:var(--soft); border:1px solid var(--line);
