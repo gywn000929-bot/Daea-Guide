@@ -11,7 +11,7 @@
   :root {
     --navy:#1B3A6B; --navy2:#2E5C8A; --navy3:#4A7AAD; --navy4:#7EB3E8;
     --light:#EEF3FA; --accent:#D4E4F7; --white:#fff;
-    --text:#222; --gray:#666; --lightgray:#f5f7fa;
+    --text:#141414; --gray:#5b5b62; --lightgray:#f5f7fa;
     --border:#D0DFF0; --green:#2E7D32; --greenbg:#E8F5E9; --amber:#E65100;
     --tip:#FFF8E1; --tipborder:#F9A825;
     --warn:#FFF3E0; --warnborder:#E65100;
@@ -20,7 +20,7 @@
     --font:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,system-ui,'Segoe UI',Roboto,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Noto Sans CJK KR',sans-serif;
     --mono:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;
   }
-  body { font-family:var(--font); background:var(--lightgray); color:var(--text); display:flex; min-height:100vh; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; text-rendering:optimizeLegibility; letter-spacing:-0.01em; }
+  body { font-family:var(--font); background:var(--lightgray); color:var(--text); display:flex; min-height:100vh; text-rendering:optimizeLegibility; letter-spacing:-0.01em; }
   table, .erp-grid, .tbl, .items-stats .stat b, .item-code, .pno, .code-chip, .vcode, .vcnt { font-variant-numeric:tabular-nums; }
 
   /* ── SIDEBAR ── */
@@ -256,7 +256,7 @@
   .vgroup-body table { font-size:12px; }
   .vgroup-body th { background:var(--navy3); padding:7px 12px; font-size:11px; }
   .vgroup-body td { padding:6px 12px; font-size:12px; }
-  .item-code { font-family:var(--mono); font-weight:700; color:var(--navy2); white-space:nowrap; }
+  .item-code { font-family:var(--mono); font-weight:700; color:#141414; white-space:nowrap; }
   .acct-chip { display:inline-block; font-size:10px; padding:1px 7px; border-radius:5px; background:var(--lightgray); color:var(--gray); }
   .acct-chip.raw { background:#FFF3E0; color:var(--amber); }
   .load-more { text-align:center; padding:11px; font-size:12px; color:var(--navy2); cursor:pointer; background:var(--lightgray); border-top:1px solid var(--border); font-weight:600; }
@@ -2099,7 +2099,7 @@ function rowHtml(it){
   const acct = it.a==='원자재'||it.a==='부자재' ? '<span class="acct-chip raw">'+escapeHtml(it.a)+'</span>'
     : (it.a?'<span class="acct-chip">'+escapeHtml(it.a)+'</span>':'');
   return '<tr><td class="item-code">'+escapeHtml(it.c)+'</td><td>'+escapeHtml(it.n)+
-    '</td><td style="color:#555">'+escapeHtml(it.s)+'</td><td>'+escapeHtml(it.u)+'</td><td>'+acct+'</td></tr>';
+    '</td><td style="color:#3f3f46">'+escapeHtml(it.s)+'</td><td>'+escapeHtml(it.u)+'</td><td>'+acct+'</td></tr>';
 }
 
 function expandGroup(code, ev){
