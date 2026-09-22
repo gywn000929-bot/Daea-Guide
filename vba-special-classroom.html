@@ -216,7 +216,75 @@ input::placeholder,textarea::placeholder{color:#535c57;opacity:1}
 .navbtn,.lessonLink,.lesson-link{font-weight:600}
 :focus-visible{outline:3px solid #265c47;outline-offset:3px}
 </style>
-</head>
+<style id="professional-theme">
+/* Professional guide theme: shared navigation, surfaces and action hierarchy. */
+:root{--navy:#1b3a6b;--navy2:#234d7c;--navy3:#366593;--navy4:#9dc5ef;--blue:#245b94;--green:#245b94;--sky:#edf3fa;--light:#edf3fa;--ink:#202d3d;--text:#202d3d;--muted:#49596b;--gray:#49596b;--line:#d6dfea;--border:#d6dfea;--bg:#f3f5f9}
+body{background:#f3f5f9;color:#202d3d;letter-spacing:-.015em}
+h1,h2,h3,h4{color:#1b3a6b;letter-spacing:-.025em}
+a{color:#245b94}button,input,select,textarea{font-family:inherit}
+.topbar,body>header{background:#fff;border-bottom:1px solid #d6dfea;backdrop-filter:none}
+.topbar strong,.topbar strong:before,.crumb,body>header b,body>header span{color:#354b66}
+.content,.page{padding-top:26px}
+.hero,.lessonHero{background:linear-gradient(115deg,#1b3a6b,#2e5c8a)!important;color:#fff!important;border:0!important;border-radius:14px!important;box-shadow:none!important}
+.hero h2,.hero h2 em,.lessonHero h1,.lessonHero h2{color:#fff!important;font-style:normal}
+.hero p,.lessonHero .lead{color:#eef4fc!important;opacity:1;font-size:16px!important;line-height:1.8}
+.hero .eyebrow,.lessonHero .eyebrow{color:#d5e5f7!important;font-size:12px;letter-spacing:.04em}
+#home>.hero,.lessonHero.course-welcome,.hero{padding:28px 32px!important;min-height:0!important}
+#home>.hero h2,.hero h2{font-size:30px!important;line-height:1.4!important;margin:10px 0 12px!important}
+.hero-copy{max-width:900px!important}.hero p{max-width:800px!important}
+.hero .pill,.hero-mark{display:none}
+.heroactions{margin-top:18px;gap:10px}
+.primary,.download,.next,.copy,.run,.beginner .start-link{background:#1b4f85!important;color:#fff!important;border:1px solid #1b4f85!important;border-radius:7px!important;font-weight:700}
+.hero .primary,.hero-start{display:inline-flex;align-items:center;gap:8px;background:#fff!important;color:#1b3a6b!important;border:1px solid #fff!important;border-radius:7px;padding:10px 17px;font-size:15px;font-weight:700;text-decoration:none}
+.hero-start{margin-top:8px}
+.hero .download-trigger{background:transparent!important;border-color:#91afd0!important;color:#fff!important}
+.secondary,.external,.ghost,.timer button,.backlink{background:#fff;color:#234d7c;border:1px solid #bfccdc;border-radius:7px}
+.beginner{background:#fff!important;color:#202d3d!important;border:1px solid #d6dfea!important;border-left:4px solid #2e5c8a!important;border-radius:10px!important;padding:22px 24px!important;margin:20px 0!important}
+.beginner h2,.beginner h3{color:#1b3a6b!important}.beginner p,.beginner li{color:#35465a!important}
+.beginner .where,.tag,.pill,.kicker{background:#eaf1f9!important;color:#254c76!important;border-color:#cedced!important;border-radius:5px}
+.beginner a,.beginner summary{color:#245b94}.beginner .start-link{color:#fff!important}
+.beginner details,.beginner .done{border-color:#d6dfea!important}
+.mission-card,.card,.task,.asidecard,.panel,.coursemap,.coursegrid>a,.saved-item{background:#fff;border-color:#d6dfea;border-radius:10px;box-shadow:0 2px 5px #17335c05}
+.mission-card{padding:22px;text-align:left}.mission-card:hover{border-color:#537eae;box-shadow:0 4px 14px #17335c12;transform:translateY(-2px)}
+.mission-card h3,.card h3,.task h3,.section-head h2,.sectionhead h2,.workspace-head h2{color:#1b3a6b}
+.mission-card p,.card p,.hint,.meta,.duration,.small,.muted{color:#49596b}
+.card-symbol{background:#eaf1f9!important;color:#245b94!important;border-radius:8px}
+.card-output{border-color:#d6dfea;color:#354b66}.card-output b{color:#245b94}
+.how,.note,.concept,.transfer,.do,.say{background:#edf3fa;border-color:#9cb6d3;color:#273e58}
+.note.warning{background:#fff6e8;border-color:#dfbb7b;color:#684714}.note.success,.finish{background:#edf6f0;border-color:#a9cbb5;color:#28583a}
+.prompt,.prompt-text,textarea,input,select{border-color:#b9c8d9}.prompt,.prompt-text{background:#f6f8fb;color:#23364b}
+.stages button.active,.stepdot.active,.scenario button.active,.choice .active{background:#1b3a6b;color:#fff;border-color:#1b3a6b}
+.stages button,.stepdot{border-radius:6px}.metrics .metric,.metric{color:#1b3a6b}
+th,.expected th{background:#e8eff8;color:#1b3a6b;border-color:#cad8e8}
+.mini,.codebox{background:#17283f;color:#edf4fc}
+.page-footer,footer{color:#526174;border-color:#d6dfea}
+:focus-visible{outline:3px solid #4284c8;outline-offset:3px}
+@media(max-width:760px){#home>.hero,.lessonHero.course-welcome,.hero{padding:24px!important}.hero h2,#home>.hero h2{font-size:26px!important}.hero p,.lessonHero .lead{font-size:15px!important}.beginner{padding:20px!important}.heroactions{flex-wrap:wrap}}
+
+.sidebar,.side{background:#1b365e!important;color:#fff!important;border-right:1px solid #183154}
+.sidebar h1,.side .brand h1,.side .brand small,.sidebar .brand,.sidebar .sub,.side .brand p,.side-label,.side-bottom,.side-bottom a,.side-bottom span,.sidefoot button,.nav:before{color:#e5edf8!important}
+.sidebar .brand:before,.side .brand:before{display:none!important}
+.sidebar,.side{padding-top:25px}.side .brand p{margin-bottom:20px}
+.missionNav button,.navbtn{color:#e5edf8!important;border-radius:6px;font-weight:600}
+.missionNav button.active,.missionNav button:hover,.navbtn.active,.navbtn:hover{background:#37567d!important;color:#fff!important;box-shadow:inset 3px 0 #a9d2ff}
+.navbtn:before,.nav-symbol{color:#bcd4f0!important}
+.shelfButton,.side .progressbox{background:#27456c!important;color:#fff!important;border:1px solid #506b8c!important;border-radius:8px}
+.side .progressmeta,.side .progressbox b,.shelfButton span{color:#e5edf8!important}
+.side-bottom,.sidefoot{border-color:#486180!important}
+.side .progressline{background:#506785}.side .progressline i{background:#a9d2ff}
+@media(max-width:980px){.side{background:#1b365e!important}.navbtn.active{border-bottom-color:#a9d2ff}}
+.hero{display:block!important}.hero-art{display:none}.path{background:#fff;border-color:#d6dfea}.path b{color:#1b3a6b}.path div:before{color:#526174}</style>
+<style>
+.sidebar #storageStatus,.layout>aside #courseProgress{color:#e5edf8!important}
+#courseSearch{background:#fff!important;border-color:#9db3cc!important;color:#202d3d!important}
+.beginner li:before,.chapter>ol>li:before{background:#e7eff9!important;color:#234d7c!important}
+.beginner .done{background:#edf3fa!important;color:#273e58!important}
+.work-grid>.panel,.result-top,.ribbon,.stages{border-color:#d6dfea!important}
+.work-grid>.panel{background:#fff!important}.stages{background:#fff!important}
+.chapter>ol>li,.chapter details,.coursegrid a:nth-child(n){background:#fff;border-color:#d6dfea}
+.completion{background:#edf3fa!important;color:#273e58!important;border-color:#cad8e8}
+.progressbox progress::-webkit-progress-bar{background:#546f90}.progressbox progress::-webkit-progress-value{background:#a9d2ff}
+</style><style>h1,h2,h3{word-break:keep-all;overflow-wrap:break-word}.lessonHero:after{color:#a9c9eb;opacity:.24}#mobileMenu{background:#fff;color:#234d7c;border-color:#bfccdc}</style></head>
 <body>
 <noscript><div class="noscript">이 학습기는 단계 이동과 파일 다운로드에 JavaScript가 필요합니다. Chrome 또는 Edge에서 공개 링크를 열어 주세요.</div></noscript>
 <div class="app">
@@ -236,7 +304,7 @@ input::placeholder,textarea::placeholder{color:#535c57;opacity:1}
   <header class="topbar"><strong id="currentTitle">시작 안내</strong><div class="timer"><span id="timer">00:00</span><button id="timerToggle">타이머 시작</button><button class="ghost" id="timerReset">초기화</button></div></header>
   <div class="page">
     <section class="panel active" id="home">
-      <div class="hero"><div class="hero-copy"><span class="eyebrow">WINDOWS EXCEL DESKTOP · HANDS ON</span><h2>반복 업무는 줄이고,<br><em>가능성은 넓히세요.</em></h2><p>연습용 파일로 원리를 확인한 뒤, 두 개의 실제 VBA를 직접 설치하고 실행합니다. 결과가 맞는지 확인하는 방법과 오류가 났을 때 어디를 볼지도 함께 연습합니다.</p><div class="heroactions"><button class="primary go" data-go="basics">실습 시작하기 →</button><button class="primary download-trigger" data-file="ITEM_AUTO_FILL_실습키트.zip">ITEM 키트 받기</button><button class="primary download-trigger" data-file="AIR_CONFIRM_V10_실습키트.zip">AIR 키트 받기</button></div></div><div class="hero-art" aria-hidden="true"><div class="sheet-window"><div class="sheet-title"><span class="excel-icon">X</span> Your next workflow<span class="sheet-dots">···</span></div><div class="sheet-formula">fx &nbsp; 반복하던 업무, 한 번의 실행으로</div><table class="sheet-grid"><thead><tr><th></th><th>A</th><th>B</th><th>C</th></tr></thead><tbody><tr><th>1</th><td>FAC</td><td>ITEM CD</td><td>Balance</td></tr><tr><th>2</th><td>F1</td><td>1001</td><td class="filled">1,800</td></tr><tr><th>3</th><td>F2</td><td>1001</td><td class="filled">2,200</td></tr><tr><th>4</th><td>F5</td><td>2002</td><td class="filled">3,000</td></tr></tbody></table></div><div class="automation-badge"><b>✓</b> 반복 작업 → 자동화 완료</div><div class="art-caption">LESS REPETITION. MORE POSSIBILITY.</div></div></div>
+      <div class="hero"><div class="hero-copy"><span class="eyebrow">EXCEL VBA · 업무 자동화 실습</span><h2>반복 업무는 줄이고,<br><em>가능성은 넓히세요.</em></h2><p>연습용 파일로 원리를 확인한 뒤, 두 개의 실제 VBA를 직접 설치하고 실행합니다. 결과가 맞는지 확인하는 방법과 오류가 났을 때 어디를 볼지도 함께 연습합니다.</p><div class="heroactions"><button class="primary go" data-go="basics">실습 시작하기 →</button><button class="primary download-trigger" data-file="ITEM_AUTO_FILL_실습키트.zip">ITEM 키트 받기</button><button class="primary download-trigger" data-file="AIR_CONFIRM_V10_실습키트.zip">AIR 키트 받기</button></div></div></div>
       <div class="beginner"><span class="where">시작 안내 · 처음 사용하는 분</span><h3>오늘은 버튼 하나로 결과를 만드는 순서를 익힙니다</h3><ol><li>이 안내 페이지는 순서를 보여줍니다. 실제 코드는 Windows 데스크톱 Excel에서 실행합니다. 브라우저의 “예상 결과 계산”은 정답을 비교하는 참고 화면입니다.</li><li>아래 준비물을 확인한 뒤 “실습 시작하기”를 누릅니다. 코드를 외우지 않고 파일 준비 → 코드 넣기 → 실행 → 결과 확인 순으로 진행합니다.</li><li>처음에는 ITEM 실습만 끝내도 됩니다. 같은 순서가 익숙해지면 AIR 실습으로 넘어갑니다.</li></ol><p class="done"><b>여기까지 되면 다음으로:</b> Excel과 연습 파일을 둘 폴더를 준비했습니다.</p><details><summary>파일 이름 뒤 .zip, .xlsx, .bas, .xlsm은 무엇인가요?</summary><dl><dt>.zip</dt><dd>여러 실습 파일을 묶은 압축 파일입니다. 내려받은 파일을 오른쪽 클릭하고 “모두 압축 풀기”로 폴더에 풉니다.</dd><dt>.xlsx</dt><dd>표와 수량이 들어 있는 Excel 파일입니다. VBA 코드를 함께 보관할 파일은 .xlsm으로 저장합니다.</dd><dt>.bas</dt><dd>준비된 VBA 코드 파일입니다. Excel의 코드 편집기에서 “파일 → 파일 가져오기”로 넣습니다.</dd><dt>.xlsm</dt><dd>표와 VBA 코드를 함께 저장하는 Excel 파일 형식입니다. “다른 이름으로 저장”에서 파일 형식으로 선택합니다.</dd></dl></details></div><div class="path"><div><b>준비</b>파일과 보안 확인</div><div><b>이해</b>VBA 구조 읽기</div><div><b>설치</b>모듈에 코드 넣기</div><div><b>실행</b>예제 데이터 처리</div><div><b>검증</b>업무 기준과 대조</div></div>
       <div class="grid">
         <article class="card"><span class="tag">75분 권장</span><h3>오늘 완성할 결과</h3><p><b>ITEM AUTO FILL</b>에서 FAC와 ITEM CD를 기준으로 Balance·Stock·입고수량을 채웁니다.</p><p><b>AIR CONFIRM</b>에서 Confirm을 매칭해 태국 전달용 표와 확인 목록을 만듭니다.</p></article>
