@@ -22,7 +22,402 @@ body{font-family:var(--font);background:#f5f7fa;color:var(--text);letter-spacing
 .beginner dl{display:grid;grid-template-columns:105px 1fr;gap:8px 14px;margin:12px 0}.beginner dt{font-weight:700}.beginner dd{margin:0}
 .beginner pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fff;padding:14px;border:1px solid #dbe5d4;border-radius:7px;font:13px/1.8 inherit;color:#2f4837}
 @media(max-width:680px){.beginner{padding:18px;margin:16px 0}.beginner dl{grid-template-columns:1fr;gap:2px}.beginner dd{margin-bottom:10px}.beginner h2,.beginner h3{font-size:18px!important}}
-</style><meta name="description" content="구매·물류 실무를 위한 Gemini 100강. 메일, P/O·재고 대조, Excel VBA, Gem을 단계별로 실습합니다."></head><body><header><b>Gemini 업무 활용 · 100강</b><span>구매·물류 · 메일 · Excel VBA · Gem</span><button id="mobileMenu" class="js-only">실습 목차</button><a href="https://gemini.google.com/" target="_blank" rel="noopener">Gemini 열기 ↗</a></header><div class="layout"><aside><div class="sidebarBrand"><a href="#chapter-0"><small>DAE-A HOLDINGS</small><strong>Gemini<br>업무 활용 실습</strong><em>100 LESSONS · 구매·물류</em></a></div><div class="js-only"><label for="courseSearch">강의 찾기</label><input id="courseSearch" type="search" placeholder="강 번호, VBA, 재고…" aria-label="강의 제목 검색"><p id="searchStatus" role="status"></p></div><div class="js-only progressbox"><b id="courseProgress">실습 기록 0 / 100</b><progress id="courseMeter" max="100" value="0">0</progress><a id="resume" href="#chapter-0">최근 강으로 이동 →</a></div><details class="tocgroup" open><summary>01–10 · 자료 이해·메일·VBA 준비</summary><a data-chapter href="#chapter-0">001 · 처음 시작하는 방법</a><a data-chapter href="#chapter-1">002 · 메일 한 묶음 고르기</a><a data-chapter href="#chapter-2">003 · Gemini가 읽은 범위 확인하기</a><a data-chapter href="#chapter-3">004 · 사실과 확인할 사항 나누기</a><a data-chapter href="#chapter-4">005 · 이번 업무의 기준 적기</a><a data-chapter href="#chapter-5">006 · 영문 메일 초안 만들기</a><a data-chapter href="#chapter-6">007 · 바꾸고 싶은 부분만 요청하기</a><a data-chapter href="#chapter-7">008 · 비교할 열과 기준 정하기</a><a data-chapter href="#chapter-8">009 · 자동화할 작업을 문장으로 정하기</a><a data-chapter href="#chapter-9">010 · 실습용 Excel 파일 만들기</a></details><details class="tocgroup"><summary>11–20 · 기본 VBA 실행·Gem 만들기</summary><a data-chapter href="#chapter-10">011 · Gemini에 VBA 요청하기</a><a data-chapter href="#chapter-11">012 · Excel VBA 편집기에 붙여넣기</a><a data-chapter href="#chapter-12">013 · 한 번 실행하고 원본과 비교하기</a><a data-chapter href="#chapter-13">014 · 오류 정보를 모아서 다시 요청하기</a><a data-chapter href="#chapter-14">015 · 실제 양식에 맞게 요청서 바꾸기</a><a data-chapter href="#chapter-15">016 · 저장할 기준과 매번 줄 자료 나누기</a><a data-chapter href="#chapter-16">017 · 새 Gem에 요청 사항 넣기</a><a data-chapter href="#chapter-17">018 · 참고 파일 추가하기 (선택)</a><a data-chapter href="#chapter-18">019 · 조건을 바꾸며 답변 확인하고 저장하기</a><a data-chapter href="#chapter-19">020 · 다음 업무를 같은 순서로 진행하기</a></details><details class="tocgroup"><summary>21–30 · 메일과 요청 설계</summary><a data-chapter href="#chapter-20">021 · 수신자별 요청 분리</a><a data-chapter href="#chapter-21">022 · 메일 제목에 검색 기준 넣기</a><a data-chapter href="#chapter-22">023 · 정정 메일에서 변경점 명시</a><a data-chapter href="#chapter-23">024 · 가능·예정·완료 표현 비교</a><a data-chapter href="#chapter-24">025 · 첨부와 본문 수량 대조</a><a data-chapter href="#chapter-25">026 · 회신을 요청 사항별로 추적</a><a data-chapter href="#chapter-26">027 · 짧은 본문과 상세 표 분리</a><a data-chapter href="#chapter-27">028 · 모호한 회신에 확인 질문 만들기</a><a data-chapter href="#chapter-28">029 · 긴 대화를 새 채팅으로 이어가기</a><a data-chapter href="#chapter-29">030 · 같은 자료로 두 요청문 비교</a></details><details class="tocgroup"><summary>31–40 · P/O와 재고 대조</summary><a data-chapter href="#chapter-30">031 · 품목 코드 원형 보존</a><a data-chapter href="#chapter-31">032 · 중복 행의 의미 판단</a><a data-chapter href="#chapter-32">033 · Stock 적용 전후 나누기</a><a data-chapter href="#chapter-33">034 · 예약 재고를 가용량에서 구분</a><a data-chapter href="#chapter-34">035 · 부족량을 P/O별 배분</a><a data-chapter href="#chapter-35">036 · 부분 취소와 재발행 구분</a><a data-chapter href="#chapter-36">037 · 박스 올림과 과잉 수량 표시</a><a data-chapter href="#chapter-37">038 · 단위가 다른 수량 비교</a><a data-chapter href="#chapter-38">039 · 서로 다른 기준일 대조</a><a data-chapter href="#chapter-39">040 · 원본과 결과 차이 보고서</a></details><details class="tocgroup"><summary>41–50 · 선적과 거래명세서</summary><a data-chapter href="#chapter-40">041 · AIR와 Vessel 물량 나누기</a><a data-chapter href="#chapter-41">042 · 선적 선택지 비교</a><a data-chapter href="#chapter-42">043 · 선박 혼입 후 Short 재확인</a><a data-chapter href="#chapter-43">044 · 거래명세서와 실물 차이 계산</a><a data-chapter href="#chapter-44">045 · 부족품과 오입품 분리</a><a data-chapter href="#chapter-45">046 · NCV 처리 조건 확인</a><a data-chapter href="#chapter-46">047 · REMARK를 행동 중심으로 작성</a><a data-chapter href="#chapter-47">048 · 공급사 발주 시한 설명</a><a data-chapter href="#chapter-48">049 · 출하 변경 이력표 만들기</a><a data-chapter href="#chapter-49">050 · 주간 출하 브리핑 정리</a></details><details class="tocgroup"><summary>51–60 · Excel 자료 정리</summary><a data-chapter href="#chapter-50">051 · 여러 공장 파일 합치기</a><a data-chapter href="#chapter-51">052 · 거래처 코드 불일치 표시</a><a data-chapter href="#chapter-52">053 · Maker와 구매처 매핑</a><a data-chapter href="#chapter-53">054 · 숫자처럼 보이는 문자열 정리</a><a data-chapter href="#chapter-54">055 · 날짜 해석 모호성 처리</a><a data-chapter href="#chapter-55">056 · 병합된 제목과 실제 데이터 구분</a><a data-chapter href="#chapter-56">057 · 필터와 숨김 행의 범위 정하기</a><a data-chapter href="#chapter-57">058 · 표 모양과 데이터 정확성 분리</a><a data-chapter href="#chapter-58">059 · 대조 결과에서 예외 먼저 보기</a><a data-chapter href="#chapter-59">060 · 정리 작업 요청서 완성</a></details><details class="tocgroup"><summary>61–70 · VBA 구조 익히기</summary><a data-chapter href="#chapter-60">061 · 코드를 작업 순서로 읽기</a><a data-chapter href="#chapter-61">062 · 변수와 자료형 구분</a><a data-chapter href="#chapter-62">063 · 통합문서와 시트 대상 고정</a><a data-chapter href="#chapter-63">064 · 셀 주소와 범위 이해</a><a data-chapter href="#chapter-64">065 · 마지막 데이터 행 찾기</a><a data-chapter href="#chapter-65">066 · 조건문으로 예외 분리</a><a data-chapter href="#chapter-66">067 · 반복문으로 행별 확인</a><a data-chapter href="#chapter-67">068 · 기능을 작은 Sub로 나누기</a><a data-chapter href="#chapter-68">069 · 중단점과 F8로 한 줄씩 확인</a><a data-chapter href="#chapter-69">070 · 코드 변경 전후 비교</a></details><details class="tocgroup"><summary>71–80 · VBA 업무 적용</summary><a data-chapter href="#chapter-70">071 · 열 위치 대신 제목으로 찾기</a><a data-chapter href="#chapter-71">072 · 원본 색상을 유지한 서식 적용</a><a data-chapter href="#chapter-72">073 · Maker 경계선 만들기</a><a data-chapter href="#chapter-73">074 · 수식과 표시값 보존</a><a data-chapter href="#chapter-74">075 · 실행 오류 후 설정 복원</a><a data-chapter href="#chapter-75">076 · 처리 기록 남기기</a><a data-chapter href="#chapter-76">077 · 덮어쓰기 없는 결과 이름</a><a data-chapter href="#chapter-77">078 · 출력 PDF 범위 확인</a><a data-chapter href="#chapter-78">079 · 폴더 일괄 처리 전 소량 실행</a><a data-chapter href="#chapter-79">080 · 매주 사용할 실행 절차 완성</a></details><details class="tocgroup"><summary>81–90 · Gem 운영과 개선</summary><a data-chapter href="#chapter-80">081 · 한 Gem의 역할 범위 정하기</a><a data-chapter href="#chapter-81">082 · 좋은 메일 예시에서 규칙 추출</a><a data-chapter href="#chapter-82">083 · 확인 질문을 적정 수준으로 줄이기</a><a data-chapter href="#chapter-83">084 · 상충하는 업무 기준 정리</a><a data-chapter href="#chapter-84">085 · 지식 파일 갱신 기록</a><a data-chapter href="#chapter-85">086 · 새 채팅에서도 기준 확인</a><a data-chapter href="#chapter-86">087 · 자료 속 요청과 사용자 지시 구분</a><a data-chapter href="#chapter-87">088 · 같은 기준으로 답변 비교</a><a data-chapter href="#chapter-88">089 · 기준 카드와 Gem 일치 확인</a><a data-chapter href="#chapter-89">090 · 실무용 Gem 운영 묶음 완성</a></details><details class="tocgroup"><summary>91–100 · 종합 업무 실습</summary><a data-chapter href="#chapter-90">091 · 거래명세서 불일치부터 요청 메일까지</a><a data-chapter href="#chapter-91">092 · 공장별 부족 P/O 정리</a><a data-chapter href="#chapter-92">093 · 주간 AIR 리스트 변경 반영</a><a data-chapter href="#chapter-93">094 · 출하 선택지와 수요 일정 연결</a><a data-chapter href="#chapter-94">095 · 통합 P/O와 구매처 매핑 연결</a><a data-chapter href="#chapter-95">096 · 분석 결과를 VBA 작업서로 전환</a><a data-chapter href="#chapter-96">097 · 원하는 결과가 안 나올 때 원인 분리</a><a data-chapter href="#chapter-97">098 · 다른 업무로 적용 범위 넓히기</a><a data-chapter href="#chapter-98">099 · 업무별 요청문 목록 정리</a><a data-chapter href="#chapter-99">100 · 실제 업무 한 건을 처음부터 끝까지</a></details><button id="export" class="js-only">메모 파일로 저장</button><p id="storage">작성한 메모는 별도로 복사해 보관할 수 있습니다.</p><a href="https://gywn000929-bot.github.io/Daea-Guide/%EB%8C%80%EC%95%84_%EA%B5%AC%EB%A7%A4%EB%AC%BC%EB%A5%98%ED%8C%80_%EC%97%85%EB%AC%B4%EB%A7%A4%EB%89%B4%EC%96%BC_v9_4.html" target="_blank" rel="noopener" class="manualLink">업무 매뉴얼 ↗</a></aside><main><section class="chapter" id="chapter-0"><div class="lessonHero" data-number="001"><div class="eyebrow">001 / 100 · 기본 실습</div><h1>처음에는 메일 한 통부터 시작하세요</h1><p class="lead">처음부터 100강을 읽지 않아도 됩니다. 006강의 예시로 메일 한 통을 만들어 본 뒤, 필요한 설명을 찾아보세요.</p></div><div class="beginner"><span class="where">처음 사용하는 분 · 10–15분부터</span><h2>오늘은 복사 → 붙여넣기 → 숫자 확인까지만</h2><p>실제 업무 파일이나 Excel을 준비하지 않아도 됩니다. 아래 연습용 수량으로 Gemini의 답변을 한 번 받아보세요.</p><ol><li><b>006강:</b> 준비된 요청문을 복사해 Gemini에 보내고, 추가 <b>2,000 EA</b>와 총 <b>20,000 EA</b>가 나오는지 확인합니다.</li><li><b>007강:</b> 같은 대화에서 메일을 더 짧게 바꿔봅니다. 숫자는 유지되는지 확인합니다.</li><li><b>끝:</b> 마음에 드는 요청문을 메모에 남깁니다. 오늘은 여기서 멈춰도 됩니다.</li></ol><a class="start-link" href="#chapter-5">006강 · 첫 메일 만들어보기 →</a><a href="gemini-practice-lab.html">숫자를 직접 바꾸는 실습실 열기 →</a><details><summary>메일 실습 다음에는 무엇을 하나요?</summary><p><b>내 메일을 정리하고 싶다면:</b> 002–005강 → 008강.<br><b>반복 설명을 줄이고 싶다면:</b> 016–019강의 Gem 만들기.<br><b>Excel 작업을 자동화하고 싶다면:</b> Windows 데스크톱 Excel을 준비하고 009–015강.<br><b>021–100강:</b> 필요한 업무가 생겼을 때 찾아보는 참고 실습입니다.</p></details><details><summary>낯선 단어는 여기서 확인하세요</summary><dl><dt>요청문 / 프롬프트</dt><dd>Gemini에게 보내는 부탁입니다. 예: “아래 수량을 계산하고 메일을 써 줘.”</dd><dt>P/O</dt><dd>발주서 또는 발주 건을 뜻합니다. 추가 P/O는 필요한 수량을 더 발주하는 일입니다.</dd><dt>EA / Box Q’ty</dt><dd>EA는 낱개 수, Box Q’ty는 한 박스에 담는 낱개 수입니다.</dd><dt>FAC / Maker</dt><dd>FAC는 공장 구분, Maker는 제조사입니다. F1·F2·F5는 이 교재의 공장 구분 예시입니다.</dd><dt>Gem</dt><dd>반복해서 부탁할 역할과 답변 기준을 저장한 Gemini 도우미입니다.</dd><dt>VBA / 매크로</dt><dd>Excel이 할 일을 적는 언어 / 실행할 작업 묶음입니다.</dd><dt>대조 / 검증</dt><dd>답변의 숫자나 내용을 원래 자료와 나란히 놓고 확인하는 일입니다.</dd></dl></details></div><div class="note"><b>준비물은 두 개의 탭입니다</b><p>이 교재를 열어두고 위의 “Gemini 열기”로 새 탭을 엽니다. Gemini에 로그인한 뒤 이 탭으로 돌아오세요. 첫 메일 실습에는 첨부파일이나 Excel이 필요하지 않습니다.</p></div><details class="coursemap"><summary>전체 100강 목차와 선택 과정 보기</summary><h2>전체 과정 · 10개 단원</h2><div class="coursegrid"><a href="#chapter-0"><b>01–10강</b><br>자료 이해·메일·VBA 준비</a><a href="#chapter-10"><b>11–20강</b><br>기본 VBA 실행·Gem 만들기</a><a href="#chapter-20"><b>21–30강</b><br>메일과 요청 설계</a><a href="#chapter-30"><b>31–40강</b><br>P/O와 재고 대조</a><a href="#chapter-40"><b>41–50강</b><br>선적과 거래명세서</a><a href="#chapter-50"><b>51–60강</b><br>Excel 자료 정리</a><a href="#chapter-60"><b>61–70강</b><br>VBA 구조 익히기</a><a href="#chapter-70"><b>71–80강</b><br>VBA 업무 적용</a><a href="#chapter-80"><b>81–90강</b><br>Gem 운영과 개선</a><a href="#chapter-90"><b>91–100강</b><br>종합 업무 실습</a></div><p>첫 만남에서는 기본 과정의 필요한 부분만 진행합니다. 이후에는 실제 업무 한 건과 연결되는 강을 2~3개씩 선택합니다. VBA 심화는 09–15강, Gem 심화는 16–19강을 먼저 진행합니다.</p></details><div class="check"><b>오늘의 완료 기준</b><br>메일 초안을 하나 받고, 추가 수량과 총수량을 확인하고, 다음에 쓸 요청문을 아래 메모에 남기면 됩니다.</div><label for="note-0">기록할 내용</label><textarea id="note-0" data-save="note-0" placeholder="이번 업무의 조건이나 수정할 내용을 적습니다."></textarea><label class="completion js-only"><input type="checkbox" data-done="0"> 이 강 실습 기록하기</label><nav class="nav"><a class="next" href="#chapter-5">첫 실습 · 006강 →</a></nav></section><section class="chapter" id="chapter-1"><div class="lessonHero" data-number="002"><div class="eyebrow">002 / 100 · 기본 실습</div><h1>메일 한 묶음 고르기</h1><p class="lead">같은 업무의 요청부터 최신 회신까지 준비합니다.</p></div><div class="beginner"><span class="where">Outlook + 메모장</span><h3>한 업무의 메일만 모으세요</h3><ol><li>같은 품목이나 발주번호의 요청 메일과 최신 회신을 엽니다. 다른 업무의 메일은 빼세요.</li><li>메모장에 날짜, 제목, 보낸 사람, 본문을 순서대로 복사합니다. 중요한 표가 첨부에 있다면 그 파일도 준비합니다.</li><li>실제 메일이 아직 없다면 006강의 연습 예시부터 해도 됩니다.</li></ol><p class="done"><b>여기까지 되면 다음으로:</b> 무엇을 요청했고 마지막에 무엇이 바뀌었는지 원문에서 찾을 수 있습니다.</p></div><div class="concept"><h2>업무 상황</h2><p>요청과 회신이 여러 메일에 흩어져 있고, 중간에 수량이 변경되었습니다.</p><h2>핵심 원리</h2><p>자료의 양보다 의사결정 흐름이 중요합니다. 요청·변경·확정 메일을 함께 제공해야 과거 요청을 현재 조건으로 적용하는 일을 줄일 수 있습니다.</p></div><h2>지금 할 작업</h2><ol><li>다운로드한 메일에서 같은 P/O 또는 같은 품목에 관한 메일 3~5건을 고릅니다.</li><li>요청 메일 → 회신 → 최신 변경사항 순서로 정리합니다.</li><li>보낸 날짜·보낸 사람·제목·본문을 함께 남깁니다. 첨부 Excel이 판단 근거라면 별도로 준비합니다.</li><li>회사에서 사용이 허용된 계정과 자료 범위인지 확인합니다. 실습에 불필요한 개인정보는 제외합니다.</li></ol><details><summary>.msg 또는 .pst 파일만 있는 경우</summary><p>Gemini가 내용을 읽었다고 확인되기 전에는 분석을 맡기지 않습니다. Outlook에서 관련 메일을 열어 날짜·제목·본문을 텍스트 파일에 옮깁니다. 확장자만 .txt로 바꾸면 변환되지 않습니다.</p></details><div class="check"><b>확인할 결과</b><br>하나의 업무를 설명할 수 있는 메일 묶음과 관련 첨부파일을 준비합니다.</div><div class="transfer"><h2>조건을 바꿔 적용하기</h2><p>선택한 묶음에서 최신 변경 메일을 제외했을 때 어떤 값이 달라지는지 원문으로 비교합니다.</p><details><summary>비교할 결과와 해설 보기</summary><p>답변이 틀렸다면 먼저 자료 누락 여부를 살핍니다. 필요한 자료가 없는데 요청문만 길게 써도 최신 사실을 알 수 없습니다.</p></details><h2>다음 업무에 다시 쓰기</h2><p>같은 품목이라도 공장이나 P/O가 다르면 구분합니다. 자료를 추가할 때 변경 이유와 날짜를 붙입니다.</p></div><label for="note-1">기록할 내용</label><textarea id="note-1" data-save="note-1" placeholder="이번 업무의 조건이나 수정할 내용을 적습니다."></textarea><label class="completion js-only"><input type="checkbox" data-done="1"> 이 강 실습 기록하기</label><nav class="nav"><a href="#chapter-0">← 이전 강</a><a class="next" href="#chapter-2">다음 · 003강 →</a></nav></section><section class="chapter" id="chapter-2"><div class="lessonHero" data-number="003"><div class="eyebrow">003 / 100 · 기본 실습</div><h1>Gemini가 읽은 범위 확인하기</h1><p class="lead">분석 전에 파일명과 읽힌 내용을 확인합니다.</p></div><div class="beginner"><span class="where">Gemini 새 채팅</span><h3>파일을 올린 뒤 내용을 한 줄 확인하세요</h3><ol><li>Gemini에서 새 채팅을 열고 입력창의 파일 추가 메뉴로 준비한 자료를 올립니다.</li><li>아래 요청문을 복사해 입력창에 붙여넣고 전송합니다.</li><li>원본의 품목 한 개를 골라 수량과 날짜가 답변에 똑같이 나오는지 확인합니다.</li></ol><p class="done"><b>여기까지 되면 다음으로:</b> 파일 이름뿐 아니라 원본 내용 한 줄이 일치합니다. 읽지 못했다면 해당 표나 본문을 텍스트로 다시 제공합니다.</p></div><div class="concept"><h2>업무 상황</h2><p>첨부파일은 올라갔지만, 필요한 표와 본문까지 읽혔는지 알 수 없습니다.</p><h2>핵심 원리</h2><p>업로드 성공은 내용 전체를 읽었다는 보장이 아닙니다. 파일명 확인과 내용 대조를 구분합니다.</p></div><h2>지금 할 작업</h2><ol><li>Gemini에서 새 채팅을 엽니다.</li><li>입력창의 파일 추가 기능으로 준비한 파일을 올립니다.</li><li>아래 요청문을 보내고 파일별로 결과를 확인합니다.</li></ol><div class="prompt"><button class="copy js-only" type="button">요청문 복사</button><pre>첨부 자료를 먼저 확인해 줘. 아직 결론이나 회신 초안은 만들지 마.
+
+/* Gemini guides — shared sage and forest design */
+:root{--navy:#204f40;--navy2:#346c55;--navy3:#668565;--navy4:#a9c393;--blue:#346c55;--sky:#edf3e8;--ink:#27372e;--muted:#69776e;--line:#dde5da;--border:#dde5da;--light:#f0f5eb;--text:#27372e;--gray:#69776e;--green:#2f7054;--font:Pretendard,"Aptos",-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic",sans-serif}
+
+html{scroll-behavior:smooth}
+body{background:#f6f7f2;color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.85;letter-spacing:-.025em;-webkit-font-smoothing:antialiased}
+
+button,input,select,textarea{font-family:inherit}
+button,a,summary,input,textarea,select{touch-action:manipulation}
+a{color:#346c55}
+button{transition:background .18s,border-color .18s,box-shadow .18s}
+button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #638e58!important;outline-offset:3px}
+button:hover{border-color:#96ad89}
+button.primary,.nav .next{background:#204f40;color:white;border-color:#204f40}
+button.primary:hover,.nav .next:hover{background:#2f6651;color:white}
+
+.beginner{background:#fff;border:1px solid var(--line);border-radius:15px;padding:27px 30px;margin:24px 0;box-shadow:none}
+
+.beginner h2,.beginner h3{font-size:21px!important;letter-spacing:-.045em;margin:0 0 16px!important;color:#234b36!important}
+
+.beginner .where{background:#eff4e8;border:0;border-radius:5px;color:#566f46;font-size:11px;padding:4px 10px;margin-bottom:14px;font-weight:600}
+
+.beginner p{color:#586850!important;line-height:1.9}
+.beginner ol{list-style:none;padding:0;counter-reset:walk;display:grid;gap:12px;margin:16px 0}
+.beginner ol>li{counter-increment:walk;position:relative;margin:0;padding:0 0 0 36px;line-height:1.9}
+.beginner ol>li:before{content:counter(walk,decimal-leading-zero);position:absolute;left:0;top:2px;font:600 11px/23px var(--font);background:#f0f4e9;color:#70825e;width:25px;height:25px;border-radius:7px;text-align:center}
+.beginner .done{background:#f4f7ef;border:0;border-radius:8px;padding:14px 16px;margin-top:18px!important;font-size:13px!important}
+.beginner details{background:transparent;border:0;border-top:1px solid var(--line);border-radius:0;padding:15px 0 0;margin-top:18px}
+.beginner summary{color:#496442;font-size:12px}
+.beginner .start-link{background:#204f40;border-radius:8px;padding:12px 18px}
+.beginner dl{font-size:13px}
+.beginner dd{color:#64715d}
+
+.prompt-text,pre{tab-size:4}
+.external,header>a{border-radius:7px;background:#fff;border-color:var(--line);color:#3b5f49;text-decoration:none}
+.note{background:#f1f5eb;color:#4b6647;border-left-color:#91a779}
+.warning{background:#fff7e8;color:#80613e;border-color:#d9b976}
+.success{background:#eef5e8;color:#46623a;border-color:#91b77e}
+.check{background:#eef5e9;border-color:#d9e6cd;border-left-color:#8cac76}
+.check b{color:#3f633b}
+table{font-variant-numeric:tabular-nums}
+th{background:#edf2e7;color:#3e5b3c;border-color:#dae3d3}
+td{color:#364737}
+th,td{border-color:#e0e7da}
+tbody tr:nth-child(even){background:#fafbf7}
+.copy{background:#eef4e7;color:#315639;border-color:#d9e4cf}
+.copy:hover{background:#e0ecd5}
+footer{color:#7c8975;font-size:10px;letter-spacing:.02em;border-top:1px solid var(--line);padding-top:20px;margin-top:32px}
+#toast{background:#244d3b}
+
+.guide-switch{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 0}
+.guide-switch a{font-size:11px;text-decoration:none;color:#64785a;padding:6px 9px;border:1px solid #dce5d4;border-radius:6px;background:#fafcf7}
+.guide-switch a:hover{background:#edf4e6}
+
+@media(max-width:680px){.beginner{padding:21px 20px;border-radius:12px;margin:18px 0}
+.beginner h2,.beginner h3{font-size:19px!important}
+.beginner .where{font-size:10px}
+.beginner ol{gap:14px}
+.beginner ol>li{padding-left:33px}
+.beginner p,.beginner li{font-size:13px!important}
+.beginner dl{display:block}
+.beginner dd{margin:4px 0 12px}
+.beginner .done{font-size:12px!important}
+button{min-height:40px}
+summary{min-height:28px}
+}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+*,*:before,*:after{animation:none!important;transition:none!important}
+}
+
+
+header{margin-left:258px;height:76px;padding:0 38px;background:#f6f7f2ed;backdrop-filter:blur(12px);border-color:var(--line);box-shadow:none}
+header b{font-size:13px;font-weight:600;letter-spacing:-.02em;color:#33512d}
+header span{font-size:11px;color:#8a977f}
+header>a{font-size:11px;padding:7px 11px}
+.layout>aside{width:258px;background:#fff;color:#36472f;padding:30px 20px;border-right:1px solid var(--line);scrollbar-color:#cbd6c4 transparent}
+.sidebarBrand{padding:0 4px 22px;border-bottom:1px solid var(--line);margin-bottom:20px}
+.sidebarBrand:before{content:'✳';display:grid;place-items:center;width:39px;height:39px;border-radius:12px;background:#204f40;color:#d7e9b9;font-size:28px;margin-bottom:20px}
+.sidebarBrand small{color:#7f8d75;font-size:9px;letter-spacing:.15em}
+.sidebarBrand strong{color:#2d4b2b;font-size:21px;line-height:1.4;letter-spacing:-.05em;margin:12px 0}
+.sidebarBrand em{background:#f1f5eb;color:#859570;border-radius:5px;font-size:9px;padding:4px 8px}
+.layout>aside label{color:#73816b;font-size:10px;margin:15px 0 8px}
+#courseSearch{background:#f9fbf6;border:1px solid #dce5d3;color:#3f5932;padding:11px 12px;font-size:12px}
+#courseSearch::placeholder{color:#94a087}
+#searchStatus{font-size:10px;color:#748867}
+.progressbox{background:#f1f5e9;border:1px solid #e1e9d7;border-radius:9px;padding:14px;margin:16px 0 22px}
+.progressbox b{font-size:11px;color:#6a8057;font-weight:600}
+.progressbox progress{height:5px;accent-color:#7c9d59;margin:11px 0}
+.progressbox a{font-size:10px;color:#879b74}
+.tocgroup{border-color:#e9eddf;padding:10px 0}
+.tocgroup summary{font-size:11px;color:#60734f;padding:6px 3px}
+.tocgroup a{color:#7a886b;font-size:11px;padding:9px 9px;line-height:1.7;border-radius:5px;margin:4px 0}
+.tocgroup a:hover{background:#f5f8ef;color:#506939}
+.tocgroup a[aria-current]{background:#edf3e4;border-left-color:#719151;color:#3b5f2b;font-weight:600}
+.layout>aside #export{background:#fff;color:#728962;border:1px solid #dce6d0;border-radius:7px;font-size:11px;padding:10px}
+.layout>aside #export:hover{background:#f1f5e9}
+#storage{color:#94a083;font-size:10px}
+.layout>aside>a{font-size:11px;color:#768d64;padding:9px 2px}
+.layout>main{margin-left:258px;max-width:1250px;padding:34px 42px 64px;transform:none;margin-right:0}
+.chapter{margin:0;animation:none!important}
+.lessonHero{background:#e9eee1;border:1px solid #dfe7d5;color:#31512c;box-shadow:none;border-radius:17px;padding:36px 38px;margin-bottom:28px;min-height:208px;display:flex;flex-direction:column;justify-content:center}
+.lessonHero:after{font-size:116px;font-weight:400;color:#d4dfc8;right:26px;top:23px;letter-spacing:-.075em;line-height:1;z-index:0}
+.lessonHero h1{font-size:32px;line-height:1.5;letter-spacing:-.055em;color:#2e512b;margin:12px 0;position:relative;z-index:1;max-width:80%}
+.lessonHero .eyebrow{color:#7b8c65;font-size:10px;letter-spacing:.1em}
+.lessonHero .lead{color:#6a7a58;font-size:14px;line-height:1.9;max-width:76%;margin:4px 0 0}
+.chapter>h2{font-size:19px;letter-spacing:-.04em;color:#38572e;margin:34px 0 17px}
+.chapter>h3{color:#4d653c}
+.chapter>p{color:#637254;line-height:1.95}
+.concept{box-shadow:none;border-radius:13px;padding:26px 28px;display:grid;grid-template-columns:120px 1fr;gap:15px 20px;margin:24px 0}
+.concept h2{margin:0!important;font-size:12px;line-height:2;color:#82956c}
+.concept p{font-size:14px;line-height:1.9;color:#586c49}
+.chapter>ol{gap:10px}
+.chapter>ol>li{border-color:#e0e7d8;box-shadow:none;background:#fff;color:#546747;padding:19px 22px 19px 62px;border-radius:10px;line-height:1.85}
+.chapter>ol>li:before{background:#eff4e7;color:#729057;font-size:11px;border-radius:7px;top:20px;left:20px}
+.prompt{border:1px solid #dce5d1;border-radius:13px;box-shadow:none;background:#fcfdf9;padding:25px 28px;margin:22px 0}
+.prompt:before{content:'COPY & TRY · 복사해서 직접 해보기';font-size:9px;color:#8a9a73;letter-spacing:.09em;border-bottom:1px solid #e5ebdc;padding-bottom:13px;margin-bottom:16px}
+.prompt pre{font-size:14px;line-height:2;color:#42583a}
+.prompt .copy{font-size:11px;padding:8px 12px;margin-bottom:15px;border-radius:6px}
+.chapter .table{border-radius:11px;border-color:#dfe7d5;margin:24px 0}
+.chapter th{font-size:11px;font-weight:600;padding:13px 16px}
+.chapter td{font-size:13px;padding:13px 16px;line-height:1.8}
+.transfer{border-left:3px solid #abc48b;border-radius:12px;background:#fff;padding:7px 26px 24px}
+.transfer h2{color:#59733f;font-size:14px;margin-top:23px}
+.transfer p{color:#687b54;line-height:1.9}
+.chapter details{border-color:#dee6d4;border-radius:10px;padding:17px 22px;background:#fff}
+.chapter details summary{font-size:12px;color:#647c4c;line-height:1.8}
+.chapter details p{color:#647553;line-height:1.9}
+.chapter details details{background:#f9fbf6}
+.chapter .beginner details{background:transparent;border:0;border-top:1px solid #e1e7d8;border-radius:0;padding:16px 0 0}
+.chapter .beginner .where{font-size:10px}
+.chapter .beginner>ol{gap:15px}
+.chapter .beginner>ol>li{padding-left:36px}
+.chapter .beginner>h2{max-width:720px}
+.chapter .beginner .start-link{font-size:13px;padding:12px 18px}
+.coursemap{margin:24px 0}
+.coursegrid{gap:12px;margin-top:18px}
+.coursegrid a{background:#fafcf7;border:1px solid #e1e8d7;border-radius:9px;padding:18px;box-shadow:none;color:#809068;font-size:12px;line-height:1.9}
+.coursegrid a b{font-size:17px;color:#4e7037;font-weight:600;letter-spacing:-.04em}
+.coursegrid a:hover{border-color:#a4bd87;box-shadow:none;background:#f1f6e9}
+.chapter>label{font-size:12px;color:#7a8d66;margin-top:22px}
+.chapter textarea{background:#fdfefb;border-color:#dbe5d0;border-radius:10px;min-height:135px;font-size:14px;padding:18px;color:#3c562f}
+.chapter textarea::placeholder{color:#9aa88c}
+.completion{border-color:#e0e8d6;background:#f0f5e8;color:#637c4c!important;font-size:12px;padding:14px 16px}
+.completion input{accent-color:#668849;margin-right:7px}
+.nav{border-color:#dde5d2;margin-top:28px;padding-top:23px}
+.nav a{border-color:#d7e2cb;color:#627e4c;font-size:12px;border-radius:8px;padding:12px 18px}
+.nav .next{color:#fff;background:#204f40;border-color:#204f40}
+.chapter>.note{font-size:13px;padding:20px 23px}
+.chapter>.check{font-size:14px;padding:20px 23px}
+.chapter>ul{color:#627551;font-size:14px}
+
+@media(min-width:1600px){.layout>main{margin-left:calc(258px + (100vw - 1600px)/2);max-width:1260px;padding-left:50px;padding-right:50px}
+}
+
+@media(max-width:1100px){.layout>aside{width:226px;padding:26px 16px}
+.layout>main{margin-left:226px;padding:28px}
+header{margin-left:226px;padding:0 28px}
+header span{display:none}
+.lessonHero{padding:31px}
+.lessonHero h1{font-size:29px}
+.lessonHero:after{font-size:90px;top:32px}
+.lessonHero .lead{max-width:80%}
+.concept{grid-template-columns:92px 1fr;gap:15px}
+}
+
+@media(max-width:850px){header{margin-left:0;height:65px;padding:0 16px;gap:9px}
+header b{font-size:13px}
+header>a{font-size:10px;padding:7px 9px}
+#mobileMenu{font-size:11px;background:#fff;border-color:#dce6d1;color:#5c7745;padding:8px 10px}
+.layout>aside{position:static;width:auto;height:auto;max-height:none;padding:22px;border-right:0;border-bottom:1px solid var(--line)}
+.ready .layout>aside.mobile-open{max-height:65vh;margin:0;box-shadow:0 8px 20px #31472a08}
+.sidebarBrand:before{display:none}
+.sidebarBrand{padding-bottom:16px}
+.sidebarBrand strong{font-size:19px}
+.layout>main{margin:0;max-width:none;transform:none;padding:22px 20px 50px}
+.lessonHero h1{max-width:85%;font-size:28px}
+.lessonHero .lead{max-width:85%;font-size:13px}
+.lessonHero{min-height:185px;padding:28px;border-radius:13px}
+.chapter .beginner{padding:25px}
+.concept{padding:22px}
+.chapter .table{width:100%}
+.chapter table{min-width:440px}
+.coursegrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:550px){header b{font-size:11px}
+header>a{font-size:9px;padding:7px 8px}
+.layout>main{padding:18px 16px 40px}
+.lessonHero{padding:26px 23px;min-height:195px}
+.lessonHero:after{font-size:74px;right:15px;top:17px;color:#d9e2cf}
+.lessonHero h1{font-size:26px;max-width:100%;padding-right:12px;margin:16px 0 10px}
+.lessonHero .eyebrow{font-size:9px}
+.lessonHero .lead{max-width:100%;font-size:12px}
+.chapter .beginner{padding:21px}
+.chapter .beginner .start-link{display:block;text-align:center;margin:12px 0}
+.chapter .beginner>a:not(.start-link){display:block;font-size:12px;margin-top:13px}
+.concept{display:block;padding:21px}
+.concept h2{font-size:11px;margin:0 0 8px!important}
+.concept h2:not(:first-child){margin-top:20px!important}
+.concept p{font-size:13px}
+.chapter>ol>li{padding:17px 17px 17px 53px;font-size:13px}
+.chapter>ol>li:before{left:16px;top:18px}
+.prompt{padding:21px}
+.prompt pre{font-size:13px;line-height:1.95}
+.prompt:before{font-size:8px}
+.coursegrid{grid-template-columns:1fr}
+.chapter details{padding:15px 18px}
+.transfer{padding:3px 21px 20px}
+.transfer p{font-size:13px}
+.chapter>.check,.chapter>.note{font-size:13px;padding:18px}
+.chapter>h2{font-size:18px}
+.nav{gap:8px;flex-wrap:wrap}
+.nav a{font-size:11px;padding:11px 13px}
+.chapter textarea{font-size:13px}
+.chapter .beginner .where{font-size:9px}
+}
+
+@media print{header,.layout>aside{display:none!important}
+.layout>main{margin:0!important;padding:0!important;max-width:none!important;transform:none!important}
+.lessonHero{background:#edf3e7!important;color:#23482b!important;min-height:0;display:block;padding:20px}
+.lessonHero h1,.lessonHero .lead,.lessonHero .eyebrow{color:#23482b!important;max-width:none}
+.lessonHero:after{display:none}
+.beginner{box-shadow:none}
+.concept{display:block}
+.concept h2{margin-top:14px!important}
+.prompt:before{color:#45623a}
+.chapter table{min-width:0}
+.chapter .table{overflow:visible}
+.chapter{break-before:page}
+.coursegrid{grid-template-columns:1fr 1fr}
+.nav,.guide-switch{display:none}
+}
+
+
+
+/* Warm editorial finish — cream, peach, butter and sage */
+body{background:#fbf8f2;color:#344338}
+.topbar,header{background:#fbf8f2ee}
+.sidebar,.layout>aside{background:#fffdf9;border-color:#e7e5db}
+.brand:before,.sidebarBrand:before{background:#375e4b;color:#fff0c9}
+.brand,.sidebarBrand small{color:#7f8777}
+.hero{background:#f8eee1;border-color:#eee1cf;border-radius:22px;grid-template-columns:minmax(0,1.08fr) minmax(260px,.92fr);padding:40px;min-height:370px}
+.hero h2{color:#344f3c;font-size:clamp(29px,2.55vw,39px)}
+.hero h2 em{color:#9b694e}
+.hero p{color:#706c5e}
+.hero .eyebrow{color:#9a795a}
+.pill{background:#fff9ef;border-color:#e7d9c4;color:#8b7154;border-radius:20px}
+.warm-art{margin:0;position:relative;min-width:0;align-self:center}
+.warm-art img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain;border-radius:20px;mix-blend-mode:multiply}
+.warm-art figcaption{font-size:10px;color:#897a61;letter-spacing:.08em;text-align:center;margin-top:-6px}
+.mission-card,.panel,.saved-item{background:#fffefa;border-color:#e6e5d9}
+.mission-card:hover{background:#fffefa;border-color:#c9ba99;box-shadow:0 8px 22px #80603a09}
+.card-symbol{background:#f7e8db;color:#a47752;border-radius:13px}
+.mission-card:nth-child(2) .card-symbol{background:#faf0cb;color:#9a8135}
+.mission-card:nth-child(3) .card-symbol{background:#eaf0e3;color:#678157}
+.mission-card:nth-child(4) .card-symbol{background:#f2eaf0;color:#977487}
+.mission-card h3{color:#42543b}
+.mission-card p{color:#6d7464}
+.card-output{color:#707c5e;border-color:#eeeadd}
+.card-output b{color:#607a4d}
+.duration{background:#f6f3eb;border-radius:12px;padding:3px 9px;color:#7a806e}
+.missionNav button.active{background:#f4eddf;color:#6d5d3f}
+.missionNav button.active .nav-symbol{color:#a07c4b}
+.sidebar .shelfButton{background:#faf6ed;border-color:#e7dfce;color:#7a6f55}
+.side-label,.side-bottom,#storageStatus{color:#79816e}
+.topbar strong,header b{color:#536047}
+.crumb{color:#78826e}
+.external,header>a{background:#fffdfa;border-color:#e7e1d4;color:#607052}
+.beginner{background:#fffefa;border-color:#e7e4d7;border-radius:17px}
+.beginner .where{background:#faf0cf;color:#8b7544;border-radius:20px}
+.beginner ol>li:before{background:#f8e8d8;color:#a27952;border-radius:9px}
+.beginner h2,.beginner h3{color:#43583b!important}
+.beginner p,.beginner li{color:#626d54!important}
+.beginner .done{background:#f3f4e9;color:#606d4f!important}
+.beginner summary{color:#7b795c}
+.beginner details{border-color:#ece7d9}
+.beginner .start-link,button.primary,.nav .next{background:#3b624d;border-color:#3b624d;color:white;box-shadow:0 3px 8px #4c614514}
+.beginner .start-link:hover,button.primary:hover,.nav .next:hover{background:#2c513e;color:#fff}
+.stages{background:#fffefa;border-color:#e5e4d8}
+.stages button.active{background:#3b624d;color:#fff}
+#workspace>.beginner{background:#f9f1e4;border-color:#eadfca}
+#workspace>.beginner .where{background:#fffaf0;color:#96754a}
+#workspace>.beginner .done{background:#f0ecd9}
+.field input,.field select,.field textarea{background:#fffdf7;border-color:#dfdfd0;color:#46543b}
+.field small,.panel .intro,.hint{color:#78816b}
+.choice:has(input:checked){background:#f7f6e9;border-color:#e2e0c9}
+#live{background:#fffef8;border-top-color:#bdc699}
+.metric{background:#f4f3df;border-color:#e8e7ce}
+.metric b{color:#62763f}
+.metric small{color:#788354}
+.formula{background:#f8f5e9;color:#7a7958}
+.prompt-text{background:#f8f7ef;border-color:#e8e5d6;color:#515e42}
+.how{background:#faf7ef;border-color:#e8e3d6}
+.how p{color:#768068}
+.note{background:#f6f3e7;color:#77714e;border-left-color:#cbbd86}
+.warning{background:#fff4df;color:#8d683e;border-left-color:#d1ab6a}
+.success{background:#edf3e4;color:#567343;border-left-color:#a0b78a}
+th{background:#f0f1e4;color:#69764d}
+td{color:#4c5d3e}
+tbody tr:nth-child(even){background:#fdfbf6}
+.table-wrap,.chapter .table{border-color:#e4e4d4}
+th,td{border-color:#e4e5d8}
+.f2{background:#fff3b9!important}
+.f5{background:#e0edf5!important}
+footer{border-color:#e5e5d8;color:#82866f}
+
+.lessonHero{background:#f5ecdc;border-color:#e9ddc8;border-radius:18px;color:#54613c}
+.lessonHero h1{color:#495a37}
+.lessonHero .eyebrow{color:#9b8152}
+.lessonHero .lead{color:#7b7b5c}
+.lessonHero:after{color:#e4d8bf}
+.lessonHero.course-welcome{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(210px,.8fr);gap:24px;padding:32px 36px;min-height:310px}
+.course-welcome:after{display:none}
+.course-welcome h1{max-width:100%;font-size:32px;line-height:1.5}
+.course-welcome .lead{max-width:100%;font-size:13px;line-height:1.9}
+.course-welcome .warm-art{max-width:310px;justify-self:end}
+.concept,.prompt,.transfer,.chapter details{background:#fffefa;border-color:#e7e4d5}
+.concept h2{color:#8d8768}
+.concept p{color:#697358}
+.prompt:before{border-color:#eae6d7;color:#918969}
+.prompt pre{color:#536145}
+.copy{background:#f6eed8;border-color:#e6ddc1;color:#897144}
+.copy:hover{background:#eee1bc}
+.transfer{border-left-color:#dbbc91}
+.transfer h2{color:#927951}
+.chapter>ol>li{background:#fffefa;border-color:#e7e4d8}
+.chapter>ol>li:before{background:#f8e9d6;color:#9d7848}
+.coursegrid a{background:#fcf9f0;border-color:#e9e1cd;color:#827c5d}
+.coursegrid a b{color:#7d754d}
+.coursegrid a:nth-child(3n+2){background:#f3f5e9}
+.coursegrid a:nth-child(3n){background:#faf0e7}
+.coursegrid a:hover{background:#f9efd9;border-color:#caba96}
+.chapter textarea{background:#fffefa;border-color:#e1e2d3;color:#526344}
+.completion{background:#f2f3e3;border-color:#e3e3ce;color:#778254!important}
+.progressbox{background:#f6f3e5;border-color:#e9e3cd}
+.progressbox b{color:#807753}
+.progressbox progress{accent-color:#b8aa73}
+.progressbox a{color:#8b805b}
+.tocgroup{border-color:#eeeadd}
+.tocgroup summary{color:#7b7c60}
+.tocgroup a{color:#78806b}
+.tocgroup a[aria-current]{background:#f4eddb;border-left-color:#c0aa74;color:#7a6a43}
+.tocgroup a:hover{background:#faf4e8;color:#81724e}
+#courseSearch{background:#faf8f0;border-color:#e5e0cf;color:#6d7758}
+.sidebarBrand em{background:#f7f0dc;color:#9a8451}
+.layout>aside #export{background:#fffdf7;border-color:#e6dfc9;color:#8f815a}
+.guide-switch a{background:#faf6e9;border-color:#e8e0ca;color:#8f8059}
+
+@media(max-width:1100px){.lessonHero.course-welcome{grid-template-columns:minmax(0,1.2fr) minmax(160px,.8fr);padding:28px;gap:14px}
+.course-welcome h1{font-size:28px}
+.hero{padding:30px;gap:20px;grid-template-columns:minmax(0,1fr) 230px}
+}
+
+@media(max-width:900px){.hero{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:12px}
+.hero h2{font-size:27px}
+.hero p{font-size:12px}
+.warm-art figcaption{font-size:8px}
+.lessonHero.course-welcome{display:block}
+.course-welcome .warm-art{max-width:180px;margin:16px auto 0}
+.course-welcome h1{max-width:100%;font-size:29px}
+}
+
+@media(max-width:760px){.hero{display:block;padding:28px 24px;border-radius:17px;min-height:0}
+.hero h2{font-size:31px;margin:15px 0}
+.hero .warm-art{max-width:240px;margin:8px auto -8px}
+.hero .warm-art img{border-radius:16px}
+.hero .warm-art figcaption{display:none}
+.missionNav button.active{background:transparent;border-bottom-color:#aa956b}
+.lessonHero.course-welcome{padding:27px 23px;display:grid;grid-template-columns:minmax(0,1fr) 130px;gap:12px;min-height:235px}
+.course-welcome .warm-art{margin:0;max-width:150px}
+.course-welcome h1{font-size:25px}
+.course-welcome .lead{font-size:12px}
+.course-welcome .eyebrow{font-size:8px}
+.beginner{border-radius:13px}
+}
+
+@media(max-width:450px){.lessonHero.course-welcome{display:block}
+.course-welcome h1{font-size:28px}
+.course-welcome .warm-art{display:block;width:170px;max-width:50%;margin:8px auto -10px}
+.course-welcome .lead{font-size:12px}
+}
+
+@media print{.warm-art{display:none!important}
+.lessonHero.course-welcome{display:block;min-height:0}
+.hero{background:#fff!important;display:block}
+.hero h2,.hero h2 em{color:#334e3b}
+.lessonHero{background:#f6f2e8!important}
+.lessonHero h1,.lessonHero .lead{color:#344d37!important}
+.course-welcome h1,.course-welcome .lead{max-width:none}
+}
+
+
+
+.lessonHero.course-welcome{align-items:center}.progressbox progress{appearance:none;border:0;border-radius:99px;overflow:hidden;background:#e6e5d5}.progressbox progress::-webkit-progress-bar{background:#e6e5d5;border-radius:99px}.progressbox progress::-webkit-progress-value{background:#93a976;border-radius:99px}.progressbox progress::-moz-progress-bar{background:#93a976;border-radius:99px}
+</style><meta name="description" content="구매·물류 실무를 위한 Gemini 100강. 메일, P/O·재고 대조, Excel VBA, Gem을 단계별로 실습합니다."></head><body><header><b>Gemini 업무 활용 · 100강</b><span>구매·물류 · 메일 · Excel VBA · Gem</span><button id="mobileMenu" class="js-only">실습 목차</button><a href="https://gemini.google.com/" target="_blank" rel="noopener">Gemini 열기 ↗</a></header><div class="layout"><aside><div class="sidebarBrand"><a href="#chapter-0"><small>DAE-A HOLDINGS</small><strong>Gemini<br>업무 활용 실습</strong><em>100 LESSONS · 구매·물류</em></a></div><div class="guide-switch"><a href="gemini-practice-lab.html">실무 실습실 ↗</a><a href="vba-special-classroom.html">VBA 실습실 ↗</a></div><div class="js-only"><label for="courseSearch">강의 찾기</label><input id="courseSearch" type="search" placeholder="강 번호, VBA, 재고…" aria-label="강의 제목 검색"><p id="searchStatus" role="status"></p></div><div class="js-only progressbox"><b id="courseProgress">실습 기록 0 / 100</b><progress id="courseMeter" max="100" value="0">0</progress><a id="resume" href="#chapter-0">최근 강으로 이동 →</a></div><details class="tocgroup" open><summary>01–10 · 자료 이해·메일·VBA 준비</summary><a data-chapter href="#chapter-0">001 · 처음 시작하는 방법</a><a data-chapter href="#chapter-1">002 · 메일 한 묶음 고르기</a><a data-chapter href="#chapter-2">003 · Gemini가 읽은 범위 확인하기</a><a data-chapter href="#chapter-3">004 · 사실과 확인할 사항 나누기</a><a data-chapter href="#chapter-4">005 · 이번 업무의 기준 적기</a><a data-chapter href="#chapter-5">006 · 영문 메일 초안 만들기</a><a data-chapter href="#chapter-6">007 · 바꾸고 싶은 부분만 요청하기</a><a data-chapter href="#chapter-7">008 · 비교할 열과 기준 정하기</a><a data-chapter href="#chapter-8">009 · 자동화할 작업을 문장으로 정하기</a><a data-chapter href="#chapter-9">010 · 실습용 Excel 파일 만들기</a></details><details class="tocgroup"><summary>11–20 · 기본 VBA 실행·Gem 만들기</summary><a data-chapter href="#chapter-10">011 · Gemini에 VBA 요청하기</a><a data-chapter href="#chapter-11">012 · Excel VBA 편집기에 붙여넣기</a><a data-chapter href="#chapter-12">013 · 한 번 실행하고 원본과 비교하기</a><a data-chapter href="#chapter-13">014 · 오류 정보를 모아서 다시 요청하기</a><a data-chapter href="#chapter-14">015 · 실제 양식에 맞게 요청서 바꾸기</a><a data-chapter href="#chapter-15">016 · 저장할 기준과 매번 줄 자료 나누기</a><a data-chapter href="#chapter-16">017 · 새 Gem에 요청 사항 넣기</a><a data-chapter href="#chapter-17">018 · 참고 파일 추가하기 (선택)</a><a data-chapter href="#chapter-18">019 · 조건을 바꾸며 답변 확인하고 저장하기</a><a data-chapter href="#chapter-19">020 · 다음 업무를 같은 순서로 진행하기</a></details><details class="tocgroup"><summary>21–30 · 메일과 요청 설계</summary><a data-chapter href="#chapter-20">021 · 수신자별 요청 분리</a><a data-chapter href="#chapter-21">022 · 메일 제목에 검색 기준 넣기</a><a data-chapter href="#chapter-22">023 · 정정 메일에서 변경점 명시</a><a data-chapter href="#chapter-23">024 · 가능·예정·완료 표현 비교</a><a data-chapter href="#chapter-24">025 · 첨부와 본문 수량 대조</a><a data-chapter href="#chapter-25">026 · 회신을 요청 사항별로 추적</a><a data-chapter href="#chapter-26">027 · 짧은 본문과 상세 표 분리</a><a data-chapter href="#chapter-27">028 · 모호한 회신에 확인 질문 만들기</a><a data-chapter href="#chapter-28">029 · 긴 대화를 새 채팅으로 이어가기</a><a data-chapter href="#chapter-29">030 · 같은 자료로 두 요청문 비교</a></details><details class="tocgroup"><summary>31–40 · P/O와 재고 대조</summary><a data-chapter href="#chapter-30">031 · 품목 코드 원형 보존</a><a data-chapter href="#chapter-31">032 · 중복 행의 의미 판단</a><a data-chapter href="#chapter-32">033 · Stock 적용 전후 나누기</a><a data-chapter href="#chapter-33">034 · 예약 재고를 가용량에서 구분</a><a data-chapter href="#chapter-34">035 · 부족량을 P/O별 배분</a><a data-chapter href="#chapter-35">036 · 부분 취소와 재발행 구분</a><a data-chapter href="#chapter-36">037 · 박스 올림과 과잉 수량 표시</a><a data-chapter href="#chapter-37">038 · 단위가 다른 수량 비교</a><a data-chapter href="#chapter-38">039 · 서로 다른 기준일 대조</a><a data-chapter href="#chapter-39">040 · 원본과 결과 차이 보고서</a></details><details class="tocgroup"><summary>41–50 · 선적과 거래명세서</summary><a data-chapter href="#chapter-40">041 · AIR와 Vessel 물량 나누기</a><a data-chapter href="#chapter-41">042 · 선적 선택지 비교</a><a data-chapter href="#chapter-42">043 · 선박 혼입 후 Short 재확인</a><a data-chapter href="#chapter-43">044 · 거래명세서와 실물 차이 계산</a><a data-chapter href="#chapter-44">045 · 부족품과 오입품 분리</a><a data-chapter href="#chapter-45">046 · NCV 처리 조건 확인</a><a data-chapter href="#chapter-46">047 · REMARK를 행동 중심으로 작성</a><a data-chapter href="#chapter-47">048 · 공급사 발주 시한 설명</a><a data-chapter href="#chapter-48">049 · 출하 변경 이력표 만들기</a><a data-chapter href="#chapter-49">050 · 주간 출하 브리핑 정리</a></details><details class="tocgroup"><summary>51–60 · Excel 자료 정리</summary><a data-chapter href="#chapter-50">051 · 여러 공장 파일 합치기</a><a data-chapter href="#chapter-51">052 · 거래처 코드 불일치 표시</a><a data-chapter href="#chapter-52">053 · Maker와 구매처 매핑</a><a data-chapter href="#chapter-53">054 · 숫자처럼 보이는 문자열 정리</a><a data-chapter href="#chapter-54">055 · 날짜 해석 모호성 처리</a><a data-chapter href="#chapter-55">056 · 병합된 제목과 실제 데이터 구분</a><a data-chapter href="#chapter-56">057 · 필터와 숨김 행의 범위 정하기</a><a data-chapter href="#chapter-57">058 · 표 모양과 데이터 정확성 분리</a><a data-chapter href="#chapter-58">059 · 대조 결과에서 예외 먼저 보기</a><a data-chapter href="#chapter-59">060 · 정리 작업 요청서 완성</a></details><details class="tocgroup"><summary>61–70 · VBA 구조 익히기</summary><a data-chapter href="#chapter-60">061 · 코드를 작업 순서로 읽기</a><a data-chapter href="#chapter-61">062 · 변수와 자료형 구분</a><a data-chapter href="#chapter-62">063 · 통합문서와 시트 대상 고정</a><a data-chapter href="#chapter-63">064 · 셀 주소와 범위 이해</a><a data-chapter href="#chapter-64">065 · 마지막 데이터 행 찾기</a><a data-chapter href="#chapter-65">066 · 조건문으로 예외 분리</a><a data-chapter href="#chapter-66">067 · 반복문으로 행별 확인</a><a data-chapter href="#chapter-67">068 · 기능을 작은 Sub로 나누기</a><a data-chapter href="#chapter-68">069 · 중단점과 F8로 한 줄씩 확인</a><a data-chapter href="#chapter-69">070 · 코드 변경 전후 비교</a></details><details class="tocgroup"><summary>71–80 · VBA 업무 적용</summary><a data-chapter href="#chapter-70">071 · 열 위치 대신 제목으로 찾기</a><a data-chapter href="#chapter-71">072 · 원본 색상을 유지한 서식 적용</a><a data-chapter href="#chapter-72">073 · Maker 경계선 만들기</a><a data-chapter href="#chapter-73">074 · 수식과 표시값 보존</a><a data-chapter href="#chapter-74">075 · 실행 오류 후 설정 복원</a><a data-chapter href="#chapter-75">076 · 처리 기록 남기기</a><a data-chapter href="#chapter-76">077 · 덮어쓰기 없는 결과 이름</a><a data-chapter href="#chapter-77">078 · 출력 PDF 범위 확인</a><a data-chapter href="#chapter-78">079 · 폴더 일괄 처리 전 소량 실행</a><a data-chapter href="#chapter-79">080 · 매주 사용할 실행 절차 완성</a></details><details class="tocgroup"><summary>81–90 · Gem 운영과 개선</summary><a data-chapter href="#chapter-80">081 · 한 Gem의 역할 범위 정하기</a><a data-chapter href="#chapter-81">082 · 좋은 메일 예시에서 규칙 추출</a><a data-chapter href="#chapter-82">083 · 확인 질문을 적정 수준으로 줄이기</a><a data-chapter href="#chapter-83">084 · 상충하는 업무 기준 정리</a><a data-chapter href="#chapter-84">085 · 지식 파일 갱신 기록</a><a data-chapter href="#chapter-85">086 · 새 채팅에서도 기준 확인</a><a data-chapter href="#chapter-86">087 · 자료 속 요청과 사용자 지시 구분</a><a data-chapter href="#chapter-87">088 · 같은 기준으로 답변 비교</a><a data-chapter href="#chapter-88">089 · 기준 카드와 Gem 일치 확인</a><a data-chapter href="#chapter-89">090 · 실무용 Gem 운영 묶음 완성</a></details><details class="tocgroup"><summary>91–100 · 종합 업무 실습</summary><a data-chapter href="#chapter-90">091 · 거래명세서 불일치부터 요청 메일까지</a><a data-chapter href="#chapter-91">092 · 공장별 부족 P/O 정리</a><a data-chapter href="#chapter-92">093 · 주간 AIR 리스트 변경 반영</a><a data-chapter href="#chapter-93">094 · 출하 선택지와 수요 일정 연결</a><a data-chapter href="#chapter-94">095 · 통합 P/O와 구매처 매핑 연결</a><a data-chapter href="#chapter-95">096 · 분석 결과를 VBA 작업서로 전환</a><a data-chapter href="#chapter-96">097 · 원하는 결과가 안 나올 때 원인 분리</a><a data-chapter href="#chapter-97">098 · 다른 업무로 적용 범위 넓히기</a><a data-chapter href="#chapter-98">099 · 업무별 요청문 목록 정리</a><a data-chapter href="#chapter-99">100 · 실제 업무 한 건을 처음부터 끝까지</a></details><button id="export" class="js-only">메모 파일로 저장</button><p id="storage">작성한 메모는 별도로 복사해 보관할 수 있습니다.</p><a href="https://gywn000929-bot.github.io/Daea-Guide/%EB%8C%80%EC%95%84_%EA%B5%AC%EB%A7%A4%EB%AC%BC%EB%A5%98%ED%8C%80_%EC%97%85%EB%AC%B4%EB%A7%A4%EB%89%B4%EC%96%BC_v9_4.html" target="_blank" rel="noopener" class="manualLink">업무 매뉴얼 ↗</a></aside><main><section class="chapter" id="chapter-0"><div class="lessonHero course-welcome" data-number="001"><div class="hero-copy"><div class="eyebrow">001 / 100 · 기본 실습</div><h1>처음에는 메일 한 통부터 시작하세요</h1><p class="lead">처음부터 100강을 읽지 않아도 됩니다. 006강의 예시로 메일 한 통을 만들어 본 뒤, 필요한 설명을 찾아보세요.</p></div><figure class="warm-art"><img src="assets/warm-learning.webp" width="900" height="900" alt="" decoding="async"></figure></div><div class="beginner"><span class="where">처음 사용하는 분 · 10–15분부터</span><h2>오늘은 복사 → 붙여넣기 → 숫자 확인까지만</h2><p>실제 업무 파일이나 Excel을 준비하지 않아도 됩니다. 아래 연습용 수량으로 Gemini의 답변을 한 번 받아보세요.</p><ol><li><b>006강:</b> 준비된 요청문을 복사해 Gemini에 보내고, 추가 <b>2,000 EA</b>와 총 <b>20,000 EA</b>가 나오는지 확인합니다.</li><li><b>007강:</b> 같은 대화에서 메일을 더 짧게 바꿔봅니다. 숫자는 유지되는지 확인합니다.</li><li><b>끝:</b> 마음에 드는 요청문을 메모에 남깁니다. 오늘은 여기서 멈춰도 됩니다.</li></ol><a class="start-link" href="#chapter-5">006강 · 첫 메일 만들어보기 →</a><a href="gemini-practice-lab.html">숫자를 직접 바꾸는 실습실 열기 →</a><details><summary>메일 실습 다음에는 무엇을 하나요?</summary><p><b>내 메일을 정리하고 싶다면:</b> 002–005강 → 008강.<br><b>반복 설명을 줄이고 싶다면:</b> 016–019강의 Gem 만들기.<br><b>Excel 작업을 자동화하고 싶다면:</b> Windows 데스크톱 Excel을 준비하고 009–015강.<br><b>021–100강:</b> 필요한 업무가 생겼을 때 찾아보는 참고 실습입니다.</p></details><details><summary>낯선 단어는 여기서 확인하세요</summary><dl><dt>요청문 / 프롬프트</dt><dd>Gemini에게 보내는 부탁입니다. 예: “아래 수량을 계산하고 메일을 써 줘.”</dd><dt>P/O</dt><dd>발주서 또는 발주 건을 뜻합니다. 추가 P/O는 필요한 수량을 더 발주하는 일입니다.</dd><dt>EA / Box Q’ty</dt><dd>EA는 낱개 수, Box Q’ty는 한 박스에 담는 낱개 수입니다.</dd><dt>FAC / Maker</dt><dd>FAC는 공장 구분, Maker는 제조사입니다. F1·F2·F5는 이 교재의 공장 구분 예시입니다.</dd><dt>Gem</dt><dd>반복해서 부탁할 역할과 답변 기준을 저장한 Gemini 도우미입니다.</dd><dt>VBA / 매크로</dt><dd>Excel이 할 일을 적는 언어 / 실행할 작업 묶음입니다.</dd><dt>대조 / 검증</dt><dd>답변의 숫자나 내용을 원래 자료와 나란히 놓고 확인하는 일입니다.</dd></dl></details></div><div class="note"><b>준비물은 두 개의 탭입니다</b><p>이 교재를 열어두고 위의 “Gemini 열기”로 새 탭을 엽니다. Gemini에 로그인한 뒤 이 탭으로 돌아오세요. 첫 메일 실습에는 첨부파일이나 Excel이 필요하지 않습니다.</p></div><details class="coursemap"><summary>전체 100강 목차와 선택 과정 보기</summary><h2>전체 과정 · 10개 단원</h2><div class="coursegrid"><a href="#chapter-0"><b>01–10강</b><br>자료 이해·메일·VBA 준비</a><a href="#chapter-10"><b>11–20강</b><br>기본 VBA 실행·Gem 만들기</a><a href="#chapter-20"><b>21–30강</b><br>메일과 요청 설계</a><a href="#chapter-30"><b>31–40강</b><br>P/O와 재고 대조</a><a href="#chapter-40"><b>41–50강</b><br>선적과 거래명세서</a><a href="#chapter-50"><b>51–60강</b><br>Excel 자료 정리</a><a href="#chapter-60"><b>61–70강</b><br>VBA 구조 익히기</a><a href="#chapter-70"><b>71–80강</b><br>VBA 업무 적용</a><a href="#chapter-80"><b>81–90강</b><br>Gem 운영과 개선</a><a href="#chapter-90"><b>91–100강</b><br>종합 업무 실습</a></div><p>첫 만남에서는 기본 과정의 필요한 부분만 진행합니다. 이후에는 실제 업무 한 건과 연결되는 강을 2~3개씩 선택합니다. VBA 심화는 09–15강, Gem 심화는 16–19강을 먼저 진행합니다.</p></details><div class="check"><b>오늘의 완료 기준</b><br>메일 초안을 하나 받고, 추가 수량과 총수량을 확인하고, 다음에 쓸 요청문을 아래 메모에 남기면 됩니다.</div><label for="note-0">기록할 내용</label><textarea id="note-0" data-save="note-0" placeholder="이번 업무의 조건이나 수정할 내용을 적습니다."></textarea><label class="completion js-only"><input type="checkbox" data-done="0"> 이 강 실습 기록하기</label><nav class="nav"><a class="next" href="#chapter-5">첫 실습 · 006강 →</a></nav></section><section class="chapter" id="chapter-1"><div class="lessonHero" data-number="002"><div class="eyebrow">002 / 100 · 기본 실습</div><h1>메일 한 묶음 고르기</h1><p class="lead">같은 업무의 요청부터 최신 회신까지 준비합니다.</p></div><div class="beginner"><span class="where">Outlook + 메모장</span><h3>한 업무의 메일만 모으세요</h3><ol><li>같은 품목이나 발주번호의 요청 메일과 최신 회신을 엽니다. 다른 업무의 메일은 빼세요.</li><li>메모장에 날짜, 제목, 보낸 사람, 본문을 순서대로 복사합니다. 중요한 표가 첨부에 있다면 그 파일도 준비합니다.</li><li>실제 메일이 아직 없다면 006강의 연습 예시부터 해도 됩니다.</li></ol><p class="done"><b>여기까지 되면 다음으로:</b> 무엇을 요청했고 마지막에 무엇이 바뀌었는지 원문에서 찾을 수 있습니다.</p></div><div class="concept"><h2>업무 상황</h2><p>요청과 회신이 여러 메일에 흩어져 있고, 중간에 수량이 변경되었습니다.</p><h2>핵심 원리</h2><p>자료의 양보다 의사결정 흐름이 중요합니다. 요청·변경·확정 메일을 함께 제공해야 과거 요청을 현재 조건으로 적용하는 일을 줄일 수 있습니다.</p></div><h2>지금 할 작업</h2><ol><li>다운로드한 메일에서 같은 P/O 또는 같은 품목에 관한 메일 3~5건을 고릅니다.</li><li>요청 메일 → 회신 → 최신 변경사항 순서로 정리합니다.</li><li>보낸 날짜·보낸 사람·제목·본문을 함께 남깁니다. 첨부 Excel이 판단 근거라면 별도로 준비합니다.</li><li>회사에서 사용이 허용된 계정과 자료 범위인지 확인합니다. 실습에 불필요한 개인정보는 제외합니다.</li></ol><details><summary>.msg 또는 .pst 파일만 있는 경우</summary><p>Gemini가 내용을 읽었다고 확인되기 전에는 분석을 맡기지 않습니다. Outlook에서 관련 메일을 열어 날짜·제목·본문을 텍스트 파일에 옮깁니다. 확장자만 .txt로 바꾸면 변환되지 않습니다.</p></details><div class="check"><b>확인할 결과</b><br>하나의 업무를 설명할 수 있는 메일 묶음과 관련 첨부파일을 준비합니다.</div><div class="transfer"><h2>조건을 바꿔 적용하기</h2><p>선택한 묶음에서 최신 변경 메일을 제외했을 때 어떤 값이 달라지는지 원문으로 비교합니다.</p><details><summary>비교할 결과와 해설 보기</summary><p>답변이 틀렸다면 먼저 자료 누락 여부를 살핍니다. 필요한 자료가 없는데 요청문만 길게 써도 최신 사실을 알 수 없습니다.</p></details><h2>다음 업무에 다시 쓰기</h2><p>같은 품목이라도 공장이나 P/O가 다르면 구분합니다. 자료를 추가할 때 변경 이유와 날짜를 붙입니다.</p></div><label for="note-1">기록할 내용</label><textarea id="note-1" data-save="note-1" placeholder="이번 업무의 조건이나 수정할 내용을 적습니다."></textarea><label class="completion js-only"><input type="checkbox" data-done="1"> 이 강 실습 기록하기</label><nav class="nav"><a href="#chapter-0">← 이전 강</a><a class="next" href="#chapter-2">다음 · 003강 →</a></nav></section><section class="chapter" id="chapter-2"><div class="lessonHero" data-number="003"><div class="eyebrow">003 / 100 · 기본 실습</div><h1>Gemini가 읽은 범위 확인하기</h1><p class="lead">분석 전에 파일명과 읽힌 내용을 확인합니다.</p></div><div class="beginner"><span class="where">Gemini 새 채팅</span><h3>파일을 올린 뒤 내용을 한 줄 확인하세요</h3><ol><li>Gemini에서 새 채팅을 열고 입력창의 파일 추가 메뉴로 준비한 자료를 올립니다.</li><li>아래 요청문을 복사해 입력창에 붙여넣고 전송합니다.</li><li>원본의 품목 한 개를 골라 수량과 날짜가 답변에 똑같이 나오는지 확인합니다.</li></ol><p class="done"><b>여기까지 되면 다음으로:</b> 파일 이름뿐 아니라 원본 내용 한 줄이 일치합니다. 읽지 못했다면 해당 표나 본문을 텍스트로 다시 제공합니다.</p></div><div class="concept"><h2>업무 상황</h2><p>첨부파일은 올라갔지만, 필요한 표와 본문까지 읽혔는지 알 수 없습니다.</p><h2>핵심 원리</h2><p>업로드 성공은 내용 전체를 읽었다는 보장이 아닙니다. 파일명 확인과 내용 대조를 구분합니다.</p></div><h2>지금 할 작업</h2><ol><li>Gemini에서 새 채팅을 엽니다.</li><li>입력창의 파일 추가 기능으로 준비한 파일을 올립니다.</li><li>아래 요청문을 보내고 파일별로 결과를 확인합니다.</li></ol><div class="prompt"><button class="copy js-only" type="button">요청문 복사</button><pre>첨부 자료를 먼저 확인해 줘. 아직 결론이나 회신 초안은 만들지 마.
 1. 확인한 파일명과 읽을 수 있는 범위
 2. 각 메일의 날짜, 제목, 핵심 요청 한 줄
 3. 읽지 못한 파일 또는 시트
