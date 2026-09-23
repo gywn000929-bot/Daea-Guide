@@ -305,6 +305,18 @@ th,.expected th{background:#e8eff8;color:#1b3a6b;border-color:#cad8e8}
   <div class="page">
     <section class="panel active" id="home">
       <div class="hero"><div class="hero-copy"><span class="eyebrow">EXCEL VBA · 업무 자동화 실습</span><h2>반복 업무는 줄이고,<br><em>가능성은 넓히세요.</em></h2><p>연습용 파일로 원리를 확인한 뒤, 두 개의 실제 VBA를 직접 설치하고 실행합니다. 결과가 맞는지 확인하는 방법과 오류가 났을 때 어디를 볼지도 함께 연습합니다.</p><div class="heroactions"><button class="primary go" data-go="basics">실습 시작하기 →</button><button class="primary download-trigger" data-file="ITEM_AUTO_FILL_실습키트.zip">ITEM 키트 받기</button><button class="primary download-trigger" data-file="AIR_CONFIRM_V10_실습키트.zip">AIR 키트 받기</button></div></div></div>
+
+      <article class="card" id="work-macro-download" aria-labelledby="work-macro-title">
+        <span class="tag">실사용 통합본 · 2026.09.23</span>
+        <h3 id="work-macro-title">업무 매크로 24개 통합본</h3>
+        <p>주 메뉴 24개와 보조 메뉴 1개로 정리한 Excel 추가 기능입니다. 에어 정리·서식, 연호 입고 계산, 한 기준·두 기준 부분합을 통합하고 V9 품목조회를 포함했습니다.</p>
+        <p class="filemeta">ZIP 구성: 매크로 신상.xlam · 리본 메뉴 설정 · 적용 안내</p>
+        <a class="download" href="downloads/daea-macros-24-20260923.zip" download="실사용_매크로_24개_통합본.zip">실사용 매크로 통합본 다운로드</a>
+        <details><summary>설치 방법과 확인 범위</summary>
+          <ol><li>Excel 작업을 저장하고 Excel을 모두 종료합니다.</li><li>기존 추가 기능 파일을 백업한 뒤, 같은 위치의 매크로 신상.xlam을 교체합니다.</li><li>메뉴 설정을 백업한 후, Excel 옵션 → 리본 사용자 지정 → 가져오기/내보내기에서 동봉된 메뉴 파일을 가져옵니다.</li></ol>
+          <p>에어 계산·부분합·연호 계산 두 모드를 시험용 데이터로 확인했습니다. 실제 업무 자료 전체 대조와 나머지 기존 매크로의 오류 수정은 포함하지 않았습니다. 위 실습 키트와 별도로 사용하는 통합 추가 기능입니다.</p>
+        </details>
+      </article>
       <div class="beginner"><span class="where">시작 안내 · 처음 사용하는 분</span><h3>오늘은 버튼 하나로 결과를 만드는 순서를 익힙니다</h3><ol><li>이 안내 페이지는 순서를 보여줍니다. 실제 코드는 Windows 데스크톱 Excel에서 실행합니다. 브라우저의 “예상 결과 계산”은 정답을 비교하는 참고 화면입니다.</li><li>아래 준비물을 확인한 뒤 “실습 시작하기”를 누릅니다. 코드를 외우지 않고 파일 준비 → 코드 넣기 → 실행 → 결과 확인 순으로 진행합니다.</li><li>처음에는 ITEM 실습만 끝내도 됩니다. 같은 순서가 익숙해지면 AIR 실습으로 넘어갑니다.</li></ol><p class="done"><b>여기까지 되면 다음으로:</b> Excel과 연습 파일을 둘 폴더를 준비했습니다.</p><details><summary>파일 이름 뒤 .zip, .xlsx, .bas, .xlsm은 무엇인가요?</summary><dl><dt>.zip</dt><dd>여러 실습 파일을 묶은 압축 파일입니다. 내려받은 파일을 오른쪽 클릭하고 “모두 압축 풀기”로 폴더에 풉니다.</dd><dt>.xlsx</dt><dd>표와 수량이 들어 있는 Excel 파일입니다. VBA 코드를 함께 보관할 파일은 .xlsm으로 저장합니다.</dd><dt>.bas</dt><dd>준비된 VBA 코드 파일입니다. Excel의 코드 편집기에서 “파일 → 파일 가져오기”로 넣습니다.</dd><dt>.xlsm</dt><dd>표와 VBA 코드를 함께 저장하는 Excel 파일 형식입니다. “다른 이름으로 저장”에서 파일 형식으로 선택합니다.</dd></dl></details></div><div class="path"><div><b>준비</b>파일과 보안 확인</div><div><b>이해</b>VBA 구조 읽기</div><div><b>설치</b>모듈에 코드 넣기</div><div><b>실행</b>예제 데이터 처리</div><div><b>검증</b>업무 기준과 대조</div></div>
       <div class="grid">
         <article class="card"><span class="tag">75분 권장</span><h3>오늘 완성할 결과</h3><p><b>ITEM AUTO FILL</b>에서 FAC와 ITEM CD를 기준으로 Balance·Stock·입고수량을 채웁니다.</p><p><b>AIR CONFIRM</b>에서 Confirm을 매칭해 태국 전달용 표와 확인 목록을 만듭니다.</p></article>
