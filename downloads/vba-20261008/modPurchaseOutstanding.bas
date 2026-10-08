@@ -31,11 +31,10 @@ Public Sub 발주미납_집계()
         Err.Raise vbObjectError + 700, , "발주 미납 원본 시트를 선택하세요. 필요한 머리글: 수주번호/수주처 품목코드/품목명/미납수량"
     End If
 
-    lastRow = Application.Max( _
-        ws.Cells(ws.Rows.Count, cols(2)).End(xlUp).Row, _
-        ws.Cells(ws.Rows.Count, cols(1)).End(xlUp).Row, _
-        ws.Cells(ws.Rows.Count, cols(0)).End(xlUp).Row, _
-        ws.Cells(ws.Rows.Count, cols(3)).End(xlUp).Row)
+    lastRow = ws.Cells(ws.Rows.Count, cols(0)).End(xlUp).Row
+    If ws.Cells(ws.Rows.Count, cols(1)).End(xlUp).Row > lastRow Then lastRow = ws.Cells(ws.Rows.Count, cols(1)).End(xlUp).Row
+    If ws.Cells(ws.Rows.Count, cols(2)).End(xlUp).Row > lastRow Then lastRow = ws.Cells(ws.Rows.Count, cols(2)).End(xlUp).Row
+    If ws.Cells(ws.Rows.Count, cols(3)).End(xlUp).Row > lastRow Then lastRow = ws.Cells(ws.Rows.Count, cols(3)).End(xlUp).Row
 
     If lastRow < 2 Then
         MsgBox "집계할 데이터가 없습니다.", vbInformation
@@ -46,12 +45,9 @@ Public Sub 발주미납_집계()
 
     For i = headerRow + 1 To lastRow
 
-        If IsError(ws.Cells(i, cols(0)).Value2) Or _
-           IsError(ws.Cells(i, cols(1)).Value2) Or _
-           IsError(ws.Cells(i, cols(2)).Value2) Then
+        If IsError(ws.Cells(i, cols(0)).Value2) Or IsError(ws.Cells(i, cols(1)).Value2) Or IsError(ws.Cells(i, cols(2)).Value2) Then
 
-            Err.Raise vbObjectError + 701, , _
-                "공장·품목코드·품목명에 오류 셀이 있습니다. 행: " & i
+            Err.Raise vbObjectError + 701, , "공장·품목코드·품목명에 오류 셀이 있습니다. 행: " & i
         End If
 
         customerCode = Trim(CStr(ws.Cells(i, cols(0)).Value2))
@@ -79,18 +75,15 @@ Public Sub 발주미납_집계()
         End If
 
         If IsError(ws.Cells(i, cols(3)).Value2) Then
-            Err.Raise vbObjectError + 702, , _
-                "미납수량에 오류 셀이 있습니다. 행: " & i
+            Err.Raise vbObjectError + 702, , "미납수량에 오류 셀이 있습니다. 행: " & i
         End If
 
         If Not IsNumeric(ws.Cells(i, cols(3)).Value2) Then
-            Err.Raise vbObjectError + 703, , _
-                "미납수량이 숫자가 아닙니다. 행: " & i
+            Err.Raise vbObjectError + 703, , "미납수량이 숫자가 아닙니다. 행: " & i
         End If
 
         If itemCode = "" And itemName = "" Then
-            Err.Raise vbObjectError + 704, , _
-                "수량은 있지만 품목코드와 품목명이 없습니다. 행: " & i
+            Err.Raise vbObjectError + 704, , "수량은 있지만 품목코드와 품목명이 없습니다. 행: " & i
         End If
 
         ' 수주번호 앞자리 F1/F2/F5로 공장 구분
@@ -105,10 +98,9 @@ Public Sub 발주미납_집계()
         qty = CDbl(ws.Cells(i, cols(3)).Value2)
 
         ' 공장 + 품목코드 + 품목명 기준 집계
-        key = Len(factory) & ":" & factory & _
-              Len(itemCode) & ":" & itemCode & itemName
+        key = Len(factory) & ":" & factory & Len(itemCode) & ":" & itemCode & itemName
 
-        If dict.exists(key) Then
+        If dict.Exists(key) Then
             data = dict(key)
             data(3) = data(3) + qty
             dict(key) = data
@@ -149,20 +141,18 @@ NextRow:
     Set resWs = wb.Worksheets.Add(After:=wb.Sheets(wb.Sheets.Count))
     resWs.Name = sheetName
 
-    resWs.Range("A1:D1").value = _
-        Array("FAC", "수주처 품목코드", "품목명", "미납잔량")
+    resWs.Range("A1:D1").Value = Array("FAC", "수주처 품목코드", "품목명", "미납잔량")
 
     resWs.Columns("B:C").NumberFormat = "@"
     rowIdx = 2
 
     ' 품목코드가 없는 항목 먼저 출력
     For pass = 1 To 2
-        For Each k In dict.keys
+        For Each k In dict.Keys
 
             data = dict(k)
 
-            If (pass = 1 And data(1) = "") Or _
-               (pass = 2 And data(1) <> "") Then
+            If (pass = 1 And data(1) = "") Or (pass = 2 And data(1) <> "") Then
 
                 resWs.Cells(rowIdx, 1).Value2 = data(0)
                 resWs.Cells(rowIdx, 2).Value2 = data(1)
@@ -176,7 +166,7 @@ NextRow:
     Next pass
 
     If rowIdx > 3 Then
-        resWs.Range("A1:D" & rowIdx - 1).Sort Key1:=resWs.Range("A2"), Order1:=xlAscending, Key2:=resWs.Range("B2"), Order2:=xlAscending, Key3:=resWs.Range("C2"), Order3:=xlAscending, header:=xlYes
+        resWs.Range("A1:D" & rowIdx - 1).Sort Key1:=resWs.Range("A2"), Order1:=xlAscending, Key2:=resWs.Range("B2"), Order2:=xlAscending, Key3:=resWs.Range("C2"), Order3:=xlAscending, Header:=xlYes
     End If
     resWs.Cells(rowIdx, 3).Value2 = "TOTAL"
     resWs.Cells(rowIdx, 4).Value2 = totalQty
@@ -208,20 +198,15 @@ NextRow:
     resWs.Columns("A").HorizontalAlignment = xlCenter
     resWs.Columns("A:D").AutoFit
 
-    If resWs.Columns("A").ColumnWidth < 8 Then _
-        resWs.Columns("A").ColumnWidth = 8
+    If resWs.Columns("A").ColumnWidth < 8 Then resWs.Columns("A").ColumnWidth = 8
 
-    If resWs.Columns("B").ColumnWidth < 20 Then _
-        resWs.Columns("B").ColumnWidth = 20
+    If resWs.Columns("B").ColumnWidth < 20 Then resWs.Columns("B").ColumnWidth = 20
 
-    If resWs.Columns("C").ColumnWidth < 28 Then _
-        resWs.Columns("C").ColumnWidth = 28
+    If resWs.Columns("C").ColumnWidth < 28 Then resWs.Columns("C").ColumnWidth = 28
 
-    If resWs.Columns("D").ColumnWidth < 16 Then _
-        resWs.Columns("D").ColumnWidth = 16
+    If resWs.Columns("D").ColumnWidth < 16 Then resWs.Columns("D").ColumnWidth = 16
 
-    MsgBox "발주미납 통합집계 완료" & vbCrLf & _
-           "총 미납수량: " & Format(totalQty, "#,##0"), vbInformation
+    MsgBox "발주미납 통합집계 완료" & vbCrLf & "총 미납수량: " & Format(totalQty, "#,##0"), vbInformation
     Exit Sub
 
 Failed:
