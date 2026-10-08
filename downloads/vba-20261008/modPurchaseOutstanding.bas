@@ -108,7 +108,7 @@ Public Sub 발주미납_집계()
         key = Len(factory) & ":" & factory & _
               Len(itemCode) & ":" & itemCode & itemName
 
-        If dict.Exists(key) Then
+        If dict.exists(key) Then
             data = dict(key)
             data(3) = data(3) + qty
             dict(key) = data
@@ -149,7 +149,7 @@ NextRow:
     Set resWs = wb.Worksheets.Add(After:=wb.Sheets(wb.Sheets.Count))
     resWs.Name = sheetName
 
-    resWs.Range("A1:D1").Value = _
+    resWs.Range("A1:D1").value = _
         Array("FAC", "수주처 품목코드", "품목명", "미납잔량")
 
     resWs.Columns("B:C").NumberFormat = "@"
@@ -157,7 +157,7 @@ NextRow:
 
     ' 품목코드가 없는 항목 먼저 출력
     For pass = 1 To 2
-        For Each k In dict.Keys
+        For Each k In dict.keys
 
             data = dict(k)
 
@@ -176,7 +176,7 @@ NextRow:
     Next pass
 
     If rowIdx > 3 Then
-        resWs.Range("A1:D" & rowIdx - 1).Sort Key1:=resWs.Range("A2"), Order1:=xlAscending, Key2:=resWs.Range("B2"), Order2:=xlAscending, Key3:=resWs.Range("C2"), Order3:=xlAscending, Header:=xlYes
+        resWs.Range("A1:D" & rowIdx - 1).Sort Key1:=resWs.Range("A2"), Order1:=xlAscending, Key2:=resWs.Range("B2"), Order2:=xlAscending, Key3:=resWs.Range("C2"), Order3:=xlAscending, header:=xlYes
     End If
     resWs.Cells(rowIdx, 3).Value2 = "TOTAL"
     resWs.Cells(rowIdx, 4).Value2 = totalQty

@@ -142,7 +142,7 @@ Public Sub STOCK_공장별_시트()
         ' 공장별 딕셔너리 안에서 품목코드 + 품목명으로 집계
         key = Len(itemCode) & ":" & itemCode & itemName
 
-        If dict.Exists(key) Then
+        If dict.exists(key) Then
             data = dict(key)
             data(2) = data(2) + qty
             dict(key) = data
@@ -170,7 +170,7 @@ NextStockRow:
         Set resWs = wb.Worksheets.Add(After:=wb.Sheets(wb.Sheets.Count))
         resWs.Name = CStr(fac)
 
-        resWs.Range("A1:D1").Value = _
+        resWs.Range("A1:D1").value = _
             Array("FAC", "ITEM CD", "Part Name", "Shipped Q'ty")
 
         ' 품목코드 앞자리 0 보존
@@ -179,7 +179,7 @@ NextStockRow:
 
         ' 코드 없는 항목 먼저, 코드 있는 항목 다음 출력
         For pass = 1 To 2
-            For Each k In dict.Keys
+            For Each k In dict.keys
 
                 data = dict(k)
 

@@ -246,12 +246,12 @@ Private Sub IndexConfirmationSource(ByVal ws As Worksheet, ByVal hdr As Object, 
             fac = NormalizeCode(CellValue(ws, r, hdr, "FAC"))
             exactKey = fac & "|" & itemCd
             token = sourceId & "|" & CStr(r)
-            If exactIndex.Exists(exactKey) Then
+            If exactIndex.exists(exactKey) Then
                 exactIndex(exactKey) = "DUP"
             Else
                 exactIndex.Add exactKey, token
             End If
-            If itemIndex.Exists(itemCd) Then
+            If itemIndex.exists(itemCd) Then
                 itemIndex(itemCd) = "DUP"
             Else
                 itemIndex.Add itemCd, token
@@ -280,13 +280,13 @@ Private Sub ProcessBaseList(ByVal wsBase As Worksheet, ByVal baseHdr As Object, 
             Set wsOwner = Nothing
             Set ownerHdr = Nothing
 
-            If exactIndex.Exists(exactKey) Then
+            If exactIndex.exists(exactKey) Then
                 If CStr(exactIndex(exactKey)) = "DUP" Then
                     issueText = "Duplicate FAC + Item cd across confirmation sheets"
                 Else
                     token = CStr(exactIndex(exactKey))
                 End If
-            ElseIf itemIndex.Exists(itemCd) Then
+            ElseIf itemIndex.exists(itemCd) Then
                 If CStr(itemIndex(itemCd)) = "DUP" Then
                     issueText = "Item cd exists more than once in confirmation sheets; FAC required"
                 Else
@@ -388,7 +388,7 @@ Private Sub ApplyConfirmRowFormats(ByVal wsBase As Worksheet, ByVal baseRow As L
     CopyFormatByKey wsBase, baseRow, baseHdr, "PARTNAME", wsOut.Cells(outRow, 4)
     CopyFormatByKey wsBase, baseRow, baseHdr, "QTY", wsOut.Cells(outRow, 5)
     If hasOwner Then
-        If ownerHdr.Exists("STOCK") And Trim$(CStr(CellValue(wsOwner, ownerRow, ownerHdr, "STOCK"))) <> "" Then
+        If ownerHdr.exists("STOCK") And Trim$(CStr(CellValue(wsOwner, ownerRow, ownerHdr, "STOCK"))) <> "" Then
             CopyFormatByKey wsOwner, ownerRow, ownerHdr, "STOCK", wsOut.Cells(outRow, 6)
         Else
             CopyFormatByKey wsBase, baseRow, baseHdr, "STOCK", wsOut.Cells(outRow, 6)
@@ -473,7 +473,7 @@ End Sub
 
 Private Sub CopyFormatColumnBlock(ByVal wsSource As Worksheet, ByVal sourceFirstRow As Long, ByVal hdr As Object, ByVal key As String, ByVal wsDestination As Worksheet, ByVal destinationFirstRow As Long, ByVal destinationColumn As Long, ByVal rowCount As Long)
     Dim sourceRange As Range, destinationRange As Range
-    If rowCount <= 0 Or Not hdr.Exists(key) Then Exit Sub
+    If rowCount <= 0 Or Not hdr.exists(key) Then Exit Sub
     Set sourceRange = wsSource.Range(wsSource.Cells(sourceFirstRow, CLng(hdr(key))), wsSource.Cells(sourceFirstRow + rowCount - 1, CLng(hdr(key))))
     Set destinationRange = wsDestination.Range(wsDestination.Cells(destinationFirstRow, destinationColumn), wsDestination.Cells(destinationFirstRow + rowCount - 1, destinationColumn))
     sourceRange.Copy
@@ -485,7 +485,7 @@ Private Sub ApplyThaiFormatsFromOutput(ByVal wsOut As Worksheet, ByVal wsThai As
     Dim r As Long, sourceOutRow As Long
     If lastThaiRow < 2 Then Exit Sub
     For r = 2 To lastThaiRow
-        sourceOutRow = CLng(NumericValue(wsThai.Cells(r, 10).Value))
+        sourceOutRow = CLng(NumericValue(wsThai.Cells(r, 10).value))
         If sourceOutRow >= 2 Then
             wsOut.Range(wsOut.Cells(sourceOutRow, 1), wsOut.Cells(sourceOutRow, 9)).Copy
             wsThai.Range(wsThai.Cells(r, 1), wsThai.Cells(r, 9)).PasteSpecial Paste:=xlPasteFormats
@@ -497,14 +497,14 @@ Private Sub ApplyThaiFormatsFromOutput(ByVal wsOut As Worksheet, ByVal wsThai As
 End Sub
 
 Private Sub CopyFormatByKey(ByVal wsSource As Worksheet, ByVal sourceRow As Long, ByVal hdr As Object, ByVal key As String, ByVal destination As Range)
-    If Not hdr.Exists(key) Then Exit Sub
+    If Not hdr.exists(key) Then Exit Sub
     wsSource.Cells(sourceRow, CLng(hdr(key))).Copy
     destination.PasteSpecial Paste:=xlPasteFormats
     Application.CutCopyMode = False
 End Sub
 
 Private Sub CopyColumnWidthByKey(ByVal wsSource As Worksheet, ByVal hdr As Object, ByVal key As String, ByVal wsDestination As Worksheet, ByVal destinationColumn As Long)
-    If Not hdr.Exists(key) Then Exit Sub
+    If Not hdr.exists(key) Then Exit Sub
     wsDestination.Columns(destinationColumn).ColumnWidth = wsSource.Columns(CLng(hdr(key))).ColumnWidth
 End Sub
 
@@ -527,12 +527,12 @@ Private Function GetHeaderMap(ByVal ws As Worksheet) As Object
     For r = 1 To 30
         lastCol = ws.Cells(r, ws.Columns.Count).End(xlToLeft).Column
         For c = 1 To lastCol
-            key = HeaderKey(CStr(ws.Cells(r, c).Value))
+            key = HeaderKey(CStr(ws.Cells(r, c).value))
             If key <> "" Then
-                If Not m.Exists(key) Then m.Add key, c
+                If Not m.exists(key) Then m.Add key, c
             End If
         Next c
-        If m.Exists("ITEMCD") Then
+        If m.exists("ITEMCD") Then
             m.Add "HEADERROW", r
             Set GetHeaderMap = m
             Exit Function
@@ -569,15 +569,15 @@ End Function
 Private Sub ValidateHeaders(ByVal m As Object, ByVal sheetName As String, ByVal required As Variant)
     Dim i As Long
     For i = LBound(required) To UBound(required)
-        If Not m.Exists(CStr(required(i))) Then
+        If Not m.exists(CStr(required(i))) Then
             Err.Raise vbObjectError + 102, , "Missing header in " & sheetName & ": " & CStr(required(i))
         End If
     Next i
 End Sub
 
 Private Function CellValue(ByVal ws As Worksheet, ByVal rowNum As Long, ByVal m As Object, ByVal key As String) As Variant
-    If m.Exists(key) Then
-        CellValue = ws.Cells(rowNum, CLng(m(key))).Value
+    If m.exists(key) Then
+        CellValue = ws.Cells(rowNum, CLng(m(key))).value
     Else
         CellValue = Empty
     End If
@@ -699,7 +699,7 @@ End Sub
 Private Sub WriteHeaders(ByVal ws As Worksheet, ByVal headers As Variant)
     Dim i As Long
     For i = LBound(headers) To UBound(headers)
-        ws.Cells(1, i + 1).Value = headers(i)
+        ws.Cells(1, i + 1).value = headers(i)
     Next i
 End Sub
 
@@ -716,7 +716,7 @@ Private Sub WriteConfirmRow(ByVal ws As Worksheet, ByVal rowNum As Long, ByVal f
     rowData(1, 9) = needVal
     rowData(1, 10) = remarkVal
     rowData(1, 11) = statusText
-    ws.Range(ws.Cells(rowNum, 1), ws.Cells(rowNum, 11)).Value = rowData
+    ws.Range(ws.Cells(rowNum, 1), ws.Cells(rowNum, 11)).value = rowData
 End Sub
 
 Private Sub WriteThaiRow(ByVal ws As Worksheet, ByVal rowNum As Long, ByVal fac As Variant, ByVal itemCd As Variant, ByVal makerVal As Variant, ByVal partVal As Variant, ByVal qtyVal As Variant, ByVal stockVal As Variant, ByVal confirmVal As Variant, ByVal shortVal As Variant, ByVal needVal As Variant, ByVal sourceOutRow As Long)
@@ -731,15 +731,15 @@ Private Sub WriteThaiRow(ByVal ws As Worksheet, ByVal rowNum As Long, ByVal fac 
     rowData(1, 8) = shortVal
     rowData(1, 9) = needVal
     rowData(1, 10) = sourceOutRow
-    ws.Range(ws.Cells(rowNum, 1), ws.Cells(rowNum, 10)).Value = rowData
+    ws.Range(ws.Cells(rowNum, 1), ws.Cells(rowNum, 10)).value = rowData
 End Sub
 
 Private Sub WriteCheck(ByVal ws As Worksheet, ByVal rowNum As Long, ByVal sourceName As String, ByVal sourceRow As Long, ByVal fac As String, ByVal itemCd As String, ByVal issueText As String)
-    ws.Cells(rowNum, 1).Value = sourceName
-    ws.Cells(rowNum, 2).Value = sourceRow
-    ws.Cells(rowNum, 3).Value = fac
-    ws.Cells(rowNum, 4).Value = itemCd
-    ws.Cells(rowNum, 5).Value = issueText
+    ws.Cells(rowNum, 1).value = sourceName
+    ws.Cells(rowNum, 2).value = sourceRow
+    ws.Cells(rowNum, 3).value = fac
+    ws.Cells(rowNum, 4).value = itemCd
+    ws.Cells(rowNum, 5).value = issueText
 End Sub
 
 Private Sub FormatOutput(ByVal ws As Worksheet, ByVal lastRow As Long, ByVal lastCol As Long, ByVal useStandardStyle As Boolean)
@@ -780,7 +780,7 @@ End Sub
 Private Sub ColorStatus(ByVal ws As Worksheet, ByVal lastRow As Long)
     Dim r As Long, s As String
     For r = 2 To lastRow
-        s = UCase$(Trim$(CStr(ws.Cells(r, 11).Value)))
+        s = UCase$(Trim$(CStr(ws.Cells(r, 11).value)))
         Select Case s
             Case "OK": ws.Cells(r, 11).Interior.Color = RGB(198, 239, 206)
             Case "CHECKING": ws.Cells(r, 11).Interior.Color = RGB(255, 235, 156)
@@ -793,11 +793,11 @@ Private Sub SortOutput(ByVal ws As Worksheet, ByVal lastRow As Long, ByVal lastC
     If lastRow < 3 Then Exit Sub
     With ws.Sort
         .SortFields.Clear
-        .SortFields.Add Key:=ws.Range(ws.Cells(2, facCol), ws.Cells(lastRow, facCol)), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
-        .SortFields.Add Key:=ws.Range(ws.Cells(2, makerCol), ws.Cells(lastRow, makerCol)), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
-        .SortFields.Add Key:=ws.Range(ws.Cells(2, partCol), ws.Cells(lastRow, partCol)), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
+        .SortFields.Add key:=ws.Range(ws.Cells(2, facCol), ws.Cells(lastRow, facCol)), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
+        .SortFields.Add key:=ws.Range(ws.Cells(2, makerCol), ws.Cells(lastRow, makerCol)), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
+        .SortFields.Add key:=ws.Range(ws.Cells(2, partCol), ws.Cells(lastRow, partCol)), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
         .SetRange ws.Range(ws.Cells(1, 1), ws.Cells(lastRow, lastCol))
-        .Header = xlYes
+        .header = xlYes
         .MatchCase = False
         .Orientation = xlTopToBottom
         .Apply

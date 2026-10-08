@@ -88,7 +88,7 @@ Sub ºÎºÐÇÕ()
         combinedKey = CStr(arr(i, keyCol1)) & "|" & CStr(arr(i, keyCol2))
         currentVal = Val(arr(i, valCol))
         
-        If dict.Exists(combinedKey) Then
+        If dict.exists(combinedKey) Then
             itemData = dict(combinedKey)
             itemData(0) = itemData(0) + currentVal
             dict(combinedKey) = itemData

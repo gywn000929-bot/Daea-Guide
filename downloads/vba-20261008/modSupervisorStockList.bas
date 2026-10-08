@@ -230,7 +230,7 @@ Public Sub 반장님_재고리스트_만들기()
         ' 같은 FAC와 품명이면 품목코드와 관계없이 합산
         key = Len(fac) & ":" & fac & itemName
 
-        If dict.Exists(key) Then
+        If dict.exists(key) Then
 
             data = dict(key)
             data(2) = data(2) + qty
@@ -273,7 +273,7 @@ NextRow:
         .Cells(1, 2).Value2 = "재고리스트"
         .Cells(1, 3).Value2 = "(" & Format(Date, "yy-mm-dd") & ")"
 
-        .Range("A2:I2").Value = _
+        .Range("A2:I2").value = _
             Array("FAC", "품목명△", qtyTitle, _
                   "팔레트", "수량", _
                   "팔레트", "수량", _
@@ -285,7 +285,7 @@ NextRow:
 
     outRow = 3
 
-    For Each k In dict.Keys
+    For Each k In dict.keys
 
         data = dict(k)
 
@@ -310,19 +310,19 @@ NextRow:
             .SortFields.Clear
 
             .SortFields.Add _
-                Key:=dest.Range("A3:A" & lastOutputRow), _
+                key:=dest.Range("A3:A" & lastOutputRow), _
                 SortOn:=xlSortOnValues, _
                 Order:=xlAscending, _
                 DataOption:=xlSortNormal
 
             .SortFields.Add _
-                Key:=dest.Range("B3:B" & lastOutputRow), _
+                key:=dest.Range("B3:B" & lastOutputRow), _
                 SortOn:=xlSortOnValues, _
                 Order:=xlAscending, _
                 DataOption:=xlSortNormal
 
             .SetRange dest.Range("A2:I" & lastOutputRow)
-            .Header = xlYes
+            .header = xlYes
             .MatchCase = False
             .Orientation = xlTopToBottom
             .Apply

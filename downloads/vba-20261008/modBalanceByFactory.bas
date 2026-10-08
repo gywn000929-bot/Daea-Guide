@@ -18,9 +18,9 @@ Sub Balance()
     ' 수주처 + 품목코드 + 품목명 기준 집계
     For i = 2 To lastRow
 
-        custCode = ws.Cells(i, "B").Value
-        itemCode = Trim(CStr(ws.Cells(i, "E").Value))
-        itemName = Trim(CStr(ws.Cells(i, "G").Value))
+        custCode = ws.Cells(i, "B").value
+        itemCode = Trim(CStr(ws.Cells(i, "E").value))
+        itemName = Trim(CStr(ws.Cells(i, "G").value))
 
         Select Case CStr(custCode)
             Case "1150"
@@ -35,8 +35,8 @@ Sub Balance()
                 custMapped = CStr(custCode)
         End Select
 
-        If IsNumeric(ws.Cells(i, "N").Value) Then
-            qty = CDbl(ws.Cells(i, "N").Value)
+        If IsNumeric(ws.Cells(i, "N").value) Then
+            qty = CDbl(ws.Cells(i, "N").value)
         Else
             qty = 0
         End If
@@ -44,7 +44,7 @@ Sub Balance()
         key = custMapped & "|" & itemCode & "|" & itemName
 
         If itemName <> "" Then
-            If dict.Exists(key) Then
+            If dict.exists(key) Then
                 dict(key) = dict(key) + qty
             Else
                 dict.Add key, qty
@@ -59,45 +59,45 @@ Sub Balance()
     Set resWs = Sheets.Add
     resWs.Name = "미납수량합계_" & Format(Now, "hhmmss")
 
-    resWs.Range("A1:D1").Value = _
+    resWs.Range("A1:D1").value = _
         Array("수주처", "거래처 품목코드", "품목명", "미납수량 합계")
 
     resWs.Columns("B:C").NumberFormat = "@"
     rowIdx = 2
 
     ' 품목코드가 없는 항목 먼저 출력
-    For Each k In dict.Keys
+    For Each k In dict.keys
 
         items = Split(k, "|")
 
         If items(1) = "" Then
-            resWs.Cells(rowIdx, 1).Value = items(0)
-            resWs.Cells(rowIdx, 2).Value = ""
-            resWs.Cells(rowIdx, 3).Value = items(2)
-            resWs.Cells(rowIdx, 4).Value = dict(k)
+            resWs.Cells(rowIdx, 1).value = items(0)
+            resWs.Cells(rowIdx, 2).value = ""
+            resWs.Cells(rowIdx, 3).value = items(2)
+            resWs.Cells(rowIdx, 4).value = dict(k)
             rowIdx = rowIdx + 1
         End If
 
     Next k
 
     ' 품목코드가 있는 항목 출력
-    For Each k In dict.Keys
+    For Each k In dict.keys
 
         items = Split(k, "|")
 
         If items(1) <> "" Then
-            resWs.Cells(rowIdx, 1).Value = items(0)
-            resWs.Cells(rowIdx, 2).Value = items(1)
-            resWs.Cells(rowIdx, 3).Value = items(2)
-            resWs.Cells(rowIdx, 4).Value = dict(k)
+            resWs.Cells(rowIdx, 1).value = items(0)
+            resWs.Cells(rowIdx, 2).value = items(1)
+            resWs.Cells(rowIdx, 3).value = items(2)
+            resWs.Cells(rowIdx, 4).value = dict(k)
             rowIdx = rowIdx + 1
         End If
 
     Next k
 
     ' 총합계
-    resWs.Cells(rowIdx, 3).Value = "총 합계"
-    resWs.Cells(rowIdx, 4).Value = totalQty
+    resWs.Cells(rowIdx, 3).value = "총 합계"
+    resWs.Cells(rowIdx, 4).value = totalQty
 
     ' 전체 표 서식
     With resWs.Range("A1:D" & rowIdx)

@@ -145,7 +145,7 @@ Public Sub 입고관리()
         ' 공장별 딕셔너리 안에서 품목코드 + 품목명으로 집계
         key = Len(itemCode) & ":" & itemCode & itemName
 
-        If dict.Exists(key) Then
+        If dict.exists(key) Then
             data = dict(key)
             data(2) = data(2) + qty
             dict(key) = data
@@ -173,7 +173,7 @@ NextInboundRow:
         Set resWs = wb.Worksheets.Add(After:=wb.Sheets(wb.Sheets.Count))
         resWs.Name = "입고_" & CStr(fac)
 
-        resWs.Range("A1:D1").Value = _
+        resWs.Range("A1:D1").value = _
             Array("FAC", "수주처 품목코드", "품목명", "입고수량")
 
         ' 품목코드 앞자리 0 보존
@@ -182,7 +182,7 @@ NextInboundRow:
 
         ' 코드 없는 항목 먼저, 코드 있는 항목 다음 출력
         For pass = 1 To 2
-            For Each k In dict.Keys
+            For Each k In dict.keys
 
                 data = dict(k)
 
