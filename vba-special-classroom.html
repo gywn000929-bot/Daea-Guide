@@ -1,4 +1,4 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="XLAM을 AddIns에 설치하고 Excel 추가 기능으로 등록한 뒤 리본 버튼으로 사용하는 방법. 기존 XLAM에 새 VBA 모듈을 추가하고 백업하는 실무 안내."><title>XLAM 추가 기능 · VBA 실무 사용 안내</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f6f7f3;color:#263d35;font:16px/1.85 "Malgun Gothic","Noto Sans KR",sans-serif}a{color:#246348}button,a{touch-action:manipulation}button{font:inherit;cursor:pointer}aside{position:fixed;inset:0 auto 0 0;width:250px;padding:30px 22px;background:#fff;border-right:1px solid #dde5da;overflow:auto}aside h1{font-size:23px;line-height:1.45;margin:12px 0}aside p{font-size:13px;color:#5c6f61}.eyebrow{font-size:11px;letter-spacing:.13em;color:#647857;font-weight:bold}nav{margin-top:24px;display:grid;gap:6px}.tab{border:0;background:none;padding:12px;text-align:left;color:#4d6055;border-radius:8px;font-size:14px}.tab.active{background:#e7f0e1;color:#204b36;font-weight:bold}.tab:hover{background:#f0f4ec}main{margin-left:250px;padding:32px 42px 70px;max-width:1620px}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #dce4d6;padding-bottom:16px;margin-bottom:26px;font-size:13px;color:#647065}.sectionhead h2{font-size:32px;line-height:1.4;letter-spacing:-.04em;margin:12px 0}.sectionhead p{margin-bottom:26px;color:#5e6a60}.panel[hidden]{display:none}article,details{background:white;border:1px solid #dce4d6;border-radius:14px;padding:24px;margin:18px 0}article h3{margin-top:0;font-size:21px;line-height:1.5}article p{margin:10px 0}.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:35px;padding:34px;background:#e8eee1;border:1px solid #d6e1cf;border-radius:20px}.hero h2{font-size:35px;line-height:1.5;letter-spacing:-.05em}.hero p{color:#4c6051}.badge{font-size:12px;background:#fff;padding:6px 10px;border-radius:7px}.primary,.secondary,.next{display:inline-block;text-decoration:none;border-radius:8px;padding:12px 18px;font-weight:bold;font-size:14px}.primary,.next{color:white;background:#285c46;border:0}.secondary{border:1px solid #bacdb9;background:#fff;color:#34563d}.next{margin-top:22px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid article{margin:18px 0 0}.flow{display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:5px}.flow div{padding:13px 18px;background:#fff;border:1px solid #d5e1d0;border-radius:10px}.flow b,.flow span{display:block}.flow span{font-size:13px;color:#5e7062}.flow i{font-style:normal;text-align:center;color:#6d8267}.horizontal{flex-direction:row;align-items:center;margin:24px 0}.horizontal div{flex:1}.note{padding:18px 22px;background:#fff4d9;border-left:4px solid #b7943f;border-radius:8px;margin:20px 0;font-size:14px}.small,.filemeta{font-size:13px}.steps{padding-left:24px}.steps li{padding-left:7px;margin:16px 0}.steps li::marker{color:#3c7256;font-weight:bold}table{width:100%;border-collapse:collapse;background:white;margin:22px 0;font-size:14px}td,th{padding:15px;border:1px solid #d6dfd2;text-align:left;vertical-align:top}th{background:#eaf0e5;color:#2c4f39}td:first-child{min-width:130px;font-weight:bold}code{background:#edf2e9;padding:3px 6px;border-radius:4px;overflow-wrap:anywhere;font:14px/1.8 Consolas,"Malgun Gothic",monospace}pre{background:#1c332b;color:#edf5e9;border-radius:10px;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.7 Consolas,"Malgun Gothic",monospace}kbd{border:1px solid #bccbbb;border-bottom:3px solid #bccbbb;padding:2px 6px;border-radius:4px;background:#f8faf5;font-size:13px}.copyrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.copyrow button{background:#fff;border:1px solid #b5c9ad;border-radius:7px;padding:9px 13px;font-size:13px}.source{display:inline-block;margin-top:10px;font-size:12px}summary{cursor:pointer;font-weight:bold}.check{display:flex;align-items:flex-start;gap:12px;padding:15px;margin:9px 0;border:1px solid #d6e1cf;border-radius:9px;background:white;font-size:14px}.check input{width:19px;height:19px;accent-color:#285c46;margin-top:4px;flex-shrink:0}.progress{height:6px;background:#e4ebde;border-radius:6px;margin-top:14px}.progress i{display:block;height:100%;background:#527a48;border-radius:6px}#progressText{font-size:12px;margin:8px 0}.reset{font-size:12px;background:transparent;border:0;text-decoration:underline;color:#647065;padding:8px 0}#notice{position:fixed;bottom:22px;right:22px;background:#234e39;color:#fff;padding:10px 18px;border-radius:9px;z-index:5}footer{font-size:12px;color:#6c776d;margin-top:35px;border-top:1px solid #d7e0d1;padding-top:16px}.back{font-size:13px}@media(max-width:900px){aside{position:relative;width:100%;padding:20px}aside h1{font-size:21px}nav{display:flex;overflow-x:auto;margin-top:14px}.tab{white-space:nowrap}aside .progress,aside #progressText,aside .reset{display:none}main{margin-left:0;padding:22px 18px}.hero,.grid{grid-template-columns:1fr}.hero{padding:24px}.hero h2{font-size:29px}.sectionhead h2{font-size:26px}.horizontal{flex-direction:column;align-items:stretch}table{font-size:12px}td,th{padding:10px;word-break:break-word}td:first-child{min-width:65px}.top{gap:15px}article,details{padding:19px}}@media print{aside,.top,.next,.copyrow button,#notice{display:none!important}main{margin:0;padding:0}.panel[hidden]{display:block}article{break-inside:avoid}.hero{display:block}}body{overflow-wrap:anywhere}main,.panel,.hero>*{min-width:0}pre{max-width:100%;overflow-x:auto}@media(max-width:900px){table{table-layout:fixed}.top{flex-wrap:wrap}} </style></head><body><aside><span class="eyebrow">DAEA · EXCEL TOOLKIT</span><h1>VBA 실습실<br>XLAM 사용 안내</h1><p>설치부터 새 모듈 추가까지</p><nav aria-label="학습 단계"><button class="tab active" data-go="start" aria-current="step">00 · 전체 흐름</button><button class="tab" data-go="why" aria-current="false">01 · 왜 XLAM인가</button><button class="tab" data-go="install" aria-current="false">02 · 설치·추가 기능 등록</button><button class="tab" data-go="ribbon" aria-current="false">03 · 리본 버튼 연결</button><button class="tab" data-go="use" aria-current="false">04 · 업무에서 사용</button><button class="tab" data-go="extend" aria-current="false">05 · 새 모듈 추가</button><button class="tab" data-go="maintain" aria-current="false">06 · 백업·문제 해결</button></nav><div class="progress"><i id="progressBar"></i></div><p id="progressText"></p><button class="reset" id="reset">체크 기록 초기화</button><p><a class="back" href="대아_구매물류팀_업무매뉴얼_v9_4.html">← Daea Guide</a></p></aside><main><div class="note" id="latest-download"><h2>사용 대상에 맞게 다운로드하세요</h2><p><b>입고관리 공장별 분리 반영</b> — 수주처 기준 F1/F2/F5 별도 시트, 확인필요 항목 분리, 원본 합계 행 중복 집계 방지. XLAM만 교체하면 됩니다.</p><p><b>STOCK·Balance 서식 개선 반영</b> — 공장별 Stock과 같은 머리글·합계행·테두리·숫자 서식입니다. 기존 리본은 그대로 사용할 수 있습니다.</p><p>세 버전 중 하나를 선택하세요. XLAM · 리본 설정 · 기능목록 · 설치 안내가 각각 포함됩니다.</p><div class="grid"><article><h3>개인용 23개</h3><p>효주님 전용 · 연호와 KET를 포함한 기존 23개 유지</p><a class="primary" href="downloads/daea-personal-inbound-factory.zip" download>개인용 23개 다운로드 ↓</a></article><article><h3>사내 공유용 15개</h3><p>같은 ERP 양식을 쓰는 동료용 · 연호 7개와 KET 이전 이후 제외</p><a class="primary" href="downloads/daea-team-inbound-factory.zip" download>사내 공유용 15개 다운로드 ↓</a></article><article><h3>범용 도구 2개</h3><p>업체와 무관한 부분합 + 원본 범위를 직접 선택하는 범용 값조회</p><a class="primary" href="downloads/daea-general-20261007.zip" download>범용 도구 2개 다운로드 ↓</a></article></div><p>사내 공유용의 ‘품목 잔량·재고 조회’는 업무 양식 전용이며 범용 값조회와 다릅니다. 새 범용 조회와 리본 가져오기는 실제 Excel 실행 확인 전입니다.</p></div><div class="top"><b>Excel 도구를 내 업무에 연결하기</b><span>Windows Excel · 2026.10.07</span></div><noscript><style>.panel[hidden]{display:block}</style><p>JavaScript가 꺼져 있어 전체 내용을 한 번에 표시합니다. 파일 링크는 사용할 수 있습니다.</p></noscript><section class="panel" id="start" aria-labelledby="title-start" ><header class="sectionhead"><span class="eyebrow">START HERE</span><h2 id="title-start" tabindex="-1">VBA를 한곳에 모아, 리본에서 실행하기</h2><p>매주 바뀌는 업무 파일에는 데이터만. 반복해서 쓰는 VBA는 하나의 XLAM에 모아 관리합니다.</p></header>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="XLAM을 AddIns에 설치하고 Excel 추가 기능으로 등록한 뒤 리본 버튼으로 사용하는 방법. 기존 XLAM에 새 VBA 모듈을 추가하고 백업하는 실무 안내."><title>XLAM 추가 기능 · VBA 실무 사용 안내</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f6f7f3;color:#263d35;font:16px/1.85 "Malgun Gothic","Noto Sans KR",sans-serif}a{color:#246348}button,a{touch-action:manipulation}button{font:inherit;cursor:pointer}aside{position:fixed;inset:0 auto 0 0;width:250px;padding:30px 22px;background:#fff;border-right:1px solid #dde5da;overflow:auto}aside h1{font-size:23px;line-height:1.45;margin:12px 0}aside p{font-size:13px;color:#5c6f61}.eyebrow{font-size:11px;letter-spacing:.13em;color:#647857;font-weight:bold}nav{margin-top:24px;display:grid;gap:6px}.tab{border:0;background:none;padding:12px;text-align:left;color:#4d6055;border-radius:8px;font-size:14px}.tab.active{background:#e7f0e1;color:#204b36;font-weight:bold}.tab:hover{background:#f0f4ec}main{margin-left:250px;padding:32px 42px 70px;max-width:1620px}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #dce4d6;padding-bottom:16px;margin-bottom:26px;font-size:13px;color:#647065}.sectionhead h2{font-size:32px;line-height:1.4;letter-spacing:-.04em;margin:12px 0}.sectionhead p{margin-bottom:26px;color:#5e6a60}.panel[hidden]{display:none}article,details{background:white;border:1px solid #dce4d6;border-radius:14px;padding:24px;margin:18px 0}article h3{margin-top:0;font-size:21px;line-height:1.5}article p{margin:10px 0}.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:35px;padding:34px;background:#e8eee1;border:1px solid #d6e1cf;border-radius:20px}.hero h2{font-size:35px;line-height:1.5;letter-spacing:-.05em}.hero p{color:#4c6051}.badge{font-size:12px;background:#fff;padding:6px 10px;border-radius:7px}.primary,.secondary,.next{display:inline-block;text-decoration:none;border-radius:8px;padding:12px 18px;font-weight:bold;font-size:14px}.primary,.next{color:white;background:#285c46;border:0}.secondary{border:1px solid #bacdb9;background:#fff;color:#34563d}.next{margin-top:22px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid article{margin:18px 0 0}.flow{display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:5px}.flow div{padding:13px 18px;background:#fff;border:1px solid #d5e1d0;border-radius:10px}.flow b,.flow span{display:block}.flow span{font-size:13px;color:#5e7062}.flow i{font-style:normal;text-align:center;color:#6d8267}.horizontal{flex-direction:row;align-items:center;margin:24px 0}.horizontal div{flex:1}.note{padding:18px 22px;background:#fff4d9;border-left:4px solid #b7943f;border-radius:8px;margin:20px 0;font-size:14px}.small,.filemeta{font-size:13px}.steps{padding-left:24px}.steps li{padding-left:7px;margin:16px 0}.steps li::marker{color:#3c7256;font-weight:bold}table{width:100%;border-collapse:collapse;background:white;margin:22px 0;font-size:14px}td,th{padding:15px;border:1px solid #d6dfd2;text-align:left;vertical-align:top}th{background:#eaf0e5;color:#2c4f39}td:first-child{min-width:130px;font-weight:bold}code{background:#edf2e9;padding:3px 6px;border-radius:4px;overflow-wrap:anywhere;font:14px/1.8 Consolas,"Malgun Gothic",monospace}pre{background:#1c332b;color:#edf5e9;border-radius:10px;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.7 Consolas,"Malgun Gothic",monospace}kbd{border:1px solid #bccbbb;border-bottom:3px solid #bccbbb;padding:2px 6px;border-radius:4px;background:#f8faf5;font-size:13px}.copyrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.copyrow button{background:#fff;border:1px solid #b5c9ad;border-radius:7px;padding:9px 13px;font-size:13px}.source{display:inline-block;margin-top:10px;font-size:12px}summary{cursor:pointer;font-weight:bold}.check{display:flex;align-items:flex-start;gap:12px;padding:15px;margin:9px 0;border:1px solid #d6e1cf;border-radius:9px;background:white;font-size:14px}.check input{width:19px;height:19px;accent-color:#285c46;margin-top:4px;flex-shrink:0}.progress{height:6px;background:#e4ebde;border-radius:6px;margin-top:14px}.progress i{display:block;height:100%;background:#527a48;border-radius:6px}#progressText{font-size:12px;margin:8px 0}.reset{font-size:12px;background:transparent;border:0;text-decoration:underline;color:#647065;padding:8px 0}#notice{position:fixed;bottom:22px;right:22px;background:#234e39;color:#fff;padding:10px 18px;border-radius:9px;z-index:5}footer{font-size:12px;color:#6c776d;margin-top:35px;border-top:1px solid #d7e0d1;padding-top:16px}.back{font-size:13px}@media(max-width:900px){aside{position:relative;width:100%;padding:20px}aside h1{font-size:21px}nav{display:flex;overflow-x:auto;margin-top:14px}.tab{white-space:nowrap}aside .progress,aside #progressText,aside .reset{display:none}main{margin-left:0;padding:22px 18px}.hero,.grid{grid-template-columns:1fr}.hero{padding:24px}.hero h2{font-size:29px}.sectionhead h2{font-size:26px}.horizontal{flex-direction:column;align-items:stretch}table{font-size:12px}td,th{padding:10px;word-break:break-word}td:first-child{min-width:65px}.top{gap:15px}article,details{padding:19px}}@media print{aside,.top,.next,.copyrow button,#notice{display:none!important}main{margin:0;padding:0}.panel[hidden]{display:block}article{break-inside:avoid}.hero{display:block}}body{overflow-wrap:anywhere}main,.panel,.hero>*{min-width:0}pre{max-width:100%;overflow-x:auto}@media(max-width:900px){table{table-layout:fixed}.top{flex-wrap:wrap}} </style></head><body><aside><span class="eyebrow">DAEA · EXCEL TOOLKIT</span><h1>VBA 실습실<br>XLAM 사용 안내</h1><p>설치부터 새 모듈 추가까지</p><nav aria-label="학습 단계"><button class="tab" data-go="latest-code">최신 코드 · 업무용/범용</button><button class="tab active" data-go="start" aria-current="step">00 · 전체 흐름</button><button class="tab" data-go="why" aria-current="false">01 · 왜 XLAM인가</button><button class="tab" data-go="install" aria-current="false">02 · 설치·추가 기능 등록</button><button class="tab" data-go="ribbon" aria-current="false">03 · 리본 버튼 연결</button><button class="tab" data-go="use" aria-current="false">04 · 업무에서 사용</button><button class="tab" data-go="extend" aria-current="false">05 · 새 모듈 추가</button><button class="tab" data-go="maintain" aria-current="false">06 · 백업·문제 해결</button></nav><div class="progress"><i id="progressBar"></i></div><p id="progressText"></p><button class="reset" id="reset">체크 기록 초기화</button><p><a class="back" href="대아_구매물류팀_업무매뉴얼_v9_4.html">← Daea Guide</a></p></aside><main><div class="note" id="latest-download"><h2>10월 8일 최신 코드 업데이트</h2><p>STOCK 두 종류 · 공장별 입고 · 줄바꿈 없는 반장님 재고리스트 · 범용 코드</p><button class="next" data-go="latest-code">최신 코드 보기·복사·다운로드 →</button><p><b>아래 XLAM 패키지는 10월 7일 이전 배포본입니다.</b> 최신 수정은 위 코드 자료에서 받아 모듈을 교체하세요.</p><h2>사용 대상에 맞게 다운로드하세요</h2><p><b>입고관리 공장별 분리 반영</b> — 수주처 기준 F1/F2/F5 별도 시트, 확인필요 항목 분리, 원본 합계 행 중복 집계 방지. XLAM만 교체하면 됩니다.</p><p><b>STOCK·Balance 서식 개선 반영</b> — 공장별 Stock과 같은 머리글·합계행·테두리·숫자 서식입니다. 기존 리본은 그대로 사용할 수 있습니다.</p><p>세 버전 중 하나를 선택하세요. XLAM · 리본 설정 · 기능목록 · 설치 안내가 각각 포함됩니다.</p><div class="grid"><article><h3>개인용 23개</h3><p>효주님 전용 · 연호와 KET를 포함한 기존 23개 유지</p><a class="primary" href="downloads/daea-personal-inbound-factory.zip" download>개인용 23개 다운로드 ↓</a></article><article><h3>사내 공유용 15개</h3><p>같은 ERP 양식을 쓰는 동료용 · 연호 7개와 KET 이전 이후 제외</p><a class="primary" href="downloads/daea-team-inbound-factory.zip" download>사내 공유용 15개 다운로드 ↓</a></article><article><h3>범용 도구 2개</h3><p>업체와 무관한 부분합 + 원본 범위를 직접 선택하는 범용 값조회</p><a class="primary" href="downloads/daea-general-20261007.zip" download>범용 도구 2개 다운로드 ↓</a></article></div><p>사내 공유용의 ‘품목 잔량·재고 조회’는 업무 양식 전용이며 범용 값조회와 다릅니다. 새 범용 조회와 리본 가져오기는 실제 Excel 실행 확인 전입니다.</p></div><div class="top"><b>Excel 도구를 내 업무에 연결하기</b><span>Windows Excel · 2026.10.07</span></div><noscript><style>.panel[hidden]{display:block}</style><p>JavaScript가 꺼져 있어 전체 내용을 한 번에 표시합니다. 파일 링크는 사용할 수 있습니다.</p></noscript><section class="panel" id="start" aria-labelledby="title-start" ><header class="sectionhead"><span class="eyebrow">START HERE</span><h2 id="title-start" tabindex="-1">VBA를 한곳에 모아, 리본에서 실행하기</h2><p>매주 바뀌는 업무 파일에는 데이터만. 반복해서 쓰는 VBA는 하나의 XLAM에 모아 관리합니다.</p></header>
 <div class="hero"><div><span class="badge">10월 7일 정리본 · 리본 4개 그룹 · 실행 버튼 23개</span><h2>한 번 설치하고,<br>필요한 업무에서 꺼내 쓰세요.</h2><p>이번 점검 파일은 Downloads의 매크로 신상.xlam입니다. 에어·연호·부분합·V9 품목조회와 공장별 출고수량 기능 등이 들어 있습니다. 설치와 메뉴 연결은 각각 한 번씩 해두고, 이후에는 작업할 파일을 선택한 뒤 버튼을 누릅니다.</p><a class="primary" href="downloads/daea-macros-selected23-ribbon-fixed.zip" download="대아_업무매크로_선택23개_리본수정.zip">선택한 23개 최종본 ZIP 받기 ↓</a><p class="small">정리된 XLAM + 업무별 리본 설정 + 이름변경표 + 적용 안내 포함</p></div><div class="flow"><div><b>① AddIns 폴더</b><span>XLAM 파일의 보관 장소</span></div><i>↓</i><div><b>② Excel 추가 기능 등록</b><span>Excel이 도구를 불러오게 하기</span></div><i>↓</i><div><b>③ 리본 버튼 연결</b><span>자주 쓰는 도구를 화면에 배치</span></div><i>↓</i><div><b>④ 업무 파일에서 실행</b><span>선택한 파일·시트의 데이터를 처리</span></div></div></div>
 <div class="grid"><article><h3>이 안내의 기준</h3><p>Windows 데스크톱 Excel과 2026년 10월 7일 제공된 XLAM 기준입니다. 브라우저용 Excel에서는 VBA를 실행하지 않습니다. 회사 설정에 따라 메뉴 이름이나 매크로 허용 방식이 다를 수 있습니다.</p></article><article><h3>파일을 두 번 클릭하는 것과 달라요</h3><p>XLAM은 보통 작업 시트처럼 화면에 나타나지 않습니다. 등록된 도구가 뒤에서 준비되고, 실제 데이터는 별도로 연 업무 파일에서 처리합니다.</p></article></div>
 <div class="note">정리본은 Excel 저장·재열기, 저장 코드 일치, 리본 대상 23개 존재를 확인했습니다. 전체 VBA 컴파일 및 실제 업무 계산 실행은 미검증입니다. 처음에는 복사한 업무 자료에서 시험하세요.</div>
@@ -51,4 +51,2128 @@ End Sub</pre><p>처음 시험할 때는 편집기에서 <b>새업무_대상확�
 <article><h3>앞으로 업데이트할 때</h3><p>이번 파일에는 modPalletLabelBasic.파렛트_라벨_기본와 modPalletLabelExpanded.파렛트_라벨_확대가 함께 있습니다. 이름이 같아도 내용이 동일하지 않습니다. 삭제하거나 이름만으로 연결하지 말고 모듈 이름까지 지정해 구별하세요. 새 기능은 modNewWork 같은 고유한 모듈·실행 이름을 사용합니다.</p><ol class="steps"><li>기능을 수정하기 전 XLAM을 날짜별로 백업하고, 리본 설정도 내보냅니다.</li><li>배포 파일로 교체할 때는 Excel을 모두 닫고 기존 설치 위치의 파일을 교체합니다. 새 버전 번호는 백업 폴더나 변경 기록에 적고, 등록된 파일명·경로는 유지하는 편이 편합니다.</li><li>Excel을 다시 열어 추가 기능 등록 상태를 확인합니다. 기존 모듈·실행 이름이 같으면 버튼 연결을 유지할 수 있습니다. 이름·경로가 바뀌었다면 다시 연결합니다.</li><li>새 기능을 더한 경우 기존 기능 하나와 새 기능을 각각 시험합니다. 문제가 생기면 Excel을 종료하고 백업 XLAM과 메뉴 설정으로 되돌립니다.</li></ol></article>
 <table><thead><tr><th>증상</th><th>먼저 확인할 것</th></tr></thead><tbody><tr><td>XLAM을 열었는데 아무 시트도 안 보임</td><td>추가 기능은 숨겨진 상태로 로드될 수 있습니다. 추가 기능 체크 상태와 리본 실행을 확인합니다.</td></tr><tr><td>‘매크로를 실행할 수 없습니다’</td><td>XLAM 등록·파일 경로·매크로 허용 여부와 버튼의 모듈/실행 이름을 확인합니다.</td></tr><tr><td>버튼은 있는데 다른 파일을 처리함</td><td>업무 파일과 대상 시트를 다시 선택합니다. 코드의 ActiveWorkbook/ThisWorkbook 사용도 확인합니다.</td></tr><tr><td>새 코드를 넣었는데 버튼이 없음</td><td>코드 추가와 메뉴 추가는 별도입니다. 기존 리본 설정에 새 실행 이름을 연결합니다.</td></tr><tr><td>예전 기능이나 중복된 이름이 보임</td><td>구버전 XLAM을 함께 등록했는지, 동일 BAS를 여러 번 가져왔는지 확인합니다. 사용 중인 파일은 확인 없이 지우지 않습니다.</td></tr><tr><td>저장 후 재시작하니 새 코드가 사라짐</td><td>다른 프로젝트를 편집했거나 XLAM이 읽기 전용인지 확인합니다. 설치된 XLAM을 선택해 저장합니다.</td></tr><tr><td>‘이름이 분명하지 않습니다’ 또는 컴파일 오류</td><td>같은 공개 Sub/Function 중복, 누락된 보조 함수, 표준 모듈에 들어간 시트 이벤트 코드를 확인합니다.</td></tr><tr><td>V9 원본을 못 찾음</td><td>대상과 원본을 같은 Excel 실행 창에서 열고 파일명·헤더·공장 정보를 확인합니다.</td></tr></tbody></table>
 <div class="grid"><article><h3>처음 설치할 때</h3><p>XLAM 복사 → 추가 기능 등록 → 메뉴 가져오기 → 복사본 실행 확인</p></article><article><h3>새 기능을 만들 때</h3><p>백업 → 기존 XLAM에 새 모듈 → 컴파일·저장 → 새 버튼 연결 → 결과 확인</p></article></div>
-<label class="check"><input type="checkbox" data-check="ready"><span>XLAM과 리본 설정을 함께 백업하고 업데이트할 수 있다</span></label><article><h3>이전 실습 자료도 필요하다면</h3><p>기존 ITEM AUTO FILL·AIR CONFIRM 예제와 실습 키트는 별도 실습 페이지에 보관했습니다. 학습용 코드 버전과 이번 점검 파일은 서로 다릅니다. <a href="downloads/daea-macros-24-20260923.zip">9월 23일 이전 통합본 ZIP</a>도 참고용으로 보관합니다. 이번 파일 대신 설치하지 마세요.</p><a class="secondary" href="vba-practice-legacy.html">이전 VBA 예제 실습 열기 →</a></article></section><footer>2026.10.07 제공 파일 기준 정적 점검 · 실제 설치와 메뉴 연결은 각 PC에서 진행하세요.</footer></main><div id="notice" role="status" hidden></div><script>const key='daea-xlam-guide-v1';let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}')}catch{}const checks=[...document.querySelectorAll('[data-check]')];function progress(){const n=checks.filter(x=>x.checked).length;document.getElementById('progressText').textContent=n+' / '+checks.length+' 확인';document.getElementById('progressBar').style.width=(100*n/checks.length)+'%'}checks.forEach(x=>{x.checked=!!saved[x.dataset.check];x.addEventListener('change',()=>{saved[x.dataset.check]=x.checked;try{localStorage.setItem(key,JSON.stringify(saved))}catch{}progress()})});progress();function show(id,focus=false){if(!document.getElementById(id)?.classList.contains('panel'))id='start';document.querySelectorAll('.panel').forEach(x=>x.hidden=x.id!==id);document.querySelectorAll('.tab').forEach(b=>{b.classList.toggle('active',b.dataset.go===id);b.setAttribute('aria-current',b.dataset.go===id?'step':'false')});history.replaceState(null,'','#'+id);window.scrollTo(0,0);if(focus)document.getElementById('title-'+id).focus({preventScroll:true})}document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>show(b.dataset.go,true));window.addEventListener('hashchange',()=>show(location.hash.slice(1)));show(location.hash.slice(1)||'start');function note(t){const n=document.getElementById('notice');n.textContent=t;n.hidden=false;setTimeout(()=>n.hidden=true,2400)}document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{const t=document.getElementById(b.dataset.copy).textContent;try{await navigator.clipboard.writeText(t);note('복사했습니다')}catch{note('복사할 내용을 선택해 Ctrl+C를 눌러주세요')}});document.getElementById('reset').onclick=()=>{if(!confirm('이 안내의 체크 기록을 초기화할까요?'))return;saved={};try{localStorage.removeItem(key)}catch{}checks.forEach(x=>x.checked=false);progress()};</script></body></html>
+<label class="check"><input type="checkbox" data-check="ready"><span>XLAM과 리본 설정을 함께 백업하고 업데이트할 수 있다</span></label><article><h3>이전 실습 자료도 필요하다면</h3><p>기존 ITEM AUTO FILL·AIR CONFIRM 예제와 실습 키트는 별도 실습 페이지에 보관했습니다. 학습용 코드 버전과 이번 점검 파일은 서로 다릅니다. <a href="downloads/daea-macros-24-20260923.zip">9월 23일 이전 통합본 ZIP</a>도 참고용으로 보관합니다. 이번 파일 대신 설치하지 마세요.</p><a class="secondary" href="vba-practice-legacy.html">이전 VBA 예제 실습 열기 →</a></article></section><section class="panel" id="latest-code" aria-labelledby="title-latest-code" hidden><header class="sectionhead"><span class="eyebrow">2026.10.08 · 최신 코드</span><h2 id="title-latest-code" tabindex="-1">업무용 · 범용 VBA 코드</h2><p>모듈별 전체 코드 복사와 BAS 다운로드. 아래 자료가 최근 대화에서 수정한 최신 버전입니다.</p></header><p class="note">기존 XLAM을 백업하고 해당 모듈을 교체하세요. BAS 가져오기와 코드 붙여넣기는 둘 중 하나만 사용합니다. STOCK 이름을 바꾼 경우 리본도 다시 연결합니다. 아래 ZIP은 코드 모듈 자료이며 XLAM 완성본은 아닙니다.</p><article><h3>업무용 최신 코드</h3><a class="primary" href="downloads/vba-business-20261008.zip" download>업무용 최신 코드 전체 BAS 받기</a><p>제공한 출고·입고 예시 복사본에서 최신 STOCK·입고·재고리스트 합계 검증 완료. 원본은 수정하지 않았습니다.</p></article><article><h3>STOCK 통합집계</h3><p>출고 Sheet1 · Y열 출고처코드로 구분 · 합계행 제외 · 한 시트 출력</p><p>모듈 이름: <code>modShipmentSummary</code></p><div class="copyrow"><button data-copy="code-modShipmentSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modShipmentSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modShipmentSummary">Option Explicit
+
+Public Sub STOCK_통합집계()
+
+    Dim ws As Worksheet, resWs As Worksheet
+    Dim wb As Workbook
+    Dim dict As Object
+    Dim lastRow As Long, i As Long, rowIdx As Long
+    Dim customerCode As String, factory As String
+    Dim itemCode As String, itemName As String
+    Dim qty As Double, totalQty As Double
+    Dim key As String, k As Variant, data As Variant
+    Dim pass As Long
+    Dim baseName As String, sheetName As String
+    Dim suffix As Long
+    Dim sh As Object, nameExists As Boolean
+
+    On Error GoTo Failed
+
+    If TypeName(ActiveSheet) &lt;&gt; &quot;Worksheet&quot; Then
+        MsgBox &quot;STOCK 원본 시트를 선택해주세요.&quot;, vbExclamation
+        Exit Sub
+    End If
+
+    Set ws = ActiveSheet
+    Set wb = ws.Parent
+
+    &#x27; 원본 열 확인
+    If Trim(CStr(ws.Cells(1, &quot;Y&quot;).Value2)) &lt;&gt; &quot;출고처코드&quot; Or _
+       Trim(CStr(ws.Cells(1, &quot;U&quot;).Value2)) &lt;&gt; &quot;거래처 품목코드&quot; Or _
+       Trim(CStr(ws.Cells(1, &quot;I&quot;).Value2)) &lt;&gt; &quot;출고수량&quot; Then
+
+        MsgBox &quot;원본 열을 확인해주세요.&quot; &amp; vbCrLf &amp; _
+               &quot;Y열: 출고처코드&quot; &amp; vbCrLf &amp; _
+               &quot;U열: 거래처 품목코드&quot; &amp; vbCrLf &amp; _
+               &quot;I열: 출고수량&quot;, vbExclamation
+        Exit Sub
+    End If
+
+    lastRow = Application.Max( _
+        ws.Cells(ws.Rows.Count, &quot;C&quot;).End(xlUp).Row, _
+        ws.Cells(ws.Rows.Count, &quot;U&quot;).End(xlUp).Row, _
+        ws.Cells(ws.Rows.Count, &quot;Y&quot;).End(xlUp).Row, _
+        ws.Cells(ws.Rows.Count, &quot;I&quot;).End(xlUp).Row)
+
+    If lastRow &lt; 2 Then
+        MsgBox &quot;집계할 데이터가 없습니다.&quot;, vbInformation
+        Exit Sub
+    End If
+
+    Set dict = CreateObject(&quot;Scripting.Dictionary&quot;)
+
+    For i = 2 To lastRow
+
+        If IsError(ws.Cells(i, &quot;Y&quot;).Value2) Or _
+           IsError(ws.Cells(i, &quot;U&quot;).Value2) Or _
+           IsError(ws.Cells(i, &quot;C&quot;).Value2) Then
+
+            Err.Raise vbObjectError + 701, , _
+                &quot;공장·품목코드·품목명에 오류 셀이 있습니다. 행: &quot; &amp; i
+        End If
+
+        customerCode = Trim(CStr(ws.Cells(i, &quot;Y&quot;).Value2))
+        itemCode = Trim(CStr(ws.Cells(i, &quot;U&quot;).Value2))
+        itemName = Trim(CStr(ws.Cells(i, &quot;C&quot;).Value2))
+
+        &#x27; 원본 마지막 합계행 제외
+        If customerCode = &quot;&quot; And itemCode = &quot;&quot; Then
+            Select Case UCase(itemName)
+                Case &quot;합계&quot;, &quot;총 합계&quot;, &quot;총합계&quot;, &quot;계&quot;, &quot;TOTAL&quot;
+                    GoTo NextRow
+            End Select
+        End If
+
+        &#x27; 완전히 빈 행 제외
+        If customerCode = &quot;&quot; And itemCode = &quot;&quot; And itemName = &quot;&quot; Then
+            If Not IsError(ws.Cells(i, &quot;I&quot;).Value2) Then
+                If Len(Trim(CStr(ws.Cells(i, &quot;I&quot;).Value2))) = 0 Then
+                    GoTo NextRow
+                End If
+            End If
+        End If
+
+        If IsError(ws.Cells(i, &quot;I&quot;).Value2) Then
+            Err.Raise vbObjectError + 702, , _
+                &quot;출고수량에 오류 셀이 있습니다. 행: &quot; &amp; i
+        End If
+
+        If Not IsNumeric(ws.Cells(i, &quot;I&quot;).Value2) Then
+            Err.Raise vbObjectError + 703, , _
+                &quot;출고수량이 숫자가 아닙니다. 행: &quot; &amp; i
+        End If
+
+        If itemCode = &quot;&quot; And itemName = &quot;&quot; Then
+            Err.Raise vbObjectError + 704, , _
+                &quot;수량은 있지만 품목코드와 품목명이 없습니다. 행: &quot; &amp; i
+        End If
+
+        &#x27; Y열 출고처코드로 공장 구분
+        Select Case customerCode
+            Case &quot;1010&quot;
+                factory = &quot;F1&quot;
+            Case &quot;1060&quot;
+                factory = &quot;F2&quot;
+            Case &quot;1150&quot;
+                factory = &quot;F5&quot;
+            Case Else
+                If customerCode = &quot;&quot; Then
+                    factory = &quot;확인필요&quot;
+                Else
+                    factory = &quot;확인필요(&quot; &amp; customerCode &amp; &quot;)&quot;
+                End If
+        End Select
+
+        qty = CDbl(ws.Cells(i, &quot;I&quot;).Value2)
+
+        &#x27; 공장 + 품목코드 + 품목명 기준 집계
+        key = Len(factory) &amp; &quot;:&quot; &amp; factory &amp; _
+              Len(itemCode) &amp; &quot;:&quot; &amp; itemCode &amp; itemName
+
+        If dict.Exists(key) Then
+            data = dict(key)
+            data(3) = data(3) + qty
+            dict(key) = data
+        Else
+            dict.Add key, Array(factory, itemCode, itemName, qty)
+        End If
+
+        totalQty = totalQty + qty
+
+NextRow:
+    Next i
+
+    If dict.Count = 0 Then
+        MsgBox &quot;집계할 상세 데이터가 없습니다.&quot;, vbInformation
+        Exit Sub
+    End If
+
+    &#x27; 결과 시트 이름 중복 방지
+    baseName = &quot;STOCK_통합_&quot; &amp; Format(Now, &quot;hhmmss&quot;)
+    sheetName = baseName
+
+    Do
+        nameExists = False
+
+        For Each sh In wb.Sheets
+            If StrComp(sh.Name, sheetName, vbTextCompare) = 0 Then
+                nameExists = True
+                Exit For
+            End If
+        Next sh
+
+        If Not nameExists Then Exit Do
+
+        suffix = suffix + 1
+        sheetName = baseName &amp; &quot;_&quot; &amp; suffix
+    Loop
+
+    Set resWs = wb.Worksheets.Add(After:=wb.Sheets(wb.Sheets.Count))
+    resWs.Name = sheetName
+
+    resWs.Range(&quot;A1:D1&quot;).Value = _
+        Array(&quot;FAC&quot;, &quot;ITEM CD&quot;, &quot;Part Name&quot;, &quot;Shipped Q&#x27;ty&quot;)
+
+    resWs.Columns(&quot;B:C&quot;).NumberFormat = &quot;@&quot;
+    rowIdx = 2
+
+    &#x27; 품목코드가 없는 항목 먼저 출력
+    For pass = 1 To 2
+        For Each k In dict.Keys
+
+            data = dict(k)
+
+            If (pass = 1 And data(1) = &quot;&quot;) Or _
+               (pass = 2 And data(1) &lt;&gt; &quot;&quot;) Then
+
+                resWs.Cells(rowIdx, 1).Value2 = data(0)
+                resWs.Cells(rowIdx, 2).Value2 = data(1)
+                resWs.Cells(rowIdx, 3).Value2 = data(2)
+                resWs.Cells(rowIdx, 4).Value2 = data(3)
+
+                rowIdx = rowIdx + 1
+            End If
+
+        Next k
+    Next pass
+
+    resWs.Cells(rowIdx, 3).Value2 = &quot;TOTAL&quot;
+    resWs.Cells(rowIdx, 4).Value2 = totalQty
+
+    With resWs.Range(&quot;A1:D&quot; &amp; rowIdx)
+        .Font.Name = &quot;Arial&quot;
+        .Font.Size = 9
+        .Font.Color = vbBlack
+        .VerticalAlignment = xlCenter
+        .Borders.LineStyle = xlContinuous
+        .Borders.Weight = xlThin
+        .Borders.Color = RGB(200, 200, 200)
+        .RowHeight = 18
+    End With
+
+    With resWs.Range(&quot;A1:D1&quot;)
+        .Font.Bold = True
+        .Interior.Color = RGB(221, 235, 247)
+        .HorizontalAlignment = xlCenter
+        .RowHeight = 24
+    End With
+
+    With resWs.Range(&quot;A&quot; &amp; rowIdx &amp; &quot;:D&quot; &amp; rowIdx)
+        .Font.Bold = True
+        .Interior.Color = RGB(221, 235, 247)
+    End With
+
+    resWs.Range(&quot;D2:D&quot; &amp; rowIdx).NumberFormat = &quot;#,##0&quot;
+    resWs.Columns(&quot;A&quot;).HorizontalAlignment = xlCenter
+    resWs.Columns(&quot;A:D&quot;).AutoFit
+
+    If resWs.Columns(&quot;A&quot;).ColumnWidth &lt; 8 Then _
+        resWs.Columns(&quot;A&quot;).ColumnWidth = 8
+
+    If resWs.Columns(&quot;B&quot;).ColumnWidth &lt; 20 Then _
+        resWs.Columns(&quot;B&quot;).ColumnWidth = 20
+
+    If resWs.Columns(&quot;C&quot;).ColumnWidth &lt; 28 Then _
+        resWs.Columns(&quot;C&quot;).ColumnWidth = 28
+
+    If resWs.Columns(&quot;D&quot;).ColumnWidth &lt; 16 Then _
+        resWs.Columns(&quot;D&quot;).ColumnWidth = 16
+
+    MsgBox &quot;STOCK 통합집계 완료&quot; &amp; vbCrLf &amp; _
+           &quot;총 출고수량: &quot; &amp; Format(totalQty, &quot;#,##0&quot;), vbInformation
+    Exit Sub
+
+Failed:
+    MsgBox Err.Description, vbExclamation
+
+End Sub</pre></details></article><article><h3>STOCK 공장별 시트</h3><p>출고 Sheet1 → F1/F2/F5 · 확인필요 시트 없음 · 미등록 공장코드는 중단</p><p>모듈 이름: <code>modFactoryShipment</code></p><div class="copyrow"><button data-copy="code-modFactoryShipment">전체 코드 복사</button><a href="downloads/vba-20261008/modFactoryShipment.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modFactoryShipment">Option Explicit
+
+Public Sub STOCK_공장별_시트()
+
+    Dim ws As Worksheet, resWs As Worksheet
+    Dim wb As Workbook
+    Dim factoryDicts As Object, dict As Object
+    Dim factories As Variant, fac As Variant
+    Dim lastRow As Long, i As Long, rowIdx As Long
+    Dim customerCode As String, factory As String
+    Dim itemCode As String, itemName As String
+    Dim key As String, k As Variant, data As Variant
+    Dim qty As Double, totalQty As Double, grandTotal As Double
+    Dim detailCount As Long, pass As Long
+    Dim sh As Object
+
+    On Error GoTo Failed
+
+    If TypeName(ActiveSheet) &lt;&gt; &quot;Worksheet&quot; Then
+        MsgBox &quot;STOCK 원본 시트를 선택해주세요.&quot;, vbExclamation
+        Exit Sub
+    End If
+
+    Set ws = ActiveSheet
+    Set wb = ws.Parent
+
+    &#x27; 원본 열 확인
+    If Trim(CStr(ws.Cells(1, &quot;Y&quot;).Value2)) &lt;&gt; &quot;출고처코드&quot; Or _
+       Trim(CStr(ws.Cells(1, &quot;U&quot;).Value2)) &lt;&gt; &quot;거래처 품목코드&quot; Or _
+       Trim(CStr(ws.Cells(1, &quot;I&quot;).Value2)) &lt;&gt; &quot;출고수량&quot; Then
+
+        MsgBox &quot;STOCK 원본의 열을 확인해주세요.&quot; &amp; vbCrLf &amp; _
+               &quot;Y열: 출고처코드&quot; &amp; vbCrLf &amp; _
+               &quot;U열: 거래처 품목코드&quot; &amp; vbCrLf &amp; _
+               &quot;C열: 품목명&quot; &amp; vbCrLf &amp; _
+               &quot;I열: 출고수량&quot;, vbExclamation
+        Exit Sub
+    End If
+
+    factories = Array(&quot;F1&quot;, &quot;F2&quot;, &quot;F5&quot;)
+
+    &#x27; 기존 결과 시트 보호
+    For Each fac In factories
+        For Each sh In wb.Sheets
+
+            If StrComp(sh.Name, CStr(fac), vbTextCompare) = 0 Then
+                MsgBox fac &amp; &quot; 시트가 이미 있습니다.&quot; &amp; vbCrLf &amp; _
+                       &quot;기존 시트 이름을 변경한 후 다시 실행해주세요.&quot;, _
+                       vbExclamation
+                Exit Sub
+            End If
+
+        Next sh
+    Next fac
+
+    Set factoryDicts = CreateObject(&quot;Scripting.Dictionary&quot;)
+
+    For Each fac In factories
+        Set dict = CreateObject(&quot;Scripting.Dictionary&quot;)
+        factoryDicts.Add CStr(fac), dict
+    Next fac
+
+    lastRow = Application.Max( _
+        ws.Cells(ws.Rows.Count, &quot;Y&quot;).End(xlUp).Row, _
+        ws.Cells(ws.Rows.Count, &quot;U&quot;).End(xlUp).Row, _
+        ws.Cells(ws.Rows.Count, &quot;C&quot;).End(xlUp).Row, _
+        ws.Cells(ws.Rows.Count, &quot;I&quot;).End(xlUp).Row)
+
+    &#x27; 전체 데이터 검증 및 집계
+    &#x27; 검증이 끝나기 전에는 결과 시트를 만들지 않음
+    For i = 2 To lastRow
+
+        If IsError(ws.Cells(i, &quot;Y&quot;).Value2) Or _
+           IsError(ws.Cells(i, &quot;U&quot;).Value2) Or _
+           IsError(ws.Cells(i, &quot;C&quot;).Value2) Then
+
+            Err.Raise vbObjectError + 720, , _
+                &quot;출고처·품목코드·품목명에 오류 셀이 있습니다.&quot; &amp; _
+                vbCrLf &amp; &quot;원본 행: &quot; &amp; i
+        End If
+
+        customerCode = Trim(CStr(ws.Cells(i, &quot;Y&quot;).Value2))
+        itemCode = Trim(CStr(ws.Cells(i, &quot;U&quot;).Value2))
+        itemName = Trim(CStr(ws.Cells(i, &quot;C&quot;).Value2))
+
+        &#x27; 원본 합계행 제외
+        If customerCode = &quot;&quot; And itemCode = &quot;&quot; Then
+            Select Case UCase(itemName)
+                Case &quot;합계&quot;, &quot;총 합계&quot;, &quot;총합계&quot;, &quot;계&quot;, &quot;TOTAL&quot;
+                    GoTo NextStockRow
+            End Select
+        End If
+
+        &#x27; 완전히 빈 행 제외
+        If customerCode = &quot;&quot; And itemCode = &quot;&quot; And itemName = &quot;&quot; Then
+            If Not IsError(ws.Cells(i, &quot;I&quot;).Value2) Then
+                If Len(Trim(CStr(ws.Cells(i, &quot;I&quot;).Value2))) = 0 Then
+                    GoTo NextStockRow
+                End If
+            End If
+        End If
+
+        If IsError(ws.Cells(i, &quot;I&quot;).Value2) Then
+            Err.Raise vbObjectError + 721, , _
+                &quot;출고수량에 오류 셀이 있습니다.&quot; &amp; _
+                vbCrLf &amp; &quot;원본 행: &quot; &amp; i
+        End If
+
+        If Not IsNumeric(ws.Cells(i, &quot;I&quot;).Value2) Then
+            Err.Raise vbObjectError + 722, , _
+                &quot;출고수량이 숫자가 아닙니다.&quot; &amp; _
+                vbCrLf &amp; &quot;원본 행: &quot; &amp; i
+        End If
+
+        If itemCode = &quot;&quot; And itemName = &quot;&quot; Then
+            Err.Raise vbObjectError + 723, , _
+                &quot;수량은 있지만 품목코드와 품목명이 없습니다.&quot; &amp; _
+                vbCrLf &amp; &quot;원본 행: &quot; &amp; i
+        End If
+
+        &#x27; Y열 출고처코드로 공장 구분
+        Select Case customerCode
+            Case &quot;1010&quot;
+                factory = &quot;F1&quot;
+            Case &quot;1060&quot;
+                factory = &quot;F2&quot;
+            Case &quot;1150&quot;
+                factory = &quot;F5&quot;
+            Case Else
+                Err.Raise vbObjectError + 724, , _
+                    &quot;공장을 구분할 수 없는 출고처코드입니다.&quot; &amp; vbCrLf &amp; _
+                    &quot;원본 행: &quot; &amp; i &amp; vbCrLf &amp; _
+                    &quot;Y열 값: [&quot; &amp; customerCode &amp; &quot;]&quot; &amp; vbCrLf &amp; _
+                    &quot;1010 / 1060 / 1150인지 확인해주세요.&quot; &amp; vbCrLf &amp; _
+                    &quot;결과 시트는 생성하지 않았습니다.&quot;
+        End Select
+
+        qty = CDbl(ws.Cells(i, &quot;I&quot;).Value2)
+        Set dict = factoryDicts(factory)
+
+        &#x27; 공장별 딕셔너리 안에서 품목코드 + 품목명으로 집계
+        key = Len(itemCode) &amp; &quot;:&quot; &amp; itemCode &amp; itemName
+
+        If dict.Exists(key) Then
+            data = dict(key)
+            data(2) = data(2) + qty
+            dict(key) = data
+        Else
+            dict.Add key, Array(itemCode, itemName, qty)
+        End If
+
+        grandTotal = grandTotal + qty
+        detailCount = detailCount + 1
+
+NextStockRow:
+    Next i
+
+    If detailCount = 0 Then
+        MsgBox &quot;집계할 출고 상세 데이터가 없습니다.&quot;, vbInformation
+        Exit Sub
+    End If
+
+    &#x27; F1 / F2 / F5 결과 시트 생성
+    For Each fac In factories
+
+        Set dict = factoryDicts(CStr(fac))
+        totalQty = 0
+
+        Set resWs = wb.Worksheets.Add(After:=wb.Sheets(wb.Sheets.Count))
+        resWs.Name = CStr(fac)
+
+        resWs.Range(&quot;A1:D1&quot;).Value = _
+            Array(&quot;FAC&quot;, &quot;ITEM CD&quot;, &quot;Part Name&quot;, &quot;Shipped Q&#x27;ty&quot;)
+
+        &#x27; 품목코드 앞자리 0 보존
+        resWs.Columns(&quot;B:C&quot;).NumberFormat = &quot;@&quot;
+        rowIdx = 2
+
+        &#x27; 코드 없는 항목 먼저, 코드 있는 항목 다음 출력
+        For pass = 1 To 2
+            For Each k In dict.Keys
+
+                data = dict(k)
+
+                If (pass = 1 And data(0) = &quot;&quot;) Or _
+                   (pass = 2 And data(0) &lt;&gt; &quot;&quot;) Then
+
+                    resWs.Cells(rowIdx, 1).Value2 = CStr(fac)
+                    resWs.Cells(rowIdx, 2).Value2 = data(0)
+                    resWs.Cells(rowIdx, 3).Value2 = data(1)
+                    resWs.Cells(rowIdx, 4).Value2 = data(2)
+
+                    totalQty = totalQty + data(2)
+                    rowIdx = rowIdx + 1
+                End If
+
+            Next k
+        Next pass
+
+        resWs.Cells(rowIdx, 3).Value2 = &quot;TOTAL&quot;
+        resWs.Cells(rowIdx, 4).Value2 = totalQty
+
+        With resWs.Range(&quot;A1:D&quot; &amp; rowIdx)
+            .Font.Name = &quot;Arial&quot;
+            .Font.Size = 9
+            .Font.Color = vbBlack
+            .VerticalAlignment = xlCenter
+            .Borders.LineStyle = xlContinuous
+            .Borders.Weight = xlThin
+            .Borders.Color = RGB(200, 200, 200)
+            .RowHeight = 18
+        End With
+
+        With resWs.Range(&quot;A1:D1&quot;)
+            .Font.Bold = True
+            .Interior.Color = RGB(221, 235, 247)
+            .HorizontalAlignment = xlCenter
+            .RowHeight = 24
+        End With
+
+        With resWs.Range(&quot;A&quot; &amp; rowIdx &amp; &quot;:D&quot; &amp; rowIdx)
+            .Font.Bold = True
+            .Interior.Color = RGB(221, 235, 247)
+        End With
+
+        resWs.Range(&quot;D2:D&quot; &amp; rowIdx).NumberFormat = &quot;#,##0&quot;
+        resWs.Columns(&quot;A&quot;).HorizontalAlignment = xlCenter
+        resWs.Columns(&quot;A:D&quot;).AutoFit
+
+        If resWs.Columns(&quot;A&quot;).ColumnWidth &lt; 8 Then _
+            resWs.Columns(&quot;A&quot;).ColumnWidth = 8
+
+        If resWs.Columns(&quot;B&quot;).ColumnWidth &lt; 20 Then _
+            resWs.Columns(&quot;B&quot;).ColumnWidth = 20
+
+        If resWs.Columns(&quot;C&quot;).ColumnWidth &lt; 28 Then _
+            resWs.Columns(&quot;C&quot;).ColumnWidth = 28
+
+        If resWs.Columns(&quot;D&quot;).ColumnWidth &lt; 16 Then _
+            resWs.Columns(&quot;D&quot;).ColumnWidth = 16
+
+    Next fac
+
+    MsgBox &quot;공장별 출고 정리가 완료되었습니다.&quot; &amp; vbCrLf &amp; _
+           &quot;생성 시트: F1 / F2 / F5&quot; &amp; vbCrLf &amp; _
+           &quot;전체 출고수량: &quot; &amp; Format(grandTotal, &quot;#,##0&quot;), _
+           vbInformation
+    Exit Sub
+
+Failed:
+    MsgBox Err.Description, vbExclamation
+
+End Sub</pre></details></article><article><h3>입고관리</h3><p>입고 Sheet1 → 입고_F1/F2/F5 · 확인필요 시트 없음 · 원본 합계행 제외</p><p>모듈 이름: <code>modInboundSummary</code></p><div class="copyrow"><button data-copy="code-modInboundSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modInboundSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modInboundSummary">Option Explicit
+
+Public Sub 입고관리()
+
+    Dim ws As Worksheet, resWs As Worksheet
+    Dim wb As Workbook
+    Dim factoryDicts As Object, dict As Object
+    Dim factories As Variant, fac As Variant
+    Dim lastRow As Long, i As Long, rowIdx As Long
+    Dim customerCode As String, factory As String
+    Dim itemCode As String, itemName As String
+    Dim key As String, k As Variant, data As Variant
+    Dim qty As Double, totalQty As Double, grandTotal As Double
+    Dim detailCount As Long, pass As Long
+    Dim resultName As String
+    Dim sh As Object
+
+    On Error GoTo Failed
+
+    If TypeName(ActiveSheet) &lt;&gt; &quot;Worksheet&quot; Then
+        MsgBox &quot;입고 원본 시트를 선택해주세요.&quot;, vbExclamation
+        Exit Sub
+    End If
+
+    Set ws = ActiveSheet
+    Set wb = ws.Parent
+
+    &#x27; 원본 열 확인
+    If Trim(CStr(ws.Cells(1, &quot;B&quot;).Value2)) &lt;&gt; &quot;수주처&quot; Or _
+       Trim(CStr(ws.Cells(1, &quot;AQ&quot;).Value2)) &lt;&gt; &quot;수주처 품목코드&quot; Or _
+       Trim(CStr(ws.Cells(1, &quot;K&quot;).Value2)) &lt;&gt; &quot;입고수량&quot; Then
+
+        MsgBox &quot;입고 원본의 열을 확인해주세요.&quot; &amp; vbCrLf &amp; _
+               &quot;B열: 수주처&quot; &amp; vbCrLf &amp; _
+               &quot;AQ열: 수주처 품목코드&quot; &amp; vbCrLf &amp; _
+               &quot;G열: 품목명&quot; &amp; vbCrLf &amp; _
+               &quot;K열: 입고수량&quot;, vbExclamation
+        Exit Sub
+    End If
+
+    factories = Array(&quot;F1&quot;, &quot;F2&quot;, &quot;F5&quot;)
+
+    &#x27; 기존 결과 시트 보호
+    For Each fac In factories
+
+        resultName = &quot;입고_&quot; &amp; CStr(fac)
+
+        For Each sh In wb.Sheets
+            If StrComp(sh.Name, resultName, vbTextCompare) = 0 Then
+                MsgBox resultName &amp; &quot; 시트가 이미 있습니다.&quot; &amp; vbCrLf &amp; _
+                       &quot;기존 시트 이름을 변경한 후 다시 실행해주세요.&quot;, _
+                       vbExclamation
+                Exit Sub
+            End If
+        Next sh
+
+    Next fac
+
+    Set factoryDicts = CreateObject(&quot;Scripting.Dictionary&quot;)
+
+    For Each fac In factories
+        Set dict = CreateObject(&quot;Scripting.Dictionary&quot;)
+        factoryDicts.Add CStr(fac), dict
+    Next fac
+
+    lastRow = Application.Max( _
+        ws.Cells(ws.Rows.Count, &quot;B&quot;).End(xlUp).Row, _
+        ws.Cells(ws.Rows.Count, &quot;AQ&quot;).End(xlUp).Row, _
+        ws.Cells(ws.Rows.Count, &quot;G&quot;).End(xlUp).Row, _
+        ws.Cells(ws.Rows.Count, &quot;K&quot;).End(xlUp).Row)
+
+    &#x27; 전체 데이터 검증 및 집계
+    &#x27; 검증이 끝나기 전에는 결과 시트를 만들지 않음
+    For i = 2 To lastRow
+
+        If IsError(ws.Cells(i, &quot;B&quot;).Value2) Or _
+           IsError(ws.Cells(i, &quot;AQ&quot;).Value2) Or _
+           IsError(ws.Cells(i, &quot;G&quot;).Value2) Then
+
+            Err.Raise vbObjectError + 710, , _
+                &quot;수주처·품목코드·품목명에 오류 셀이 있습니다.&quot; &amp; _
+                vbCrLf &amp; &quot;원본 행: &quot; &amp; i
+        End If
+
+        customerCode = Trim(CStr(ws.Cells(i, &quot;B&quot;).Value2))
+        itemCode = Trim(CStr(ws.Cells(i, &quot;AQ&quot;).Value2))
+        itemName = Trim(CStr(ws.Cells(i, &quot;G&quot;).Value2))
+
+        &#x27; 원본 합계행 제외
+        If customerCode = &quot;&quot; And itemCode = &quot;&quot; Then
+            Select Case UCase(itemName)
+                Case &quot;합계&quot;, &quot;총 합계&quot;, &quot;총합계&quot;, &quot;계&quot;, &quot;TOTAL&quot;
+                    GoTo NextInboundRow
+            End Select
+        End If
+
+        &#x27; 완전히 빈 행 제외
+        If customerCode = &quot;&quot; And itemCode = &quot;&quot; And itemName = &quot;&quot; Then
+            If Not IsError(ws.Cells(i, &quot;K&quot;).Value2) Then
+                If Len(Trim(CStr(ws.Cells(i, &quot;K&quot;).Value2))) = 0 Then
+                    GoTo NextInboundRow
+                End If
+            End If
+        End If
+
+        If IsError(ws.Cells(i, &quot;K&quot;).Value2) Then
+            Err.Raise vbObjectError + 711, , _
+                &quot;입고수량에 오류 셀이 있습니다.&quot; &amp; _
+                vbCrLf &amp; &quot;원본 행: &quot; &amp; i
+        End If
+
+        If Not IsNumeric(ws.Cells(i, &quot;K&quot;).Value2) Then
+            Err.Raise vbObjectError + 712, , _
+                &quot;입고수량이 숫자가 아닙니다.&quot; &amp; _
+                vbCrLf &amp; &quot;원본 행: &quot; &amp; i
+        End If
+
+        If itemCode = &quot;&quot; And itemName = &quot;&quot; Then
+            Err.Raise vbObjectError + 713, , _
+                &quot;수량은 있지만 품목코드와 품목명이 없습니다.&quot; &amp; _
+                vbCrLf &amp; &quot;원본 행: &quot; &amp; i
+        End If
+
+        &#x27; B열 수주처로 공장 구분
+        Select Case UCase(customerCode)
+            Case &quot;1010&quot;, &quot;F1&quot;
+                factory = &quot;F1&quot;
+            Case &quot;1060&quot;, &quot;F2&quot;
+                factory = &quot;F2&quot;
+            Case &quot;1150&quot;, &quot;F5&quot;
+                factory = &quot;F5&quot;
+            Case Else
+                Err.Raise vbObjectError + 714, , _
+                    &quot;공장을 구분할 수 없는 수주처입니다.&quot; &amp; vbCrLf &amp; _
+                    &quot;원본 행: &quot; &amp; i &amp; vbCrLf &amp; _
+                    &quot;B열 값: [&quot; &amp; customerCode &amp; &quot;]&quot; &amp; vbCrLf &amp; _
+                    &quot;1010 / 1060 / 1150인지 확인해주세요.&quot; &amp; vbCrLf &amp; _
+                    &quot;결과 시트는 생성하지 않았습니다.&quot;
+        End Select
+
+        qty = CDbl(ws.Cells(i, &quot;K&quot;).Value2)
+        Set dict = factoryDicts(factory)
+
+        &#x27; 공장별 딕셔너리 안에서 품목코드 + 품목명으로 집계
+        key = Len(itemCode) &amp; &quot;:&quot; &amp; itemCode &amp; itemName
+
+        If dict.Exists(key) Then
+            data = dict(key)
+            data(2) = data(2) + qty
+            dict(key) = data
+        Else
+            dict.Add key, Array(itemCode, itemName, qty)
+        End If
+
+        grandTotal = grandTotal + qty
+        detailCount = detailCount + 1
+
+NextInboundRow:
+    Next i
+
+    If detailCount = 0 Then
+        MsgBox &quot;집계할 입고 상세 데이터가 없습니다.&quot;, vbInformation
+        Exit Sub
+    End If
+
+    &#x27; F1 / F2 / F5 결과 시트 생성
+    For Each fac In factories
+
+        Set dict = factoryDicts(CStr(fac))
+        totalQty = 0
+
+        Set resWs = wb.Worksheets.Add(After:=wb.Sheets(wb.Sheets.Count))
+        resWs.Name = &quot;입고_&quot; &amp; CStr(fac)
+
+        resWs.Range(&quot;A1:D1&quot;).Value = _
+            Array(&quot;FAC&quot;, &quot;수주처 품목코드&quot;, &quot;품목명&quot;, &quot;입고수량&quot;)
+
+        &#x27; 품목코드 앞자리 0 보존
+        resWs.Columns(&quot;B:C&quot;).NumberFormat = &quot;@&quot;
+        rowIdx = 2
+
+        &#x27; 코드 없는 항목 먼저, 코드 있는 항목 다음 출력
+        For pass = 1 To 2
+            For Each k In dict.Keys
+
+                data = dict(k)
+
+                If (pass = 1 And data(0) = &quot;&quot;) Or _
+                   (pass = 2 And data(0) &lt;&gt; &quot;&quot;) Then
+
+                    resWs.Cells(rowIdx, 1).Value2 = CStr(fac)
+                    resWs.Cells(rowIdx, 2).Value2 = data(0)
+                    resWs.Cells(rowIdx, 3).Value2 = data(1)
+                    resWs.Cells(rowIdx, 4).Value2 = data(2)
+
+                    totalQty = totalQty + data(2)
+                    rowIdx = rowIdx + 1
+                End If
+
+            Next k
+        Next pass
+
+        resWs.Cells(rowIdx, 3).Value2 = &quot;TOTAL&quot;
+        resWs.Cells(rowIdx, 4).Value2 = totalQty
+
+        With resWs.Range(&quot;A1:D&quot; &amp; rowIdx)
+            .Font.Name = &quot;Arial&quot;
+            .Font.Size = 9
+            .Font.Color = vbBlack
+            .VerticalAlignment = xlCenter
+            .Borders.LineStyle = xlContinuous
+            .Borders.Weight = xlThin
+            .Borders.Color = RGB(200, 200, 200)
+            .RowHeight = 18
+        End With
+
+        With resWs.Range(&quot;A1:D1&quot;)
+            .Font.Bold = True
+            .Interior.Color = RGB(221, 235, 247)
+            .HorizontalAlignment = xlCenter
+            .RowHeight = 24
+        End With
+
+        With resWs.Range(&quot;A&quot; &amp; rowIdx &amp; &quot;:D&quot; &amp; rowIdx)
+            .Font.Bold = True
+            .Interior.Color = RGB(221, 235, 247)
+        End With
+
+        resWs.Range(&quot;D2:D&quot; &amp; rowIdx).NumberFormat = &quot;#,##0&quot;
+        resWs.Columns(&quot;A&quot;).HorizontalAlignment = xlCenter
+        resWs.Columns(&quot;A:D&quot;).AutoFit
+
+        If resWs.Columns(&quot;A&quot;).ColumnWidth &lt; 8 Then _
+            resWs.Columns(&quot;A&quot;).ColumnWidth = 8
+
+        If resWs.Columns(&quot;B&quot;).ColumnWidth &lt; 20 Then _
+            resWs.Columns(&quot;B&quot;).ColumnWidth = 20
+
+        If resWs.Columns(&quot;C&quot;).ColumnWidth &lt; 28 Then _
+            resWs.Columns(&quot;C&quot;).ColumnWidth = 28
+
+        If resWs.Columns(&quot;D&quot;).ColumnWidth &lt; 16 Then _
+            resWs.Columns(&quot;D&quot;).ColumnWidth = 16
+
+    Next fac
+
+    MsgBox &quot;공장별 입고 정리가 완료되었습니다.&quot; &amp; vbCrLf &amp; _
+           &quot;생성 시트: 입고_F1 / 입고_F2 / 입고_F5&quot; &amp; vbCrLf &amp; _
+           &quot;전체 입고수량: &quot; &amp; Format(grandTotal, &quot;#,##0&quot;), _
+           vbInformation
+    Exit Sub
+
+Failed:
+    MsgBox Err.Description, vbExclamation
+
+End Sub</pre></details></article><article><h3>Balance</h3><p>B 수주처 / E 품목코드 / G 품명 / N 수량 · 최근 STOCK과 같은 표 서식</p><p>모듈 이름: <code>modBalanceByFactory</code></p><div class="copyrow"><button data-copy="code-modBalanceByFactory">전체 코드 복사</button><a href="downloads/vba-20261008/modBalanceByFactory.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modBalanceByFactory">Sub Balance()
+
+    Dim ws As Worksheet, resWs As Worksheet
+    Dim lastRow As Long, i As Long, rowIdx As Long
+    Dim dict As Object, key As String
+    Dim itemCode As String, itemName As String, qty As Double
+    Dim custCode As Variant, custMapped As String
+    Dim k As Variant, items As Variant
+    Dim totalQty As Double
+
+    Set ws = ActiveSheet
+    Set dict = CreateObject(&quot;Scripting.Dictionary&quot;)
+
+    lastRow = ws.Cells(ws.Rows.Count, &quot;G&quot;).End(xlUp).Row
+    totalQty = 0
+
+    &#x27; 수주처 + 품목코드 + 품목명 기준 집계
+    For i = 2 To lastRow
+
+        custCode = ws.Cells(i, &quot;B&quot;).Value
+        itemCode = Trim(CStr(ws.Cells(i, &quot;E&quot;).Value))
+        itemName = Trim(CStr(ws.Cells(i, &quot;G&quot;).Value))
+
+        Select Case CStr(custCode)
+            Case &quot;1150&quot;
+                custMapped = &quot;F5&quot;
+            Case &quot;1010&quot;
+                custMapped = &quot;F1&quot;
+            Case &quot;1060&quot;
+                custMapped = &quot;F2&quot;
+            Case &quot;1050&quot;
+                custMapped = &quot;삼도&quot;
+            Case Else
+                custMapped = CStr(custCode)
+        End Select
+
+        If IsNumeric(ws.Cells(i, &quot;N&quot;).Value) Then
+            qty = CDbl(ws.Cells(i, &quot;N&quot;).Value)
+        Else
+            qty = 0
+        End If
+
+        key = custMapped &amp; &quot;|&quot; &amp; itemCode &amp; &quot;|&quot; &amp; itemName
+
+        If itemName &lt;&gt; &quot;&quot; Then
+            If dict.Exists(key) Then
+                dict(key) = dict(key) + qty
+            Else
+                dict.Add key, qty
+            End If
+
+            totalQty = totalQty + qty
+        End If
+
+    Next i
+
+    &#x27; 결과 시트 생성
+    Set resWs = Sheets.Add
+    resWs.Name = &quot;미납수량합계_&quot; &amp; Format(Now, &quot;hhmmss&quot;)
+
+    resWs.Range(&quot;A1:D1&quot;).Value = _
+        Array(&quot;수주처&quot;, &quot;거래처 품목코드&quot;, &quot;품목명&quot;, &quot;미납수량 합계&quot;)
+
+    resWs.Columns(&quot;B:C&quot;).NumberFormat = &quot;@&quot;
+    rowIdx = 2
+
+    &#x27; 품목코드가 없는 항목 먼저 출력
+    For Each k In dict.Keys
+
+        items = Split(k, &quot;|&quot;)
+
+        If items(1) = &quot;&quot; Then
+            resWs.Cells(rowIdx, 1).Value = items(0)
+            resWs.Cells(rowIdx, 2).Value = &quot;&quot;
+            resWs.Cells(rowIdx, 3).Value = items(2)
+            resWs.Cells(rowIdx, 4).Value = dict(k)
+            rowIdx = rowIdx + 1
+        End If
+
+    Next k
+
+    &#x27; 품목코드가 있는 항목 출력
+    For Each k In dict.Keys
+
+        items = Split(k, &quot;|&quot;)
+
+        If items(1) &lt;&gt; &quot;&quot; Then
+            resWs.Cells(rowIdx, 1).Value = items(0)
+            resWs.Cells(rowIdx, 2).Value = items(1)
+            resWs.Cells(rowIdx, 3).Value = items(2)
+            resWs.Cells(rowIdx, 4).Value = dict(k)
+            rowIdx = rowIdx + 1
+        End If
+
+    Next k
+
+    &#x27; 총합계
+    resWs.Cells(rowIdx, 3).Value = &quot;총 합계&quot;
+    resWs.Cells(rowIdx, 4).Value = totalQty
+
+    &#x27; 전체 표 서식
+    With resWs.Range(&quot;A1:D&quot; &amp; rowIdx)
+        .Font.Name = &quot;Arial&quot;
+        .Font.Size = 9
+        .Font.Color = vbBlack
+        .VerticalAlignment = xlCenter
+        .Borders.LineStyle = xlContinuous
+        .Borders.Weight = xlThin
+        .Borders.Color = RGB(200, 200, 200)
+        .RowHeight = 18
+    End With
+
+    &#x27; 머리글
+    With resWs.Range(&quot;A1:D1&quot;)
+        .Font.Bold = True
+        .Interior.Color = RGB(221, 235, 247)
+        .HorizontalAlignment = xlCenter
+        .RowHeight = 24
+    End With
+
+    &#x27; 합계행
+    With resWs.Range(&quot;A&quot; &amp; rowIdx &amp; &quot;:D&quot; &amp; rowIdx)
+        .Font.Bold = True
+        .Interior.Color = RGB(221, 235, 247)
+    End With
+
+    resWs.Range(&quot;D2:D&quot; &amp; rowIdx).NumberFormat = &quot;#,##0&quot;
+    resWs.Columns(&quot;A&quot;).HorizontalAlignment = xlCenter
+    resWs.Columns(&quot;A:D&quot;).AutoFit
+
+    If resWs.Columns(&quot;A&quot;).ColumnWidth &lt; 8 Then _
+        resWs.Columns(&quot;A&quot;).ColumnWidth = 8
+
+    If resWs.Columns(&quot;B&quot;).ColumnWidth &lt; 20 Then _
+        resWs.Columns(&quot;B&quot;).ColumnWidth = 20
+
+    If resWs.Columns(&quot;C&quot;).ColumnWidth &lt; 28 Then _
+        resWs.Columns(&quot;C&quot;).ColumnWidth = 28
+
+    If resWs.Columns(&quot;D&quot;).ColumnWidth &lt; 16 Then _
+        resWs.Columns(&quot;D&quot;).ColumnWidth = 16
+
+    resWs.Calculate
+
+    MsgBox &quot;미납수량 발란스 정리가 완료되었습니다.&quot;
+
+End Sub</pre></details></article><article><h3>반장님 재고리스트</h3><p>입고·출고 Sheet1 및 집계 결과 지원 · FAC+품명 합산 · 팔레트/수량 3쌍 · 줄바꿈 없음 · 행 높이 28 · A4 세로 흑백</p><p>모듈 이름: <code>modSupervisorStockList</code></p><div class="copyrow"><button data-copy="code-modSupervisorStockList">전체 코드 복사</button><a href="downloads/vba-20261008/modSupervisorStockList.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modSupervisorStockList">Option Explicit
+
+Public Sub 반장님_재고리스트_만들기()
+
+    Dim src As Worksheet, dest As Worksheet
+    Dim wb As Workbook
+    Dim dict As Object
+
+    Dim facCol As Long, nameCol As Long
+    Dim qtyCol As Long, codeCol As Long
+    Dim lastRow As Long, r As Long
+    Dim outRow As Long, lastOutputRow As Long
+
+    Dim fac As String, itemName As String, itemCode As String
+    Dim qty As Double
+    Dim key As String, k As Variant, data As Variant
+
+    Dim kind As String, qtyTitle As String
+    Dim resultName As String, baseName As String
+    Dim suffix As Long
+    Dim oldScreen As Boolean
+    Dim outputCreated As Boolean
+
+    oldScreen = Application.ScreenUpdating
+    On Error GoTo Failed
+
+    If TypeName(ActiveSheet) &lt;&gt; &quot;Worksheet&quot; Then
+        MsgBox &quot;입고·출고 원본 또는 집계 결과 시트를 선택해주세요.&quot;, _
+               vbExclamation
+        Exit Sub
+    End If
+
+    Set src = ActiveSheet
+    Set wb = src.Parent
+
+    &#x27;-----------------------------------
+    &#x27; 1. 원본 유형 자동 판별
+    &#x27;-----------------------------------
+
+    &#x27; 출고 원본
+    facCol = RL_FindColumn(src, Array(&quot;출고처코드&quot;))
+    qtyCol = RL_FindColumn(src, Array(&quot;출고수량&quot;))
+
+    If facCol &gt; 0 And qtyCol &gt; 0 Then
+
+        kind = &quot;출고&quot;
+        qtyTitle = &quot;출고수량&quot;
+
+        nameCol = RL_FindColumn(src, Array(&quot;품목명&quot;, &quot;품명&quot;))
+        codeCol = RL_FindColumn(src, Array(&quot;거래처 품목코드&quot;))
+
+    Else
+
+        &#x27; 입고 원본
+        facCol = RL_FindColumn(src, Array(&quot;수주처&quot;))
+        qtyCol = RL_FindColumn(src, Array(&quot;입고수량&quot;))
+
+        If facCol &gt; 0 And qtyCol &gt; 0 Then
+
+            kind = &quot;입고&quot;
+            qtyTitle = &quot;입고수량&quot;
+
+            nameCol = RL_FindColumn(src, Array(&quot;품목명&quot;, &quot;품명&quot;))
+            codeCol = RL_FindColumn(src, Array(&quot;수주처 품목코드&quot;))
+
+        Else
+
+            &#x27; 입고관리·STOCK 집계 결과
+            kind = &quot;집계&quot;
+            qtyTitle = &quot;수량&quot;
+
+            facCol = RL_FindColumn(src, _
+                Array(&quot;FAC&quot;, &quot;공장&quot;, &quot;수주처&quot;))
+
+            nameCol = RL_FindColumn(src, _
+                Array(&quot;품목명&quot;, &quot;품명&quot;, &quot;Part Name&quot;, _
+                      &quot;ITEM NM&quot;, &quot;ITEM NAME&quot;))
+
+            qtyCol = RL_FindColumn(src, _
+                Array(&quot;입고수량&quot;, &quot;입고수량 합계&quot;, _
+                      &quot;출고수량&quot;, &quot;출고수량 합계&quot;, _
+                      &quot;Shipped Q&#x27;ty&quot;, &quot;Shipped Qty&quot;, _
+                      &quot;수량&quot;, &quot;QTY&quot;))
+
+            codeCol = RL_FindColumn(src, _
+                Array(&quot;ITEM CD&quot;, &quot;수주처 품목코드&quot;, _
+                      &quot;거래처 품목코드&quot;))
+
+            If qtyCol &gt; 0 Then
+
+                If InStr(CStr(src.Cells(1, qtyCol).Value2), _
+                         &quot;입고&quot;) &gt; 0 Then
+
+                    qtyTitle = &quot;입고수량&quot;
+                    kind = &quot;입고&quot;
+
+                ElseIf InStr(CStr(src.Cells(1, qtyCol).Value2), _
+                             &quot;출고&quot;) &gt; 0 Or _
+                       InStr(UCase$(CStr( _
+                             src.Cells(1, qtyCol).Value2)), _
+                             &quot;SHIPPED&quot;) &gt; 0 Then
+
+                    qtyTitle = &quot;출고수량&quot;
+                    kind = &quot;출고&quot;
+
+                End If
+
+            End If
+
+        End If
+
+    End If
+
+    If facCol = 0 Or nameCol = 0 Or qtyCol = 0 Then
+
+        MsgBox &quot;첫 행에서 공장·품명·수량 열을 찾지 못했습니다.&quot; &amp; _
+               vbCrLf &amp; vbCrLf &amp; _
+               &quot;출고 원본: 출고처코드 / 품목명 / 출고수량&quot; &amp; vbCrLf &amp; _
+               &quot;입고 원본: 수주처 / 품목명 / 입고수량&quot; &amp; vbCrLf &amp; _
+               &quot;집계 결과: FAC 또는 공장 / 품명 / 수량&quot;, _
+               vbExclamation
+
+        Exit Sub
+    End If
+
+    lastRow = Application.Max( _
+        src.Cells(src.Rows.Count, facCol).End(xlUp).Row, _
+        src.Cells(src.Rows.Count, nameCol).End(xlUp).Row, _
+        src.Cells(src.Rows.Count, qtyCol).End(xlUp).Row)
+
+    If codeCol &gt; 0 Then
+        lastRow = Application.Max(lastRow, _
+            src.Cells(src.Rows.Count, codeCol).End(xlUp).Row)
+    End If
+
+    Set dict = CreateObject(&quot;Scripting.Dictionary&quot;)
+    dict.CompareMode = vbBinaryCompare
+
+    &#x27;-----------------------------------
+    &#x27; 2. FAC + 품명별 수량 합산
+    &#x27;-----------------------------------
+    For r = 2 To lastRow
+
+        If IsError(src.Cells(r, facCol).Value2) Or _
+           IsError(src.Cells(r, nameCol).Value2) Then
+
+            Err.Raise vbObjectError + 901, , _
+                &quot;공장 또는 품명에 오류가 있습니다.&quot; &amp; _
+                vbCrLf &amp; &quot;원본 행: &quot; &amp; r
+        End If
+
+        fac = RL_Text(src.Cells(r, facCol).Value2)
+        itemName = RL_Text(src.Cells(r, nameCol).Value2)
+        itemCode = &quot;&quot;
+
+        If codeCol &gt; 0 Then
+
+            If IsError(src.Cells(r, codeCol).Value2) Then
+                Err.Raise vbObjectError + 902, , _
+                    &quot;품목코드에 오류가 있습니다.&quot; &amp; _
+                    vbCrLf &amp; &quot;원본 행: &quot; &amp; r
+            End If
+
+            itemCode = RL_Text(src.Cells(r, codeCol).Value2)
+
+        End If
+
+        &#x27; 기존 합계행 제외
+        If fac = &quot;&quot; And itemCode = &quot;&quot; Then
+
+            Select Case UCase$(Replace(itemName, &quot; &quot;, &quot;&quot;))
+                Case &quot;합계&quot;, &quot;총합계&quot;, &quot;계&quot;, &quot;TOTAL&quot;, &quot;GRANDTOTAL&quot;
+                    GoTo NextRow
+            End Select
+
+        End If
+
+        &#x27; 완전히 빈 행 제외
+        If fac = &quot;&quot; And itemName = &quot;&quot; And itemCode = &quot;&quot; Then
+
+            If Not IsError(src.Cells(r, qtyCol).Value2) Then
+                If RL_Text(src.Cells(r, qtyCol).Value2) = &quot;&quot; Then
+                    GoTo NextRow
+                End If
+            End If
+
+        End If
+
+        If itemName = &quot;&quot; Then
+            Err.Raise vbObjectError + 903, , _
+                &quot;품명이 비어 있습니다.&quot; &amp; vbCrLf &amp; _
+                &quot;원본 행: &quot; &amp; r
+        End If
+
+        &#x27; 공장코드를 FAC로 변환
+        Select Case UCase$(fac)
+
+            Case &quot;1010&quot;, &quot;F1&quot;
+                fac = &quot;F1&quot;
+
+            Case &quot;1060&quot;, &quot;F2&quot;
+                fac = &quot;F2&quot;
+
+            Case &quot;1150&quot;, &quot;F5&quot;
+                fac = &quot;F5&quot;
+
+            Case Else
+                Err.Raise vbObjectError + 904, , _
+                    &quot;공장을 구분할 수 없습니다.&quot; &amp; vbCrLf &amp; _
+                    &quot;원본 행: &quot; &amp; r &amp; vbCrLf &amp; _
+                    &quot;공장 값: [&quot; &amp; fac &amp; &quot;]&quot;
+
+        End Select
+
+        If IsError(src.Cells(r, qtyCol).Value2) Then
+            Err.Raise vbObjectError + 905, , _
+                &quot;수량에 오류가 있습니다.&quot; &amp; vbCrLf &amp; _
+                &quot;원본 행: &quot; &amp; r
+        End If
+
+        If Not IsNumeric(src.Cells(r, qtyCol).Value2) Then
+            Err.Raise vbObjectError + 906, , _
+                &quot;수량이 숫자가 아닙니다.&quot; &amp; vbCrLf &amp; _
+                &quot;원본 행: &quot; &amp; r
+        End If
+
+        qty = CDbl(src.Cells(r, qtyCol).Value2)
+
+        &#x27; 같은 FAC와 품명이면 품목코드와 관계없이 합산
+        key = Len(fac) &amp; &quot;:&quot; &amp; fac &amp; itemName
+
+        If dict.Exists(key) Then
+
+            data = dict(key)
+            data(2) = data(2) + qty
+            dict(key) = data
+
+        Else
+
+            dict.Add key, Array(fac, itemName, qty)
+
+        End If
+
+NextRow:
+    Next r
+
+    If dict.Count = 0 Then
+        MsgBox &quot;출력할 상세 데이터가 없습니다.&quot;, vbInformation
+        Exit Sub
+    End If
+
+    &#x27;-----------------------------------
+    &#x27; 3. 새 결과 시트 생성
+    &#x27;-----------------------------------
+    baseName = &quot;반장님_재고_&quot; &amp; Format(Now, &quot;hhmmss&quot;)
+    resultName = baseName
+
+    Do While RL_SheetExists(wb, resultName)
+        suffix = suffix + 1
+        resultName = baseName &amp; &quot;_&quot; &amp; suffix
+    Loop
+
+    Application.ScreenUpdating = False
+
+    Set dest = wb.Worksheets.Add(After:=wb.Sheets(wb.Sheets.Count))
+    outputCreated = True
+    dest.Name = resultName
+
+    With dest
+
+        &#x27; FAC 열은 좁으므로 제목과 날짜는 B1/C1에 표시
+        .Cells(1, 2).Value2 = &quot;재고리스트&quot;
+        .Cells(1, 3).Value2 = &quot;(&quot; &amp; Format(Date, &quot;yy-mm-dd&quot;) &amp; &quot;)&quot;
+
+        .Range(&quot;A2:I2&quot;).Value = _
+            Array(&quot;FAC&quot;, &quot;품목명△&quot;, qtyTitle, _
+                  &quot;팔레트&quot;, &quot;수량&quot;, _
+                  &quot;팔레트&quot;, &quot;수량&quot;, _
+                  &quot;팔레트&quot;, &quot;수량&quot;)
+
+        .Columns(&quot;A:B&quot;).NumberFormat = &quot;@&quot;
+
+    End With
+
+    outRow = 3
+
+    For Each k In dict.Keys
+
+        data = dict(k)
+
+        dest.Cells(outRow, 1).Value2 = data(0)
+        dest.Cells(outRow, 2).Value2 = data(1)
+        dest.Cells(outRow, 3).Value2 = data(2)
+
+        &#x27; D:I는 팔레트·수량 기록용 빈칸
+        outRow = outRow + 1
+
+    Next k
+
+    lastOutputRow = outRow - 1
+
+    &#x27;-----------------------------------
+    &#x27; 4. FAC → 품명 오름차순 정렬
+    &#x27;-----------------------------------
+    If dict.Count &gt; 1 Then
+
+        With dest.Sort
+
+            .SortFields.Clear
+
+            .SortFields.Add _
+                Key:=dest.Range(&quot;A3:A&quot; &amp; lastOutputRow), _
+                SortOn:=xlSortOnValues, _
+                Order:=xlAscending, _
+                DataOption:=xlSortNormal
+
+            .SortFields.Add _
+                Key:=dest.Range(&quot;B3:B&quot; &amp; lastOutputRow), _
+                SortOn:=xlSortOnValues, _
+                Order:=xlAscending, _
+                DataOption:=xlSortNormal
+
+            .SetRange dest.Range(&quot;A2:I&quot; &amp; lastOutputRow)
+            .Header = xlYes
+            .MatchCase = False
+            .Orientation = xlTopToBottom
+            .Apply
+
+        End With
+
+    End If
+
+    &#x27;-----------------------------------
+    &#x27; 5. 연호 재고리스트 형태의 흑백 서식
+    &#x27;-----------------------------------
+    With dest.Range(&quot;A1:I&quot; &amp; lastOutputRow)
+
+        .Font.Name = &quot;맑은 고딕&quot;
+        .Font.Color = vbBlack
+        .Interior.Pattern = xlNone
+        .VerticalAlignment = xlCenter
+        .WrapText = False
+
+    End With
+
+    With dest.Range(&quot;B1:C1&quot;)
+
+        .Font.Size = 16
+        .Font.Bold = True
+        .HorizontalAlignment = xlLeft
+        .ShrinkToFit = True
+
+    End With
+
+    With dest.Range(&quot;A2:I&quot; &amp; lastOutputRow)
+
+        .Font.Size = 14
+
+        With .Borders
+            .LineStyle = xlContinuous
+            .Weight = xlThin
+            .Color = vbBlack
+        End With
+
+    End With
+
+    With dest.Range(&quot;A2:I2&quot;)
+
+        .Font.Bold = True
+        .HorizontalAlignment = xlCenter
+        .WrapText = False
+        .ShrinkToFit = True
+
+    End With
+
+    With dest
+
+        &#x27; 품명 공간을 넓게 확보
+        .Columns(&quot;A&quot;).ColumnWidth = 6
+        .Columns(&quot;B&quot;).ColumnWidth = 34
+        .Columns(&quot;C&quot;).ColumnWidth = 13
+        .Columns(&quot;D:I&quot;).ColumnWidth = 9
+
+        .Range(&quot;A3:A&quot; &amp; lastOutputRow).HorizontalAlignment = xlCenter
+        .Range(&quot;C3:I&quot; &amp; lastOutputRow).HorizontalAlignment = xlRight
+
+        &#x27; 품명은 한 줄 표시
+        &#x27; 긴 품명만 셀 너비에 맞춰 글자 축소
+        With .Range(&quot;B3:B&quot; &amp; lastOutputRow)
+            .WrapText = False
+            .ShrinkToFit = True
+            .HorizontalAlignment = xlLeft
+            .VerticalAlignment = xlCenter
+        End With
+
+        &#x27; 수량 표시
+        .Range(&quot;C3:I&quot; &amp; lastOutputRow).NumberFormat = &quot;#,##0.######&quot;
+
+        &#x27; 팔레트 번호는 텍스트로 입력 가능
+        .Range(&quot;D3:D&quot; &amp; lastOutputRow).NumberFormat = &quot;@&quot;
+        .Range(&quot;F3:F&quot; &amp; lastOutputRow).NumberFormat = &quot;@&quot;
+        .Range(&quot;H3:H&quot; &amp; lastOutputRow).NumberFormat = &quot;@&quot;
+
+        &#x27; 행 높이 고정 - AutoFit 사용하지 않음
+        .Rows(1).RowHeight = 32
+        .Rows(2).RowHeight = 30
+        .Rows(&quot;3:&quot; &amp; lastOutputRow).RowHeight = 28
+
+    End With
+
+    &#x27;-----------------------------------
+    &#x27; 6. A4 세로·흑백 인쇄
+    &#x27;-----------------------------------
+    With dest.PageSetup
+
+        .PaperSize = xlPaperA4
+        .Orientation = xlPortrait
+        .BlackAndWhite = True
+
+        .PrintArea = dest.Range(&quot;A1:I&quot; &amp; lastOutputRow).Address
+        .PrintTitleRows = &quot;$1:$2&quot;
+
+        .PrintGridlines = False
+        .PrintHeadings = False
+        .CenterHorizontally = True
+
+        .TopMargin = Application.InchesToPoints(0.4)
+        .BottomMargin = Application.InchesToPoints(0.4)
+        .LeftMargin = Application.InchesToPoints(0.4)
+        .RightMargin = Application.InchesToPoints(0.4)
+
+        .Zoom = False
+        .FitToPagesWide = 1
+        .FitToPagesTall = False
+
+    End With
+
+    Application.ScreenUpdating = oldScreen
+    dest.Activate
+
+    MsgBox &quot;반장님 재고리스트를 만들었습니다.&quot; &amp; vbCrLf &amp; _
+           &quot;원본 구분: &quot; &amp; kind &amp; vbCrLf &amp; _
+           &quot;FAC·품명별 집계: &quot; &amp; dict.Count &amp; &quot;건&quot; &amp; vbCrLf &amp; _
+           &quot;품명 한 줄 표시 · 행 높이 고정&quot; &amp; vbCrLf &amp; _
+           &quot;Ctrl+P에서 인쇄 모양을 확인해주세요.&quot;, _
+           vbInformation
+
+    Exit Sub
+
+Failed:
+
+    Application.ScreenUpdating = oldScreen
+
+    If outputCreated Then
+
+        MsgBox &quot;출력 또는 인쇄 설정 중 오류가 발생했습니다.&quot; &amp; _
+               vbCrLf &amp; &quot;생성된 시트를 확인해주세요.&quot; &amp; _
+               vbCrLf &amp; Err.Description, vbExclamation
+
+    Else
+
+        MsgBox Err.Description, vbExclamation
+
+    End If
+
+End Sub
+
+
+&#x27; 문자열 양쪽 공백 정리
+Private Function RL_Text(ByVal value As Variant) As String
+
+    RL_Text = Trim$(Replace(CStr(value), ChrW(160), &quot; &quot;))
+
+End Function
+
+
+&#x27; 머리글 비교용 문자열
+Private Function RL_HeaderKey(ByVal value As Variant) As String
+
+    Dim text As String
+
+    text = UCase$(RL_Text(value))
+    text = Replace(text, &quot; &quot;, &quot;&quot;)
+    text = Replace(text, vbTab, &quot;&quot;)
+    text = Replace(text, vbCr, &quot;&quot;)
+    text = Replace(text, vbLf, &quot;&quot;)
+    text = Replace(text, &quot;△&quot;, &quot;&quot;)
+    text = Replace(text, &quot;▲&quot;, &quot;&quot;)
+
+    RL_HeaderKey = text
+
+End Function
+
+
+&#x27; 첫 행에서 해당 머리글 열 찾기
+Private Function RL_FindColumn( _
+    ByVal ws As Worksheet, _
+    ByVal aliases As Variant) As Long
+
+    Dim c As Long, lastCol As Long
+    Dim alias As Variant
+    Dim header As String
+    Dim matched As Boolean
+
+    lastCol = ws.Cells(1, ws.Columns.Count).End(xlToLeft).Column
+
+    For c = 1 To lastCol
+
+        If Not IsError(ws.Cells(1, c).Value2) Then
+
+            header = RL_HeaderKey(ws.Cells(1, c).Value2)
+            matched = False
+
+            For Each alias In aliases
+
+                If header = RL_HeaderKey(alias) Then
+                    matched = True
+                    Exit For
+                End If
+
+            Next alias
+
+            If matched Then
+
+                If RL_FindColumn &lt;&gt; 0 Then
+                    Err.Raise vbObjectError + 920, , _
+                        &quot;같은 역할의 머리글이 여러 개 있습니다: &quot; &amp; _
+                        CStr(ws.Cells(1, c).Value2)
+                End If
+
+                RL_FindColumn = c
+
+            End If
+
+        End If
+
+    Next c
+
+End Function
+
+
+&#x27; 같은 이름의 시트 존재 여부
+Private Function RL_SheetExists( _
+    ByVal wb As Workbook, _
+    ByVal sheetName As String) As Boolean
+
+    Dim sh As Object
+
+    For Each sh In wb.Sheets
+
+        If StrComp(sh.Name, sheetName, vbTextCompare) = 0 Then
+            RL_SheetExists = True
+            Exit Function
+        End If
+
+    Next sh
+
+End Function</pre></details></article><article><h3>다른 사람도 쓰는 범용 코드</h3><a class="primary" href="downloads/vba-general-20261008.zip" download>다른 사람도 쓰는 범용 코드 전체 BAS 받기</a><p>특정 업체 코드가 필요하지 않습니다. 각 모듈의 입력 조건을 확인하세요. 범용 코드의 실제 실행은 미검증입니다.</p></article><article><h3>범용 재고리스트</h3><p>첫 행: FAC·공장·부서·구분 중 하나 + 품명 + 수량. 특정 업체나 공장코드 제한 없이 구분+품명 합산. 팔레트 기록 칸 포함</p><p>모듈 이름: <code>modGeneralStockList</code></p><div class="copyrow"><button data-copy="code-modGeneralStockList">전체 코드 복사</button><a href="downloads/vba-20261008/modGeneralStockList.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modGeneralStockList">Option Explicit
+
+Public Sub 범용_재고리스트_만들기()
+
+    Dim src As Worksheet, dest As Worksheet
+    Dim wb As Workbook
+    Dim dict As Object
+
+    Dim facCol As Long, nameCol As Long
+    Dim qtyCol As Long, codeCol As Long
+    Dim lastRow As Long, r As Long
+    Dim outRow As Long, lastOutputRow As Long
+
+    Dim fac As String, itemName As String, itemCode As String
+    Dim qty As Double
+    Dim key As String, k As Variant, data As Variant
+
+    Dim kind As String, qtyTitle As String
+    Dim resultName As String, baseName As String
+    Dim suffix As Long
+    Dim oldScreen As Boolean
+    Dim outputCreated As Boolean
+
+    oldScreen = Application.ScreenUpdating
+    On Error GoTo Failed
+
+    If TypeName(ActiveSheet) &lt;&gt; &quot;Worksheet&quot; Then
+        MsgBox &quot;입고·출고 원본 또는 집계 결과 시트를 선택해주세요.&quot;, _
+               vbExclamation
+        Exit Sub
+    End If
+
+    Set src = ActiveSheet
+    Set wb = src.Parent
+
+    &#x27;-----------------------------------
+    &#x27; 1. 원본 유형 자동 판별
+    &#x27;-----------------------------------
+
+    kind = &quot;범용&quot;
+    qtyTitle = &quot;수량&quot;
+    facCol = RL_FindColumn(src, Array(&quot;FAC&quot;, &quot;공장&quot;, &quot;부서&quot;, &quot;구분&quot;))
+    nameCol = RL_FindColumn(src, Array(&quot;품명&quot;, &quot;품목명&quot;, &quot;Part Name&quot;, &quot;ITEM NAME&quot;))
+    qtyCol = RL_FindColumn(src, Array(&quot;수량&quot;, &quot;QTY&quot;, &quot;입고수량&quot;, &quot;출고수량&quot;, &quot;Shipped Q&#x27;ty&quot;))
+    codeCol = RL_FindColumn(src, Array(&quot;품목코드&quot;, &quot;ITEM CD&quot;))
+    If facCol = 0 Or nameCol = 0 Or qtyCol = 0 Then
+        MsgBox &quot;첫 행에 FAC(또는 공장/부서/구분), 품명, 수량 머리글이 필요합니다.&quot;, vbExclamation
+        Exit Sub
+    End If
+
+    lastRow = Application.Max( _
+        src.Cells(src.Rows.Count, facCol).End(xlUp).Row, _
+        src.Cells(src.Rows.Count, nameCol).End(xlUp).Row, _
+        src.Cells(src.Rows.Count, qtyCol).End(xlUp).Row)
+
+    If codeCol &gt; 0 Then
+        lastRow = Application.Max(lastRow, _
+            src.Cells(src.Rows.Count, codeCol).End(xlUp).Row)
+    End If
+
+    Set dict = CreateObject(&quot;Scripting.Dictionary&quot;)
+    dict.CompareMode = vbBinaryCompare
+
+    &#x27;-----------------------------------
+    &#x27; 2. FAC + 품명별 수량 합산
+    &#x27;-----------------------------------
+    For r = 2 To lastRow
+
+        If IsError(src.Cells(r, facCol).Value2) Or _
+           IsError(src.Cells(r, nameCol).Value2) Then
+
+            Err.Raise vbObjectError + 901, , _
+                &quot;공장 또는 품명에 오류가 있습니다.&quot; &amp; _
+                vbCrLf &amp; &quot;원본 행: &quot; &amp; r
+        End If
+
+        fac = RL_Text(src.Cells(r, facCol).Value2)
+        itemName = RL_Text(src.Cells(r, nameCol).Value2)
+        itemCode = &quot;&quot;
+
+        If codeCol &gt; 0 Then
+
+            If IsError(src.Cells(r, codeCol).Value2) Then
+                Err.Raise vbObjectError + 902, , _
+                    &quot;품목코드에 오류가 있습니다.&quot; &amp; _
+                    vbCrLf &amp; &quot;원본 행: &quot; &amp; r
+            End If
+
+            itemCode = RL_Text(src.Cells(r, codeCol).Value2)
+
+        End If
+
+        &#x27; 기존 합계행 제외
+        If fac = &quot;&quot; And itemCode = &quot;&quot; Then
+
+            Select Case UCase$(Replace(itemName, &quot; &quot;, &quot;&quot;))
+                Case &quot;합계&quot;, &quot;총합계&quot;, &quot;계&quot;, &quot;TOTAL&quot;, &quot;GRANDTOTAL&quot;
+                    GoTo NextRow
+            End Select
+
+        End If
+
+        &#x27; 완전히 빈 행 제외
+        If fac = &quot;&quot; And itemName = &quot;&quot; And itemCode = &quot;&quot; Then
+
+            If Not IsError(src.Cells(r, qtyCol).Value2) Then
+                If RL_Text(src.Cells(r, qtyCol).Value2) = &quot;&quot; Then
+                    GoTo NextRow
+                End If
+            End If
+
+        End If
+
+        If itemName = &quot;&quot; Then
+            Err.Raise vbObjectError + 903, , _
+                &quot;품명이 비어 있습니다.&quot; &amp; vbCrLf &amp; _
+                &quot;원본 행: &quot; &amp; r
+        End If
+
+        &#x27; 공장코드를 FAC로 변환
+        If fac = &quot;&quot; Then
+            Err.Raise vbObjectError + 904, , &quot;구분 값이 비어 있습니다. 원본 행: &quot; &amp; r
+        End If
+
+        If IsError(src.Cells(r, qtyCol).Value2) Then
+            Err.Raise vbObjectError + 905, , _
+                &quot;수량에 오류가 있습니다.&quot; &amp; vbCrLf &amp; _
+                &quot;원본 행: &quot; &amp; r
+        End If
+
+        If Not IsNumeric(src.Cells(r, qtyCol).Value2) Then
+            Err.Raise vbObjectError + 906, , _
+                &quot;수량이 숫자가 아닙니다.&quot; &amp; vbCrLf &amp; _
+                &quot;원본 행: &quot; &amp; r
+        End If
+
+        qty = CDbl(src.Cells(r, qtyCol).Value2)
+
+        &#x27; 같은 FAC와 품명이면 품목코드와 관계없이 합산
+        key = Len(fac) &amp; &quot;:&quot; &amp; fac &amp; itemName
+
+        If dict.Exists(key) Then
+
+            data = dict(key)
+            data(2) = data(2) + qty
+            dict(key) = data
+
+        Else
+
+            dict.Add key, Array(fac, itemName, qty)
+
+        End If
+
+NextRow:
+    Next r
+
+    If dict.Count = 0 Then
+        MsgBox &quot;출력할 상세 데이터가 없습니다.&quot;, vbInformation
+        Exit Sub
+    End If
+
+    &#x27;-----------------------------------
+    &#x27; 3. 새 결과 시트 생성
+    &#x27;-----------------------------------
+    baseName = &quot;반장님_재고_&quot; &amp; Format(Now, &quot;hhmmss&quot;)
+    resultName = baseName
+
+    Do While RL_SheetExists(wb, resultName)
+        suffix = suffix + 1
+        resultName = baseName &amp; &quot;_&quot; &amp; suffix
+    Loop
+
+    Application.ScreenUpdating = False
+
+    Set dest = wb.Worksheets.Add(After:=wb.Sheets(wb.Sheets.Count))
+    outputCreated = True
+    dest.Name = resultName
+
+    With dest
+
+        &#x27; FAC 열은 좁으므로 제목과 날짜는 B1/C1에 표시
+        .Cells(1, 2).Value2 = &quot;재고리스트&quot;
+        .Cells(1, 3).Value2 = &quot;(&quot; &amp; Format(Date, &quot;yy-mm-dd&quot;) &amp; &quot;)&quot;
+
+        .Range(&quot;A2:I2&quot;).Value = _
+            Array(&quot;FAC&quot;, &quot;품목명△&quot;, qtyTitle, _
+                  &quot;팔레트&quot;, &quot;수량&quot;, _
+                  &quot;팔레트&quot;, &quot;수량&quot;, _
+                  &quot;팔레트&quot;, &quot;수량&quot;)
+
+        .Columns(&quot;A:B&quot;).NumberFormat = &quot;@&quot;
+
+    End With
+
+    outRow = 3
+
+    For Each k In dict.Keys
+
+        data = dict(k)
+
+        dest.Cells(outRow, 1).Value2 = data(0)
+        dest.Cells(outRow, 2).Value2 = data(1)
+        dest.Cells(outRow, 3).Value2 = data(2)
+
+        &#x27; D:I는 팔레트·수량 기록용 빈칸
+        outRow = outRow + 1
+
+    Next k
+
+    lastOutputRow = outRow - 1
+
+    &#x27;-----------------------------------
+    &#x27; 4. FAC → 품명 오름차순 정렬
+    &#x27;-----------------------------------
+    If dict.Count &gt; 1 Then
+
+        With dest.Sort
+
+            .SortFields.Clear
+
+            .SortFields.Add _
+                Key:=dest.Range(&quot;A3:A&quot; &amp; lastOutputRow), _
+                SortOn:=xlSortOnValues, _
+                Order:=xlAscending, _
+                DataOption:=xlSortNormal
+
+            .SortFields.Add _
+                Key:=dest.Range(&quot;B3:B&quot; &amp; lastOutputRow), _
+                SortOn:=xlSortOnValues, _
+                Order:=xlAscending, _
+                DataOption:=xlSortNormal
+
+            .SetRange dest.Range(&quot;A2:I&quot; &amp; lastOutputRow)
+            .Header = xlYes
+            .MatchCase = False
+            .Orientation = xlTopToBottom
+            .Apply
+
+        End With
+
+    End If
+
+    &#x27;-----------------------------------
+    &#x27; 5. 연호 재고리스트 형태의 흑백 서식
+    &#x27;-----------------------------------
+    With dest.Range(&quot;A1:I&quot; &amp; lastOutputRow)
+
+        .Font.Name = &quot;맑은 고딕&quot;
+        .Font.Color = vbBlack
+        .Interior.Pattern = xlNone
+        .VerticalAlignment = xlCenter
+        .WrapText = False
+
+    End With
+
+    With dest.Range(&quot;B1:C1&quot;)
+
+        .Font.Size = 16
+        .Font.Bold = True
+        .HorizontalAlignment = xlLeft
+        .ShrinkToFit = True
+
+    End With
+
+    With dest.Range(&quot;A2:I&quot; &amp; lastOutputRow)
+
+        .Font.Size = 14
+
+        With .Borders
+            .LineStyle = xlContinuous
+            .Weight = xlThin
+            .Color = vbBlack
+        End With
+
+    End With
+
+    With dest.Range(&quot;A2:I2&quot;)
+
+        .Font.Bold = True
+        .HorizontalAlignment = xlCenter
+        .WrapText = False
+        .ShrinkToFit = True
+
+    End With
+
+    With dest
+
+        &#x27; 품명 공간을 넓게 확보
+        .Columns(&quot;A&quot;).ColumnWidth = 6
+        .Columns(&quot;B&quot;).ColumnWidth = 34
+        .Columns(&quot;C&quot;).ColumnWidth = 13
+        .Columns(&quot;D:I&quot;).ColumnWidth = 9
+
+        .Range(&quot;A3:A&quot; &amp; lastOutputRow).HorizontalAlignment = xlCenter
+        .Range(&quot;C3:I&quot; &amp; lastOutputRow).HorizontalAlignment = xlRight
+
+        &#x27; 품명은 한 줄 표시
+        &#x27; 긴 품명만 셀 너비에 맞춰 글자 축소
+        With .Range(&quot;B3:B&quot; &amp; lastOutputRow)
+            .WrapText = False
+            .ShrinkToFit = True
+            .HorizontalAlignment = xlLeft
+            .VerticalAlignment = xlCenter
+        End With
+
+        &#x27; 수량 표시
+        .Range(&quot;C3:I&quot; &amp; lastOutputRow).NumberFormat = &quot;#,##0.######&quot;
+
+        &#x27; 팔레트 번호는 텍스트로 입력 가능
+        .Range(&quot;D3:D&quot; &amp; lastOutputRow).NumberFormat = &quot;@&quot;
+        .Range(&quot;F3:F&quot; &amp; lastOutputRow).NumberFormat = &quot;@&quot;
+        .Range(&quot;H3:H&quot; &amp; lastOutputRow).NumberFormat = &quot;@&quot;
+
+        &#x27; 행 높이 고정 - AutoFit 사용하지 않음
+        .Rows(1).RowHeight = 32
+        .Rows(2).RowHeight = 30
+        .Rows(&quot;3:&quot; &amp; lastOutputRow).RowHeight = 28
+
+    End With
+
+    &#x27;-----------------------------------
+    &#x27; 6. A4 세로·흑백 인쇄
+    &#x27;-----------------------------------
+    With dest.PageSetup
+
+        .PaperSize = xlPaperA4
+        .Orientation = xlPortrait
+        .BlackAndWhite = True
+
+        .PrintArea = dest.Range(&quot;A1:I&quot; &amp; lastOutputRow).Address
+        .PrintTitleRows = &quot;$1:$2&quot;
+
+        .PrintGridlines = False
+        .PrintHeadings = False
+        .CenterHorizontally = True
+
+        .TopMargin = Application.InchesToPoints(0.4)
+        .BottomMargin = Application.InchesToPoints(0.4)
+        .LeftMargin = Application.InchesToPoints(0.4)
+        .RightMargin = Application.InchesToPoints(0.4)
+
+        .Zoom = False
+        .FitToPagesWide = 1
+        .FitToPagesTall = False
+
+    End With
+
+    Application.ScreenUpdating = oldScreen
+    dest.Activate
+
+    MsgBox &quot;반장님 재고리스트를 만들었습니다.&quot; &amp; vbCrLf &amp; _
+           &quot;원본 구분: &quot; &amp; kind &amp; vbCrLf &amp; _
+           &quot;FAC·품명별 집계: &quot; &amp; dict.Count &amp; &quot;건&quot; &amp; vbCrLf &amp; _
+           &quot;품명 한 줄 표시 · 행 높이 고정&quot; &amp; vbCrLf &amp; _
+           &quot;Ctrl+P에서 인쇄 모양을 확인해주세요.&quot;, _
+           vbInformation
+
+    Exit Sub
+
+Failed:
+
+    Application.ScreenUpdating = oldScreen
+
+    If outputCreated Then
+
+        MsgBox &quot;출력 또는 인쇄 설정 중 오류가 발생했습니다.&quot; &amp; _
+               vbCrLf &amp; &quot;생성된 시트를 확인해주세요.&quot; &amp; _
+               vbCrLf &amp; Err.Description, vbExclamation
+
+    Else
+
+        MsgBox Err.Description, vbExclamation
+
+    End If
+
+End Sub
+
+
+&#x27; 문자열 양쪽 공백 정리
+Private Function RL_Text(ByVal value As Variant) As String
+
+    RL_Text = Trim$(Replace(CStr(value), ChrW(160), &quot; &quot;))
+
+End Function
+
+
+&#x27; 머리글 비교용 문자열
+Private Function RL_HeaderKey(ByVal value As Variant) As String
+
+    Dim text As String
+
+    text = UCase$(RL_Text(value))
+    text = Replace(text, &quot; &quot;, &quot;&quot;)
+    text = Replace(text, vbTab, &quot;&quot;)
+    text = Replace(text, vbCr, &quot;&quot;)
+    text = Replace(text, vbLf, &quot;&quot;)
+    text = Replace(text, &quot;△&quot;, &quot;&quot;)
+    text = Replace(text, &quot;▲&quot;, &quot;&quot;)
+
+    RL_HeaderKey = text
+
+End Function
+
+
+&#x27; 첫 행에서 해당 머리글 열 찾기
+Private Function RL_FindColumn( _
+    ByVal ws As Worksheet, _
+    ByVal aliases As Variant) As Long
+
+    Dim c As Long, lastCol As Long
+    Dim alias As Variant
+    Dim header As String
+    Dim matched As Boolean
+
+    lastCol = ws.Cells(1, ws.Columns.Count).End(xlToLeft).Column
+
+    For c = 1 To lastCol
+
+        If Not IsError(ws.Cells(1, c).Value2) Then
+
+            header = RL_HeaderKey(ws.Cells(1, c).Value2)
+            matched = False
+
+            For Each alias In aliases
+
+                If header = RL_HeaderKey(alias) Then
+                    matched = True
+                    Exit For
+                End If
+
+            Next alias
+
+            If matched Then
+
+                If RL_FindColumn &lt;&gt; 0 Then
+                    Err.Raise vbObjectError + 920, , _
+                        &quot;같은 역할의 머리글이 여러 개 있습니다: &quot; &amp; _
+                        CStr(ws.Cells(1, c).Value2)
+                End If
+
+                RL_FindColumn = c
+
+            End If
+
+        End If
+
+    Next c
+
+End Function
+
+
+&#x27; 같은 이름의 시트 존재 여부
+Private Function RL_SheetExists( _
+    ByVal wb As Workbook, _
+    ByVal sheetName As String) As Boolean
+
+    Dim sh As Object
+
+    For Each sh In wb.Sheets
+
+        If StrComp(sh.Name, sheetName, vbTextCompare) = 0 Then
+            RL_SheetExists = True
+            Exit Function
+        End If
+
+    Next sh
+
+End Function</pre></details></article><article><h3>범용 부분합</h3><p>머리글과 데이터를 포함한 연속 범위를 선택한 뒤 두 기준과 합계 열을 지정</p><p>모듈 이름: <code>modSubtotalTwoKeys</code></p><div class="copyrow"><button data-copy="code-modSubtotalTwoKeys">전체 코드 복사</button><a href="downloads/vba-20261008/modSubtotalTwoKeys.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modSubtotalTwoKeys">Sub 부분합()
+    Dim rng As Range
+    Dim arr As Variant
+    Dim dict As Object
+    Dim i As Long, j As Long
+    Dim keyCol1 As Variant, keyCol2 As Variant, valCol As Variant, extraInput As Variant
+    Dim outWs As Worksheet
+    Dim k As Variant, r As Long
+    Dim headerKey1 As String, headerKey2 As String, headerVal As String
+
+    &#x27; 1. 범위 확인 및 방어 코드
+    If TypeName(Selection) &lt;&gt; &quot;Range&quot; Then
+        MsgBox &quot;범위를 먼저 선택하세요.&quot;
+        Exit Sub
+    End If
+    
+    Set rng = Selection
+    arr = rng.value
+
+    If Not IsArray(arr) Then
+        MsgBox &quot;2행 이상 데이터 범위를 선택하세요.&quot;
+        Exit Sub
+    End If
+
+    If UBound(arr, 1) &lt; 2 Then
+        MsgBox &quot;머리글을 포함하여 최소 2행 이상 선택해야 합니다.&quot;
+        Exit Sub
+    End If
+
+    &#x27; 2. 열 번호 입력 받기
+    keyCol1 = Application.InputBox(&quot;첫 번째 기준 열 번호(예: 거래처코드)를 입력하세요.&quot;, &quot;1. 첫 번째 기준&quot;, Type:=1)
+    If keyCol1 = False Or keyCol1 &lt;= 0 Then Exit Sub
+
+    keyCol2 = Application.InputBox(&quot;두 번째 기준 열 번호(예: 품목명)를 입력하세요.&quot;, &quot;2. 두 번째 기준&quot;, Type:=1)
+    If keyCol2 = False Or keyCol2 &lt;= 0 Then Exit Sub
+
+    valCol = Application.InputBox(&quot;합산할 금액/수량 열 번호를 입력하세요.&quot;, &quot;3. 합계 열 선택&quot;, Type:=1)
+    If valCol = False Or valCol &lt;= 0 Then Exit Sub
+    
+    If keyCol1 &gt; UBound(arr, 2) Or keyCol2 &gt; UBound(arr, 2) Or valCol &gt; UBound(arr, 2) Then
+        MsgBox &quot;선택한 범위 내의 열 번호를 입력해주세요.&quot;
+        Exit Sub
+    End If
+
+    &#x27; 2-1. 추가로 출력할 열 입력 받기
+    Dim extraCols() As Long
+    Dim hasExtra As Boolean
+    Dim extraStrArr() As String
+    Dim eCount As Long
+    
+    extraInput = Application.InputBox(&quot;추가로 함께 출력할 열 번호를 입력하세요.&quot; &amp; vbCrLf &amp; _
+                                      &quot;(예: 3,4 와 같이 쉼표로 구분 가능)&quot; &amp; vbCrLf &amp; _
+                                      &quot;없으면 빈칸으로 &#x27;확인&#x27; 클릭&quot;, &quot;4. 추가 정보 열 선택&quot;, Type:=2)
+    
+    hasExtra = False: eCount = 0
+    If extraInput &lt;&gt; &quot;False&quot; And Trim(extraInput) &lt;&gt; &quot;&quot; Then
+        extraStrArr = Split(extraInput, &quot;,&quot;)
+        ReDim extraCols(0 To UBound(extraStrArr))
+        For j = 0 To UBound(extraStrArr)
+            If IsNumeric(Trim(extraStrArr(j))) Then
+                Dim colIdx As Long: colIdx = CLng(Trim(extraStrArr(j)))
+                If colIdx &gt; 0 And colIdx &lt;= UBound(arr, 2) Then
+                    extraCols(eCount) = colIdx
+                    eCount = eCount + 1
+                End If
+            End If
+        Next j
+        If eCount &gt; 0 Then
+            ReDim Preserve extraCols(0 To eCount - 1)
+            hasExtra = True
+        End If
+    End If
+
+    &#x27; 3. 데이터 합산 (Dictionary)
+    Set dict = CreateObject(&quot;Scripting.Dictionary&quot;)
+    
+    headerKey1 = arr(1, keyCol1)
+    headerKey2 = arr(1, keyCol2)
+    headerVal = arr(1, valCol)
+
+    Dim combinedKey As String &#x27; 두 기준을 합친 고유 키
+    Dim currentVal As Double
+    Dim itemData() As Variant &#x27; [0]합계, [1~n]추가 데이터
+
+    For i = 2 To UBound(arr, 1)
+        &#x27; 두 기준 열을 &quot;|&quot; 구분자로 합쳐서 유니크한 키 생성
+        combinedKey = CStr(arr(i, keyCol1)) &amp; &quot;|&quot; &amp; CStr(arr(i, keyCol2))
+        currentVal = Val(arr(i, valCol))
+        
+        If dict.Exists(combinedKey) Then
+            itemData = dict(combinedKey)
+            itemData(0) = itemData(0) + currentVal
+            dict(combinedKey) = itemData
+        Else
+            ReDim itemData(0 To eCount)
+            itemData(0) = currentVal
+            If hasExtra Then
+                For j = 0 To eCount - 1
+                    itemData(j + 1) = arr(i, extraCols(j))
+                Next j
+            End If
+            dict.Add combinedKey, itemData
+        End If
+    Next i
+
+    &#x27; 4. 결과 출력
+    Set outWs = Worksheets.Add(After:=ActiveSheet)
+    On Error Resume Next
+    outWs.Name = &quot;중복기준_부분합_&quot; &amp; Format(Now, &quot;hhmmss&quot;)
+    On Error GoTo 0
+
+    &#x27; 머리글 출력 (기준1, 기준2, 합계순)
+    outWs.Cells(1, 1).value = headerKey1
+    outWs.Cells(1, 2).value = headerKey2
+    outWs.Cells(1, 3).value = headerVal &amp; &quot; 합계&quot;
+    
+    If hasExtra Then
+        For j = 0 To eCount - 1
+            outWs.Cells(1, 4 + j).value = arr(1, extraCols(j))
+        Next j
+    End If
+    
+    &#x27; 데이터 출력
+    r = 2
+    Dim splitKey As Variant
+    For Each k In dict.keys
+        splitKey = Split(k, &quot;|&quot;)
+        outWs.Cells(r, 1).value = splitKey(0) &#x27; 기준1
+        outWs.Cells(r, 2).value = splitKey(1) &#x27; 기준2
+        
+        itemData = dict(k)
+        outWs.Cells(r, 3).value = itemData(0) &#x27; 합계
+        
+        If hasExtra Then
+            For j = 0 To eCount - 1
+                outWs.Cells(r, 4 + j).value = itemData(j + 1)
+            Next j
+        End If
+        r = r + 1
+    Next k
+
+    &#x27; 5. 서식 정리
+    Dim lastCol As Long: lastCol = 3 + eCount
+    outWs.Columns(&quot;C&quot;).NumberFormat = &quot;#,##0&quot; &#x27; C열(합계) 서식
+    
+    With outWs.Range(outWs.Cells(1, 1), outWs.Cells(1, lastCol))
+        .Font.Bold = True
+        .Interior.Color = RGB(220, 230, 241)
+        .Borders.LineStyle = xlContinuous
+        .HorizontalAlignment = xlCenter
+    End With
+    outWs.Range(outWs.Columns(1), outWs.Columns(lastCol)).AutoFit
+    
+    MsgBox &quot;복합 기준 부분합 완료!&quot;, vbInformation
+End Sub
+</pre></details></article><article><h3>범용 값조회</h3><p>원본 기준 열·값 열·조회 대상·결과 첫 셀 선택. 중복 기준과 미조회는 #N/A. 결과 덮어쓰기 전 확인</p><p>모듈 이름: <code>modGeneralLookup</code></p><div class="copyrow"><button data-copy="code-modGeneralLookup">전체 코드 복사</button><a href="downloads/vba-20261008/modGeneralLookup.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modGeneralLookup">Option Explicit
+Public Sub 범용_값조회()
+    Dim keys As Range, vals As Range, targets As Range, dest As Range
+    Dim d As Object, dup As Object, result() As Variant
+    Dim i As Long, k As String, miss As Long
+    On Error Resume Next
+    Set keys = Application.InputBox(&quot;원본의 검색 기준 한 열을 선택하세요. 머리글 제외&quot;, &quot;범용 값조회 1/4&quot;, Type:=8)
+    On Error GoTo Failed
+    If keys Is Nothing Then Exit Sub
+    On Error Resume Next
+    Set vals = Application.InputBox(&quot;가져올 값 한 열을 선택하세요. 기준 열과 행 수가 같아야 합니다.&quot;, &quot;범용 값조회 2/4&quot;, Type:=8)
+    On Error GoTo Failed
+    If vals Is Nothing Then Exit Sub
+    On Error Resume Next
+    Set targets = Application.InputBox(&quot;조회할 값이 있는 한 열을 선택하세요. 머리글 제외&quot;, &quot;범용 값조회 3/4&quot;, Type:=8)
+    On Error GoTo Failed
+    If targets Is Nothing Then Exit Sub
+    On Error Resume Next
+    Set dest = Application.InputBox(&quot;결과를 넣을 첫 셀 하나를 선택하세요.&quot;, &quot;범용 값조회 4/4&quot;, Type:=8)
+    On Error GoTo Failed
+    If dest Is Nothing Then Exit Sub
+    If keys.Areas.Count &lt;&gt; 1 Or vals.Areas.Count &lt;&gt; 1 Or targets.Areas.Count &lt;&gt; 1 Or dest.Areas.Count &lt;&gt; 1 Then Err.Raise 5, , &quot;연속 범위를 선택하세요.&quot;
+    If keys.Columns.Count &lt;&gt; 1 Or vals.Columns.Count &lt;&gt; 1 Or targets.Columns.Count &lt;&gt; 1 Or dest.Cells.CountLarge &lt;&gt; 1 Then Err.Raise 5, , &quot;기준/값/조회는 한 열, 결과 시작은 한 셀을 선택하세요.&quot;
+    If keys.Rows.Count &lt;&gt; vals.Rows.Count Then Err.Raise 5, , &quot;원본 기준 열과 값 열의 행 수가 다릅니다.&quot;
+    If dest.Row + targets.Rows.Count - 1 &gt; dest.Worksheet.Rows.Count Then Err.Raise 5, , &quot;결과가 시트의 마지막 행을 넘습니다.&quot;
+    Set d = CreateObject(&quot;Scripting.Dictionary&quot;)
+    Set dup = CreateObject(&quot;Scripting.Dictionary&quot;)
+    d.CompareMode = vbBinaryCompare
+    dup.CompareMode = vbBinaryCompare
+    For i = 1 To keys.Rows.Count
+        If Not IsError(keys.Cells(i, 1).Value2) Then
+            k = CStr(keys.Cells(i, 1).Value2)
+            If Len(k) &gt; 0 Then
+                If d.Exists(k) Then
+                    dup(k) = True
+                Else
+                    d.Add k, vals.Cells(i, 1).Value2
+                End If
+            End If
+        End If
+    Next i
+    ReDim result(1 To targets.Rows.Count, 1 To 1)
+    For i = 1 To targets.Rows.Count
+        result(i, 1) = CVErr(xlErrNA)
+        If Not IsError(targets.Cells(i, 1).Value2) Then
+            k = CStr(targets.Cells(i, 1).Value2)
+            If d.Exists(k) And Not dup.Exists(k) Then result(i, 1) = d(k)
+        End If
+        If IsError(result(i, 1)) Then miss = miss + 1
+    Next i
+    If MsgBox(&quot;선택한 셀부터 &quot; &amp; targets.Rows.Count &amp; &quot;행을 결과 값으로 덮어씁니다. 진행할까요?&quot;, vbYesNo + vbQuestion) &lt;&gt; vbYes Then Exit Sub
+    dest.Resize(targets.Rows.Count, 1).Value2 = result
+    MsgBox &quot;완료. 미조회/중복 기준/원본 오류 등 확인할 결과: &quot; &amp; miss &amp; &quot;건 (#N/A 또는 원본 오류)&quot;, vbInformation
+    Exit Sub
+Failed:
+    MsgBox Err.Description, vbExclamation
+End Sub</pre></details></article></section><footer>2026.10.07 제공 파일 기준 정적 점검 · 실제 설치와 메뉴 연결은 각 PC에서 진행하세요.</footer></main><div id="notice" role="status" hidden></div><script>const key='daea-xlam-guide-v1';let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}')}catch{}const checks=[...document.querySelectorAll('[data-check]')];function progress(){const n=checks.filter(x=>x.checked).length;document.getElementById('progressText').textContent=n+' / '+checks.length+' 확인';document.getElementById('progressBar').style.width=(100*n/checks.length)+'%'}checks.forEach(x=>{x.checked=!!saved[x.dataset.check];x.addEventListener('change',()=>{saved[x.dataset.check]=x.checked;try{localStorage.setItem(key,JSON.stringify(saved))}catch{}progress()})});progress();function show(id,focus=false){if(!document.getElementById(id)?.classList.contains('panel'))id='start';document.querySelectorAll('.panel').forEach(x=>x.hidden=x.id!==id);document.querySelectorAll('.tab').forEach(b=>{b.classList.toggle('active',b.dataset.go===id);b.setAttribute('aria-current',b.dataset.go===id?'step':'false')});history.replaceState(null,'','#'+id);window.scrollTo(0,0);if(focus)document.getElementById('title-'+id).focus({preventScroll:true})}document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>show(b.dataset.go,true));window.addEventListener('hashchange',()=>show(location.hash.slice(1)));show(location.hash.slice(1)||'start');function note(t){const n=document.getElementById('notice');n.textContent=t;n.hidden=false;setTimeout(()=>n.hidden=true,2400)}document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{const t=document.getElementById(b.dataset.copy).textContent;try{await navigator.clipboard.writeText(t);note('복사했습니다')}catch{note('복사할 내용을 선택해 Ctrl+C를 눌러주세요')}});document.getElementById('reset').onclick=()=>{if(!confirm('이 안내의 체크 기록을 초기화할까요?'))return;saved={};try{localStorage.removeItem(key)}catch{}checks.forEach(x=>x.checked=false);progress()};</script></body></html>
