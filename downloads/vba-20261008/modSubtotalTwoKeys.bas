@@ -140,18 +140,53 @@ Sub 부분합()
         r = r + 1
     Next k
 
-    ' 5. 서식 정리
+    ' 5. 읽기 쉬운 표와 흑백 인쇄 서식
     Dim lastCol As Long: lastCol = 3 + eCount
-    outWs.Columns("C").NumberFormat = "#,##0" ' C열(합계) 서식
-    
+    Dim body As Range, col As Long
+    Set body = outWs.Range(outWs.Cells(1, 1), outWs.Cells(r - 1, lastCol))
+    With body
+        .Font.Name = "맑은 고딕"
+        .Font.Size = 11
+        .Font.Color = vbBlack
+        .VerticalAlignment = xlCenter
+        .WrapText = False
+        .RowHeight = 23
+        .Borders.LineStyle = xlContinuous
+        .Borders.Weight = xlThin
+        .Borders.Color = RGB(190, 190, 190)
+    End With
     With outWs.Range(outWs.Cells(1, 1), outWs.Cells(1, lastCol))
         .Font.Bold = True
-        .Interior.Color = RGB(220, 230, 241)
-        .Borders.LineStyle = xlContinuous
+        .Font.Size = 11
+        .Interior.Color = RGB(230, 230, 230)
         .HorizontalAlignment = xlCenter
+        .RowHeight = 30
     End With
+    outWs.Range(outWs.Cells(2, 3), outWs.Cells(r - 1, 3)).NumberFormat = "#,##0.########;-#,##0.########;0"
+    outWs.Range(outWs.Cells(2, 3), outWs.Cells(r - 1, 3)).HorizontalAlignment = xlRight
     outWs.Range(outWs.Columns(1), outWs.Columns(lastCol)).AutoFit
-    
-    MsgBox "복합 기준 부분합 완료!", vbInformation
+    For col = 1 To lastCol
+        With outWs.Columns(col)
+            If .ColumnWidth < 14 Then .ColumnWidth = 14
+            If .ColumnWidth > 42 Then .ColumnWidth = 42
+        End With
+    Next col
+    outWs.Range(outWs.Cells(2, 1), outWs.Cells(r - 1, lastCol)).ShrinkToFit = True
+    body.AutoFilter
+    With outWs.PageSetup
+        .PaperSize = xlPaperA4
+        .Orientation = xlPortrait
+        If lastCol > 5 Then .Orientation = xlLandscape
+        .Zoom = False
+        .FitToPagesWide = 1
+        .FitToPagesTall = False
+        .BlackAndWhite = True
+        .PrintTitleRows = "$1:$1"
+        .PrintArea = body.Address
+        .CenterHorizontally = True
+        .LeftMargin = Application.CentimetersToPoints(1)
+        .RightMargin = Application.CentimetersToPoints(1)
+        .CenterFooter = "&P / &N"
+    End With
+    MsgBox "부분합 완료! 새 시트에 서식과 A4 인쇄 설정을 적용했습니다.", vbInformation
 End Sub
-

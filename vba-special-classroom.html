@@ -1,4 +1,4 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="XLAM을 AddIns에 설치하고 Excel 추가 기능으로 등록한 뒤 리본 버튼으로 사용하는 방법. 기존 XLAM에 새 VBA 모듈을 추가하고 백업하는 실무 안내."><title>XLAM 추가 기능 · VBA 실무 사용 안내</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f6f7f3;color:#263d35;font:16px/1.85 "Malgun Gothic","Noto Sans KR",sans-serif}a{color:#246348}button,a{touch-action:manipulation}button{font:inherit;cursor:pointer}aside{position:fixed;inset:0 auto 0 0;width:250px;padding:30px 22px;background:#fff;border-right:1px solid #dde5da;overflow:auto}aside h1{font-size:23px;line-height:1.45;margin:12px 0}aside p{font-size:13px;color:#5c6f61}.eyebrow{font-size:11px;letter-spacing:.13em;color:#647857;font-weight:bold}nav{margin-top:24px;display:grid;gap:6px}.tab{border:0;background:none;padding:12px;text-align:left;color:#4d6055;border-radius:8px;font-size:14px}.tab.active{background:#e7f0e1;color:#204b36;font-weight:bold}.tab:hover{background:#f0f4ec}main{margin-left:250px;padding:32px 42px 70px;max-width:1620px}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #dce4d6;padding-bottom:16px;margin-bottom:26px;font-size:13px;color:#647065}.sectionhead h2{font-size:32px;line-height:1.4;letter-spacing:-.04em;margin:12px 0}.sectionhead p{margin-bottom:26px;color:#5e6a60}.panel[hidden]{display:none}article,details{background:white;border:1px solid #dce4d6;border-radius:14px;padding:24px;margin:18px 0}article h3{margin-top:0;font-size:21px;line-height:1.5}article p{margin:10px 0}.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:35px;padding:34px;background:#e8eee1;border:1px solid #d6e1cf;border-radius:20px}.hero h2{font-size:35px;line-height:1.5;letter-spacing:-.05em}.hero p{color:#4c6051}.badge{font-size:12px;background:#fff;padding:6px 10px;border-radius:7px}.primary,.secondary,.next{display:inline-block;text-decoration:none;border-radius:8px;padding:12px 18px;font-weight:bold;font-size:14px}.primary,.next{color:white;background:#285c46;border:0}.secondary{border:1px solid #bacdb9;background:#fff;color:#34563d}.next{margin-top:22px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid article{margin:18px 0 0}.flow{display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:5px}.flow div{padding:13px 18px;background:#fff;border:1px solid #d5e1d0;border-radius:10px}.flow b,.flow span{display:block}.flow span{font-size:13px;color:#5e7062}.flow i{font-style:normal;text-align:center;color:#6d8267}.horizontal{flex-direction:row;align-items:center;margin:24px 0}.horizontal div{flex:1}.note{padding:18px 22px;background:#fff4d9;border-left:4px solid #b7943f;border-radius:8px;margin:20px 0;font-size:14px}.small,.filemeta{font-size:13px}.steps{padding-left:24px}.steps li{padding-left:7px;margin:16px 0}.steps li::marker{color:#3c7256;font-weight:bold}table{width:100%;border-collapse:collapse;background:white;margin:22px 0;font-size:14px}td,th{padding:15px;border:1px solid #d6dfd2;text-align:left;vertical-align:top}th{background:#eaf0e5;color:#2c4f39}td:first-child{min-width:130px;font-weight:bold}code{background:#edf2e9;padding:3px 6px;border-radius:4px;overflow-wrap:anywhere;font:14px/1.8 Consolas,"Malgun Gothic",monospace}pre{background:#1c332b;color:#edf5e9;border-radius:10px;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.7 Consolas,"Malgun Gothic",monospace}kbd{border:1px solid #bccbbb;border-bottom:3px solid #bccbbb;padding:2px 6px;border-radius:4px;background:#f8faf5;font-size:13px}.copyrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.copyrow button{background:#fff;border:1px solid #b5c9ad;border-radius:7px;padding:9px 13px;font-size:13px}.source{display:inline-block;margin-top:10px;font-size:12px}summary{cursor:pointer;font-weight:bold}.check{display:flex;align-items:flex-start;gap:12px;padding:15px;margin:9px 0;border:1px solid #d6e1cf;border-radius:9px;background:white;font-size:14px}.check input{width:19px;height:19px;accent-color:#285c46;margin-top:4px;flex-shrink:0}.progress{height:6px;background:#e4ebde;border-radius:6px;margin-top:14px}.progress i{display:block;height:100%;background:#527a48;border-radius:6px}#progressText{font-size:12px;margin:8px 0}.reset{font-size:12px;background:transparent;border:0;text-decoration:underline;color:#647065;padding:8px 0}#notice{position:fixed;bottom:22px;right:22px;background:#234e39;color:#fff;padding:10px 18px;border-radius:9px;z-index:5}footer{font-size:12px;color:#6c776d;margin-top:35px;border-top:1px solid #d7e0d1;padding-top:16px}.back{font-size:13px}@media(max-width:900px){aside{position:relative;width:100%;padding:20px}aside h1{font-size:21px}nav{display:flex;overflow-x:auto;margin-top:14px}.tab{white-space:nowrap}aside .progress,aside #progressText,aside .reset{display:none}main{margin-left:0;padding:22px 18px}.hero,.grid{grid-template-columns:1fr}.hero{padding:24px}.hero h2{font-size:29px}.sectionhead h2{font-size:26px}.horizontal{flex-direction:column;align-items:stretch}table{font-size:12px}td,th{padding:10px;word-break:break-word}td:first-child{min-width:65px}.top{gap:15px}article,details{padding:19px}}@media print{aside,.top,.next,.copyrow button,#notice{display:none!important}main{margin:0;padding:0}.panel[hidden]{display:block}article{break-inside:avoid}.hero{display:block}}body{overflow-wrap:anywhere}main,.panel,.hero>*{min-width:0}pre{max-width:100%;overflow-x:auto}@media(max-width:900px){table{table-layout:fixed}.top{flex-wrap:wrap}} </style></head><body><aside><span class="eyebrow">DAEA · EXCEL TOOLKIT</span><h1>VBA 실습실<br>XLAM 사용 안내</h1><p>설치부터 새 모듈 추가까지</p><nav aria-label="학습 단계"><button class="tab" data-go="latest-code">최신 코드 · 업무용/범용</button><button class="tab active" data-go="start" aria-current="step">00 · 전체 흐름</button><button class="tab" data-go="why" aria-current="false">01 · 왜 XLAM인가</button><button class="tab" data-go="install" aria-current="false">02 · 설치·추가 기능 등록</button><button class="tab" data-go="ribbon" aria-current="false">03 · 리본 버튼 연결</button><button class="tab" data-go="use" aria-current="false">04 · 업무에서 사용</button><button class="tab" data-go="extend" aria-current="false">05 · 새 모듈 추가</button><button class="tab" data-go="maintain" aria-current="false">06 · 백업·문제 해결</button></nav><div class="progress"><i id="progressBar"></i></div><p id="progressText"></p><button class="reset" id="reset">체크 기록 초기화</button><p><a class="back" href="대아_구매물류팀_업무매뉴얼_v9_4.html">← Daea Guide</a></p></aside><main><div class="note" id="latest-download"><h2>10월 8일 최신 코드 업데이트</h2><p>STOCK 두 종류 · 공장별 입고 · 줄바꿈 없는 반장님 재고리스트 · 범용 코드</p><button class="next" data-go="latest-code">최신 코드 보기·복사·다운로드 →</button><p><b>아래 XLAM ZIP도 10월 8일 최신 수정까지 반영했습니다.</b> ZIP 안의 XLAM을 교체하고 함께 든 리본 설정도 가져오세요.</p><h2>사용 대상에 맞게 다운로드하세요</h2><p><b>입고관리 공장별 분리 반영</b> — 수주처 기준 F1/F2/F5 별도 시트, 확인필요 항목 분리, 원본 합계 행 중복 집계 방지. XLAM과 ZIP의 리본 설정을 함께 적용하세요.</p><p><b>최신 XLAM 완성본 반영</b> — 공장별 Stock과 같은 머리글·합계행·테두리·숫자 서식입니다. 새 기능이 추가되어 ZIP의 리본설정.exportedUI도 다시 가져오세요.</p><p>세 버전 중 하나를 선택하세요. XLAM · 리본 설정 · 기능목록 · 설치 안내가 각각 포함됩니다.</p><div class="grid"><article><h3>개인용 25개</h3><p>효주님 전용 · 연호·KET 유지 + STOCK 공장별·반장님 재고리스트 추가</p><a class="primary" href="downloads/daea-personal-inbound-factory.zip" download>개인용 25개 다운로드 ↓</a></article><article><h3>사내 공유용 17개</h3><p>사내 공통 17개 · 최신 STOCK 두 종류와 반장님 재고리스트 포함</p><a class="primary" href="downloads/daea-team-inbound-factory.zip" download>사내 공유용 17개 다운로드 ↓</a></article><article><h3>범용 도구 2개</h3><p>업체와 무관한 부분합 + 원본 범위를 직접 선택하는 범용 값조회</p><a class="primary" href="downloads/daea-general-20261007.zip" download>범용 도구 2개 다운로드 ↓</a></article></div><p>사내 공유용의 ‘품목 잔량·재고 조회’는 업무 양식 전용이며 범용 값조회와 다릅니다. 새 범용 조회와 리본 가져오기는 실제 Excel 실행 확인 전입니다.</p></div><div class="top"><b>Excel 도구를 내 업무에 연결하기</b><span>Windows Excel · 2026.10.07</span></div><noscript><style>.panel[hidden]{display:block}</style><p>JavaScript가 꺼져 있어 전체 내용을 한 번에 표시합니다. 파일 링크는 사용할 수 있습니다.</p></noscript><section class="panel" id="start" aria-labelledby="title-start" ><header class="sectionhead"><span class="eyebrow">START HERE</span><h2 id="title-start" tabindex="-1">VBA를 한곳에 모아, 리본에서 실행하기</h2><p>매주 바뀌는 업무 파일에는 데이터만. 반복해서 쓰는 VBA는 하나의 XLAM에 모아 관리합니다.</p></header>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="XLAM을 AddIns에 설치하고 Excel 추가 기능으로 등록한 뒤 리본 버튼으로 사용하는 방법. 기존 XLAM에 새 VBA 모듈을 추가하고 백업하는 실무 안내."><title>XLAM 추가 기능 · VBA 실무 사용 안내</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f6f7f3;color:#263d35;font:16px/1.85 "Malgun Gothic","Noto Sans KR",sans-serif}a{color:#246348}button,a{touch-action:manipulation}button{font:inherit;cursor:pointer}aside{position:fixed;inset:0 auto 0 0;width:250px;padding:30px 22px;background:#fff;border-right:1px solid #dde5da;overflow:auto}aside h1{font-size:23px;line-height:1.45;margin:12px 0}aside p{font-size:13px;color:#5c6f61}.eyebrow{font-size:11px;letter-spacing:.13em;color:#647857;font-weight:bold}nav{margin-top:24px;display:grid;gap:6px}.tab{border:0;background:none;padding:12px;text-align:left;color:#4d6055;border-radius:8px;font-size:14px}.tab.active{background:#e7f0e1;color:#204b36;font-weight:bold}.tab:hover{background:#f0f4ec}main{margin-left:250px;padding:32px 42px 70px;max-width:1620px}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #dce4d6;padding-bottom:16px;margin-bottom:26px;font-size:13px;color:#647065}.sectionhead h2{font-size:32px;line-height:1.4;letter-spacing:-.04em;margin:12px 0}.sectionhead p{margin-bottom:26px;color:#5e6a60}.panel[hidden]{display:none}article,details{background:white;border:1px solid #dce4d6;border-radius:14px;padding:24px;margin:18px 0}article h3{margin-top:0;font-size:21px;line-height:1.5}article p{margin:10px 0}.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:35px;padding:34px;background:#e8eee1;border:1px solid #d6e1cf;border-radius:20px}.hero h2{font-size:35px;line-height:1.5;letter-spacing:-.05em}.hero p{color:#4c6051}.badge{font-size:12px;background:#fff;padding:6px 10px;border-radius:7px}.primary,.secondary,.next{display:inline-block;text-decoration:none;border-radius:8px;padding:12px 18px;font-weight:bold;font-size:14px}.primary,.next{color:white;background:#285c46;border:0}.secondary{border:1px solid #bacdb9;background:#fff;color:#34563d}.next{margin-top:22px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid article{margin:18px 0 0}.flow{display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:5px}.flow div{padding:13px 18px;background:#fff;border:1px solid #d5e1d0;border-radius:10px}.flow b,.flow span{display:block}.flow span{font-size:13px;color:#5e7062}.flow i{font-style:normal;text-align:center;color:#6d8267}.horizontal{flex-direction:row;align-items:center;margin:24px 0}.horizontal div{flex:1}.note{padding:18px 22px;background:#fff4d9;border-left:4px solid #b7943f;border-radius:8px;margin:20px 0;font-size:14px}.small,.filemeta{font-size:13px}.steps{padding-left:24px}.steps li{padding-left:7px;margin:16px 0}.steps li::marker{color:#3c7256;font-weight:bold}table{width:100%;border-collapse:collapse;background:white;margin:22px 0;font-size:14px}td,th{padding:15px;border:1px solid #d6dfd2;text-align:left;vertical-align:top}th{background:#eaf0e5;color:#2c4f39}td:first-child{min-width:130px;font-weight:bold}code{background:#edf2e9;padding:3px 6px;border-radius:4px;overflow-wrap:anywhere;font:14px/1.8 Consolas,"Malgun Gothic",monospace}pre{background:#1c332b;color:#edf5e9;border-radius:10px;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.7 Consolas,"Malgun Gothic",monospace}kbd{border:1px solid #bccbbb;border-bottom:3px solid #bccbbb;padding:2px 6px;border-radius:4px;background:#f8faf5;font-size:13px}.copyrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.copyrow button{background:#fff;border:1px solid #b5c9ad;border-radius:7px;padding:9px 13px;font-size:13px}.source{display:inline-block;margin-top:10px;font-size:12px}summary{cursor:pointer;font-weight:bold}.check{display:flex;align-items:flex-start;gap:12px;padding:15px;margin:9px 0;border:1px solid #d6e1cf;border-radius:9px;background:white;font-size:14px}.check input{width:19px;height:19px;accent-color:#285c46;margin-top:4px;flex-shrink:0}.progress{height:6px;background:#e4ebde;border-radius:6px;margin-top:14px}.progress i{display:block;height:100%;background:#527a48;border-radius:6px}#progressText{font-size:12px;margin:8px 0}.reset{font-size:12px;background:transparent;border:0;text-decoration:underline;color:#647065;padding:8px 0}#notice{position:fixed;bottom:22px;right:22px;background:#234e39;color:#fff;padding:10px 18px;border-radius:9px;z-index:5}footer{font-size:12px;color:#6c776d;margin-top:35px;border-top:1px solid #d7e0d1;padding-top:16px}.back{font-size:13px}@media(max-width:900px){aside{position:relative;width:100%;padding:20px}aside h1{font-size:21px}nav{display:flex;overflow-x:auto;margin-top:14px}.tab{white-space:nowrap}aside .progress,aside #progressText,aside .reset{display:none}main{margin-left:0;padding:22px 18px}.hero,.grid{grid-template-columns:1fr}.hero{padding:24px}.hero h2{font-size:29px}.sectionhead h2{font-size:26px}.horizontal{flex-direction:column;align-items:stretch}table{font-size:12px}td,th{padding:10px;word-break:break-word}td:first-child{min-width:65px}.top{gap:15px}article,details{padding:19px}}@media print{aside,.top,.next,.copyrow button,#notice{display:none!important}main{margin:0;padding:0}.panel[hidden]{display:block}article{break-inside:avoid}.hero{display:block}}body{overflow-wrap:anywhere}main,.panel,.hero>*{min-width:0}pre{max-width:100%;overflow-x:auto}@media(max-width:900px){table{table-layout:fixed}.top{flex-wrap:wrap}} </style></head><body><aside><span class="eyebrow">DAEA · EXCEL TOOLKIT</span><h1>VBA 실습실<br>XLAM 사용 안내</h1><p>설치부터 새 모듈 추가까지</p><nav aria-label="학습 단계"><button class="tab" data-go="latest-code">최신 코드 · 업무용/범용</button><button class="tab active" data-go="start" aria-current="step">00 · 전체 흐름</button><button class="tab" data-go="why" aria-current="false">01 · 왜 XLAM인가</button><button class="tab" data-go="install" aria-current="false">02 · 설치·추가 기능 등록</button><button class="tab" data-go="ribbon" aria-current="false">03 · 리본 버튼 연결</button><button class="tab" data-go="use" aria-current="false">04 · 업무에서 사용</button><button class="tab" data-go="extend" aria-current="false">05 · 새 모듈 추가</button><button class="tab" data-go="maintain" aria-current="false">06 · 백업·문제 해결</button></nav><div class="progress"><i id="progressBar"></i></div><p id="progressText"></p><button class="reset" id="reset">체크 기록 초기화</button><p><a class="back" href="대아_구매물류팀_업무매뉴얼_v9_4.html">← Daea Guide</a></p></aside><main><div class="note" id="latest-download"><h2>10월 8일 최신 코드 업데이트</h2><p>STOCK 두 종류 · 공장별 입고 · 줄바꿈 없는 반장님 재고리스트 · 범용 코드</p><button class="next" data-go="latest-code">최신 코드 보기·복사·다운로드 →</button><p><b>아래 XLAM ZIP도 10월 8일 최신 수정까지 반영했습니다.</b> ZIP 안의 XLAM을 교체하고 함께 든 리본 설정도 가져오세요.</p><h2>사용 대상에 맞게 다운로드하세요</h2><p><b>입고관리 공장별 분리 반영</b> — 수주처 기준 F1/F2/F5 별도 시트, 확인필요 항목 분리, 원본 합계 행 중복 집계 방지. XLAM과 ZIP의 리본 설정을 함께 적용하세요.</p><p><b>최신 XLAM 완성본 반영</b> — 공장별 Stock과 같은 머리글·합계행·테두리·숫자 서식입니다. 새 기능이 추가되어 ZIP의 리본설정.exportedUI도 다시 가져오세요.</p><p>세 버전 중 하나를 선택하세요. XLAM · 리본 설정 · 기능목록 · 설치 안내가 각각 포함됩니다.</p><div class="grid"><article><h3>개인용 28개</h3><p>효주님 전용 · 연호·KET 유지 + STOCK 공장별·반장님 재고리스트 추가</p><a class="primary" href="downloads/daea-personal-inbound-factory.zip" download>개인용 28개 다운로드 ↓</a></article><article><h3>사내 공유용 18개</h3><p>사내 공통 18개 · 최신 STOCK 두 종류와 반장님 재고리스트 포함</p><a class="primary" href="downloads/daea-team-inbound-factory.zip" download>사내 공유용 18개 다운로드 ↓</a></article><article><h3>범용 도구 2개</h3><p>업체와 무관한 부분합 + 원본 범위를 직접 선택하는 범용 값조회</p><a class="primary" href="downloads/daea-general-20261007.zip" download>범용 도구 2개 다운로드 ↓</a></article></div><p>사내 공유용의 ‘품목 잔량·재고 조회’는 업무 양식 전용이며 범용 값조회와 다릅니다. 새 범용 조회와 리본 가져오기는 실제 Excel 실행 확인 전입니다.</p></div><div class="top"><b>Excel 도구를 내 업무에 연결하기</b><span>Windows Excel · 2026.10.07</span></div><noscript><style>.panel[hidden]{display:block}</style><p>JavaScript가 꺼져 있어 전체 내용을 한 번에 표시합니다. 파일 링크는 사용할 수 있습니다.</p></noscript><section class="panel" id="start" aria-labelledby="title-start" ><header class="sectionhead"><span class="eyebrow">START HERE</span><h2 id="title-start" tabindex="-1">VBA를 한곳에 모아, 리본에서 실행하기</h2><p>매주 바뀌는 업무 파일에는 데이터만. 반복해서 쓰는 VBA는 하나의 XLAM에 모아 관리합니다.</p></header>
 <div class="hero"><div><span class="badge">10월 7일 정리본 · 리본 4개 그룹 · 실행 버튼 23개</span><h2>한 번 설치하고,<br>필요한 업무에서 꺼내 쓰세요.</h2><p>이번 점검 파일은 Downloads의 매크로 신상.xlam입니다. 에어·연호·부분합·V9 품목조회와 공장별 출고수량 기능 등이 들어 있습니다. 설치와 메뉴 연결은 각각 한 번씩 해두고, 이후에는 작업할 파일을 선택한 뒤 버튼을 누릅니다.</p><a class="primary" href="downloads/daea-macros-selected23-ribbon-fixed.zip" download="대아_업무매크로_선택23개_리본수정.zip">선택한 23개 최종본 ZIP 받기 ↓</a><p class="small">정리된 XLAM + 업무별 리본 설정 + 이름변경표 + 적용 안내 포함</p></div><div class="flow"><div><b>① AddIns 폴더</b><span>XLAM 파일의 보관 장소</span></div><i>↓</i><div><b>② Excel 추가 기능 등록</b><span>Excel이 도구를 불러오게 하기</span></div><i>↓</i><div><b>③ 리본 버튼 연결</b><span>자주 쓰는 도구를 화면에 배치</span></div><i>↓</i><div><b>④ 업무 파일에서 실행</b><span>선택한 파일·시트의 데이터를 처리</span></div></div></div>
 <div class="grid"><article><h3>이 안내의 기준</h3><p>Windows 데스크톱 Excel과 2026년 10월 7일 제공된 XLAM 기준입니다. 브라우저용 Excel에서는 VBA를 실행하지 않습니다. 회사 설정에 따라 메뉴 이름이나 매크로 허용 방식이 다를 수 있습니다.</p></article><article><h3>파일을 두 번 클릭하는 것과 달라요</h3><p>XLAM은 보통 작업 시트처럼 화면에 나타나지 않습니다. 등록된 도구가 뒤에서 준비되고, 실제 데이터는 별도로 연 업무 파일에서 처리합니다.</p></article></div>
 <div class="note">정리본은 Excel 저장·재열기, 저장 코드 일치, 리본 대상 23개 존재를 확인했습니다. 전체 VBA 컴파일 및 실제 업무 계산 실행은 미검증입니다. 처음에는 복사한 업무 자료에서 시험하세요.</div>
@@ -51,7 +51,2163 @@ End Sub</pre><p>처음 시험할 때는 편집기에서 <b>새업무_대상확�
 <article><h3>앞으로 업데이트할 때</h3><p>이번 파일에는 modPalletLabelBasic.파렛트_라벨_기본와 modPalletLabelExpanded.파렛트_라벨_확대가 함께 있습니다. 이름이 같아도 내용이 동일하지 않습니다. 삭제하거나 이름만으로 연결하지 말고 모듈 이름까지 지정해 구별하세요. 새 기능은 modNewWork 같은 고유한 모듈·실행 이름을 사용합니다.</p><ol class="steps"><li>기능을 수정하기 전 XLAM을 날짜별로 백업하고, 리본 설정도 내보냅니다.</li><li>배포 파일로 교체할 때는 Excel을 모두 닫고 기존 설치 위치의 파일을 교체합니다. 새 버전 번호는 백업 폴더나 변경 기록에 적고, 등록된 파일명·경로는 유지하는 편이 편합니다.</li><li>Excel을 다시 열어 추가 기능 등록 상태를 확인합니다. 기존 모듈·실행 이름이 같으면 버튼 연결을 유지할 수 있습니다. 이름·경로가 바뀌었다면 다시 연결합니다.</li><li>새 기능을 더한 경우 기존 기능 하나와 새 기능을 각각 시험합니다. 문제가 생기면 Excel을 종료하고 백업 XLAM과 메뉴 설정으로 되돌립니다.</li></ol></article>
 <table><thead><tr><th>증상</th><th>먼저 확인할 것</th></tr></thead><tbody><tr><td>XLAM을 열었는데 아무 시트도 안 보임</td><td>추가 기능은 숨겨진 상태로 로드될 수 있습니다. 추가 기능 체크 상태와 리본 실행을 확인합니다.</td></tr><tr><td>‘매크로를 실행할 수 없습니다’</td><td>XLAM 등록·파일 경로·매크로 허용 여부와 버튼의 모듈/실행 이름을 확인합니다.</td></tr><tr><td>버튼은 있는데 다른 파일을 처리함</td><td>업무 파일과 대상 시트를 다시 선택합니다. 코드의 ActiveWorkbook/ThisWorkbook 사용도 확인합니다.</td></tr><tr><td>새 코드를 넣었는데 버튼이 없음</td><td>코드 추가와 메뉴 추가는 별도입니다. 기존 리본 설정에 새 실행 이름을 연결합니다.</td></tr><tr><td>예전 기능이나 중복된 이름이 보임</td><td>구버전 XLAM을 함께 등록했는지, 동일 BAS를 여러 번 가져왔는지 확인합니다. 사용 중인 파일은 확인 없이 지우지 않습니다.</td></tr><tr><td>저장 후 재시작하니 새 코드가 사라짐</td><td>다른 프로젝트를 편집했거나 XLAM이 읽기 전용인지 확인합니다. 설치된 XLAM을 선택해 저장합니다.</td></tr><tr><td>‘이름이 분명하지 않습니다’ 또는 컴파일 오류</td><td>같은 공개 Sub/Function 중복, 누락된 보조 함수, 표준 모듈에 들어간 시트 이벤트 코드를 확인합니다.</td></tr><tr><td>V9 원본을 못 찾음</td><td>대상과 원본을 같은 Excel 실행 창에서 열고 파일명·헤더·공장 정보를 확인합니다.</td></tr></tbody></table>
 <div class="grid"><article><h3>처음 설치할 때</h3><p>XLAM 복사 → 추가 기능 등록 → 메뉴 가져오기 → 복사본 실행 확인</p></article><article><h3>새 기능을 만들 때</h3><p>백업 → 기존 XLAM에 새 모듈 → 컴파일·저장 → 새 버튼 연결 → 결과 확인</p></article></div>
-<label class="check"><input type="checkbox" data-check="ready"><span>XLAM과 리본 설정을 함께 백업하고 업데이트할 수 있다</span></label><article><h3>이전 실습 자료도 필요하다면</h3><p>기존 ITEM AUTO FILL·AIR CONFIRM 예제와 실습 키트는 별도 실습 페이지에 보관했습니다. 학습용 코드 버전과 이번 점검 파일은 서로 다릅니다. <a href="downloads/daea-macros-24-20260923.zip">9월 23일 이전 통합본 ZIP</a>도 참고용으로 보관합니다. 이번 파일 대신 설치하지 마세요.</p><a class="secondary" href="vba-practice-legacy.html">이전 VBA 예제 실습 열기 →</a></article></section><section class="panel" id="latest-code" aria-labelledby="title-latest-code" hidden><header class="sectionhead"><span class="eyebrow">2026.10.08 · 최신 코드</span><h2 id="title-latest-code" tabindex="-1">업무용 · 범용 VBA 코드</h2><p>모듈별 전체 코드 복사와 BAS 다운로드. 아래 자료가 최근 대화에서 수정한 최신 버전입니다.</p></header><p class="note">기존 XLAM을 백업하고 해당 모듈을 교체하세요. BAS 가져오기와 코드 붙여넣기는 둘 중 하나만 사용합니다. STOCK 이름을 바꾼 경우 리본도 다시 연결합니다. 아래 ZIP은 코드 모듈 자료이며 XLAM 완성본은 아닙니다.</p><article><h3>업무용 최신 코드</h3><a class="primary" href="downloads/vba-business-20261008.zip" download>업무용 최신 코드 전체 BAS 받기</a><p>제공한 출고·입고 예시 복사본에서 최신 STOCK·입고·재고리스트 합계 검증 완료. 원본은 수정하지 않았습니다.</p></article><article><h3>STOCK 통합집계</h3><p>출고 Sheet1 · Y열 출고처코드로 구분 · 합계행 제외 · 한 시트 출력</p><p>모듈 이름: <code>modShipmentSummary</code></p><div class="copyrow"><button data-copy="code-modShipmentSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modShipmentSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modShipmentSummary">Option Explicit
+<label class="check"><input type="checkbox" data-check="ready"><span>XLAM과 리본 설정을 함께 백업하고 업데이트할 수 있다</span></label><article><h3>이전 실습 자료도 필요하다면</h3><p>기존 ITEM AUTO FILL·AIR CONFIRM 예제와 실습 키트는 별도 실습 페이지에 보관했습니다. 학습용 코드 버전과 이번 점검 파일은 서로 다릅니다. <a href="downloads/daea-macros-24-20260923.zip">9월 23일 이전 통합본 ZIP</a>도 참고용으로 보관합니다. 이번 파일 대신 설치하지 마세요.</p><a class="secondary" href="vba-practice-legacy.html">이전 VBA 예제 실습 열기 →</a></article></section><section class="panel" id="latest-code" aria-labelledby="title-latest-code" hidden><header class="sectionhead"><span class="eyebrow">2026.10.08 · 최신 코드</span><h2 id="title-latest-code" tabindex="-1">업무용 · 범용 VBA 코드</h2><p>모듈별 전체 코드 복사와 BAS 다운로드. 아래 자료가 최근 대화에서 수정한 최신 버전입니다.</p></header><p class="note">기존 XLAM을 백업하고 해당 모듈을 교체하세요. BAS 가져오기와 코드 붙여넣기는 둘 중 하나만 사용합니다. STOCK 이름을 바꾼 경우 리본도 다시 연결합니다. 아래 ZIP은 코드 모듈 자료이며 XLAM 완성본은 아닙니다.</p><article><h3>10월 8일 추가 반영</h3><p>부분합 글꼴·표·A4 흑백 인쇄 개선, 발주미납 집계 추가, 개인용 AIR CONFIRM V10 복구를 ZIP의 XLAM에도 반영했습니다. 입고관리의 수주처 1310 지원은 공장 구분 확인 후 반영 예정입니다.</p></article><article><h3>발주미납 집계</h3><p>수주번호의 F1/F2/F5별로 수주처 품목코드·품목명·미납잔량을 새 시트에 집계합니다.</p><p>모듈 이름: <code>modPurchaseOutstanding</code></p><div class="copyrow"><button data-copy="code-modPurchaseOutstanding">전체 코드 복사</button><a href="downloads/vba-20261008/modPurchaseOutstanding.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modPurchaseOutstanding">Option Explicit
+
+
+
+Public Sub 발주미납_집계()
+
+
+
+    Dim ws As Worksheet, resWs As Worksheet
+
+    Dim wb As Workbook
+
+    Dim dict As Object
+
+    Dim lastRow As Long, i As Long, rowIdx As Long
+
+    Dim customerCode As String, factory As String
+
+    Dim itemCode As String, itemName As String
+
+    Dim qty As Double, totalQty As Double
+
+    Dim key As String, k As Variant, data As Variant
+
+    Dim pass As Long
+
+    Dim baseName As String, sheetName As String
+
+    Dim suffix As Long
+
+    Dim sh As Object, nameExists As Boolean
+
+
+
+    Dim headerRow As Long, cols As Variant
+
+    On Error GoTo Failed
+
+
+
+    If TypeName(ActiveSheet) &lt;&gt; &quot;Worksheet&quot; Then
+
+        MsgBox &quot;발주미납 원본 시트를 선택해주세요.&quot;, vbExclamation
+
+        Exit Sub
+
+    End If
+
+
+
+    Set ws = ActiveSheet
+
+    Set wb = ws.Parent
+
+
+
+    If Not FindHeaders(ws, Array(&quot;수주번호&quot;, &quot;수주처 품목코드&quot;, &quot;품목명&quot;, &quot;미납수량&quot;), headerRow, cols) Then
+
+        Err.Raise vbObjectError + 700, , &quot;발주 미납 원본 시트를 선택하세요. 필요한 머리글: 수주번호/수주처 품목코드/품목명/미납수량&quot;
+
+    End If
+
+
+
+    lastRow = Application.Max( _
+
+        ws.Cells(ws.Rows.Count, cols(2)).End(xlUp).Row, _
+
+        ws.Cells(ws.Rows.Count, cols(1)).End(xlUp).Row, _
+
+        ws.Cells(ws.Rows.Count, cols(0)).End(xlUp).Row, _
+
+        ws.Cells(ws.Rows.Count, cols(3)).End(xlUp).Row)
+
+
+
+    If lastRow &lt; 2 Then
+
+        MsgBox &quot;집계할 데이터가 없습니다.&quot;, vbInformation
+
+        Exit Sub
+
+    End If
+
+
+
+    Set dict = CreateObject(&quot;Scripting.Dictionary&quot;)
+
+
+
+    For i = headerRow + 1 To lastRow
+
+
+
+        If IsError(ws.Cells(i, cols(0)).Value2) Or _
+
+           IsError(ws.Cells(i, cols(1)).Value2) Or _
+
+           IsError(ws.Cells(i, cols(2)).Value2) Then
+
+
+
+            Err.Raise vbObjectError + 701, , _
+
+                &quot;공장·품목코드·품목명에 오류 셀이 있습니다. 행: &quot; &amp; i
+
+        End If
+
+
+
+        customerCode = Trim(CStr(ws.Cells(i, cols(0)).Value2))
+
+        itemCode = Trim(CStr(ws.Cells(i, cols(1)).Value2))
+
+        itemName = Trim(CStr(ws.Cells(i, cols(2)).Value2))
+
+
+
+        If customerCode = &quot;&quot; And itemCode = &quot;&quot; And itemName = &quot;&quot; Then
+
+            If InStr(1, CStr(ws.Cells(i, 4).Value2), &quot;합계&quot;, vbTextCompare) &gt; 0 Then GoTo NextRow
+
+        End If
+
+        &#x27; 원본 마지막 합계행 제외
+
+        If customerCode = &quot;&quot; And itemCode = &quot;&quot; Then
+
+            Select Case UCase(itemName)
+
+                Case &quot;합계&quot;, &quot;총 합계&quot;, &quot;총합계&quot;, &quot;계&quot;, &quot;TOTAL&quot;
+
+                    GoTo NextRow
+
+            End Select
+
+        End If
+
+
+
+        &#x27; 완전히 빈 행 제외
+
+        If customerCode = &quot;&quot; And itemCode = &quot;&quot; And itemName = &quot;&quot; Then
+
+            If Not IsError(ws.Cells(i, cols(3)).Value2) Then
+
+                If Len(Trim(CStr(ws.Cells(i, cols(3)).Value2))) = 0 Then
+
+                    GoTo NextRow
+
+                End If
+
+            End If
+
+        End If
+
+
+
+        If IsError(ws.Cells(i, cols(3)).Value2) Then
+
+            Err.Raise vbObjectError + 702, , _
+
+                &quot;미납수량에 오류 셀이 있습니다. 행: &quot; &amp; i
+
+        End If
+
+
+
+        If Not IsNumeric(ws.Cells(i, cols(3)).Value2) Then
+
+            Err.Raise vbObjectError + 703, , _
+
+                &quot;미납수량이 숫자가 아닙니다. 행: &quot; &amp; i
+
+        End If
+
+
+
+        If itemCode = &quot;&quot; And itemName = &quot;&quot; Then
+
+            Err.Raise vbObjectError + 704, , _
+
+                &quot;수량은 있지만 품목코드와 품목명이 없습니다. 행: &quot; &amp; i
+
+        End If
+
+
+
+        &#x27; 수주번호 앞자리 F1/F2/F5로 공장 구분
+
+        Select Case UCase$(Left$(customerCode, 2))
+
+            Case &quot;F1&quot;: factory = &quot;F1&quot;
+
+            Case &quot;F2&quot;: factory = &quot;F2&quot;
+
+            Case &quot;F5&quot;: factory = &quot;F5&quot;
+
+            Case Else
+
+                Err.Raise vbObjectError + 705, , &quot;수주번호에서 공장을 구분할 수 없습니다. 행: &quot; &amp; i &amp; &quot; / &quot; &amp; customerCode
+
+        End Select
+
+
+
+        qty = CDbl(ws.Cells(i, cols(3)).Value2)
+
+
+
+        &#x27; 공장 + 품목코드 + 품목명 기준 집계
+
+        key = Len(factory) &amp; &quot;:&quot; &amp; factory &amp; _
+
+              Len(itemCode) &amp; &quot;:&quot; &amp; itemCode &amp; itemName
+
+
+
+        If dict.Exists(key) Then
+
+            data = dict(key)
+
+            data(3) = data(3) + qty
+
+            dict(key) = data
+
+        Else
+
+            dict.Add key, Array(factory, itemCode, itemName, qty)
+
+        End If
+
+
+
+        totalQty = totalQty + qty
+
+
+
+NextRow:
+
+    Next i
+
+
+
+    If dict.Count = 0 Then
+
+        MsgBox &quot;집계할 상세 데이터가 없습니다.&quot;, vbInformation
+
+        Exit Sub
+
+    End If
+
+
+
+    &#x27; 결과 시트 이름 중복 방지
+
+    baseName = &quot;발주미납_통합_&quot; &amp; Format(Now, &quot;hhmmss&quot;)
+
+    sheetName = baseName
+
+
+
+    Do
+
+        nameExists = False
+
+
+
+        For Each sh In wb.Sheets
+
+            If StrComp(sh.Name, sheetName, vbTextCompare) = 0 Then
+
+                nameExists = True
+
+                Exit For
+
+            End If
+
+        Next sh
+
+
+
+        If Not nameExists Then Exit Do
+
+
+
+        suffix = suffix + 1
+
+        sheetName = baseName &amp; &quot;_&quot; &amp; suffix
+
+    Loop
+
+
+
+    Set resWs = wb.Worksheets.Add(After:=wb.Sheets(wb.Sheets.Count))
+
+    resWs.Name = sheetName
+
+
+
+    resWs.Range(&quot;A1:D1&quot;).Value = _
+
+        Array(&quot;FAC&quot;, &quot;수주처 품목코드&quot;, &quot;품목명&quot;, &quot;미납잔량&quot;)
+
+
+
+    resWs.Columns(&quot;B:C&quot;).NumberFormat = &quot;@&quot;
+
+    rowIdx = 2
+
+
+
+    &#x27; 품목코드가 없는 항목 먼저 출력
+
+    For pass = 1 To 2
+
+        For Each k In dict.Keys
+
+
+
+            data = dict(k)
+
+
+
+            If (pass = 1 And data(1) = &quot;&quot;) Or _
+
+               (pass = 2 And data(1) &lt;&gt; &quot;&quot;) Then
+
+
+
+                resWs.Cells(rowIdx, 1).Value2 = data(0)
+
+                resWs.Cells(rowIdx, 2).Value2 = data(1)
+
+                resWs.Cells(rowIdx, 3).Value2 = data(2)
+
+                resWs.Cells(rowIdx, 4).Value2 = data(3)
+
+
+
+                rowIdx = rowIdx + 1
+
+            End If
+
+
+
+        Next k
+
+    Next pass
+
+
+
+    If rowIdx &gt; 3 Then
+
+        resWs.Range(&quot;A1:D&quot; &amp; rowIdx - 1).Sort Key1:=resWs.Range(&quot;A2&quot;), Order1:=xlAscending, Key2:=resWs.Range(&quot;B2&quot;), Order2:=xlAscending, Key3:=resWs.Range(&quot;C2&quot;), Order3:=xlAscending, Header:=xlYes
+
+    End If
+
+    resWs.Cells(rowIdx, 3).Value2 = &quot;TOTAL&quot;
+
+    resWs.Cells(rowIdx, 4).Value2 = totalQty
+
+
+
+    With resWs.Range(&quot;A1:D&quot; &amp; rowIdx)
+
+        .Font.Name = &quot;Arial&quot;
+
+        .Font.Size = 9
+
+        .Font.Color = vbBlack
+
+        .VerticalAlignment = xlCenter
+
+        .Borders.LineStyle = xlContinuous
+
+        .Borders.Weight = xlThin
+
+        .Borders.Color = RGB(200, 200, 200)
+
+        .RowHeight = 18
+
+    End With
+
+
+
+    With resWs.Range(&quot;A1:D1&quot;)
+
+        .Font.Bold = True
+
+        .Interior.Color = RGB(221, 235, 247)
+
+        .HorizontalAlignment = xlCenter
+
+        .RowHeight = 24
+
+    End With
+
+
+
+    With resWs.Range(&quot;A&quot; &amp; rowIdx &amp; &quot;:D&quot; &amp; rowIdx)
+
+        .Font.Bold = True
+
+        .Interior.Color = RGB(221, 235, 247)
+
+    End With
+
+
+
+    resWs.Range(&quot;D2:D&quot; &amp; rowIdx).NumberFormat = &quot;#,##0&quot;
+
+    resWs.Columns(&quot;A&quot;).HorizontalAlignment = xlCenter
+
+    resWs.Columns(&quot;A:D&quot;).AutoFit
+
+
+
+    If resWs.Columns(&quot;A&quot;).ColumnWidth &lt; 8 Then _
+
+        resWs.Columns(&quot;A&quot;).ColumnWidth = 8
+
+
+
+    If resWs.Columns(&quot;B&quot;).ColumnWidth &lt; 20 Then _
+
+        resWs.Columns(&quot;B&quot;).ColumnWidth = 20
+
+
+
+    If resWs.Columns(&quot;C&quot;).ColumnWidth &lt; 28 Then _
+
+        resWs.Columns(&quot;C&quot;).ColumnWidth = 28
+
+
+
+    If resWs.Columns(&quot;D&quot;).ColumnWidth &lt; 16 Then _
+
+        resWs.Columns(&quot;D&quot;).ColumnWidth = 16
+
+
+
+    MsgBox &quot;발주미납 통합집계 완료&quot; &amp; vbCrLf &amp; _
+
+           &quot;총 미납수량: &quot; &amp; Format(totalQty, &quot;#,##0&quot;), vbInformation
+
+    Exit Sub
+
+
+
+Failed:
+
+    MsgBox Err.Description, vbExclamation
+
+
+
+End Sub
+
+
+
+Private Function HKey(ByVal v As Variant) As String
+
+    If IsError(v) Then Exit Function
+
+    Dim s As String
+
+    s = UCase$(Trim$(CStr(v)))
+
+    s = Replace(s, &quot; &quot;, &quot;&quot;)
+
+    s = Replace(s, ChrW(160), &quot;&quot;)
+
+    s = Replace(s, vbCr, &quot;&quot;)
+
+    s = Replace(s, vbLf, &quot;&quot;)
+
+    s = Replace(s, vbTab, &quot;&quot;)
+
+    s = Replace(s, &quot;△&quot;, &quot;&quot;)
+
+    s = Replace(s, &quot;▲&quot;, &quot;&quot;)
+
+    HKey = s
+
+End Function
+
+Private Function FindHeaders(ByVal ws As Worksheet, ByVal labels As Variant, ByRef hr As Long, ByRef cols As Variant) As Boolean
+
+    Dim r As Long, c As Long, j As Long, n As Long, hits As Long, found() As Long
+
+    n = UBound(labels) - LBound(labels) + 1
+
+    For r = 1 To 10
+
+        ReDim found(0 To n - 1)
+
+        For c = 1 To ws.Cells(r, ws.Columns.Count).End(xlToLeft).Column
+
+            For j = 0 To n - 1
+
+                If HKey(ws.Cells(r, c).Value2) = HKey(labels(j)) Then found(j) = c
+
+            Next j
+
+        Next c
+
+        hits = 0
+
+        For j = 0 To n - 1
+
+            If found(j) &gt; 0 Then hits = hits + 1
+
+        Next j
+
+        If hits = n Then
+
+            hr = r: cols = found: FindHeaders = True: Exit Function
+
+        End If
+
+    Next r
+
+End Function
+
+Private Function NewSheetName(ByVal wb As Workbook, ByVal base As String) As String
+
+    Dim s As String, i As Long, sh As Object, exists As Boolean
+
+    s = base
+
+    Do
+
+        exists = False
+
+        For Each sh In wb.Sheets
+
+            If StrComp(sh.Name, s, vbTextCompare) = 0 Then exists = True: Exit For
+
+        Next sh
+
+        If Not exists Then NewSheetName = s: Exit Function
+
+        i = i + 1: s = base &amp; &quot;_&quot; &amp; i
+
+    Loop
+
+End Function
+
+</pre></details></article><article><h3>AIR CONFIRM V10 복구</h3><p>개인용 기존 입력 양식 전용입니다. BuildTuesdayConfirm 또는 BuildThursdayConfirm을 실행합니다. 기존 확인 결과 시트는 다시 작성합니다.</p><p>모듈 이름: <code>modAirConfirmV10</code></p><div class="copyrow"><button data-copy="code-modAirConfirmV10">전체 코드 복사</button><a href="downloads/vba-20261008/modAirConfirmV10.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modAirConfirmV10">Option Explicit
+
+
+
+Private Const SH_TUE As String = &quot;TUE_CONFIRM&quot;
+
+Private Const SH_THU As String = &quot;THU_CONFIRM&quot;
+
+Private Const SH_F12 As String = &quot;THAI_F1F2&quot;
+
+Private Const SH_F5 As String = &quot;THAI_F5&quot;
+
+Private Const SH_CHECK As String = &quot;CHECK&quot;
+
+
+
+Public Sub BuildAirConfirm()
+
+    BuildTuesdayConfirm
+
+End Sub
+
+
+
+Public Sub BuildTuesdayConfirm()
+
+    BuildByMode &quot;TUESDAY&quot;
+
+End Sub
+
+
+
+Public Sub BuildThursdayConfirm()
+
+    BuildByMode &quot;THURSDAY&quot;
+
+End Sub
+
+
+
+Private Sub BuildByMode(ByVal modeText As String)
+
+    Dim wb As Workbook
+
+    Dim wsHyoju As Worksheet, wsKyungjin As Worksheet, wsMinji As Worksheet, wsBase As Worksheet
+
+    Dim wsOut As Worksheet, wsF12 As Worksheet, wsF5 As Worksheet, wsCheck As Worksheet
+
+    Dim hyojuHdr As Object, kyungjinHdr As Object, minjiHdr As Object, baseHdr As Object
+
+    Dim confirmExact As Object, confirmByItem As Object
+
+    Dim lastBase As Long, r As Long
+
+    Dim outRow As Long, f12Row As Long, f5Row As Long, checkRow As Long
+
+    Dim calcMode As XlCalculation
+
+    Dim qtyHeader As String, baseLabel As String
+
+    Dim currentStep As String
+
+
+
+    On Error GoTo CleanFail
+
+    currentStep = &quot;Open workbook sheets&quot;
+
+    Set wb = ActiveWorkbook
+
+    If wb Is Nothing Then Err.Raise vbObjectError + 109, , &quot;No active workbook. Open the AIR confirmation workbook first.&quot;
+
+    Set wsHyoju = FindInputSheet(wb, &quot;HYOJU&quot;)
+
+    Set wsKyungjin = FindInputSheet(wb, &quot;KYUNGJIN&quot;)
+
+    Set wsMinji = FindOrCreatePersonSheet(wb, &quot;MINJI&quot;)
+
+    If UCase$(modeText) = &quot;TUESDAY&quot; Then
+
+        Set wsBase = FindInputSheet(wb, &quot;TUESDAY&quot;)
+
+        Set wsOut = EnsureSheet(wb, SH_TUE)
+
+        qtyHeader = &quot;Purchase request&quot;
+
+        baseLabel = &quot;AIR LIST&quot;
+
+    Else
+
+        Set wsBase = FindInputSheet(wb, &quot;THURSDAY&quot;)
+
+        Set wsOut = EnsureSheet(wb, SH_THU)
+
+        qtyHeader = &quot;Remain&quot;
+
+        baseLabel = &quot;WEDNESDAY REMAIN&quot;
+
+    End If
+
+    Set wsF12 = EnsureSheet(wb, SH_F12)
+
+    Set wsF5 = EnsureSheet(wb, SH_F5)
+
+    Set wsCheck = EnsureSheet(wb, SH_CHECK)
+
+
+
+    calcMode = Application.Calculation
+
+    Application.ScreenUpdating = False
+
+    Application.EnableEvents = False
+
+    Application.Calculation = xlCalculationManual
+
+
+
+    currentStep = &quot;Read headers&quot;
+
+    Set hyojuHdr = GetHeaderMap(wsHyoju)
+
+    Set kyungjinHdr = GetHeaderMap(wsKyungjin)
+
+    Set minjiHdr = GetHeaderMap(wsMinji)
+
+    Set baseHdr = GetHeaderMap(wsBase)
+
+    ValidateHeaders hyojuHdr, wsHyoju.Name, Array(&quot;ITEMCD&quot;)
+
+    ValidateHeaders kyungjinHdr, wsKyungjin.Name, Array(&quot;ITEMCD&quot;)
+
+    ValidateHeaders minjiHdr, wsMinji.Name, Array(&quot;ITEMCD&quot;)
+
+    ValidateHeaders baseHdr, wsBase.Name, Array(&quot;ITEMCD&quot;, &quot;QTY&quot;, &quot;SHORTDEL&quot;, &quot;NEEDETD&quot;)
+
+
+
+    currentStep = &quot;Prepare output sheets&quot;
+
+    ClearOutput wsOut
+
+    ClearOutput wsF12
+
+    ClearOutput wsF5
+
+    ClearOutput wsCheck
+
+    WriteHeaders wsOut, Array(&quot;FAC&quot;, &quot;Item cd&quot;, &quot;Maker&quot;, &quot;Part Name&quot;, qtyHeader, &quot;STOCK&quot;, &quot;Confirm&quot;, &quot;Short Del.&quot;, &quot;NEED ETD&quot;, &quot;REMARK&quot;, &quot;STATUS&quot;)
+
+    WriteHeaders wsF12, Array(&quot;FAC&quot;, &quot;Item cd&quot;, &quot;Maker&quot;, &quot;Part Name&quot;, qtyHeader, &quot;STOCK&quot;, &quot;Confirm&quot;, &quot;SHORT&quot;, &quot;NEED ETD&quot;)
+
+    WriteHeaders wsF5, Array(&quot;FAC&quot;, &quot;Item cd&quot;, &quot;Maker&quot;, &quot;Part Name&quot;, qtyHeader, &quot;STOCK&quot;, &quot;Confirm&quot;, &quot;SHORT&quot;, &quot;NEED ETD&quot;)
+
+    WriteHeaders wsCheck, Array(&quot;SOURCE&quot;, &quot;ROW&quot;, &quot;FAC&quot;, &quot;Item cd&quot;, &quot;ISSUE&quot;)
+
+    ApplyConfirmHeaderFormats wsBase, baseHdr, wsHyoju, hyojuHdr, wsOut
+
+    ApplyThaiHeaderFormats wsBase, baseHdr, wsF12
+
+    ApplyThaiHeaderFormats wsBase, baseHdr, wsF5
+
+
+
+    Set confirmExact = CreateObject(&quot;Scripting.Dictionary&quot;)
+
+    Set confirmByItem = CreateObject(&quot;Scripting.Dictionary&quot;)
+
+
+
+    currentStep = &quot;Index confirmation sheets&quot;
+
+    IndexConfirmationSource wsHyoju, hyojuHdr, &quot;H&quot;, confirmExact, confirmByItem
+
+    IndexConfirmationSource wsKyungjin, kyungjinHdr, &quot;K&quot;, confirmExact, confirmByItem
+
+    IndexConfirmationSource wsMinji, minjiHdr, &quot;M&quot;, confirmExact, confirmByItem
+
+
+
+    outRow = 2: f12Row = 2: f5Row = 2: checkRow = 2
+
+    currentStep = &quot;Build output from base list&quot;
+
+    ProcessBaseList wsBase, baseHdr, baseLabel, wsHyoju, hyojuHdr, wsKyungjin, kyungjinHdr, wsMinji, minjiHdr, confirmExact, confirmByItem, wsOut, wsF12, wsF5, wsCheck, outRow, f12Row, f5Row, checkRow
+
+
+
+    currentStep = &quot;Apply formats&quot;
+
+    ApplyConfirmDataFormats wsBase, baseHdr, wsOut, outRow - 1
+
+    ApplyThaiFormatsFromOutput wsOut, wsF12, f12Row - 1
+
+    ApplyThaiFormatsFromOutput wsOut, wsF5, f5Row - 1
+
+
+
+    currentStep = &quot;Sort outputs&quot;
+
+    SortOutput wsOut, outRow - 1, 11, 1, 3, 4
+
+    SortOutput wsF12, f12Row - 1, 9, 1, 3, 4
+
+    SortOutput wsF5, f5Row - 1, 9, 1, 3, 4
+
+
+
+    FormatOutput wsOut, outRow - 1, 11, False
+
+    FormatOutput wsF12, f12Row - 1, 9, False
+
+    FormatOutput wsF5, f5Row - 1, 9, False
+
+    FormatOutput wsCheck, checkRow - 1, 5, True
+
+    ColorStatus wsOut, outRow - 1
+
+
+
+    Application.Calculation = calcMode
+
+    Application.EnableEvents = True
+
+    Application.ScreenUpdating = True
+
+    MsgBox modeText &amp; &quot; confirmation completed.&quot; &amp; vbCrLf &amp; _
+
+           wsOut.Name &amp; &quot;: &quot; &amp; CStr(outRow - 2) &amp; &quot; rows&quot; &amp; vbCrLf &amp; _
+
+           &quot;THAI_F1F2: &quot; &amp; CStr(f12Row - 2) &amp; &quot; rows&quot; &amp; vbCrLf &amp; _
+
+           &quot;THAI_F5: &quot; &amp; CStr(f5Row - 2) &amp; &quot; rows&quot; &amp; vbCrLf &amp; _
+
+           &quot;CHECK: &quot; &amp; CStr(checkRow - 2) &amp; &quot; rows&quot;, vbInformation
+
+    Exit Sub
+
+
+
+CleanFail:
+
+    Application.Calculation = calcMode
+
+    Application.EnableEvents = True
+
+    Application.ScreenUpdating = True
+
+    MsgBox &quot;Macro stopped.&quot; &amp; vbCrLf &amp; _
+
+           &quot;Step: &quot; &amp; currentStep &amp; vbCrLf &amp; _
+
+           &quot;Error &quot; &amp; CStr(Err.Number) &amp; &quot;: &quot; &amp; Err.Description, vbExclamation
+
+End Sub
+
+
+
+Public Sub CopyThaiF1F2()
+
+    CopyOutputTable SH_F12
+
+End Sub
+
+
+
+Public Sub CopyThaiF5()
+
+    CopyOutputTable SH_F5
+
+End Sub
+
+
+
+Public Sub ClearInputRows()
+
+    Dim wsHyoju As Worksheet, wsKyungjin As Worksheet, wsMinji As Worksheet, wsAir As Worksheet, wsRem As Worksheet
+
+    Set wsHyoju = FindInputSheet(ActiveWorkbook, &quot;HYOJU&quot;)
+
+    Set wsKyungjin = FindInputSheet(ActiveWorkbook, &quot;KYUNGJIN&quot;)
+
+    Set wsMinji = FindOrCreatePersonSheet(ActiveWorkbook, &quot;MINJI&quot;)
+
+    Set wsAir = FindInputSheet(ActiveWorkbook, &quot;TUESDAY&quot;)
+
+    Set wsRem = FindInputSheet(ActiveWorkbook, &quot;THURSDAY&quot;)
+
+    If wsHyoju.Cells(wsHyoju.Rows.Count, 1).End(xlUp).Row &gt; 1 Then wsHyoju.Rows(&quot;2:&quot; &amp; wsHyoju.Rows.Count).ClearContents
+
+    If wsKyungjin.Cells(wsKyungjin.Rows.Count, 1).End(xlUp).Row &gt; 1 Then wsKyungjin.Rows(&quot;2:&quot; &amp; wsKyungjin.Rows.Count).ClearContents
+
+    If wsMinji.Cells(wsMinji.Rows.Count, 1).End(xlUp).Row &gt; 1 Then wsMinji.Rows(&quot;2:&quot; &amp; wsMinji.Rows.Count).ClearContents
+
+    If wsAir.Cells(wsAir.Rows.Count, 1).End(xlUp).Row &gt; 1 Then wsAir.Rows(&quot;2:&quot; &amp; wsAir.Rows.Count).ClearContents
+
+    If wsRem.Cells(wsRem.Rows.Count, 1).End(xlUp).Row &gt; 1 Then wsRem.Rows(&quot;2:&quot; &amp; wsRem.Rows.Count).ClearContents
+
+    MsgBox &quot;Input rows cleared. Headers were kept.&quot;, vbInformation
+
+End Sub
+
+
+
+Private Function FindInputSheet(ByVal wb As Workbook, ByVal roleName As String) As Worksheet
+
+    Dim aliases As Variant, ws As Worksheet, aliasValue As Variant
+
+    Select Case UCase$(roleName)
+
+        Case &quot;HYOJU&quot;
+
+            aliases = Array(KoreanHyoju(), &quot;HYOJU&quot;, &quot;HYOJU_CONFIRM&quot;)
+
+        Case &quot;KYUNGJIN&quot;
+
+            aliases = Array(KoreanKyungjin(), &quot;KYUNGJIN&quot;, &quot;KYUNGJIN_CONFIRM&quot;)
+
+        Case &quot;MINJI&quot;
+
+            aliases = Array(KoreanMinji(), &quot;MINJI&quot;, &quot;MINJI_CONFIRM&quot;)
+
+        Case &quot;TUESDAY&quot;
+
+            aliases = Array(KoreanTuesdayAir(), &quot;TUESDAY_AIR&quot;, &quot;AIR_LIST&quot;, &quot;AIR&quot;)
+
+        Case &quot;THURSDAY&quot;
+
+            aliases = Array(KoreanWednesdayRemain(), &quot;WEDNESDAY_REMAIN&quot;, &quot;REMAIN_WED&quot;, &quot;REMAIN&quot;)
+
+        Case Else
+
+            Err.Raise vbObjectError + 110, , &quot;Unknown sheet role: &quot; &amp; roleName
+
+    End Select
+
+
+
+    For Each ws In wb.Worksheets
+
+        For Each aliasValue In aliases
+
+            If NormalizeSheetName(ws.Name) = NormalizeSheetName(CStr(aliasValue)) Then
+
+                Set FindInputSheet = ws
+
+                Exit Function
+
+            End If
+
+        Next aliasValue
+
+    Next ws
+
+
+
+    Err.Raise vbObjectError + 111, , &quot;Input sheet not found for &quot; &amp; roleName &amp; &quot;. Expected one of: &quot; &amp; Join(aliases, &quot;, &quot;)
+
+End Function
+
+
+
+Private Function FindOrCreatePersonSheet(ByVal wb As Workbook, ByVal roleName As String) As Worksheet
+
+    Dim ws As Worksheet
+
+    On Error Resume Next
+
+    Set ws = FindInputSheet(wb, roleName)
+
+    On Error GoTo 0
+
+    If ws Is Nothing Then
+
+        Set ws = wb.Worksheets.Add(After:=wb.Worksheets(wb.Worksheets.Count))
+
+        If UCase$(roleName) = &quot;MINJI&quot; Then
+
+            ws.Name = KoreanMinji()
+
+        Else
+
+            ws.Name = roleName
+
+        End If
+
+        WriteHeaders ws, Array(&quot;FAC&quot;, &quot;Item cd&quot;, &quot;Maker&quot;, &quot;Part Name&quot;, &quot;Remain&quot;, &quot;STOCK&quot;, &quot;Confirm&quot;, &quot;Short Del.&quot;, &quot;NEED ETD&quot;, &quot;REMARK&quot;)
+
+    End If
+
+    Set FindOrCreatePersonSheet = ws
+
+End Function
+
+
+
+Private Function EnsureSheet(ByVal wb As Workbook, ByVal sheetName As String) As Worksheet
+
+    Dim ws As Worksheet
+
+    On Error Resume Next
+
+    Set ws = wb.Worksheets(sheetName)
+
+    On Error GoTo 0
+
+    If ws Is Nothing Then
+
+        Set ws = wb.Worksheets.Add(After:=wb.Worksheets(wb.Worksheets.Count))
+
+        ws.Name = sheetName
+
+    End If
+
+    Set EnsureSheet = ws
+
+End Function
+
+
+
+Private Function NormalizeSheetName(ByVal valueIn As String) As String
+
+    Dim s As String
+
+    s = UCase$(Trim$(valueIn))
+
+    s = Replace(s, &quot; &quot;, &quot;&quot;)
+
+    s = Replace(s, &quot;-&quot;, &quot;_&quot;)
+
+    NormalizeSheetName = s
+
+End Function
+
+
+
+Private Function KoreanHyoju() As String
+
+    KoreanHyoju = ChrW(54952) &amp; ChrW(51452)
+
+End Function
+
+
+
+Private Function KoreanKyungjin() As String
+
+    KoreanKyungjin = ChrW(44221) &amp; ChrW(51652)
+
+End Function
+
+
+
+Private Function KoreanMinji() As String
+
+    KoreanMinji = ChrW(48124) &amp; ChrW(51648)
+
+End Function
+
+
+
+Private Function KoreanTuesdayAir() As String
+
+    KoreanTuesdayAir = ChrW(54868) &amp; ChrW(50836) &amp; ChrW(51068) &amp; &quot;_AIR&quot;
+
+End Function
+
+
+
+Private Function KoreanWednesdayRemain() As String
+
+    KoreanWednesdayRemain = ChrW(49688) &amp; ChrW(50836) &amp; ChrW(51068) &amp; &quot;_REMAIN&quot;
+
+End Function
+
+
+
+Private Sub IndexConfirmationSource(ByVal ws As Worksheet, ByVal hdr As Object, ByVal sourceId As String, ByVal exactIndex As Object, ByVal itemIndex As Object)
+
+    Dim r As Long, lastRow As Long, fac As String, itemCd As String, exactKey As String, token As String
+
+    lastRow = LastDataRow(ws, hdr(&quot;ITEMCD&quot;))
+
+    For r = hdr(&quot;HEADERROW&quot;) + 1 To lastRow
+
+        itemCd = NormalizeCode(CellValue(ws, r, hdr, &quot;ITEMCD&quot;))
+
+        If itemCd &lt;&gt; &quot;&quot; Then
+
+            fac = NormalizeCode(CellValue(ws, r, hdr, &quot;FAC&quot;))
+
+            exactKey = fac &amp; &quot;|&quot; &amp; itemCd
+
+            token = sourceId &amp; &quot;|&quot; &amp; CStr(r)
+
+            If exactIndex.Exists(exactKey) Then
+
+                exactIndex(exactKey) = &quot;DUP&quot;
+
+            Else
+
+                exactIndex.Add exactKey, token
+
+            End If
+
+            If itemIndex.Exists(itemCd) Then
+
+                itemIndex(itemCd) = &quot;DUP&quot;
+
+            Else
+
+                itemIndex.Add itemCd, token
+
+            End If
+
+        End If
+
+    Next r
+
+End Sub
+
+
+
+Private Sub ProcessBaseList(ByVal wsBase As Worksheet, ByVal baseHdr As Object, ByVal baseLabel As String, ByVal wsHyoju As Worksheet, ByVal hyojuHdr As Object, ByVal wsKyungjin As Worksheet, ByVal kyungjinHdr As Object, ByVal wsMinji As Worksheet, ByVal minjiHdr As Object, ByVal exactIndex As Object, ByVal itemIndex As Object, ByVal wsOut As Worksheet, ByVal wsF12 As Worksheet, ByVal wsF5 As Worksheet, ByVal wsCheck As Worksheet, ByRef outRow As Long, ByRef f12Row As Long, ByRef f5Row As Long, ByRef checkRow As Long)
+
+    Dim lastBase As Long, r As Long, ownerRow As Long
+
+    Dim fac As String, itemCd As String, exactKey As String, token As String, sourceId As String
+
+    Dim statusText As String, issueText As String, sourceName As String
+
+    Dim qtyVal As Variant, stockVal As Variant, confirmVal As Variant
+
+    Dim shortVal As Variant, needVal As Variant, makerVal As Variant, partVal As Variant, remarkVal As Variant
+
+    Dim wsOwner As Worksheet, ownerHdr As Object, tokenParts As Variant, hasOwner As Boolean
+
+
+
+    lastBase = LastDataRow(wsBase, baseHdr(&quot;ITEMCD&quot;))
+
+    For r = baseHdr(&quot;HEADERROW&quot;) + 1 To lastBase
+
+        itemCd = NormalizeCode(CellValue(wsBase, r, baseHdr, &quot;ITEMCD&quot;))
+
+        If itemCd &lt;&gt; &quot;&quot; Then
+
+            fac = NormalizeCode(CellValue(wsBase, r, baseHdr, &quot;FAC&quot;))
+
+            exactKey = fac &amp; &quot;|&quot; &amp; itemCd
+
+            token = &quot;&quot;
+
+            issueText = &quot;&quot;
+
+            hasOwner = False
+
+            Set wsOwner = Nothing
+
+            Set ownerHdr = Nothing
+
+
+
+            If exactIndex.Exists(exactKey) Then
+
+                If CStr(exactIndex(exactKey)) = &quot;DUP&quot; Then
+
+                    issueText = &quot;Duplicate FAC + Item cd across confirmation sheets&quot;
+
+                Else
+
+                    token = CStr(exactIndex(exactKey))
+
+                End If
+
+            ElseIf itemIndex.Exists(itemCd) Then
+
+                If CStr(itemIndex(itemCd)) = &quot;DUP&quot; Then
+
+                    issueText = &quot;Item cd exists more than once in confirmation sheets; FAC required&quot;
+
+                Else
+
+                    token = CStr(itemIndex(itemCd))
+
+                End If
+
+            End If
+
+
+
+            If token &lt;&gt; &quot;&quot; Then
+
+                tokenParts = Split(token, &quot;|&quot;)
+
+                sourceId = CStr(tokenParts(0))
+
+                ownerRow = CLng(tokenParts(1))
+
+                Select Case sourceId
+
+                    Case &quot;H&quot;: Set wsOwner = wsHyoju: Set ownerHdr = hyojuHdr
+
+                    Case &quot;K&quot;: Set wsOwner = wsKyungjin: Set ownerHdr = kyungjinHdr
+
+                    Case &quot;M&quot;: Set wsOwner = wsMinji: Set ownerHdr = minjiHdr
+
+                End Select
+
+                hasOwner = Not wsOwner Is Nothing
+
+            End If
+
+
+
+            If issueText &lt;&gt; &quot;&quot; Then
+
+                WriteCheck wsCheck, checkRow, baseLabel, r, fac, itemCd, issueText
+
+                checkRow = checkRow + 1
+
+            End If
+
+
+
+            makerVal = CellValue(wsBase, r, baseHdr, &quot;MAKER&quot;)
+
+            partVal = CellValue(wsBase, r, baseHdr, &quot;PARTNAME&quot;)
+
+            qtyVal = CellValue(wsBase, r, baseHdr, &quot;QTY&quot;)
+
+            stockVal = CellValue(wsBase, r, baseHdr, &quot;STOCK&quot;)
+
+            shortVal = CellValue(wsBase, r, baseHdr, &quot;SHORTDEL&quot;)
+
+            needVal = CellValue(wsBase, r, baseHdr, &quot;NEEDETD&quot;)
+
+            remarkVal = CellValue(wsBase, r, baseHdr, &quot;REMARK&quot;)
+
+            confirmVal = Empty
+
+
+
+            If hasOwner Then
+
+                makerVal = FirstValue(makerVal, CellValue(wsOwner, ownerRow, ownerHdr, &quot;MAKER&quot;))
+
+                partVal = FirstValue(partVal, CellValue(wsOwner, ownerRow, ownerHdr, &quot;PARTNAME&quot;))
+
+                stockVal = FirstValue(CellValue(wsOwner, ownerRow, ownerHdr, &quot;STOCK&quot;), stockVal)
+
+                confirmVal = CellValue(wsOwner, ownerRow, ownerHdr, &quot;CONFIRM&quot;)
+
+                shortVal = FirstValue(shortVal, CellValue(wsOwner, ownerRow, ownerHdr, &quot;SHORTDEL&quot;))
+
+                needVal = FirstValue(needVal, CellValue(wsOwner, ownerRow, ownerHdr, &quot;NEEDETD&quot;))
+
+                remarkVal = FirstValue(remarkVal, CellValue(wsOwner, ownerRow, ownerHdr, &quot;REMARK&quot;))
+
+                sourceName = wsOwner.Name
+
+            Else
+
+                sourceName = baseLabel
+
+            End If
+
+
+
+            statusText = EvaluateStatus(qtyVal, stockVal, confirmVal, needVal)
+
+            WriteConfirmRow wsOut, outRow, fac, itemCd, makerVal, partVal, qtyVal, stockVal, confirmVal, shortVal, needVal, remarkVal, statusText
+
+            If statusText = &quot;CHECKING&quot; Then
+
+                If UCase$(Trim$(CStr(fac))) = &quot;F5&quot; Then
+
+                    WriteThaiRow wsF5, f5Row, fac, itemCd, makerVal, partVal, qtyVal, stockVal, confirmVal, shortVal, needVal, outRow
+
+                    f5Row = f5Row + 1
+
+                ElseIf UCase$(Trim$(CStr(fac))) = &quot;F1&quot; Or UCase$(Trim$(CStr(fac))) = &quot;F2&quot; Then
+
+                    WriteThaiRow wsF12, f12Row, fac, itemCd, makerVal, partVal, qtyVal, stockVal, confirmVal, shortVal, needVal, outRow
+
+                    f12Row = f12Row + 1
+
+                Else
+
+                    WriteCheck wsCheck, checkRow, sourceName, r, fac, itemCd, &quot;Unknown factory for Thai output&quot;
+
+                    checkRow = checkRow + 1
+
+                End If
+
+            ElseIf statusText = &quot;REVIEW&quot; Then
+
+                WriteCheck wsCheck, checkRow, sourceName, r, fac, itemCd, &quot;Confirm value needs manual review&quot;
+
+                checkRow = checkRow + 1
+
+            End If
+
+            outRow = outRow + 1
+
+        End If
+
+    Next r
+
+End Sub
+
+
+
+Private Sub ApplyConfirmHeaderFormats(ByVal wsBase As Worksheet, ByVal baseHdr As Object, ByVal wsOwner As Worksheet, ByVal ownerHdr As Object, ByVal wsOut As Worksheet)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;FAC&quot;, wsOut.Cells(1, 1)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;ITEMCD&quot;, wsOut.Cells(1, 2)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;MAKER&quot;, wsOut.Cells(1, 3)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;PARTNAME&quot;, wsOut.Cells(1, 4)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;QTY&quot;, wsOut.Cells(1, 5)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;STOCK&quot;, wsOut.Cells(1, 6)
+
+    CopyFormatByKey wsOwner, CLng(ownerHdr(&quot;HEADERROW&quot;)), ownerHdr, &quot;CONFIRM&quot;, wsOut.Cells(1, 7)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;SHORTDEL&quot;, wsOut.Cells(1, 8)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;NEEDETD&quot;, wsOut.Cells(1, 9)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;REMARK&quot;, wsOut.Cells(1, 10)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;NEEDETD&quot;, wsOut.Cells(1, 11)
+
+    wsOut.Rows(1).RowHeight = wsBase.Rows(CLng(baseHdr(&quot;HEADERROW&quot;))).RowHeight
+
+    CopyColumnWidthByKey wsBase, baseHdr, &quot;FAC&quot;, wsOut, 1
+
+    CopyColumnWidthByKey wsBase, baseHdr, &quot;ITEMCD&quot;, wsOut, 2
+
+    CopyColumnWidthByKey wsBase, baseHdr, &quot;MAKER&quot;, wsOut, 3
+
+    CopyColumnWidthByKey wsBase, baseHdr, &quot;PARTNAME&quot;, wsOut, 4
+
+    CopyColumnWidthByKey wsBase, baseHdr, &quot;QTY&quot;, wsOut, 5
+
+    CopyColumnWidthByKey wsBase, baseHdr, &quot;STOCK&quot;, wsOut, 6
+
+    CopyColumnWidthByKey wsOwner, ownerHdr, &quot;CONFIRM&quot;, wsOut, 7
+
+    CopyColumnWidthByKey wsBase, baseHdr, &quot;SHORTDEL&quot;, wsOut, 8
+
+    CopyColumnWidthByKey wsBase, baseHdr, &quot;NEEDETD&quot;, wsOut, 9
+
+    CopyColumnWidthByKey wsBase, baseHdr, &quot;REMARK&quot;, wsOut, 10
+
+    wsOut.Columns(11).ColumnWidth = 14
+
+End Sub
+
+
+
+Private Sub ApplyConfirmRowFormats(ByVal wsBase As Worksheet, ByVal baseRow As Long, ByVal baseHdr As Object, ByVal wsOwner As Worksheet, ByVal ownerRow As Long, ByVal ownerHdr As Object, ByVal hasOwner As Boolean, ByVal wsOut As Worksheet, ByVal outRow As Long)
+
+    CopyFormatByKey wsBase, baseRow, baseHdr, &quot;FAC&quot;, wsOut.Cells(outRow, 1)
+
+    CopyFormatByKey wsBase, baseRow, baseHdr, &quot;ITEMCD&quot;, wsOut.Cells(outRow, 2)
+
+    CopyFormatByKey wsBase, baseRow, baseHdr, &quot;MAKER&quot;, wsOut.Cells(outRow, 3)
+
+    CopyFormatByKey wsBase, baseRow, baseHdr, &quot;PARTNAME&quot;, wsOut.Cells(outRow, 4)
+
+    CopyFormatByKey wsBase, baseRow, baseHdr, &quot;QTY&quot;, wsOut.Cells(outRow, 5)
+
+    If hasOwner Then
+
+        If ownerHdr.Exists(&quot;STOCK&quot;) And Trim$(CStr(CellValue(wsOwner, ownerRow, ownerHdr, &quot;STOCK&quot;))) &lt;&gt; &quot;&quot; Then
+
+            CopyFormatByKey wsOwner, ownerRow, ownerHdr, &quot;STOCK&quot;, wsOut.Cells(outRow, 6)
+
+        Else
+
+            CopyFormatByKey wsBase, baseRow, baseHdr, &quot;STOCK&quot;, wsOut.Cells(outRow, 6)
+
+        End If
+
+    Else
+
+        CopyFormatByKey wsBase, baseRow, baseHdr, &quot;STOCK&quot;, wsOut.Cells(outRow, 6)
+
+    End If
+
+    If hasOwner Then
+
+        CopyFormatByKey wsOwner, ownerRow, ownerHdr, &quot;CONFIRM&quot;, wsOut.Cells(outRow, 7)
+
+    Else
+
+        CopyFormatByKey wsBase, baseRow, baseHdr, &quot;NEEDETD&quot;, wsOut.Cells(outRow, 7)
+
+    End If
+
+    CopyFormatByKey wsBase, baseRow, baseHdr, &quot;SHORTDEL&quot;, wsOut.Cells(outRow, 8)
+
+    CopyFormatByKey wsBase, baseRow, baseHdr, &quot;NEEDETD&quot;, wsOut.Cells(outRow, 9)
+
+    CopyFormatByKey wsBase, baseRow, baseHdr, &quot;REMARK&quot;, wsOut.Cells(outRow, 10)
+
+    CopyFormatByKey wsBase, baseRow, baseHdr, &quot;NEEDETD&quot;, wsOut.Cells(outRow, 11)
+
+    wsOut.Rows(outRow).RowHeight = wsBase.Rows(baseRow).RowHeight
+
+End Sub
+
+
+
+Private Sub ApplyThaiHeaderFormats(ByVal wsBase As Worksheet, ByVal baseHdr As Object, ByVal wsOut As Worksheet)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;FAC&quot;, wsOut.Cells(1, 1)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;ITEMCD&quot;, wsOut.Cells(1, 2)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;MAKER&quot;, wsOut.Cells(1, 3)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;PARTNAME&quot;, wsOut.Cells(1, 4)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;QTY&quot;, wsOut.Cells(1, 5)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;STOCK&quot;, wsOut.Cells(1, 6)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;NEEDETD&quot;, wsOut.Cells(1, 7)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;SHORTDEL&quot;, wsOut.Cells(1, 8)
+
+    CopyFormatByKey wsBase, CLng(baseHdr(&quot;HEADERROW&quot;)), baseHdr, &quot;NEEDETD&quot;, wsOut.Cells(1, 9)
+
+    wsOut.Rows(1).RowHeight = wsBase.Rows(CLng(baseHdr(&quot;HEADERROW&quot;))).RowHeight
+
+    CopyColumnWidthByKey wsBase, baseHdr, &quot;FAC&quot;, wsOut, 1
+
+    CopyColumnWidthByKey wsBase, baseHdr, &quot;ITEMCD&quot;, wsOut, 2
+
+    CopyColumnWidthByKey wsBase, baseHdr, &quot;MAKER&quot;, wsOut, 3
+
+    CopyColumnWidthByKey wsBase, baseHdr, &quot;PARTNAME&quot;, wsOut, 4
+
+    CopyColumnWidthByKey wsBase, baseHdr, &quot;QTY&quot;, wsOut, 5
+
+    CopyColumnWidthByKey wsBase, baseHdr, &quot;STOCK&quot;, wsOut, 6
+
+    wsOut.Columns(7).ColumnWidth = 18
+
+    CopyColumnWidthByKey wsBase, baseHdr, &quot;SHORTDEL&quot;, wsOut, 8
+
+    CopyColumnWidthByKey wsBase, baseHdr, &quot;NEEDETD&quot;, wsOut, 9
+
+End Sub
+
+
+
+Private Sub ApplyThaiRowFormats(ByVal wsBase As Worksheet, ByVal baseRow As Long, ByVal baseHdr As Object, ByVal wsOwner As Worksheet, ByVal ownerRow As Long, ByVal ownerHdr As Object, ByVal hasOwner As Boolean, ByVal wsOut As Worksheet, ByVal outRow As Long)
+
+    CopyFormatByKey wsBase, baseRow, baseHdr, &quot;FAC&quot;, wsOut.Cells(outRow, 1)
+
+    CopyFormatByKey wsBase, baseRow, baseHdr, &quot;ITEMCD&quot;, wsOut.Cells(outRow, 2)
+
+    CopyFormatByKey wsBase, baseRow, baseHdr, &quot;MAKER&quot;, wsOut.Cells(outRow, 3)
+
+    CopyFormatByKey wsBase, baseRow, baseHdr, &quot;PARTNAME&quot;, wsOut.Cells(outRow, 4)
+
+    CopyFormatByKey wsBase, baseRow, baseHdr, &quot;QTY&quot;, wsOut.Cells(outRow, 5)
+
+    CopyFormatByKey wsBase, baseRow, baseHdr, &quot;STOCK&quot;, wsOut.Cells(outRow, 6)
+
+    If hasOwner Then
+
+        CopyFormatByKey wsOwner, ownerRow, ownerHdr, &quot;CONFIRM&quot;, wsOut.Cells(outRow, 7)
+
+    Else
+
+        CopyFormatByKey wsBase, baseRow, baseHdr, &quot;NEEDETD&quot;, wsOut.Cells(outRow, 7)
+
+    End If
+
+    CopyFormatByKey wsBase, baseRow, baseHdr, &quot;SHORTDEL&quot;, wsOut.Cells(outRow, 8)
+
+    CopyFormatByKey wsBase, baseRow, baseHdr, &quot;NEEDETD&quot;, wsOut.Cells(outRow, 9)
+
+    wsOut.Rows(outRow).RowHeight = wsBase.Rows(baseRow).RowHeight
+
+End Sub
+
+
+
+Private Sub ApplyConfirmDataFormats(ByVal wsBase As Worksheet, ByVal baseHdr As Object, ByVal wsOut As Worksheet, ByVal lastOutRow As Long)
+
+    Dim sourceFirstRow As Long, rowCount As Long, r As Long
+
+    If lastOutRow &lt; 2 Then Exit Sub
+
+    sourceFirstRow = CLng(baseHdr(&quot;HEADERROW&quot;)) + 1
+
+    rowCount = lastOutRow - 1
+
+
+
+    CopyFormatColumnBlock wsBase, sourceFirstRow, baseHdr, &quot;FAC&quot;, wsOut, 2, 1, rowCount
+
+    CopyFormatColumnBlock wsBase, sourceFirstRow, baseHdr, &quot;ITEMCD&quot;, wsOut, 2, 2, rowCount
+
+    CopyFormatColumnBlock wsBase, sourceFirstRow, baseHdr, &quot;MAKER&quot;, wsOut, 2, 3, rowCount
+
+    CopyFormatColumnBlock wsBase, sourceFirstRow, baseHdr, &quot;PARTNAME&quot;, wsOut, 2, 4, rowCount
+
+    CopyFormatColumnBlock wsBase, sourceFirstRow, baseHdr, &quot;QTY&quot;, wsOut, 2, 5, rowCount
+
+    CopyFormatColumnBlock wsBase, sourceFirstRow, baseHdr, &quot;STOCK&quot;, wsOut, 2, 6, rowCount
+
+    CopyFormatColumnBlock wsBase, sourceFirstRow, baseHdr, &quot;STOCK&quot;, wsOut, 2, 7, rowCount
+
+    CopyFormatColumnBlock wsBase, sourceFirstRow, baseHdr, &quot;SHORTDEL&quot;, wsOut, 2, 8, rowCount
+
+    CopyFormatColumnBlock wsBase, sourceFirstRow, baseHdr, &quot;NEEDETD&quot;, wsOut, 2, 9, rowCount
+
+    CopyFormatColumnBlock wsBase, sourceFirstRow, baseHdr, &quot;REMARK&quot;, wsOut, 2, 10, rowCount
+
+    CopyFormatColumnBlock wsBase, sourceFirstRow, baseHdr, &quot;REMARK&quot;, wsOut, 2, 11, rowCount
+
+    wsOut.Range(wsOut.Cells(2, 7), wsOut.Cells(lastOutRow, 7)).NumberFormat = &quot;dd-mmm&quot;
+
+
+
+    For r = 2 To lastOutRow
+
+        wsOut.Rows(r).RowHeight = wsBase.Rows(sourceFirstRow + r - 2).RowHeight
+
+    Next r
+
+End Sub
+
+
+
+Private Sub CopyFormatColumnBlock(ByVal wsSource As Worksheet, ByVal sourceFirstRow As Long, ByVal hdr As Object, ByVal key As String, ByVal wsDestination As Worksheet, ByVal destinationFirstRow As Long, ByVal destinationColumn As Long, ByVal rowCount As Long)
+
+    Dim sourceRange As Range, destinationRange As Range
+
+    If rowCount &lt;= 0 Or Not hdr.Exists(key) Then Exit Sub
+
+    Set sourceRange = wsSource.Range(wsSource.Cells(sourceFirstRow, CLng(hdr(key))), wsSource.Cells(sourceFirstRow + rowCount - 1, CLng(hdr(key))))
+
+    Set destinationRange = wsDestination.Range(wsDestination.Cells(destinationFirstRow, destinationColumn), wsDestination.Cells(destinationFirstRow + rowCount - 1, destinationColumn))
+
+    sourceRange.Copy
+
+    destinationRange.PasteSpecial Paste:=xlPasteFormats
+
+    Application.CutCopyMode = False
+
+End Sub
+
+
+
+Private Sub ApplyThaiFormatsFromOutput(ByVal wsOut As Worksheet, ByVal wsThai As Worksheet, ByVal lastThaiRow As Long)
+
+    Dim r As Long, sourceOutRow As Long
+
+    If lastThaiRow &lt; 2 Then Exit Sub
+
+    For r = 2 To lastThaiRow
+
+        sourceOutRow = CLng(NumericValue(wsThai.Cells(r, 10).Value))
+
+        If sourceOutRow &gt;= 2 Then
+
+            wsOut.Range(wsOut.Cells(sourceOutRow, 1), wsOut.Cells(sourceOutRow, 9)).Copy
+
+            wsThai.Range(wsThai.Cells(r, 1), wsThai.Cells(r, 9)).PasteSpecial Paste:=xlPasteFormats
+
+            wsThai.Rows(r).RowHeight = wsOut.Rows(sourceOutRow).RowHeight
+
+        End If
+
+    Next r
+
+    wsThai.Range(wsThai.Cells(2, 10), wsThai.Cells(lastThaiRow, 10)).ClearContents
+
+    Application.CutCopyMode = False
+
+End Sub
+
+
+
+Private Sub CopyFormatByKey(ByVal wsSource As Worksheet, ByVal sourceRow As Long, ByVal hdr As Object, ByVal key As String, ByVal destination As Range)
+
+    If Not hdr.Exists(key) Then Exit Sub
+
+    wsSource.Cells(sourceRow, CLng(hdr(key))).Copy
+
+    destination.PasteSpecial Paste:=xlPasteFormats
+
+    Application.CutCopyMode = False
+
+End Sub
+
+
+
+Private Sub CopyColumnWidthByKey(ByVal wsSource As Worksheet, ByVal hdr As Object, ByVal key As String, ByVal wsDestination As Worksheet, ByVal destinationColumn As Long)
+
+    If Not hdr.Exists(key) Then Exit Sub
+
+    wsDestination.Columns(destinationColumn).ColumnWidth = wsSource.Columns(CLng(hdr(key))).ColumnWidth
+
+End Sub
+
+
+
+Private Sub CopyOutputTable(ByVal sheetName As String)
+
+    Dim ws As Worksheet, lastRow As Long, lastCol As Long
+
+    Set ws = ActiveWorkbook.Worksheets(sheetName)
+
+    lastRow = ws.Cells(ws.Rows.Count, 1).End(xlUp).Row
+
+    lastCol = ws.Cells(1, ws.Columns.Count).End(xlToLeft).Column
+
+    If lastRow &lt; 2 Then
+
+        MsgBox &quot;No rows to copy in &quot; &amp; sheetName, vbExclamation
+
+        Exit Sub
+
+    End If
+
+    ws.Range(ws.Cells(1, 1), ws.Cells(lastRow, lastCol)).Copy
+
+    MsgBox sheetName &amp; &quot; copied. Paste it into Outlook.&quot;, vbInformation
+
+End Sub
+
+
+
+Private Function GetHeaderMap(ByVal ws As Worksheet) As Object
+
+    Dim m As Object, r As Long, c As Long, lastCol As Long, key As String
+
+    Set m = CreateObject(&quot;Scripting.Dictionary&quot;)
+
+    For r = 1 To 30
+
+        lastCol = ws.Cells(r, ws.Columns.Count).End(xlToLeft).Column
+
+        For c = 1 To lastCol
+
+            key = HeaderKey(CStr(ws.Cells(r, c).Value))
+
+            If key &lt;&gt; &quot;&quot; Then
+
+                If Not m.Exists(key) Then m.Add key, c
+
+            End If
+
+        Next c
+
+        If m.Exists(&quot;ITEMCD&quot;) Then
+
+            m.Add &quot;HEADERROW&quot;, r
+
+            Set GetHeaderMap = m
+
+            Exit Function
+
+        End If
+
+        m.RemoveAll
+
+    Next r
+
+    Err.Raise vbObjectError + 101, , &quot;Header row not found in &quot; &amp; ws.Name
+
+End Function
+
+
+
+Private Function HeaderKey(ByVal rawText As String) As String
+
+    Dim s As String
+
+    s = UCase$(Trim$(rawText))
+
+    s = Replace(s, &quot; &quot;, &quot;&quot;)
+
+    s = Replace(s, &quot;.&quot;, &quot;&quot;)
+
+    s = Replace(s, &quot;_&quot;, &quot;&quot;)
+
+    s = Replace(s, &quot;-&quot;, &quot;&quot;)
+
+    s = Replace(s, &quot;/&quot;, &quot;&quot;)
+
+    s = Replace(s, &quot;&#x27;&quot;, &quot;&quot;)
+
+    Select Case s
+
+        Case &quot;FAC&quot;, &quot;FACTORY&quot;: HeaderKey = &quot;FAC&quot;
+
+        Case &quot;ITEMCD&quot;, &quot;ITEMCODE&quot;, &quot;ITEMNO&quot;: HeaderKey = &quot;ITEMCD&quot;
+
+        Case &quot;MAKER&quot;, &quot;SUPPLIER&quot;: HeaderKey = &quot;MAKER&quot;
+
+        Case &quot;PARTNAME&quot;, &quot;ITEMNM&quot;, &quot;ITEMNAME&quot;: HeaderKey = &quot;PARTNAME&quot;
+
+        Case &quot;REMAIN&quot;, &quot;PURCHASEREQUEST&quot;, &quot;REQUESTQTY&quot;, &quot;QTY&quot;: HeaderKey = &quot;QTY&quot;
+
+        Case &quot;STOCK&quot;: HeaderKey = &quot;STOCK&quot;
+
+        Case &quot;CONFIRM&quot;, &quot;CONFIRMED&quot;: HeaderKey = &quot;CONFIRM&quot;
+
+        Case &quot;SHORTDEL&quot;, &quot;SHORT&quot;, &quot;SHORTDELIVERY&quot;: HeaderKey = &quot;SHORTDEL&quot;
+
+        Case &quot;NEEDETD&quot;, &quot;REQUESTETD&quot;: HeaderKey = &quot;NEEDETD&quot;
+
+        Case &quot;REMARK&quot;, &quot;NOTE&quot;: HeaderKey = &quot;REMARK&quot;
+
+        Case Else: HeaderKey = &quot;&quot;
+
+    End Select
+
+End Function
+
+
+
+Private Sub ValidateHeaders(ByVal m As Object, ByVal sheetName As String, ByVal required As Variant)
+
+    Dim i As Long
+
+    For i = LBound(required) To UBound(required)
+
+        If Not m.Exists(CStr(required(i))) Then
+
+            Err.Raise vbObjectError + 102, , &quot;Missing header in &quot; &amp; sheetName &amp; &quot;: &quot; &amp; CStr(required(i))
+
+        End If
+
+    Next i
+
+End Sub
+
+
+
+Private Function CellValue(ByVal ws As Worksheet, ByVal rowNum As Long, ByVal m As Object, ByVal key As String) As Variant
+
+    If m.Exists(key) Then
+
+        CellValue = ws.Cells(rowNum, CLng(m(key))).Value
+
+    Else
+
+        CellValue = Empty
+
+    End If
+
+End Function
+
+
+
+Private Function FirstValue(ByVal primaryValue As Variant, ByVal fallbackValue As Variant) As Variant
+
+    If Trim$(CStr(primaryValue)) &lt;&gt; &quot;&quot; Then
+
+        FirstValue = primaryValue
+
+    Else
+
+        FirstValue = fallbackValue
+
+    End If
+
+End Function
+
+
+
+Private Function NormalizeCode(ByVal valueIn As Variant) As String
+
+    NormalizeCode = UCase$(Replace(Trim$(CStr(valueIn)), &quot; &quot;, &quot;&quot;))
+
+End Function
+
+
+
+Private Function LastDataRow(ByVal ws As Worksheet, ByVal colNum As Long) As Long
+
+    LastDataRow = ws.Cells(ws.Rows.Count, colNum).End(xlUp).Row
+
+End Function
+
+
+
+Private Function NumericValue(ByVal valueIn As Variant) As Double
+
+    Dim s As String
+
+    If IsNumeric(valueIn) Then
+
+        NumericValue = CDbl(valueIn)
+
+    Else
+
+        s = Replace(Replace(Trim$(CStr(valueIn)), &quot;,&quot;, &quot;&quot;), &quot; &quot;, &quot;&quot;)
+
+        If s = &quot;&quot; Then
+
+            NumericValue = 0
+
+        ElseIf IsNumeric(s) Then
+
+            NumericValue = CDbl(s)
+
+        Else
+
+            NumericValue = 0
+
+        End If
+
+    End If
+
+End Function
+
+
+
+Private Function EvaluateStatus(ByVal qtyVal As Variant, ByVal stockVal As Variant, ByVal confirmVal As Variant, ByVal needVal As Variant) As String
+
+    Dim qty As Double, stockQty As Double, confirmText As String
+
+    qty = NumericValue(qtyVal)
+
+    stockQty = NumericValue(stockVal)
+
+    confirmText = UCase$(Trim$(CStr(confirmVal)))
+
+
+
+    If qty &lt;= 0 Then EvaluateStatus = &quot;REVIEW&quot;: Exit Function
+
+    If stockQty &gt;= qty Then EvaluateStatus = &quot;OK&quot;: Exit Function
+
+    If confirmText = &quot;&quot; Then EvaluateStatus = &quot;CHECKING&quot;: Exit Function
+
+    EvaluateStatus = &quot;OK&quot;
+
+End Function
+
+
+
+Private Function ParseConfirmQty(ByVal textIn As String, ByRef qtyOut As Double) As Boolean
+
+    Dim re As Object, matches As Object, token As String
+
+    Set re = CreateObject(&quot;VBScript.RegExp&quot;)
+
+    re.Pattern = &quot;^\s*([0-9]+(?:\.[0-9]+)?)\s*([Kk]?)\b&quot;
+
+    re.Global = False
+
+    If re.Test(textIn) Then
+
+        Set matches = re.Execute(textIn)
+
+        token = matches(0).SubMatches(0)
+
+        qtyOut = CDbl(token)
+
+        If UCase$(matches(0).SubMatches(1)) = &quot;K&quot; Then qtyOut = qtyOut * 1000
+
+        ParseConfirmQty = True
+
+    End If
+
+End Function
+
+
+
+Private Function ParseFlexibleDate(ByVal valueIn As Variant, ByRef dateOut As Date) As Boolean
+
+    Dim s As String, re As Object, matches As Object
+
+    Dim d As Long, m As Long, y As Long, monText As String
+
+    On Error GoTo DateFail
+
+    If IsDate(valueIn) Then
+
+        dateOut = CDate(valueIn)
+
+        ParseFlexibleDate = True
+
+        Exit Function
+
+    End If
+
+    s = Trim$(CStr(valueIn))
+
+    If s = &quot;&quot; Or UCase$(s) = &quot;URGENT&quot; Then Exit Function
+
+    Set re = CreateObject(&quot;VBScript.RegExp&quot;)
+
+    re.Pattern = &quot;([0-9]{1,2})[-/ ]([A-Za-z]{3}|[0-9]{1,2})(?:[-/ ]([0-9]{2,4}))?&quot;
+
+    re.Global = False
+
+    If Not re.Test(s) Then Exit Function
+
+    Set matches = re.Execute(s)
+
+    d = CLng(matches(0).SubMatches(0))
+
+    monText = UCase$(matches(0).SubMatches(1))
+
+    If IsNumeric(monText) Then m = CLng(monText) Else m = MonthNo(monText)
+
+    If matches(0).SubMatches(2) = &quot;&quot; Then
+
+        y = Year(Date)
+
+    Else
+
+        y = CLng(matches(0).SubMatches(2))
+
+        If y &lt; 100 Then y = 2000 + y
+
+    End If
+
+    dateOut = DateSerial(y, m, d)
+
+    ParseFlexibleDate = True
+
+    Exit Function
+
+DateFail:
+
+    ParseFlexibleDate = False
+
+End Function
+
+
+
+Private Function MonthNo(ByVal monText As String) As Long
+
+    Select Case Left$(monText, 3)
+
+        Case &quot;JAN&quot;: MonthNo = 1
+
+        Case &quot;FEB&quot;: MonthNo = 2
+
+        Case &quot;MAR&quot;: MonthNo = 3
+
+        Case &quot;APR&quot;: MonthNo = 4
+
+        Case &quot;MAY&quot;: MonthNo = 5
+
+        Case &quot;JUN&quot;: MonthNo = 6
+
+        Case &quot;JUL&quot;: MonthNo = 7
+
+        Case &quot;AUG&quot;: MonthNo = 8
+
+        Case &quot;SEP&quot;: MonthNo = 9
+
+        Case &quot;OCT&quot;: MonthNo = 10
+
+        Case &quot;NOV&quot;: MonthNo = 11
+
+        Case &quot;DEC&quot;: MonthNo = 12
+
+        Case Else: Err.Raise vbObjectError + 103, , &quot;Unknown month: &quot; &amp; monText
+
+    End Select
+
+End Function
+
+
+
+Private Sub ClearOutput(ByVal ws As Worksheet)
+
+    If ws.AutoFilterMode Then ws.AutoFilterMode = False
+
+    ws.UsedRange.Clear
+
+End Sub
+
+
+
+Private Sub WriteHeaders(ByVal ws As Worksheet, ByVal headers As Variant)
+
+    Dim i As Long
+
+    For i = LBound(headers) To UBound(headers)
+
+        ws.Cells(1, i + 1).Value = headers(i)
+
+    Next i
+
+End Sub
+
+
+
+Private Sub WriteConfirmRow(ByVal ws As Worksheet, ByVal rowNum As Long, ByVal fac As Variant, ByVal itemCd As Variant, ByVal makerVal As Variant, ByVal partVal As Variant, ByVal qtyVal As Variant, ByVal stockVal As Variant, ByVal confirmVal As Variant, ByVal shortVal As Variant, ByVal needVal As Variant, ByVal remarkVal As Variant, ByVal statusText As String)
+
+    Dim rowData(1 To 1, 1 To 11) As Variant
+
+    rowData(1, 1) = fac
+
+    rowData(1, 2) = itemCd
+
+    rowData(1, 3) = makerVal
+
+    rowData(1, 4) = partVal
+
+    rowData(1, 5) = qtyVal
+
+    rowData(1, 6) = NumericValue(stockVal)
+
+    rowData(1, 7) = confirmVal
+
+    rowData(1, 8) = shortVal
+
+    rowData(1, 9) = needVal
+
+    rowData(1, 10) = remarkVal
+
+    rowData(1, 11) = statusText
+
+    ws.Range(ws.Cells(rowNum, 1), ws.Cells(rowNum, 11)).Value = rowData
+
+End Sub
+
+
+
+Private Sub WriteThaiRow(ByVal ws As Worksheet, ByVal rowNum As Long, ByVal fac As Variant, ByVal itemCd As Variant, ByVal makerVal As Variant, ByVal partVal As Variant, ByVal qtyVal As Variant, ByVal stockVal As Variant, ByVal confirmVal As Variant, ByVal shortVal As Variant, ByVal needVal As Variant, ByVal sourceOutRow As Long)
+
+    Dim rowData(1 To 1, 1 To 10) As Variant
+
+    rowData(1, 1) = fac
+
+    rowData(1, 2) = itemCd
+
+    rowData(1, 3) = makerVal
+
+    rowData(1, 4) = partVal
+
+    rowData(1, 5) = qtyVal
+
+    rowData(1, 6) = NumericValue(stockVal)
+
+    rowData(1, 7) = confirmVal
+
+    rowData(1, 8) = shortVal
+
+    rowData(1, 9) = needVal
+
+    rowData(1, 10) = sourceOutRow
+
+    ws.Range(ws.Cells(rowNum, 1), ws.Cells(rowNum, 10)).Value = rowData
+
+End Sub
+
+
+
+Private Sub WriteCheck(ByVal ws As Worksheet, ByVal rowNum As Long, ByVal sourceName As String, ByVal sourceRow As Long, ByVal fac As String, ByVal itemCd As String, ByVal issueText As String)
+
+    ws.Cells(rowNum, 1).Value = sourceName
+
+    ws.Cells(rowNum, 2).Value = sourceRow
+
+    ws.Cells(rowNum, 3).Value = fac
+
+    ws.Cells(rowNum, 4).Value = itemCd
+
+    ws.Cells(rowNum, 5).Value = issueText
+
+End Sub
+
+
+
+Private Sub FormatOutput(ByVal ws As Worksheet, ByVal lastRow As Long, ByVal lastCol As Long, ByVal useStandardStyle As Boolean)
+
+    Dim rng As Range
+
+    If lastRow &lt; 1 Then lastRow = 1
+
+    Set rng = ws.Range(ws.Cells(1, 1), ws.Cells(lastRow, lastCol))
+
+    If useStandardStyle Then
+
+        With ws.Range(ws.Cells(1, 1), ws.Cells(1, lastCol))
+
+            .Font.Bold = True
+
+            .Font.Color = RGB(255, 255, 255)
+
+            .Interior.Color = RGB(31, 78, 121)
+
+            .HorizontalAlignment = xlCenter
+
+        End With
+
+        With rng.Borders
+
+            .LineStyle = xlContinuous
+
+            .Color = RGB(166, 166, 166)
+
+            .Weight = xlThin
+
+        End With
+
+        rng.VerticalAlignment = xlCenter
+
+        rng.WrapText = True
+
+    End If
+
+    If ws.AutoFilterMode Then ws.AutoFilterMode = False
+
+    ws.Range(ws.Cells(1, 1), ws.Cells(lastRow, lastCol)).AutoFilter
+
+    ws.Range(ws.Cells(1, 1), ws.Cells(lastRow, lastCol)).Columns.AutoFit
+
+    If lastCol = 11 Then
+
+        ws.Columns(4).ColumnWidth = 48
+
+        If lastRow &gt;= 2 Then ws.Range(ws.Cells(2, 5), ws.Cells(lastRow, 6)).NumberFormat = &quot;#,##0&quot;
+
+    Else
+
+        ws.Columns(4).ColumnWidth = 48
+
+        If lastCol &gt;= 6 And lastRow &gt;= 2 Then ws.Range(ws.Cells(2, 5), ws.Cells(lastRow, 6)).NumberFormat = &quot;#,##0&quot;
+
+    End If
+
+    ws.Activate
+
+    ActiveWindow.FreezePanes = False
+
+    ws.Range(&quot;A2&quot;).Select
+
+    ActiveWindow.FreezePanes = True
+
+End Sub
+
+
+
+Private Sub ColorStatus(ByVal ws As Worksheet, ByVal lastRow As Long)
+
+    Dim r As Long, s As String
+
+    For r = 2 To lastRow
+
+        s = UCase$(Trim$(CStr(ws.Cells(r, 11).Value)))
+
+        Select Case s
+
+            Case &quot;OK&quot;: ws.Cells(r, 11).Interior.Color = RGB(198, 239, 206)
+
+            Case &quot;CHECKING&quot;: ws.Cells(r, 11).Interior.Color = RGB(255, 235, 156)
+
+            Case Else: ws.Cells(r, 11).Interior.Color = RGB(255, 235, 156)
+
+        End Select
+
+    Next r
+
+End Sub
+
+
+
+Private Sub SortOutput(ByVal ws As Worksheet, ByVal lastRow As Long, ByVal lastCol As Long, ByVal facCol As Long, ByVal makerCol As Long, ByVal partCol As Long)
+
+    If lastRow &lt; 3 Then Exit Sub
+
+    With ws.Sort
+
+        .SortFields.Clear
+
+        .SortFields.Add Key:=ws.Range(ws.Cells(2, facCol), ws.Cells(lastRow, facCol)), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
+
+        .SortFields.Add Key:=ws.Range(ws.Cells(2, makerCol), ws.Cells(lastRow, makerCol)), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
+
+        .SortFields.Add Key:=ws.Range(ws.Cells(2, partCol), ws.Cells(lastRow, partCol)), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
+
+        .SetRange ws.Range(ws.Cells(1, 1), ws.Cells(lastRow, lastCol))
+
+        .Header = xlYes
+
+        .MatchCase = False
+
+        .Orientation = xlTopToBottom
+
+        .Apply
+
+    End With
+
+End Sub
+
+</pre></details></article><article><h3>업무용 최신 코드</h3><a class="primary" href="downloads/vba-business-20261008.zip" download>업무용 최신 코드 전체 BAS 받기</a><p>제공한 출고·입고 예시 복사본에서 최신 STOCK·입고·재고리스트 합계 검증 완료. 원본은 수정하지 않았습니다.</p></article><article><h3>STOCK 통합집계</h3><p>출고 Sheet1 · Y열 출고처코드로 구분 · 합계행 제외 · 한 시트 출력</p><p>모듈 이름: <code>modShipmentSummary</code></p><div class="copyrow"><button data-copy="code-modShipmentSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modShipmentSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modShipmentSummary">Option Explicit
 
 Public Sub STOCK_통합집계()
 
@@ -1964,160 +4120,196 @@ Private Function RL_SheetExists( _
 
     Next sh
 
-End Function</pre></details></article><article><h3>범용 부분합</h3><p>머리글과 데이터를 포함한 연속 범위를 선택한 뒤 두 기준과 합계 열을 지정</p><p>모듈 이름: <code>modSubtotalTwoKeys</code></p><div class="copyrow"><button data-copy="code-modSubtotalTwoKeys">전체 코드 복사</button><a href="downloads/vba-20261008/modSubtotalTwoKeys.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modSubtotalTwoKeys">Sub 부분합()
-    Dim rng As Range
-    Dim arr As Variant
-    Dim dict As Object
-    Dim i As Long, j As Long
-    Dim keyCol1 As Variant, keyCol2 As Variant, valCol As Variant, extraInput As Variant
-    Dim outWs As Worksheet
-    Dim k As Variant, r As Long
-    Dim headerKey1 As String, headerKey2 As String, headerVal As String
-
-    &#x27; 1. 범위 확인 및 방어 코드
-    If TypeName(Selection) &lt;&gt; &quot;Range&quot; Then
-        MsgBox &quot;범위를 먼저 선택하세요.&quot;
-        Exit Sub
-    End If
-    
-    Set rng = Selection
-    arr = rng.value
-
-    If Not IsArray(arr) Then
-        MsgBox &quot;2행 이상 데이터 범위를 선택하세요.&quot;
-        Exit Sub
-    End If
-
-    If UBound(arr, 1) &lt; 2 Then
-        MsgBox &quot;머리글을 포함하여 최소 2행 이상 선택해야 합니다.&quot;
-        Exit Sub
-    End If
-
-    &#x27; 2. 열 번호 입력 받기
-    keyCol1 = Application.InputBox(&quot;첫 번째 기준 열 번호(예: 거래처코드)를 입력하세요.&quot;, &quot;1. 첫 번째 기준&quot;, Type:=1)
-    If keyCol1 = False Or keyCol1 &lt;= 0 Then Exit Sub
-
-    keyCol2 = Application.InputBox(&quot;두 번째 기준 열 번호(예: 품목명)를 입력하세요.&quot;, &quot;2. 두 번째 기준&quot;, Type:=1)
-    If keyCol2 = False Or keyCol2 &lt;= 0 Then Exit Sub
-
-    valCol = Application.InputBox(&quot;합산할 금액/수량 열 번호를 입력하세요.&quot;, &quot;3. 합계 열 선택&quot;, Type:=1)
-    If valCol = False Or valCol &lt;= 0 Then Exit Sub
-    
-    If keyCol1 &gt; UBound(arr, 2) Or keyCol2 &gt; UBound(arr, 2) Or valCol &gt; UBound(arr, 2) Then
-        MsgBox &quot;선택한 범위 내의 열 번호를 입력해주세요.&quot;
-        Exit Sub
-    End If
-
-    &#x27; 2-1. 추가로 출력할 열 입력 받기
-    Dim extraCols() As Long
-    Dim hasExtra As Boolean
-    Dim extraStrArr() As String
-    Dim eCount As Long
-    
-    extraInput = Application.InputBox(&quot;추가로 함께 출력할 열 번호를 입력하세요.&quot; &amp; vbCrLf &amp; _
-                                      &quot;(예: 3,4 와 같이 쉼표로 구분 가능)&quot; &amp; vbCrLf &amp; _
-                                      &quot;없으면 빈칸으로 &#x27;확인&#x27; 클릭&quot;, &quot;4. 추가 정보 열 선택&quot;, Type:=2)
-    
-    hasExtra = False: eCount = 0
-    If extraInput &lt;&gt; &quot;False&quot; And Trim(extraInput) &lt;&gt; &quot;&quot; Then
-        extraStrArr = Split(extraInput, &quot;,&quot;)
-        ReDim extraCols(0 To UBound(extraStrArr))
-        For j = 0 To UBound(extraStrArr)
-            If IsNumeric(Trim(extraStrArr(j))) Then
-                Dim colIdx As Long: colIdx = CLng(Trim(extraStrArr(j)))
-                If colIdx &gt; 0 And colIdx &lt;= UBound(arr, 2) Then
-                    extraCols(eCount) = colIdx
-                    eCount = eCount + 1
-                End If
-            End If
-        Next j
-        If eCount &gt; 0 Then
-            ReDim Preserve extraCols(0 To eCount - 1)
-            hasExtra = True
-        End If
-    End If
-
-    &#x27; 3. 데이터 합산 (Dictionary)
-    Set dict = CreateObject(&quot;Scripting.Dictionary&quot;)
-    
-    headerKey1 = arr(1, keyCol1)
-    headerKey2 = arr(1, keyCol2)
-    headerVal = arr(1, valCol)
-
-    Dim combinedKey As String &#x27; 두 기준을 합친 고유 키
-    Dim currentVal As Double
-    Dim itemData() As Variant &#x27; [0]합계, [1~n]추가 데이터
-
-    For i = 2 To UBound(arr, 1)
-        &#x27; 두 기준 열을 &quot;|&quot; 구분자로 합쳐서 유니크한 키 생성
-        combinedKey = CStr(arr(i, keyCol1)) &amp; &quot;|&quot; &amp; CStr(arr(i, keyCol2))
-        currentVal = Val(arr(i, valCol))
-        
-        If dict.Exists(combinedKey) Then
-            itemData = dict(combinedKey)
-            itemData(0) = itemData(0) + currentVal
-            dict(combinedKey) = itemData
-        Else
-            ReDim itemData(0 To eCount)
-            itemData(0) = currentVal
-            If hasExtra Then
-                For j = 0 To eCount - 1
-                    itemData(j + 1) = arr(i, extraCols(j))
-                Next j
-            End If
-            dict.Add combinedKey, itemData
-        End If
-    Next i
-
-    &#x27; 4. 결과 출력
-    Set outWs = Worksheets.Add(After:=ActiveSheet)
-    On Error Resume Next
-    outWs.Name = &quot;중복기준_부분합_&quot; &amp; Format(Now, &quot;hhmmss&quot;)
-    On Error GoTo 0
-
-    &#x27; 머리글 출력 (기준1, 기준2, 합계순)
-    outWs.Cells(1, 1).value = headerKey1
-    outWs.Cells(1, 2).value = headerKey2
-    outWs.Cells(1, 3).value = headerVal &amp; &quot; 합계&quot;
-    
-    If hasExtra Then
-        For j = 0 To eCount - 1
-            outWs.Cells(1, 4 + j).value = arr(1, extraCols(j))
-        Next j
-    End If
-    
-    &#x27; 데이터 출력
-    r = 2
-    Dim splitKey As Variant
-    For Each k In dict.keys
-        splitKey = Split(k, &quot;|&quot;)
-        outWs.Cells(r, 1).value = splitKey(0) &#x27; 기준1
-        outWs.Cells(r, 2).value = splitKey(1) &#x27; 기준2
-        
-        itemData = dict(k)
-        outWs.Cells(r, 3).value = itemData(0) &#x27; 합계
-        
-        If hasExtra Then
-            For j = 0 To eCount - 1
-                outWs.Cells(r, 4 + j).value = itemData(j + 1)
-            Next j
-        End If
-        r = r + 1
-    Next k
-
-    &#x27; 5. 서식 정리
+End Function</pre></details></article><article><h3>범용 부분합</h3><p>머리글과 데이터를 포함한 연속 범위를 선택한 뒤 두 기준과 합계 열을 지정</p><p>모듈 이름: <code>modSubtotalTwoKeys</code></p><div class="copyrow"><button data-copy="code-modSubtotalTwoKeys">전체 코드 복사</button><a href="downloads/vba-20261008/modSubtotalTwoKeys.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modSubtotalTwoKeys">Sub 부분합()
+    Dim rng As Range
+    Dim arr As Variant
+    Dim dict As Object
+    Dim i As Long, j As Long
+    Dim keyCol1 As Variant, keyCol2 As Variant, valCol As Variant, extraInput As Variant
+    Dim outWs As Worksheet
+    Dim k As Variant, r As Long
+    Dim headerKey1 As String, headerKey2 As String, headerVal As String
+
+    &#x27; 1. 범위 확인 및 방어 코드
+    If TypeName(Selection) &lt;&gt; &quot;Range&quot; Then
+        MsgBox &quot;범위를 먼저 선택하세요.&quot;
+        Exit Sub
+    End If
+    
+    Set rng = Selection
+    arr = rng.value
+
+    If Not IsArray(arr) Then
+        MsgBox &quot;2행 이상 데이터 범위를 선택하세요.&quot;
+        Exit Sub
+    End If
+
+    If UBound(arr, 1) &lt; 2 Then
+        MsgBox &quot;머리글을 포함하여 최소 2행 이상 선택해야 합니다.&quot;
+        Exit Sub
+    End If
+
+    &#x27; 2. 열 번호 입력 받기
+    keyCol1 = Application.InputBox(&quot;첫 번째 기준 열 번호(예: 거래처코드)를 입력하세요.&quot;, &quot;1. 첫 번째 기준&quot;, Type:=1)
+    If keyCol1 = False Or keyCol1 &lt;= 0 Then Exit Sub
+
+    keyCol2 = Application.InputBox(&quot;두 번째 기준 열 번호(예: 품목명)를 입력하세요.&quot;, &quot;2. 두 번째 기준&quot;, Type:=1)
+    If keyCol2 = False Or keyCol2 &lt;= 0 Then Exit Sub
+
+    valCol = Application.InputBox(&quot;합산할 금액/수량 열 번호를 입력하세요.&quot;, &quot;3. 합계 열 선택&quot;, Type:=1)
+    If valCol = False Or valCol &lt;= 0 Then Exit Sub
+    
+    If keyCol1 &gt; UBound(arr, 2) Or keyCol2 &gt; UBound(arr, 2) Or valCol &gt; UBound(arr, 2) Then
+        MsgBox &quot;선택한 범위 내의 열 번호를 입력해주세요.&quot;
+        Exit Sub
+    End If
+
+    &#x27; 2-1. 추가로 출력할 열 입력 받기
+    Dim extraCols() As Long
+    Dim hasExtra As Boolean
+    Dim extraStrArr() As String
+    Dim eCount As Long
+    
+    extraInput = Application.InputBox(&quot;추가로 함께 출력할 열 번호를 입력하세요.&quot; &amp; vbCrLf &amp; _
+                                      &quot;(예: 3,4 와 같이 쉼표로 구분 가능)&quot; &amp; vbCrLf &amp; _
+                                      &quot;없으면 빈칸으로 &#x27;확인&#x27; 클릭&quot;, &quot;4. 추가 정보 열 선택&quot;, Type:=2)
+    
+    hasExtra = False: eCount = 0
+    If extraInput &lt;&gt; &quot;False&quot; And Trim(extraInput) &lt;&gt; &quot;&quot; Then
+        extraStrArr = Split(extraInput, &quot;,&quot;)
+        ReDim extraCols(0 To UBound(extraStrArr))
+        For j = 0 To UBound(extraStrArr)
+            If IsNumeric(Trim(extraStrArr(j))) Then
+                Dim colIdx As Long: colIdx = CLng(Trim(extraStrArr(j)))
+                If colIdx &gt; 0 And colIdx &lt;= UBound(arr, 2) Then
+                    extraCols(eCount) = colIdx
+                    eCount = eCount + 1
+                End If
+            End If
+        Next j
+        If eCount &gt; 0 Then
+            ReDim Preserve extraCols(0 To eCount - 1)
+            hasExtra = True
+        End If
+    End If
+
+    &#x27; 3. 데이터 합산 (Dictionary)
+    Set dict = CreateObject(&quot;Scripting.Dictionary&quot;)
+    
+    headerKey1 = arr(1, keyCol1)
+    headerKey2 = arr(1, keyCol2)
+    headerVal = arr(1, valCol)
+
+    Dim combinedKey As String &#x27; 두 기준을 합친 고유 키
+    Dim currentVal As Double
+    Dim itemData() As Variant &#x27; [0]합계, [1~n]추가 데이터
+
+    For i = 2 To UBound(arr, 1)
+        &#x27; 두 기준 열을 &quot;|&quot; 구분자로 합쳐서 유니크한 키 생성
+        combinedKey = CStr(arr(i, keyCol1)) &amp; &quot;|&quot; &amp; CStr(arr(i, keyCol2))
+        currentVal = Val(arr(i, valCol))
+        
+        If dict.Exists(combinedKey) Then
+            itemData = dict(combinedKey)
+            itemData(0) = itemData(0) + currentVal
+            dict(combinedKey) = itemData
+        Else
+            ReDim itemData(0 To eCount)
+            itemData(0) = currentVal
+            If hasExtra Then
+                For j = 0 To eCount - 1
+                    itemData(j + 1) = arr(i, extraCols(j))
+                Next j
+            End If
+            dict.Add combinedKey, itemData
+        End If
+    Next i
+
+    &#x27; 4. 결과 출력
+    Set outWs = Worksheets.Add(After:=ActiveSheet)
+    On Error Resume Next
+    outWs.Name = &quot;중복기준_부분합_&quot; &amp; Format(Now, &quot;hhmmss&quot;)
+    On Error GoTo 0
+
+    &#x27; 머리글 출력 (기준1, 기준2, 합계순)
+    outWs.Cells(1, 1).value = headerKey1
+    outWs.Cells(1, 2).value = headerKey2
+    outWs.Cells(1, 3).value = headerVal &amp; &quot; 합계&quot;
+    
+    If hasExtra Then
+        For j = 0 To eCount - 1
+            outWs.Cells(1, 4 + j).value = arr(1, extraCols(j))
+        Next j
+    End If
+    
+    &#x27; 데이터 출력
+    r = 2
+    Dim splitKey As Variant
+    For Each k In dict.keys
+        splitKey = Split(k, &quot;|&quot;)
+        outWs.Cells(r, 1).value = splitKey(0) &#x27; 기준1
+        outWs.Cells(r, 2).value = splitKey(1) &#x27; 기준2
+        
+        itemData = dict(k)
+        outWs.Cells(r, 3).value = itemData(0) &#x27; 합계
+        
+        If hasExtra Then
+            For j = 0 To eCount - 1
+                outWs.Cells(r, 4 + j).value = itemData(j + 1)
+            Next j
+        End If
+        r = r + 1
+    Next k
+
+    &#x27; 5. 읽기 쉬운 표와 흑백 인쇄 서식
     Dim lastCol As Long: lastCol = 3 + eCount
-    outWs.Columns(&quot;C&quot;).NumberFormat = &quot;#,##0&quot; &#x27; C열(합계) 서식
-    
+    Dim body As Range, col As Long
+    Set body = outWs.Range(outWs.Cells(1, 1), outWs.Cells(r - 1, lastCol))
+    With body
+        .Font.Name = &quot;맑은 고딕&quot;
+        .Font.Size = 11
+        .Font.Color = vbBlack
+        .VerticalAlignment = xlCenter
+        .WrapText = False
+        .RowHeight = 23
+        .Borders.LineStyle = xlContinuous
+        .Borders.Weight = xlThin
+        .Borders.Color = RGB(190, 190, 190)
+    End With
     With outWs.Range(outWs.Cells(1, 1), outWs.Cells(1, lastCol))
         .Font.Bold = True
-        .Interior.Color = RGB(220, 230, 241)
-        .Borders.LineStyle = xlContinuous
+        .Font.Size = 11
+        .Interior.Color = RGB(230, 230, 230)
         .HorizontalAlignment = xlCenter
+        .RowHeight = 30
     End With
+    outWs.Range(outWs.Cells(2, 3), outWs.Cells(r - 1, 3)).NumberFormat = &quot;#,##0.########;-#,##0.########;0&quot;
+    outWs.Range(outWs.Cells(2, 3), outWs.Cells(r - 1, 3)).HorizontalAlignment = xlRight
     outWs.Range(outWs.Columns(1), outWs.Columns(lastCol)).AutoFit
-    
-    MsgBox &quot;복합 기준 부분합 완료!&quot;, vbInformation
+    For col = 1 To lastCol
+        With outWs.Columns(col)
+            If .ColumnWidth &lt; 14 Then .ColumnWidth = 14
+            If .ColumnWidth &gt; 42 Then .ColumnWidth = 42
+        End With
+    Next col
+    outWs.Range(outWs.Cells(2, 1), outWs.Cells(r - 1, lastCol)).ShrinkToFit = True
+    body.AutoFilter
+    With outWs.PageSetup
+        .PaperSize = xlPaperA4
+        .Orientation = xlPortrait
+        If lastCol &gt; 5 Then .Orientation = xlLandscape
+        .Zoom = False
+        .FitToPagesWide = 1
+        .FitToPagesTall = False
+        .BlackAndWhite = True
+        .PrintTitleRows = &quot;$1:$1&quot;
+        .PrintArea = body.Address
+        .CenterHorizontally = True
+        .LeftMargin = Application.CentimetersToPoints(1)
+        .RightMargin = Application.CentimetersToPoints(1)
+        .CenterFooter = &quot;&amp;P / &amp;N&quot;
+    End With
+    MsgBox &quot;부분합 완료! 새 시트에 서식과 A4 인쇄 설정을 적용했습니다.&quot;, vbInformation
 End Sub
 </pre></details></article><article><h3>범용 값조회</h3><p>원본 기준 열·값 열·조회 대상·결과 첫 셀 선택. 중복 기준과 미조회는 #N/A. 결과 덮어쓰기 전 확인</p><p>모듈 이름: <code>modGeneralLookup</code></p><div class="copyrow"><button data-copy="code-modGeneralLookup">전체 코드 복사</button><a href="downloads/vba-20261008/modGeneralLookup.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modGeneralLookup">Option Explicit
 Public Sub 범용_값조회()
