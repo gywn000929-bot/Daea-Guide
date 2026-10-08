@@ -78,22 +78,24 @@ NextRow:
     Loop
     Set outWs = wb.Worksheets.Add(After:=wb.Sheets(wb.Sheets.Count))
     outWs.Name = outName
-    outWs.Range("A1:E1").Value = Array("발주번호 끝5자리", "수주번호", "품목명", "발주수량", "미납수량")
+    outWs.Range("A1:E1").Value = Array("품목명", "수주번호", "주문서 번호", "발주수량", "미납수량")
     outWs.Columns("A:C").NumberFormat = "@"
     r = 2
     For Each k In dict.Keys
         data = dict(k)
-        For j = 0 To 4
-            outWs.Cells(r, j + 1).Value2 = data(j)
-        Next j
+        outWs.Cells(r, 1).Value2 = data(2)
+        outWs.Cells(r, 2).Value2 = data(1)
+        outWs.Cells(r, 3).Value2 = data(0)
+        outWs.Cells(r, 4).Value2 = data(3)
+        outWs.Cells(r, 5).Value2 = data(4)
         r = r + 1
     Next k
     If r > 3 Then outWs.Range("A1:E" & (r - 1)).Sort Key1:=outWs.Range("A2"), Order1:=xlAscending, Key2:=outWs.Range("B2"), Order2:=xlAscending, Key3:=outWs.Range("C2"), Order3:=xlAscending, Header:=xlYes
-    outWs.Cells(r, 3).Value2 = "합계"
+    outWs.Cells(r, 1).Value2 = "합계"
     outWs.Cells(r, 4).Value2 = totalQ
     outWs.Cells(r, 5).Value2 = totalBal
     With outWs.Range("A1:E" & r)
-        .Font.Name = "맑은 고딕"
+        .Font.Name = "Arial"
         .Font.Size = 11
         .Font.Color = vbBlack
         .VerticalAlignment = xlCenter
@@ -105,24 +107,31 @@ NextRow:
     End With
     With outWs.Range("A1:E1")
         .Font.Bold = True
-        .Interior.Color = RGB(230, 230, 230)
+        .Interior.Color = 14524132
         .HorizontalAlignment = xlCenter
         .RowHeight = 30
     End With
     With outWs.Range("A" & r & ":E" & r)
         .Font.Bold = True
-        .Interior.Color = RGB(230, 230, 230)
+        .Interior.Color = 14524132
     End With
-    outWs.Columns("A").ColumnWidth = 18
-    outWs.Columns("B").ColumnWidth = 26
-    outWs.Columns("C").ColumnWidth = 36
-    outWs.Columns("D:E").ColumnWidth = 17
-    outWs.Range("C2:C" & r).ShrinkToFit = True
+    outWs.Columns("A").ColumnWidth = 45
+    outWs.Columns("B").ColumnWidth = 22
+    outWs.Columns("C").ColumnWidth = 14
+    outWs.Columns("D:E").ColumnWidth = 15
+    outWs.Range("A2:B" & r).ShrinkToFit = True
     outWs.Range("D2:E" & r).NumberFormat = "#,##0.########;-#,##0.########;0"
+    outWs.Range("A2:C" & (r - 1)).HorizontalAlignment = xlCenter
+    outWs.Range("D2:E" & r).HorizontalAlignment = xlRight
+    If r > 3 Then
+        With outWs.Range("A3:A" & (r - 1)).FormatConditions.Add(Type:=xlExpression, Formula1:="=$A3=$A2")
+            .Font.Color = vbWhite
+        End With
+    End If
     outWs.Range("A1:E" & (r - 1)).AutoFilter
     With outWs.PageSetup
         .PaperSize = xlPaperA4
-        .Orientation = xlLandscape
+        .Orientation = xlPortrait
         .Zoom = False
         .FitToPagesWide = 1
         .FitToPagesTall = False
@@ -141,6 +150,8 @@ End Sub
 Private Function HeaderKey(ByVal v As Variant) As String
     If IsError(v) Then Exit Function
     HeaderKey = Replace(Replace(Replace(Replace(Replace(Trim$(CStr(v)), " ", ""), vbCr, ""), vbLf, ""), vbTab, ""), ChrW(160), "")
+    HeaderKey = Replace(Replace(HeaderKey, "△", ""), "▲", "")
+    If HeaderKey = "주문서번호" Then HeaderKey = "발주번호"
 End Function
 Private Function TextValue(ByVal v As Variant, ByVal rowNo As Long) As String
     If IsError(v) Then Err.Raise vbObjectError + 806, , "오류 셀이 있습니다. 원본 행: " & rowNo
