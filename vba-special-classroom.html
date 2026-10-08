@@ -53,265 +53,523 @@ End Sub</pre><p>처음 시험할 때는 편집기에서 <b>새업무_대상확�
 <article><h3>앞으로 업데이트할 때</h3><p>이번 파일에는 modPalletLabelBasic.파렛트_라벨_기본와 modPalletLabelExpanded.파렛트_라벨_확대가 함께 있습니다. 이름이 같아도 내용이 동일하지 않습니다. 삭제하거나 이름만으로 연결하지 말고 모듈 이름까지 지정해 구별하세요. 새 기능은 modNewWork 같은 고유한 모듈·실행 이름을 사용합니다.</p><ol class="steps"><li>기능을 수정하기 전 XLAM을 날짜별로 백업하고, 리본 설정도 내보냅니다.</li><li>배포 파일로 교체할 때는 Excel을 모두 닫고 기존 설치 위치의 파일을 교체합니다. 새 버전 번호는 백업 폴더나 변경 기록에 적고, 등록된 파일명·경로는 유지하는 편이 편합니다.</li><li>Excel을 다시 열어 추가 기능 등록 상태를 확인합니다. 기존 모듈·실행 이름이 같으면 버튼 연결을 유지할 수 있습니다. 이름·경로가 바뀌었다면 다시 연결합니다.</li><li>새 기능을 더한 경우 기존 기능 하나와 새 기능을 각각 시험합니다. 문제가 생기면 Excel을 종료하고 백업 XLAM과 메뉴 설정으로 되돌립니다.</li></ol></article>
 <table><thead><tr><th>증상</th><th>먼저 확인할 것</th></tr></thead><tbody><tr><td>XLAM을 열었는데 아무 시트도 안 보임</td><td>추가 기능은 숨겨진 상태로 로드될 수 있습니다. 추가 기능 체크 상태와 리본 실행을 확인합니다.</td></tr><tr><td>‘매크로를 실행할 수 없습니다’</td><td>XLAM 등록·파일 경로·매크로 허용 여부와 버튼의 모듈/실행 이름을 확인합니다.</td></tr><tr><td>버튼은 있는데 다른 파일을 처리함</td><td>업무 파일과 대상 시트를 다시 선택합니다. 코드의 ActiveWorkbook/ThisWorkbook 사용도 확인합니다.</td></tr><tr><td>새 코드를 넣었는데 버튼이 없음</td><td>코드 추가와 메뉴 추가는 별도입니다. 기존 리본 설정에 새 실행 이름을 연결합니다.</td></tr><tr><td>예전 기능이나 중복된 이름이 보임</td><td>구버전 XLAM을 함께 등록했는지, 동일 BAS를 여러 번 가져왔는지 확인합니다. 사용 중인 파일은 확인 없이 지우지 않습니다.</td></tr><tr><td>저장 후 재시작하니 새 코드가 사라짐</td><td>다른 프로젝트를 편집했거나 XLAM이 읽기 전용인지 확인합니다. 설치된 XLAM을 선택해 저장합니다.</td></tr><tr><td>‘이름이 분명하지 않습니다’ 또는 컴파일 오류</td><td>같은 공개 Sub/Function 중복, 누락된 보조 함수, 표준 모듈에 들어간 시트 이벤트 코드를 확인합니다.</td></tr><tr><td>V9 원본을 못 찾음</td><td>대상과 원본을 같은 Excel 실행 창에서 열고 파일명·헤더·공장 정보를 확인합니다.</td></tr></tbody></table>
 <div class="grid"><article><h3>처음 설치할 때</h3><p>XLAM 복사 → 추가 기능 등록 → 메뉴 가져오기 → 복사본 실행 확인</p></article><article><h3>새 기능을 만들 때</h3><p>백업 → 기존 XLAM에 새 모듈 → 컴파일·저장 → 새 버튼 연결 → 결과 확인</p></article></div>
-<label class="check"><input type="checkbox" data-check="ready"><span>XLAM과 리본 설정을 함께 백업하고 업데이트할 수 있다</span></label><article><h3>이전 실습 자료도 필요하다면</h3><p>기존 ITEM AUTO FILL·AIR CONFIRM 예제와 실습 키트는 별도 실습 페이지에 보관했습니다. 학습용 코드 버전과 이번 점검 파일은 서로 다릅니다. <a href="downloads/daea-macros-24-20260923.zip">9월 23일 이전 통합본 ZIP</a>도 참고용으로 보관합니다. 이번 파일 대신 설치하지 마세요.</p><a class="secondary" href="vba-practice-legacy.html">이전 VBA 예제 실습 열기 →</a></article></section><section class="panel" id="latest-code" aria-labelledby="title-latest-code" hidden><header class="sectionhead"><span class="eyebrow">2026.10.08 · 최신 코드</span><h2 id="title-latest-code" tabindex="-1">업무용 · 범용 VBA 코드</h2><p>모듈별 전체 코드 복사와 BAS 다운로드. 아래 자료가 최근 대화에서 수정한 최신 버전입니다.</p></header><p class="note">기존 XLAM을 백업하고 해당 모듈을 교체하세요. BAS 가져오기와 코드 붙여넣기는 둘 중 하나만 사용합니다. STOCK 이름을 바꾼 경우 리본도 다시 연결합니다. 아래 ZIP은 코드 모듈 자료이며 XLAM 완성본은 아닙니다.</p><div class="module-picker"><label for="moduleSelect">복사할 모듈</label><select id="moduleSelect"></select><button id="openModule">코드 창 열기</button></div><p>Alt+F11 → 기존 모듈 선택 → 코드 전체를 교체하세요. 새 기능은 삽입 → 모듈에서 추가하고 표시된 모듈 이름을 지정하세요. 같은 실행 이름이 중복되지 않도록 기존 모듈에 덧붙이지 마세요. 아래 코드는 현재 배포 XLAM과 일치하며, 범용 도구는 별도 자료입니다.</p><article><h3>10월 8일 추가 반영</h3><p>부분합 글꼴·표·A4 흑백 인쇄 개선, 발주미납 집계 추가, 개인용 AIR CONFIRM V10 복구를 ZIP의 XLAM에도 반영했습니다. 입고관리의 수주처 1310 지원은 공장 구분 확인 후 반영 예정입니다.</p></article><article><h3>발주미납 집계</h3><p>수주번호의 F1/F2/F5별로 수주처 품목코드·품목명·미납잔량을 새 시트에 집계합니다.</p><p>모듈 이름: <code>modPurchaseOutstanding</code></p><div class="copyrow"><button data-copy="code-modPurchaseOutstanding">전체 코드 복사</button><a href="downloads/vba-20261008/modPurchaseOutstanding.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modPurchaseOutstanding">Option Explicit
-
-Public Sub 발주미납_집계()
-
-    Dim ws As Worksheet, resWs As Worksheet
-    Dim wb As Workbook
-    Dim dict As Object
-    Dim lastRow As Long, i As Long, rowIdx As Long
-    Dim customerCode As String, factory As String
-    Dim itemCode As String, itemName As String
-    Dim qty As Double, totalQty As Double
-    Dim key As String, k As Variant, data As Variant
-    Dim pass As Long
-    Dim baseName As String, sheetName As String
-    Dim suffix As Long
-    Dim sh As Object, nameExists As Boolean
-
-    Dim headerRow As Long, cols As Variant
-    On Error GoTo Failed
-
-    If TypeName(ActiveSheet) &lt;&gt; &quot;Worksheet&quot; Then
-        MsgBox &quot;발주미납 원본 시트를 선택해주세요.&quot;, vbExclamation
-        Exit Sub
-    End If
-
-    Set ws = ActiveSheet
-    Set wb = ws.Parent
-
-    If Not FindHeaders(ws, Array(&quot;수주번호&quot;, &quot;수주처 품목코드&quot;, &quot;품목명&quot;, &quot;미납수량&quot;), headerRow, cols) Then
-        Err.Raise vbObjectError + 700, , &quot;발주 미납 원본 시트를 선택하세요. 필요한 머리글: 수주번호/수주처 품목코드/품목명/미납수량&quot;
-    End If
-
-    lastRow = ws.Cells(ws.Rows.Count, cols(0)).End(xlUp).Row
-    If ws.Cells(ws.Rows.Count, cols(1)).End(xlUp).Row &gt; lastRow Then lastRow = ws.Cells(ws.Rows.Count, cols(1)).End(xlUp).Row
-    If ws.Cells(ws.Rows.Count, cols(2)).End(xlUp).Row &gt; lastRow Then lastRow = ws.Cells(ws.Rows.Count, cols(2)).End(xlUp).Row
-    If ws.Cells(ws.Rows.Count, cols(3)).End(xlUp).Row &gt; lastRow Then lastRow = ws.Cells(ws.Rows.Count, cols(3)).End(xlUp).Row
-
-    If lastRow &lt; 2 Then
-        MsgBox &quot;집계할 데이터가 없습니다.&quot;, vbInformation
-        Exit Sub
-    End If
-
-    Set dict = CreateObject(&quot;Scripting.Dictionary&quot;)
-
-    For i = headerRow + 1 To lastRow
-
-        If IsError(ws.Cells(i, cols(0)).Value2) Or IsError(ws.Cells(i, cols(1)).Value2) Or IsError(ws.Cells(i, cols(2)).Value2) Then
-
-            Err.Raise vbObjectError + 701, , &quot;공장·품목코드·품목명에 오류 셀이 있습니다. 행: &quot; &amp; i
-        End If
-
-        customerCode = Trim(CStr(ws.Cells(i, cols(0)).Value2))
-        itemCode = Trim(CStr(ws.Cells(i, cols(1)).Value2))
-        itemName = Trim(CStr(ws.Cells(i, cols(2)).Value2))
-
-        If customerCode = &quot;&quot; And itemCode = &quot;&quot; And itemName = &quot;&quot; Then
-            If InStr(1, CStr(ws.Cells(i, 4).Value2), &quot;합계&quot;, vbTextCompare) &gt; 0 Then GoTo NextRow
-        End If
-        &#x27; 원본 마지막 합계행 제외
-        If customerCode = &quot;&quot; And itemCode = &quot;&quot; Then
-            Select Case UCase(itemName)
-                Case &quot;합계&quot;, &quot;총 합계&quot;, &quot;총합계&quot;, &quot;계&quot;, &quot;TOTAL&quot;
-                    GoTo NextRow
-            End Select
-        End If
-
-        &#x27; 완전히 빈 행 제외
-        If customerCode = &quot;&quot; And itemCode = &quot;&quot; And itemName = &quot;&quot; Then
-            If Not IsError(ws.Cells(i, cols(3)).Value2) Then
-                If Len(Trim(CStr(ws.Cells(i, cols(3)).Value2))) = 0 Then
-                    GoTo NextRow
-                End If
-            End If
-        End If
-
-        If IsError(ws.Cells(i, cols(3)).Value2) Then
-            Err.Raise vbObjectError + 702, , &quot;미납수량에 오류 셀이 있습니다. 행: &quot; &amp; i
-        End If
-
-        If Not IsNumeric(ws.Cells(i, cols(3)).Value2) Then
-            Err.Raise vbObjectError + 703, , &quot;미납수량이 숫자가 아닙니다. 행: &quot; &amp; i
-        End If
-
-        If itemCode = &quot;&quot; And itemName = &quot;&quot; Then
-            Err.Raise vbObjectError + 704, , &quot;수량은 있지만 품목코드와 품목명이 없습니다. 행: &quot; &amp; i
-        End If
-
-        &#x27; 수주번호 앞자리 F1/F2/F5로 공장 구분
-        Select Case UCase$(Left$(customerCode, 2))
-            Case &quot;F1&quot;: factory = &quot;F1&quot;
-            Case &quot;F2&quot;: factory = &quot;F2&quot;
-            Case &quot;F5&quot;: factory = &quot;F5&quot;
-            Case Else
-                Err.Raise vbObjectError + 705, , &quot;수주번호에서 공장을 구분할 수 없습니다. 행: &quot; &amp; i &amp; &quot; / &quot; &amp; customerCode
-        End Select
-
-        qty = CDbl(ws.Cells(i, cols(3)).Value2)
-
-        &#x27; 공장 + 품목코드 + 품목명 기준 집계
-        key = Len(factory) &amp; &quot;:&quot; &amp; factory &amp; Len(itemCode) &amp; &quot;:&quot; &amp; itemCode &amp; itemName
-
-        If dict.Exists(key) Then
-            data = dict(key)
-            data(3) = data(3) + qty
-            dict(key) = data
-        Else
-            dict.Add key, Array(factory, itemCode, itemName, qty)
-        End If
-
-        totalQty = totalQty + qty
-
-NextRow:
-    Next i
-
-    If dict.Count = 0 Then
-        MsgBox &quot;집계할 상세 데이터가 없습니다.&quot;, vbInformation
-        Exit Sub
-    End If
-
-    &#x27; 결과 시트 이름 중복 방지
-    baseName = &quot;발주미납_통합_&quot; &amp; Format(Now, &quot;hhmmss&quot;)
-    sheetName = baseName
-
-    Do
-        nameExists = False
-
-        For Each sh In wb.Sheets
-            If StrComp(sh.Name, sheetName, vbTextCompare) = 0 Then
-                nameExists = True
-                Exit For
-            End If
-        Next sh
-
-        If Not nameExists Then Exit Do
-
-        suffix = suffix + 1
-        sheetName = baseName &amp; &quot;_&quot; &amp; suffix
-    Loop
-
-    Set resWs = wb.Worksheets.Add(After:=wb.Sheets(wb.Sheets.Count))
-    resWs.Name = sheetName
-
-    resWs.Range(&quot;A1:D1&quot;).Value = Array(&quot;FAC&quot;, &quot;수주처 품목코드&quot;, &quot;품목명&quot;, &quot;미납잔량&quot;)
-
-    resWs.Columns(&quot;B:C&quot;).NumberFormat = &quot;@&quot;
-    rowIdx = 2
-
-    &#x27; 품목코드가 없는 항목 먼저 출력
-    For pass = 1 To 2
-        For Each k In dict.Keys
-
-            data = dict(k)
-
-            If (pass = 1 And data(1) = &quot;&quot;) Or (pass = 2 And data(1) &lt;&gt; &quot;&quot;) Then
-
-                resWs.Cells(rowIdx, 1).Value2 = data(0)
-                resWs.Cells(rowIdx, 2).Value2 = data(1)
-                resWs.Cells(rowIdx, 3).Value2 = data(2)
-                resWs.Cells(rowIdx, 4).Value2 = data(3)
-
-                rowIdx = rowIdx + 1
-            End If
-
-        Next k
-    Next pass
-
-    If rowIdx &gt; 3 Then
-        resWs.Range(&quot;A1:D&quot; &amp; rowIdx - 1).Sort Key1:=resWs.Range(&quot;A2&quot;), Order1:=xlAscending, Key2:=resWs.Range(&quot;B2&quot;), Order2:=xlAscending, Key3:=resWs.Range(&quot;C2&quot;), Order3:=xlAscending, Header:=xlYes
-    End If
-    resWs.Cells(rowIdx, 3).Value2 = &quot;TOTAL&quot;
-    resWs.Cells(rowIdx, 4).Value2 = totalQty
-
-    With resWs.Range(&quot;A1:D&quot; &amp; rowIdx)
-        .Font.Name = &quot;Arial&quot;
-        .Font.Size = 9
-        .Font.Color = vbBlack
-        .VerticalAlignment = xlCenter
-        .Borders.LineStyle = xlContinuous
-        .Borders.Weight = xlThin
-        .Borders.Color = RGB(200, 200, 200)
-        .RowHeight = 18
-    End With
-
-    With resWs.Range(&quot;A1:D1&quot;)
-        .Font.Bold = True
-        .Interior.Color = RGB(221, 235, 247)
-        .HorizontalAlignment = xlCenter
-        .RowHeight = 24
-    End With
-
-    With resWs.Range(&quot;A&quot; &amp; rowIdx &amp; &quot;:D&quot; &amp; rowIdx)
-        .Font.Bold = True
-        .Interior.Color = RGB(221, 235, 247)
-    End With
-
-    resWs.Range(&quot;D2:D&quot; &amp; rowIdx).NumberFormat = &quot;#,##0&quot;
-    resWs.Columns(&quot;A&quot;).HorizontalAlignment = xlCenter
-    resWs.Columns(&quot;A:D&quot;).AutoFit
-
-    If resWs.Columns(&quot;A&quot;).ColumnWidth &lt; 8 Then resWs.Columns(&quot;A&quot;).ColumnWidth = 8
-
-    If resWs.Columns(&quot;B&quot;).ColumnWidth &lt; 20 Then resWs.Columns(&quot;B&quot;).ColumnWidth = 20
-
-    If resWs.Columns(&quot;C&quot;).ColumnWidth &lt; 28 Then resWs.Columns(&quot;C&quot;).ColumnWidth = 28
-
-    If resWs.Columns(&quot;D&quot;).ColumnWidth &lt; 16 Then resWs.Columns(&quot;D&quot;).ColumnWidth = 16
-
-    MsgBox &quot;발주미납 통합집계 완료&quot; &amp; vbCrLf &amp; &quot;총 미납수량: &quot; &amp; Format(totalQty, &quot;#,##0&quot;), vbInformation
-    Exit Sub
-
-Failed:
-    MsgBox Err.Description, vbExclamation
-
-End Sub
-
-Private Function HKey(ByVal v As Variant) As String
-    If IsError(v) Then Exit Function
-    Dim s As String
-    s = UCase$(Trim$(CStr(v)))
-    s = Replace(s, &quot; &quot;, &quot;&quot;)
-    s = Replace(s, ChrW(160), &quot;&quot;)
-    s = Replace(s, vbCr, &quot;&quot;)
-    s = Replace(s, vbLf, &quot;&quot;)
-    s = Replace(s, vbTab, &quot;&quot;)
-    s = Replace(s, &quot;△&quot;, &quot;&quot;)
-    s = Replace(s, &quot;▲&quot;, &quot;&quot;)
-    HKey = s
-End Function
-Private Function FindHeaders(ByVal ws As Worksheet, ByVal labels As Variant, ByRef hr As Long, ByRef cols As Variant) As Boolean
-    Dim r As Long, c As Long, j As Long, n As Long, hits As Long, found() As Long
-    n = UBound(labels) - LBound(labels) + 1
-    For r = 1 To 10
-        ReDim found(0 To n - 1)
-        For c = 1 To ws.Cells(r, ws.Columns.Count).End(xlToLeft).Column
-            For j = 0 To n - 1
-                If HKey(ws.Cells(r, c).Value2) = HKey(labels(j)) Then found(j) = c
-            Next j
-        Next c
-        hits = 0
-        For j = 0 To n - 1
-            If found(j) &gt; 0 Then hits = hits + 1
-        Next j
-        If hits = n Then
-            hr = r: cols = found: FindHeaders = True: Exit Function
-        End If
-    Next r
-End Function
-Private Function NewSheetName(ByVal wb As Workbook, ByVal base As String) As String
-    Dim s As String, i As Long, sh As Object, exists As Boolean
-    s = base
-    Do
-        exists = False
-        For Each sh In wb.Sheets
-            If StrComp(sh.Name, s, vbTextCompare) = 0 Then exists = True: Exit For
-        Next sh
-        If Not exists Then NewSheetName = s: Exit Function
-        i = i + 1: s = base &amp; &quot;_&quot; &amp; i
-    Loop
-End Function
+<label class="check"><input type="checkbox" data-check="ready"><span>XLAM과 리본 설정을 함께 백업하고 업데이트할 수 있다</span></label><article><h3>이전 실습 자료도 필요하다면</h3><p>기존 ITEM AUTO FILL·AIR CONFIRM 예제와 실습 키트는 별도 실습 페이지에 보관했습니다. 학습용 코드 버전과 이번 점검 파일은 서로 다릅니다. <a href="downloads/daea-macros-24-20260923.zip">9월 23일 이전 통합본 ZIP</a>도 참고용으로 보관합니다. 이번 파일 대신 설치하지 마세요.</p><a class="secondary" href="vba-practice-legacy.html">이전 VBA 예제 실습 열기 →</a></article></section><section class="panel" id="latest-code" aria-labelledby="title-latest-code" hidden><header class="sectionhead"><span class="eyebrow">2026.10.08 · 최신 코드</span><h2 id="title-latest-code" tabindex="-1">업무용 · 범용 VBA 코드</h2><p>모듈별 전체 코드 복사와 BAS 다운로드. 아래 자료가 최근 대화에서 수정한 최신 버전입니다.</p></header><p class="note">기존 XLAM을 백업하고 해당 모듈을 교체하세요. BAS 가져오기와 코드 붙여넣기는 둘 중 하나만 사용합니다. STOCK 이름을 바꾼 경우 리본도 다시 연결합니다. 아래 ZIP은 코드 모듈 자료이며 XLAM 완성본은 아닙니다.</p><p class="note">복사 오류 수정판: 모든 모듈에서 줄 연결 기호를 제거하고 Windows VBA용 줄바꿈으로 복사합니다. 이전에 붙인 코드는 해당 모듈에서 전체 선택 후 아래 코드로 교체하세요.</p><div class="module-picker"><label for="moduleSelect">복사할 모듈</label><select id="moduleSelect"></select><button id="openModule">코드 창 열기</button></div><p>Alt+F11 → 기존 모듈 선택 → 코드 전체를 교체하세요. 새 기능은 삽입 → 모듈에서 추가하고 표시된 모듈 이름을 지정하세요. 같은 실행 이름이 중복되지 않도록 기존 모듈에 덧붙이지 마세요. 아래 코드는 현재 배포 XLAM과 일치하며, 범용 도구는 별도 자료입니다.</p><article><h3>10월 8일 추가 반영</h3><p>부분합 글꼴·표·A4 흑백 인쇄 개선, 발주미납 집계 추가, 개인용 AIR CONFIRM V10 복구를 ZIP의 XLAM에도 반영했습니다. 입고관리의 수주처 1310 지원은 공장 구분 확인 후 반영 예정입니다.</p></article><article><h3>발주미납 집계</h3><p>수주번호의 F1/F2/F5별로 수주처 품목코드·품목명·미납잔량을 새 시트에 집계합니다.</p><p>모듈 이름: <code>modPurchaseOutstanding</code></p><div class="copyrow"><button data-copy="code-modPurchaseOutstanding">전체 코드 복사</button><a href="downloads/vba-20261008/modPurchaseOutstanding.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modPurchaseOutstanding">Option Explicit
+
+
+
+Public Sub 발주미납_집계()
+
+
+
+    Dim ws As Worksheet, resWs As Worksheet
+
+    Dim wb As Workbook
+
+    Dim dict As Object
+
+    Dim lastRow As Long, i As Long, rowIdx As Long
+
+    Dim customerCode As String, factory As String
+
+    Dim itemCode As String, itemName As String
+
+    Dim qty As Double, totalQty As Double
+
+    Dim key As String, k As Variant, data As Variant
+
+    Dim pass As Long
+
+    Dim baseName As String, sheetName As String
+
+    Dim suffix As Long
+
+    Dim sh As Object, nameExists As Boolean
+
+
+
+    Dim headerRow As Long, cols As Variant
+
+    On Error GoTo Failed
+
+
+
+    If TypeName(ActiveSheet) &lt;&gt; &quot;Worksheet&quot; Then
+
+        MsgBox &quot;발주미납 원본 시트를 선택해주세요.&quot;, vbExclamation
+
+        Exit Sub
+
+    End If
+
+
+
+    Set ws = ActiveSheet
+
+    Set wb = ws.Parent
+
+
+
+    If Not FindHeaders(ws, Array(&quot;수주번호&quot;, &quot;수주처 품목코드&quot;, &quot;품목명&quot;, &quot;미납수량&quot;), headerRow, cols) Then
+
+        Err.Raise vbObjectError + 700, , &quot;발주 미납 원본 시트를 선택하세요. 필요한 머리글: 수주번호/수주처 품목코드/품목명/미납수량&quot;
+
+    End If
+
+
+
+    lastRow = ws.Cells(ws.Rows.Count, cols(0)).End(xlUp).Row
+
+    If ws.Cells(ws.Rows.Count, cols(1)).End(xlUp).Row &gt; lastRow Then lastRow = ws.Cells(ws.Rows.Count, cols(1)).End(xlUp).Row
+
+    If ws.Cells(ws.Rows.Count, cols(2)).End(xlUp).Row &gt; lastRow Then lastRow = ws.Cells(ws.Rows.Count, cols(2)).End(xlUp).Row
+
+    If ws.Cells(ws.Rows.Count, cols(3)).End(xlUp).Row &gt; lastRow Then lastRow = ws.Cells(ws.Rows.Count, cols(3)).End(xlUp).Row
+
+
+
+    If lastRow &lt; 2 Then
+
+        MsgBox &quot;집계할 데이터가 없습니다.&quot;, vbInformation
+
+        Exit Sub
+
+    End If
+
+
+
+    Set dict = CreateObject(&quot;Scripting.Dictionary&quot;)
+
+
+
+    For i = headerRow + 1 To lastRow
+
+
+
+        If IsError(ws.Cells(i, cols(0)).Value2) Or IsError(ws.Cells(i, cols(1)).Value2) Or IsError(ws.Cells(i, cols(2)).Value2) Then
+
+
+
+            Err.Raise vbObjectError + 701, , &quot;공장·품목코드·품목명에 오류 셀이 있습니다. 행: &quot; &amp; i
+
+        End If
+
+
+
+        customerCode = Trim(CStr(ws.Cells(i, cols(0)).Value2))
+
+        itemCode = Trim(CStr(ws.Cells(i, cols(1)).Value2))
+
+        itemName = Trim(CStr(ws.Cells(i, cols(2)).Value2))
+
+
+
+        If customerCode = &quot;&quot; And itemCode = &quot;&quot; And itemName = &quot;&quot; Then
+
+            If InStr(1, CStr(ws.Cells(i, 4).Value2), &quot;합계&quot;, vbTextCompare) &gt; 0 Then GoTo NextRow
+
+        End If
+
+        &#x27; 원본 마지막 합계행 제외
+
+        If customerCode = &quot;&quot; And itemCode = &quot;&quot; Then
+
+            Select Case UCase(itemName)
+
+                Case &quot;합계&quot;, &quot;총 합계&quot;, &quot;총합계&quot;, &quot;계&quot;, &quot;TOTAL&quot;
+
+                    GoTo NextRow
+
+            End Select
+
+        End If
+
+
+
+        &#x27; 완전히 빈 행 제외
+
+        If customerCode = &quot;&quot; And itemCode = &quot;&quot; And itemName = &quot;&quot; Then
+
+            If Not IsError(ws.Cells(i, cols(3)).Value2) Then
+
+                If Len(Trim(CStr(ws.Cells(i, cols(3)).Value2))) = 0 Then
+
+                    GoTo NextRow
+
+                End If
+
+            End If
+
+        End If
+
+
+
+        If IsError(ws.Cells(i, cols(3)).Value2) Then
+
+            Err.Raise vbObjectError + 702, , &quot;미납수량에 오류 셀이 있습니다. 행: &quot; &amp; i
+
+        End If
+
+
+
+        If Not IsNumeric(ws.Cells(i, cols(3)).Value2) Then
+
+            Err.Raise vbObjectError + 703, , &quot;미납수량이 숫자가 아닙니다. 행: &quot; &amp; i
+
+        End If
+
+
+
+        If itemCode = &quot;&quot; And itemName = &quot;&quot; Then
+
+            Err.Raise vbObjectError + 704, , &quot;수량은 있지만 품목코드와 품목명이 없습니다. 행: &quot; &amp; i
+
+        End If
+
+
+
+        &#x27; 수주번호 앞자리 F1/F2/F5로 공장 구분
+
+        Select Case UCase$(Left$(customerCode, 2))
+
+            Case &quot;F1&quot;: factory = &quot;F1&quot;
+
+            Case &quot;F2&quot;: factory = &quot;F2&quot;
+
+            Case &quot;F5&quot;: factory = &quot;F5&quot;
+
+            Case Else
+
+                Err.Raise vbObjectError + 705, , &quot;수주번호에서 공장을 구분할 수 없습니다. 행: &quot; &amp; i &amp; &quot; / &quot; &amp; customerCode
+
+        End Select
+
+
+
+        qty = CDbl(ws.Cells(i, cols(3)).Value2)
+
+
+
+        &#x27; 공장 + 품목코드 + 품목명 기준 집계
+
+        key = Len(factory) &amp; &quot;:&quot; &amp; factory &amp; Len(itemCode) &amp; &quot;:&quot; &amp; itemCode &amp; itemName
+
+
+
+        If dict.Exists(key) Then
+
+            data = dict(key)
+
+            data(3) = data(3) + qty
+
+            dict(key) = data
+
+        Else
+
+            dict.Add key, Array(factory, itemCode, itemName, qty)
+
+        End If
+
+
+
+        totalQty = totalQty + qty
+
+
+
+NextRow:
+
+    Next i
+
+
+
+    If dict.Count = 0 Then
+
+        MsgBox &quot;집계할 상세 데이터가 없습니다.&quot;, vbInformation
+
+        Exit Sub
+
+    End If
+
+
+
+    &#x27; 결과 시트 이름 중복 방지
+
+    baseName = &quot;발주미납_통합_&quot; &amp; Format(Now, &quot;hhmmss&quot;)
+
+    sheetName = baseName
+
+
+
+    Do
+
+        nameExists = False
+
+
+
+        For Each sh In wb.Sheets
+
+            If StrComp(sh.Name, sheetName, vbTextCompare) = 0 Then
+
+                nameExists = True
+
+                Exit For
+
+            End If
+
+        Next sh
+
+
+
+        If Not nameExists Then Exit Do
+
+
+
+        suffix = suffix + 1
+
+        sheetName = baseName &amp; &quot;_&quot; &amp; suffix
+
+    Loop
+
+
+
+    Set resWs = wb.Worksheets.Add(After:=wb.Sheets(wb.Sheets.Count))
+
+    resWs.Name = sheetName
+
+
+
+    resWs.Range(&quot;A1:D1&quot;).Value = Array(&quot;FAC&quot;, &quot;수주처 품목코드&quot;, &quot;품목명&quot;, &quot;미납잔량&quot;)
+
+
+
+    resWs.Columns(&quot;B:C&quot;).NumberFormat = &quot;@&quot;
+
+    rowIdx = 2
+
+
+
+    &#x27; 품목코드가 없는 항목 먼저 출력
+
+    For pass = 1 To 2
+
+        For Each k In dict.Keys
+
+
+
+            data = dict(k)
+
+
+
+            If (pass = 1 And data(1) = &quot;&quot;) Or (pass = 2 And data(1) &lt;&gt; &quot;&quot;) Then
+
+
+
+                resWs.Cells(rowIdx, 1).Value2 = data(0)
+
+                resWs.Cells(rowIdx, 2).Value2 = data(1)
+
+                resWs.Cells(rowIdx, 3).Value2 = data(2)
+
+                resWs.Cells(rowIdx, 4).Value2 = data(3)
+
+
+
+                rowIdx = rowIdx + 1
+
+            End If
+
+
+
+        Next k
+
+    Next pass
+
+
+
+    If rowIdx &gt; 3 Then
+
+        resWs.Range(&quot;A1:D&quot; &amp; rowIdx - 1).Sort Key1:=resWs.Range(&quot;A2&quot;), Order1:=xlAscending, Key2:=resWs.Range(&quot;B2&quot;), Order2:=xlAscending, Key3:=resWs.Range(&quot;C2&quot;), Order3:=xlAscending, Header:=xlYes
+
+    End If
+
+    resWs.Cells(rowIdx, 3).Value2 = &quot;TOTAL&quot;
+
+    resWs.Cells(rowIdx, 4).Value2 = totalQty
+
+
+
+    With resWs.Range(&quot;A1:D&quot; &amp; rowIdx)
+
+        .Font.Name = &quot;Arial&quot;
+
+        .Font.Size = 9
+
+        .Font.Color = vbBlack
+
+        .VerticalAlignment = xlCenter
+
+        .Borders.LineStyle = xlContinuous
+
+        .Borders.Weight = xlThin
+
+        .Borders.Color = RGB(200, 200, 200)
+
+        .RowHeight = 18
+
+    End With
+
+
+
+    With resWs.Range(&quot;A1:D1&quot;)
+
+        .Font.Bold = True
+
+        .Interior.Color = RGB(221, 235, 247)
+
+        .HorizontalAlignment = xlCenter
+
+        .RowHeight = 24
+
+    End With
+
+
+
+    With resWs.Range(&quot;A&quot; &amp; rowIdx &amp; &quot;:D&quot; &amp; rowIdx)
+
+        .Font.Bold = True
+
+        .Interior.Color = RGB(221, 235, 247)
+
+    End With
+
+
+
+    resWs.Range(&quot;D2:D&quot; &amp; rowIdx).NumberFormat = &quot;#,##0&quot;
+
+    resWs.Columns(&quot;A&quot;).HorizontalAlignment = xlCenter
+
+    resWs.Columns(&quot;A:D&quot;).AutoFit
+
+
+
+    If resWs.Columns(&quot;A&quot;).ColumnWidth &lt; 8 Then resWs.Columns(&quot;A&quot;).ColumnWidth = 8
+
+
+
+    If resWs.Columns(&quot;B&quot;).ColumnWidth &lt; 20 Then resWs.Columns(&quot;B&quot;).ColumnWidth = 20
+
+
+
+    If resWs.Columns(&quot;C&quot;).ColumnWidth &lt; 28 Then resWs.Columns(&quot;C&quot;).ColumnWidth = 28
+
+
+
+    If resWs.Columns(&quot;D&quot;).ColumnWidth &lt; 16 Then resWs.Columns(&quot;D&quot;).ColumnWidth = 16
+
+
+
+    MsgBox &quot;발주미납 통합집계 완료&quot; &amp; vbCrLf &amp; &quot;총 미납수량: &quot; &amp; Format(totalQty, &quot;#,##0&quot;), vbInformation
+
+    Exit Sub
+
+
+
+Failed:
+
+    MsgBox Err.Description, vbExclamation
+
+
+
+End Sub
+
+
+
+Private Function HKey(ByVal v As Variant) As String
+
+    If IsError(v) Then Exit Function
+
+    Dim s As String
+
+    s = UCase$(Trim$(CStr(v)))
+
+    s = Replace(s, &quot; &quot;, &quot;&quot;)
+
+    s = Replace(s, ChrW(160), &quot;&quot;)
+
+    s = Replace(s, vbCr, &quot;&quot;)
+
+    s = Replace(s, vbLf, &quot;&quot;)
+
+    s = Replace(s, vbTab, &quot;&quot;)
+
+    s = Replace(s, &quot;△&quot;, &quot;&quot;)
+
+    s = Replace(s, &quot;▲&quot;, &quot;&quot;)
+
+    HKey = s
+
+End Function
+
+Private Function FindHeaders(ByVal ws As Worksheet, ByVal labels As Variant, ByRef hr As Long, ByRef cols As Variant) As Boolean
+
+    Dim r As Long, c As Long, j As Long, n As Long, hits As Long, found() As Long
+
+    n = UBound(labels) - LBound(labels) + 1
+
+    For r = 1 To 10
+
+        ReDim found(0 To n - 1)
+
+        For c = 1 To ws.Cells(r, ws.Columns.Count).End(xlToLeft).Column
+
+            For j = 0 To n - 1
+
+                If HKey(ws.Cells(r, c).Value2) = HKey(labels(j)) Then found(j) = c
+
+            Next j
+
+        Next c
+
+        hits = 0
+
+        For j = 0 To n - 1
+
+            If found(j) &gt; 0 Then hits = hits + 1
+
+        Next j
+
+        If hits = n Then
+
+            hr = r: cols = found: FindHeaders = True: Exit Function
+
+        End If
+
+    Next r
+
+End Function
+
+Private Function NewSheetName(ByVal wb As Workbook, ByVal base As String) As String
+
+    Dim s As String, i As Long, sh As Object, exists As Boolean
+
+    s = base
+
+    Do
+
+        exists = False
+
+        For Each sh In wb.Sheets
+
+            If StrComp(sh.Name, s, vbTextCompare) = 0 Then exists = True: Exit For
+
+        Next sh
+
+        If Not exists Then NewSheetName = s: Exit Function
+
+        i = i + 1: s = base &amp; &quot;_&quot; &amp; i
+
+    Loop
+
+End Function
 </pre></details></article><article><h3>AIR CONFIRM V10 복구</h3><p>개인용 기존 입력 양식 전용입니다. BuildTuesdayConfirm 또는 BuildThursdayConfirm을 실행합니다. 기존 확인 결과 시트는 다시 작성합니다.</p><p>모듈 이름: <code>modAirConfirmV10</code></p><div class="copyrow"><button data-copy="code-modAirConfirmV10">전체 코드 복사</button><a href="downloads/vba-20261008/modAirConfirmV10.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modAirConfirmV10">Option Explicit
 
 
@@ -538,11 +796,7 @@ Private Sub BuildByMode(ByVal modeText As String)
 
     Application.ScreenUpdating = True
 
-    MsgBox modeText &amp; &quot; confirmation completed.&quot; &amp; vbCrLf &amp; _
-           wsOut.Name &amp; &quot;: &quot; &amp; CStr(outRow - 2) &amp; &quot; rows&quot; &amp; vbCrLf &amp; _
-           &quot;THAI_F1F2: &quot; &amp; CStr(f12Row - 2) &amp; &quot; rows&quot; &amp; vbCrLf &amp; _
-           &quot;THAI_F5: &quot; &amp; CStr(f5Row - 2) &amp; &quot; rows&quot; &amp; vbCrLf &amp; _
-           &quot;CHECK: &quot; &amp; CStr(checkRow - 2) &amp; &quot; rows&quot;, vbInformation
+MsgBox modeText &amp; &quot; confirmation completed.&quot; &amp; vbCrLf &amp; wsOut.Name &amp; &quot;: &quot; &amp; CStr(outRow - 2) &amp; &quot; rows&quot; &amp; vbCrLf &amp; &quot;THAI_F1F2: &quot; &amp; CStr(f12Row - 2) &amp; &quot; rows&quot; &amp; vbCrLf &amp; &quot;THAI_F5: &quot; &amp; CStr(f5Row - 2) &amp; &quot; rows&quot; &amp; vbCrLf &amp; &quot;CHECK: &quot; &amp; CStr(checkRow - 2) &amp; &quot; rows&quot;, vbInformation
 
     Exit Sub
 
@@ -556,9 +810,7 @@ CleanFail:
 
     Application.ScreenUpdating = True
 
-    MsgBox &quot;Macro stopped.&quot; &amp; vbCrLf &amp; _
-           &quot;Step: &quot; &amp; currentStep &amp; vbCrLf &amp; _
-           &quot;Error &quot; &amp; CStr(Err.Number) &amp; &quot;: &quot; &amp; Err.Description, vbExclamation
+MsgBox &quot;Macro stopped.&quot; &amp; vbCrLf &amp; &quot;Step: &quot; &amp; currentStep &amp; vbCrLf &amp; &quot;Error &quot; &amp; CStr(Err.Number) &amp; &quot;: &quot; &amp; Err.Description, vbExclamation
 
 End Sub
 
@@ -1912,7 +2164,8 @@ Private Sub SortOutput(ByVal ws As Worksheet, ByVal lastRow As Long, ByVal lastC
 
     End With
 
-End Sub</pre></details></article><article><h3>업무용 최신 코드</h3><a class="primary" href="downloads/vba-business-20261008.zip" download>업무용 최신 코드 전체 BAS 받기</a><p>제공한 출고·입고 예시 복사본에서 최신 STOCK·입고·재고리스트 합계 검증 완료. 원본은 수정하지 않았습니다.</p></article><article><h3>STOCK 통합집계</h3><p>출고 Sheet1 · Y열 출고처코드로 구분 · 합계행 제외 · 한 시트 출력</p><p>모듈 이름: <code>modShipmentSummary</code></p><div class="copyrow"><button data-copy="code-modShipmentSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modShipmentSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modShipmentSummary">Option Explicit
+End Sub
+</pre></details></article><article><h3>업무용 최신 코드</h3><a class="primary" href="downloads/vba-business-20261008.zip" download>업무용 최신 코드 전체 BAS 받기</a><p>제공한 출고·입고 예시 복사본에서 최신 STOCK·입고·재고리스트 합계 검증 완료. 원본은 수정하지 않았습니다.</p></article><article><h3>STOCK 통합집계</h3><p>출고 Sheet1 · Y열 출고처코드로 구분 · 합계행 제외 · 한 시트 출력</p><p>모듈 이름: <code>modShipmentSummary</code></p><div class="copyrow"><button data-copy="code-modShipmentSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modShipmentSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modShipmentSummary">Option Explicit
 
 
 
@@ -1968,16 +2221,11 @@ Public Sub STOCK_통합집계()
 
     &#x27; 원본 열 확인
 
-    If Trim(CStr(ws.Cells(1, &quot;Y&quot;).Value2)) &lt;&gt; &quot;출고처코드&quot; Or _
-       Trim(CStr(ws.Cells(1, &quot;U&quot;).Value2)) &lt;&gt; &quot;거래처 품목코드&quot; Or _
-       Trim(CStr(ws.Cells(1, &quot;I&quot;).Value2)) &lt;&gt; &quot;출고수량&quot; Then
+If Trim(CStr(ws.Cells(1, &quot;Y&quot;).Value2)) &lt;&gt; &quot;출고처코드&quot; Or Trim(CStr(ws.Cells(1, &quot;U&quot;).Value2)) &lt;&gt; &quot;거래처 품목코드&quot; Or Trim(CStr(ws.Cells(1, &quot;I&quot;).Value2)) &lt;&gt; &quot;출고수량&quot; Then
 
 
 
-        MsgBox &quot;원본 열을 확인해주세요.&quot; &amp; vbCrLf &amp; _
-               &quot;Y열: 출고처코드&quot; &amp; vbCrLf &amp; _
-               &quot;U열: 거래처 품목코드&quot; &amp; vbCrLf &amp; _
-               &quot;I열: 출고수량&quot;, vbExclamation
+MsgBox &quot;원본 열을 확인해주세요.&quot; &amp; vbCrLf &amp; &quot;Y열: 출고처코드&quot; &amp; vbCrLf &amp; &quot;U열: 거래처 품목코드&quot; &amp; vbCrLf &amp; &quot;I열: 출고수량&quot;, vbExclamation
 
         Exit Sub
 
@@ -1985,11 +2233,7 @@ Public Sub STOCK_통합집계()
 
 
 
-    lastRow = Application.Max( _
-        ws.Cells(ws.Rows.Count, &quot;C&quot;).End(xlUp).Row, _
-        ws.Cells(ws.Rows.Count, &quot;U&quot;).End(xlUp).Row, _
-        ws.Cells(ws.Rows.Count, &quot;Y&quot;).End(xlUp).Row, _
-        ws.Cells(ws.Rows.Count, &quot;I&quot;).End(xlUp).Row)
+lastRow = Application.Max( ws.Cells(ws.Rows.Count, &quot;C&quot;).End(xlUp).Row, ws.Cells(ws.Rows.Count, &quot;U&quot;).End(xlUp).Row, ws.Cells(ws.Rows.Count, &quot;Y&quot;).End(xlUp).Row, ws.Cells(ws.Rows.Count, &quot;I&quot;).End(xlUp).Row)
 
 
 
@@ -2011,14 +2255,11 @@ Public Sub STOCK_통합집계()
 
 
 
-        If IsError(ws.Cells(i, &quot;Y&quot;).Value2) Or _
-           IsError(ws.Cells(i, &quot;U&quot;).Value2) Or _
-           IsError(ws.Cells(i, &quot;C&quot;).Value2) Then
+If IsError(ws.Cells(i, &quot;Y&quot;).Value2) Or IsError(ws.Cells(i, &quot;U&quot;).Value2) Or IsError(ws.Cells(i, &quot;C&quot;).Value2) Then
 
 
 
-            Err.Raise vbObjectError + 701, , _
-                &quot;공장·품목코드·품목명에 오류 셀이 있습니다. 행: &quot; &amp; i
+Err.Raise vbObjectError + 701, , &quot;공장·품목코드·품목명에 오류 셀이 있습니다. 행: &quot; &amp; i
 
         End If
 
@@ -2068,8 +2309,7 @@ Public Sub STOCK_통합집계()
 
         If IsError(ws.Cells(i, &quot;I&quot;).Value2) Then
 
-            Err.Raise vbObjectError + 702, , _
-                &quot;출고수량에 오류 셀이 있습니다. 행: &quot; &amp; i
+Err.Raise vbObjectError + 702, , &quot;출고수량에 오류 셀이 있습니다. 행: &quot; &amp; i
 
         End If
 
@@ -2077,8 +2317,7 @@ Public Sub STOCK_통합집계()
 
         If Not IsNumeric(ws.Cells(i, &quot;I&quot;).Value2) Then
 
-            Err.Raise vbObjectError + 703, , _
-                &quot;출고수량이 숫자가 아닙니다. 행: &quot; &amp; i
+Err.Raise vbObjectError + 703, , &quot;출고수량이 숫자가 아닙니다. 행: &quot; &amp; i
 
         End If
 
@@ -2086,8 +2325,7 @@ Public Sub STOCK_통합집계()
 
         If itemCode = &quot;&quot; And itemName = &quot;&quot; Then
 
-            Err.Raise vbObjectError + 704, , _
-                &quot;수량은 있지만 품목코드와 품목명이 없습니다. 행: &quot; &amp; i
+Err.Raise vbObjectError + 704, , &quot;수량은 있지만 품목코드와 품목명이 없습니다. 행: &quot; &amp; i
 
         End If
 
@@ -2131,8 +2369,7 @@ Public Sub STOCK_통합집계()
 
         &#x27; 공장 + 품목코드 + 품목명 기준 집계
 
-        key = Len(factory) &amp; &quot;:&quot; &amp; factory &amp; _
-              Len(itemCode) &amp; &quot;:&quot; &amp; itemCode &amp; itemName
+key = Len(factory) &amp; &quot;:&quot; &amp; factory &amp; Len(itemCode) &amp; &quot;:&quot; &amp; itemCode &amp; itemName
 
 
 
@@ -2218,8 +2455,7 @@ NextRow:
 
 
 
-    resWs.Range(&quot;A1:D1&quot;).value = _
-        Array(&quot;FAC&quot;, &quot;ITEM CD&quot;, &quot;Part Name&quot;, &quot;Shipped Q&#x27;ty&quot;)
+resWs.Range(&quot;A1:D1&quot;).value = Array(&quot;FAC&quot;, &quot;ITEM CD&quot;, &quot;Part Name&quot;, &quot;Shipped Q&#x27;ty&quot;)
 
 
 
@@ -2241,8 +2477,7 @@ NextRow:
 
 
 
-            If (pass = 1 And data(1) = &quot;&quot;) Or _
-               (pass = 2 And data(1) &lt;&gt; &quot;&quot;) Then
+If (pass = 1 And data(1) = &quot;&quot;) Or (pass = 2 And data(1) &lt;&gt; &quot;&quot;) Then
 
 
 
@@ -2328,28 +2563,23 @@ NextRow:
 
 
 
-    If resWs.Columns(&quot;A&quot;).ColumnWidth &lt; 8 Then _
-        resWs.Columns(&quot;A&quot;).ColumnWidth = 8
+If resWs.Columns(&quot;A&quot;).ColumnWidth &lt; 8 Then resWs.Columns(&quot;A&quot;).ColumnWidth = 8
 
 
 
-    If resWs.Columns(&quot;B&quot;).ColumnWidth &lt; 20 Then _
-        resWs.Columns(&quot;B&quot;).ColumnWidth = 20
+If resWs.Columns(&quot;B&quot;).ColumnWidth &lt; 20 Then resWs.Columns(&quot;B&quot;).ColumnWidth = 20
 
 
 
-    If resWs.Columns(&quot;C&quot;).ColumnWidth &lt; 28 Then _
-        resWs.Columns(&quot;C&quot;).ColumnWidth = 28
+If resWs.Columns(&quot;C&quot;).ColumnWidth &lt; 28 Then resWs.Columns(&quot;C&quot;).ColumnWidth = 28
 
 
 
-    If resWs.Columns(&quot;D&quot;).ColumnWidth &lt; 16 Then _
-        resWs.Columns(&quot;D&quot;).ColumnWidth = 16
+If resWs.Columns(&quot;D&quot;).ColumnWidth &lt; 16 Then resWs.Columns(&quot;D&quot;).ColumnWidth = 16
 
 
 
-    MsgBox &quot;STOCK 통합집계 완료&quot; &amp; vbCrLf &amp; _
-           &quot;총 출고수량: &quot; &amp; Format(totalQty, &quot;#,##0&quot;), vbInformation
+MsgBox &quot;STOCK 통합집계 완료&quot; &amp; vbCrLf &amp; &quot;총 출고수량: &quot; &amp; Format(totalQty, &quot;#,##0&quot;), vbInformation
 
     Exit Sub
 
@@ -2361,7 +2591,8 @@ Failed:
 
 
 
-End Sub</pre></details></article><article><h3>STOCK 공장별 시트</h3><p>출고 Sheet1 → F1/F2/F5 · 확인필요 시트 없음 · 미등록 공장코드는 중단</p><p>모듈 이름: <code>modFactoryShipment</code></p><div class="copyrow"><button data-copy="code-modFactoryShipment">전체 코드 복사</button><a href="downloads/vba-20261008/modFactoryShipment.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modFactoryShipment">Option Explicit
+End Sub
+</pre></details></article><article><h3>STOCK 공장별 시트</h3><p>출고 Sheet1 → F1/F2/F5 · 확인필요 시트 없음 · 미등록 공장코드는 중단</p><p>모듈 이름: <code>modFactoryShipment</code></p><div class="copyrow"><button data-copy="code-modFactoryShipment">전체 코드 복사</button><a href="downloads/vba-20261008/modFactoryShipment.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modFactoryShipment">Option Explicit
 
 
 
@@ -2415,17 +2646,11 @@ Public Sub STOCK_공장별_시트()
 
     &#x27; 원본 열 확인
 
-    If Trim(CStr(ws.Cells(1, &quot;Y&quot;).Value2)) &lt;&gt; &quot;출고처코드&quot; Or _
-       Trim(CStr(ws.Cells(1, &quot;U&quot;).Value2)) &lt;&gt; &quot;거래처 품목코드&quot; Or _
-       Trim(CStr(ws.Cells(1, &quot;I&quot;).Value2)) &lt;&gt; &quot;출고수량&quot; Then
+If Trim(CStr(ws.Cells(1, &quot;Y&quot;).Value2)) &lt;&gt; &quot;출고처코드&quot; Or Trim(CStr(ws.Cells(1, &quot;U&quot;).Value2)) &lt;&gt; &quot;거래처 품목코드&quot; Or Trim(CStr(ws.Cells(1, &quot;I&quot;).Value2)) &lt;&gt; &quot;출고수량&quot; Then
 
 
 
-        MsgBox &quot;STOCK 원본의 열을 확인해주세요.&quot; &amp; vbCrLf &amp; _
-               &quot;Y열: 출고처코드&quot; &amp; vbCrLf &amp; _
-               &quot;U열: 거래처 품목코드&quot; &amp; vbCrLf &amp; _
-               &quot;C열: 품목명&quot; &amp; vbCrLf &amp; _
-               &quot;I열: 출고수량&quot;, vbExclamation
+MsgBox &quot;STOCK 원본의 열을 확인해주세요.&quot; &amp; vbCrLf &amp; &quot;Y열: 출고처코드&quot; &amp; vbCrLf &amp; &quot;U열: 거래처 품목코드&quot; &amp; vbCrLf &amp; &quot;C열: 품목명&quot; &amp; vbCrLf &amp; &quot;I열: 출고수량&quot;, vbExclamation
 
         Exit Sub
 
@@ -2447,9 +2672,7 @@ Public Sub STOCK_공장별_시트()
 
             If StrComp(sh.Name, CStr(fac), vbTextCompare) = 0 Then
 
-                MsgBox fac &amp; &quot; 시트가 이미 있습니다.&quot; &amp; vbCrLf &amp; _
-                       &quot;기존 시트 이름을 변경한 후 다시 실행해주세요.&quot;, _
-                       vbExclamation
+MsgBox fac &amp; &quot; 시트가 이미 있습니다.&quot; &amp; vbCrLf &amp; &quot;기존 시트 이름을 변경한 후 다시 실행해주세요.&quot;, vbExclamation
 
                 Exit Sub
 
@@ -2477,11 +2700,7 @@ Public Sub STOCK_공장별_시트()
 
 
 
-    lastRow = Application.Max( _
-        ws.Cells(ws.Rows.Count, &quot;Y&quot;).End(xlUp).Row, _
-        ws.Cells(ws.Rows.Count, &quot;U&quot;).End(xlUp).Row, _
-        ws.Cells(ws.Rows.Count, &quot;C&quot;).End(xlUp).Row, _
-        ws.Cells(ws.Rows.Count, &quot;I&quot;).End(xlUp).Row)
+lastRow = Application.Max( ws.Cells(ws.Rows.Count, &quot;Y&quot;).End(xlUp).Row, ws.Cells(ws.Rows.Count, &quot;U&quot;).End(xlUp).Row, ws.Cells(ws.Rows.Count, &quot;C&quot;).End(xlUp).Row, ws.Cells(ws.Rows.Count, &quot;I&quot;).End(xlUp).Row)
 
 
 
@@ -2493,15 +2712,11 @@ Public Sub STOCK_공장별_시트()
 
 
 
-        If IsError(ws.Cells(i, &quot;Y&quot;).Value2) Or _
-           IsError(ws.Cells(i, &quot;U&quot;).Value2) Or _
-           IsError(ws.Cells(i, &quot;C&quot;).Value2) Then
+If IsError(ws.Cells(i, &quot;Y&quot;).Value2) Or IsError(ws.Cells(i, &quot;U&quot;).Value2) Or IsError(ws.Cells(i, &quot;C&quot;).Value2) Then
 
 
 
-            Err.Raise vbObjectError + 720, , _
-                &quot;출고처·품목코드·품목명에 오류 셀이 있습니다.&quot; &amp; _
-                vbCrLf &amp; &quot;원본 행: &quot; &amp; i
+Err.Raise vbObjectError + 720, , &quot;출고처·품목코드·품목명에 오류 셀이 있습니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; i
 
         End If
 
@@ -2551,9 +2766,7 @@ Public Sub STOCK_공장별_시트()
 
         If IsError(ws.Cells(i, &quot;I&quot;).Value2) Then
 
-            Err.Raise vbObjectError + 721, , _
-                &quot;출고수량에 오류 셀이 있습니다.&quot; &amp; _
-                vbCrLf &amp; &quot;원본 행: &quot; &amp; i
+Err.Raise vbObjectError + 721, , &quot;출고수량에 오류 셀이 있습니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; i
 
         End If
 
@@ -2561,9 +2774,7 @@ Public Sub STOCK_공장별_시트()
 
         If Not IsNumeric(ws.Cells(i, &quot;I&quot;).Value2) Then
 
-            Err.Raise vbObjectError + 722, , _
-                &quot;출고수량이 숫자가 아닙니다.&quot; &amp; _
-                vbCrLf &amp; &quot;원본 행: &quot; &amp; i
+Err.Raise vbObjectError + 722, , &quot;출고수량이 숫자가 아닙니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; i
 
         End If
 
@@ -2571,9 +2782,7 @@ Public Sub STOCK_공장별_시트()
 
         If itemCode = &quot;&quot; And itemName = &quot;&quot; Then
 
-            Err.Raise vbObjectError + 723, , _
-                &quot;수량은 있지만 품목코드와 품목명이 없습니다.&quot; &amp; _
-                vbCrLf &amp; &quot;원본 행: &quot; &amp; i
+Err.Raise vbObjectError + 723, , &quot;수량은 있지만 품목코드와 품목명이 없습니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; i
 
         End If
 
@@ -2597,12 +2806,7 @@ Public Sub STOCK_공장별_시트()
 
             Case Else
 
-                Err.Raise vbObjectError + 724, , _
-                    &quot;공장을 구분할 수 없는 출고처코드입니다.&quot; &amp; vbCrLf &amp; _
-                    &quot;원본 행: &quot; &amp; i &amp; vbCrLf &amp; _
-                    &quot;Y열 값: [&quot; &amp; customerCode &amp; &quot;]&quot; &amp; vbCrLf &amp; _
-                    &quot;1010 / 1060 / 1150인지 확인해주세요.&quot; &amp; vbCrLf &amp; _
-                    &quot;결과 시트는 생성하지 않았습니다.&quot;
+Err.Raise vbObjectError + 724, , &quot;공장을 구분할 수 없는 출고처코드입니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; i &amp; vbCrLf &amp; &quot;Y열 값: [&quot; &amp; customerCode &amp; &quot;]&quot; &amp; vbCrLf &amp; &quot;1010 / 1060 / 1150인지 확인해주세요.&quot; &amp; vbCrLf &amp; &quot;결과 시트는 생성하지 않았습니다.&quot;
 
         End Select
 
@@ -2676,8 +2880,7 @@ NextStockRow:
 
 
 
-        resWs.Range(&quot;A1:D1&quot;).value = _
-            Array(&quot;FAC&quot;, &quot;ITEM CD&quot;, &quot;Part Name&quot;, &quot;Shipped Q&#x27;ty&quot;)
+resWs.Range(&quot;A1:D1&quot;).value = Array(&quot;FAC&quot;, &quot;ITEM CD&quot;, &quot;Part Name&quot;, &quot;Shipped Q&#x27;ty&quot;)
 
 
 
@@ -2701,8 +2904,7 @@ NextStockRow:
 
 
 
-                If (pass = 1 And data(0) = &quot;&quot;) Or _
-                   (pass = 2 And data(0) &lt;&gt; &quot;&quot;) Then
+If (pass = 1 And data(0) = &quot;&quot;) Or (pass = 2 And data(0) &lt;&gt; &quot;&quot;) Then
 
 
 
@@ -2790,23 +2992,19 @@ NextStockRow:
 
 
 
-        If resWs.Columns(&quot;A&quot;).ColumnWidth &lt; 8 Then _
-            resWs.Columns(&quot;A&quot;).ColumnWidth = 8
+If resWs.Columns(&quot;A&quot;).ColumnWidth &lt; 8 Then resWs.Columns(&quot;A&quot;).ColumnWidth = 8
 
 
 
-        If resWs.Columns(&quot;B&quot;).ColumnWidth &lt; 20 Then _
-            resWs.Columns(&quot;B&quot;).ColumnWidth = 20
+If resWs.Columns(&quot;B&quot;).ColumnWidth &lt; 20 Then resWs.Columns(&quot;B&quot;).ColumnWidth = 20
 
 
 
-        If resWs.Columns(&quot;C&quot;).ColumnWidth &lt; 28 Then _
-            resWs.Columns(&quot;C&quot;).ColumnWidth = 28
+If resWs.Columns(&quot;C&quot;).ColumnWidth &lt; 28 Then resWs.Columns(&quot;C&quot;).ColumnWidth = 28
 
 
 
-        If resWs.Columns(&quot;D&quot;).ColumnWidth &lt; 16 Then _
-            resWs.Columns(&quot;D&quot;).ColumnWidth = 16
+If resWs.Columns(&quot;D&quot;).ColumnWidth &lt; 16 Then resWs.Columns(&quot;D&quot;).ColumnWidth = 16
 
 
 
@@ -2814,10 +3012,7 @@ NextStockRow:
 
 
 
-    MsgBox &quot;공장별 출고 정리가 완료되었습니다.&quot; &amp; vbCrLf &amp; _
-           &quot;생성 시트: F1 / F2 / F5&quot; &amp; vbCrLf &amp; _
-           &quot;전체 출고수량: &quot; &amp; Format(grandTotal, &quot;#,##0&quot;), _
-           vbInformation
+MsgBox &quot;공장별 출고 정리가 완료되었습니다.&quot; &amp; vbCrLf &amp; &quot;생성 시트: F1 / F2 / F5&quot; &amp; vbCrLf &amp; &quot;전체 출고수량: &quot; &amp; Format(grandTotal, &quot;#,##0&quot;), vbInformation
 
     Exit Sub
 
@@ -2829,7 +3024,8 @@ Failed:
 
 
 
-End Sub</pre></details></article><article><h3>입고관리</h3><p>입고 Sheet1 → 입고_F1/F2/F5 · 확인필요 시트 없음 · 원본 합계행 제외</p><p>모듈 이름: <code>modInboundSummary</code></p><div class="copyrow"><button data-copy="code-modInboundSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modInboundSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modInboundSummary">Option Explicit
+End Sub
+</pre></details></article><article><h3>입고관리</h3><p>입고 Sheet1 → 입고_F1/F2/F5 · 확인필요 시트 없음 · 원본 합계행 제외</p><p>모듈 이름: <code>modInboundSummary</code></p><div class="copyrow"><button data-copy="code-modInboundSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modInboundSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modInboundSummary">Option Explicit
 
 
 
@@ -2885,17 +3081,11 @@ Public Sub 입고관리()
 
     &#x27; 원본 열 확인
 
-    If Trim(CStr(ws.Cells(1, &quot;B&quot;).Value2)) &lt;&gt; &quot;수주처&quot; Or _
-       Trim(CStr(ws.Cells(1, &quot;AQ&quot;).Value2)) &lt;&gt; &quot;수주처 품목코드&quot; Or _
-       Trim(CStr(ws.Cells(1, &quot;K&quot;).Value2)) &lt;&gt; &quot;입고수량&quot; Then
+If Trim(CStr(ws.Cells(1, &quot;B&quot;).Value2)) &lt;&gt; &quot;수주처&quot; Or Trim(CStr(ws.Cells(1, &quot;AQ&quot;).Value2)) &lt;&gt; &quot;수주처 품목코드&quot; Or Trim(CStr(ws.Cells(1, &quot;K&quot;).Value2)) &lt;&gt; &quot;입고수량&quot; Then
 
 
 
-        MsgBox &quot;입고 원본의 열을 확인해주세요.&quot; &amp; vbCrLf &amp; _
-               &quot;B열: 수주처&quot; &amp; vbCrLf &amp; _
-               &quot;AQ열: 수주처 품목코드&quot; &amp; vbCrLf &amp; _
-               &quot;G열: 품목명&quot; &amp; vbCrLf &amp; _
-               &quot;K열: 입고수량&quot;, vbExclamation
+MsgBox &quot;입고 원본의 열을 확인해주세요.&quot; &amp; vbCrLf &amp; &quot;B열: 수주처&quot; &amp; vbCrLf &amp; &quot;AQ열: 수주처 품목코드&quot; &amp; vbCrLf &amp; &quot;G열: 품목명&quot; &amp; vbCrLf &amp; &quot;K열: 입고수량&quot;, vbExclamation
 
         Exit Sub
 
@@ -2921,9 +3111,7 @@ Public Sub 입고관리()
 
             If StrComp(sh.Name, resultName, vbTextCompare) = 0 Then
 
-                MsgBox resultName &amp; &quot; 시트가 이미 있습니다.&quot; &amp; vbCrLf &amp; _
-                       &quot;기존 시트 이름을 변경한 후 다시 실행해주세요.&quot;, _
-                       vbExclamation
+MsgBox resultName &amp; &quot; 시트가 이미 있습니다.&quot; &amp; vbCrLf &amp; &quot;기존 시트 이름을 변경한 후 다시 실행해주세요.&quot;, vbExclamation
 
                 Exit Sub
 
@@ -2951,11 +3139,7 @@ Public Sub 입고관리()
 
 
 
-    lastRow = Application.Max( _
-        ws.Cells(ws.Rows.Count, &quot;B&quot;).End(xlUp).Row, _
-        ws.Cells(ws.Rows.Count, &quot;AQ&quot;).End(xlUp).Row, _
-        ws.Cells(ws.Rows.Count, &quot;G&quot;).End(xlUp).Row, _
-        ws.Cells(ws.Rows.Count, &quot;K&quot;).End(xlUp).Row)
+lastRow = Application.Max( ws.Cells(ws.Rows.Count, &quot;B&quot;).End(xlUp).Row, ws.Cells(ws.Rows.Count, &quot;AQ&quot;).End(xlUp).Row, ws.Cells(ws.Rows.Count, &quot;G&quot;).End(xlUp).Row, ws.Cells(ws.Rows.Count, &quot;K&quot;).End(xlUp).Row)
 
 
 
@@ -2967,15 +3151,11 @@ Public Sub 입고관리()
 
 
 
-        If IsError(ws.Cells(i, &quot;B&quot;).Value2) Or _
-           IsError(ws.Cells(i, &quot;AQ&quot;).Value2) Or _
-           IsError(ws.Cells(i, &quot;G&quot;).Value2) Then
+If IsError(ws.Cells(i, &quot;B&quot;).Value2) Or IsError(ws.Cells(i, &quot;AQ&quot;).Value2) Or IsError(ws.Cells(i, &quot;G&quot;).Value2) Then
 
 
 
-            Err.Raise vbObjectError + 710, , _
-                &quot;수주처·품목코드·품목명에 오류 셀이 있습니다.&quot; &amp; _
-                vbCrLf &amp; &quot;원본 행: &quot; &amp; i
+Err.Raise vbObjectError + 710, , &quot;수주처·품목코드·품목명에 오류 셀이 있습니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; i
 
         End If
 
@@ -3025,9 +3205,7 @@ Public Sub 입고관리()
 
         If IsError(ws.Cells(i, &quot;K&quot;).Value2) Then
 
-            Err.Raise vbObjectError + 711, , _
-                &quot;입고수량에 오류 셀이 있습니다.&quot; &amp; _
-                vbCrLf &amp; &quot;원본 행: &quot; &amp; i
+Err.Raise vbObjectError + 711, , &quot;입고수량에 오류 셀이 있습니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; i
 
         End If
 
@@ -3035,9 +3213,7 @@ Public Sub 입고관리()
 
         If Not IsNumeric(ws.Cells(i, &quot;K&quot;).Value2) Then
 
-            Err.Raise vbObjectError + 712, , _
-                &quot;입고수량이 숫자가 아닙니다.&quot; &amp; _
-                vbCrLf &amp; &quot;원본 행: &quot; &amp; i
+Err.Raise vbObjectError + 712, , &quot;입고수량이 숫자가 아닙니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; i
 
         End If
 
@@ -3045,9 +3221,7 @@ Public Sub 입고관리()
 
         If itemCode = &quot;&quot; And itemName = &quot;&quot; Then
 
-            Err.Raise vbObjectError + 713, , _
-                &quot;수량은 있지만 품목코드와 품목명이 없습니다.&quot; &amp; _
-                vbCrLf &amp; &quot;원본 행: &quot; &amp; i
+Err.Raise vbObjectError + 713, , &quot;수량은 있지만 품목코드와 품목명이 없습니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; i
 
         End If
 
@@ -3071,12 +3245,7 @@ Public Sub 입고관리()
 
             Case Else
 
-                Err.Raise vbObjectError + 714, , _
-                    &quot;공장을 구분할 수 없는 수주처입니다.&quot; &amp; vbCrLf &amp; _
-                    &quot;원본 행: &quot; &amp; i &amp; vbCrLf &amp; _
-                    &quot;B열 값: [&quot; &amp; customerCode &amp; &quot;]&quot; &amp; vbCrLf &amp; _
-                    &quot;1010 / 1060 / 1150인지 확인해주세요.&quot; &amp; vbCrLf &amp; _
-                    &quot;결과 시트는 생성하지 않았습니다.&quot;
+Err.Raise vbObjectError + 714, , &quot;공장을 구분할 수 없는 수주처입니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; i &amp; vbCrLf &amp; &quot;B열 값: [&quot; &amp; customerCode &amp; &quot;]&quot; &amp; vbCrLf &amp; &quot;1010 / 1060 / 1150인지 확인해주세요.&quot; &amp; vbCrLf &amp; &quot;결과 시트는 생성하지 않았습니다.&quot;
 
         End Select
 
@@ -3150,8 +3319,7 @@ NextInboundRow:
 
 
 
-        resWs.Range(&quot;A1:D1&quot;).value = _
-            Array(&quot;FAC&quot;, &quot;수주처 품목코드&quot;, &quot;품목명&quot;, &quot;입고수량&quot;)
+resWs.Range(&quot;A1:D1&quot;).value = Array(&quot;FAC&quot;, &quot;수주처 품목코드&quot;, &quot;품목명&quot;, &quot;입고수량&quot;)
 
 
 
@@ -3175,8 +3343,7 @@ NextInboundRow:
 
 
 
-                If (pass = 1 And data(0) = &quot;&quot;) Or _
-                   (pass = 2 And data(0) &lt;&gt; &quot;&quot;) Then
+If (pass = 1 And data(0) = &quot;&quot;) Or (pass = 2 And data(0) &lt;&gt; &quot;&quot;) Then
 
 
 
@@ -3264,23 +3431,19 @@ NextInboundRow:
 
 
 
-        If resWs.Columns(&quot;A&quot;).ColumnWidth &lt; 8 Then _
-            resWs.Columns(&quot;A&quot;).ColumnWidth = 8
+If resWs.Columns(&quot;A&quot;).ColumnWidth &lt; 8 Then resWs.Columns(&quot;A&quot;).ColumnWidth = 8
 
 
 
-        If resWs.Columns(&quot;B&quot;).ColumnWidth &lt; 20 Then _
-            resWs.Columns(&quot;B&quot;).ColumnWidth = 20
+If resWs.Columns(&quot;B&quot;).ColumnWidth &lt; 20 Then resWs.Columns(&quot;B&quot;).ColumnWidth = 20
 
 
 
-        If resWs.Columns(&quot;C&quot;).ColumnWidth &lt; 28 Then _
-            resWs.Columns(&quot;C&quot;).ColumnWidth = 28
+If resWs.Columns(&quot;C&quot;).ColumnWidth &lt; 28 Then resWs.Columns(&quot;C&quot;).ColumnWidth = 28
 
 
 
-        If resWs.Columns(&quot;D&quot;).ColumnWidth &lt; 16 Then _
-            resWs.Columns(&quot;D&quot;).ColumnWidth = 16
+If resWs.Columns(&quot;D&quot;).ColumnWidth &lt; 16 Then resWs.Columns(&quot;D&quot;).ColumnWidth = 16
 
 
 
@@ -3288,10 +3451,7 @@ NextInboundRow:
 
 
 
-    MsgBox &quot;공장별 입고 정리가 완료되었습니다.&quot; &amp; vbCrLf &amp; _
-           &quot;생성 시트: 입고_F1 / 입고_F2 / 입고_F5&quot; &amp; vbCrLf &amp; _
-           &quot;전체 입고수량: &quot; &amp; Format(grandTotal, &quot;#,##0&quot;), _
-           vbInformation
+MsgBox &quot;공장별 입고 정리가 완료되었습니다.&quot; &amp; vbCrLf &amp; &quot;생성 시트: 입고_F1 / 입고_F2 / 입고_F5&quot; &amp; vbCrLf &amp; &quot;전체 입고수량: &quot; &amp; Format(grandTotal, &quot;#,##0&quot;), vbInformation
 
     Exit Sub
 
@@ -3303,7 +3463,8 @@ Failed:
 
 
 
-End Sub</pre></details></article><article><h3>Balance</h3><p>B 수주처 / E 품목코드 / G 품명 / N 수량 · 최근 STOCK과 같은 표 서식</p><p>모듈 이름: <code>modBalanceByFactory</code></p><div class="copyrow"><button data-copy="code-modBalanceByFactory">전체 코드 복사</button><a href="downloads/vba-20261008/modBalanceByFactory.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modBalanceByFactory">Sub Balance()
+End Sub
+</pre></details></article><article><h3>Balance</h3><p>B 수주처 / E 품목코드 / G 품명 / N 수량 · 최근 STOCK과 같은 표 서식</p><p>모듈 이름: <code>modBalanceByFactory</code></p><div class="copyrow"><button data-copy="code-modBalanceByFactory">전체 코드 복사</button><a href="downloads/vba-20261008/modBalanceByFactory.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modBalanceByFactory">Sub Balance()
 
 
 
@@ -3423,8 +3584,7 @@ End Sub</pre></details></article><article><h3>Balance</h3><p>B 수주처 / E 품
 
 
 
-    resWs.Range(&quot;A1:D1&quot;).value = _
-        Array(&quot;수주처&quot;, &quot;거래처 품목코드&quot;, &quot;품목명&quot;, &quot;미납수량 합계&quot;)
+resWs.Range(&quot;A1:D1&quot;).value = Array(&quot;수주처&quot;, &quot;거래처 품목코드&quot;, &quot;품목명&quot;, &quot;미납수량 합계&quot;)
 
 
 
@@ -3562,23 +3722,19 @@ End Sub</pre></details></article><article><h3>Balance</h3><p>B 수주처 / E 품
 
 
 
-    If resWs.Columns(&quot;A&quot;).ColumnWidth &lt; 8 Then _
-        resWs.Columns(&quot;A&quot;).ColumnWidth = 8
+If resWs.Columns(&quot;A&quot;).ColumnWidth &lt; 8 Then resWs.Columns(&quot;A&quot;).ColumnWidth = 8
 
 
 
-    If resWs.Columns(&quot;B&quot;).ColumnWidth &lt; 20 Then _
-        resWs.Columns(&quot;B&quot;).ColumnWidth = 20
+If resWs.Columns(&quot;B&quot;).ColumnWidth &lt; 20 Then resWs.Columns(&quot;B&quot;).ColumnWidth = 20
 
 
 
-    If resWs.Columns(&quot;C&quot;).ColumnWidth &lt; 28 Then _
-        resWs.Columns(&quot;C&quot;).ColumnWidth = 28
+If resWs.Columns(&quot;C&quot;).ColumnWidth &lt; 28 Then resWs.Columns(&quot;C&quot;).ColumnWidth = 28
 
 
 
-    If resWs.Columns(&quot;D&quot;).ColumnWidth &lt; 16 Then _
-        resWs.Columns(&quot;D&quot;).ColumnWidth = 16
+If resWs.Columns(&quot;D&quot;).ColumnWidth &lt; 16 Then resWs.Columns(&quot;D&quot;).ColumnWidth = 16
 
 
 
@@ -3590,7 +3746,8 @@ End Sub</pre></details></article><article><h3>Balance</h3><p>B 수주처 / E 품
 
 
 
-End Sub</pre></details></article><article><h3>반장님 재고리스트</h3><p>입고·출고 Sheet1 및 집계 결과 지원 · FAC+품명 합산 · 팔레트/수량 3쌍 · 줄바꿈 없음 · 행 높이 28 · A4 세로 흑백</p><p>모듈 이름: <code>modSupervisorStockList</code></p><div class="copyrow"><button data-copy="code-modSupervisorStockList">전체 코드 복사</button><a href="downloads/vba-20261008/modSupervisorStockList.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modSupervisorStockList">Option Explicit
+End Sub
+</pre></details></article><article><h3>반장님 재고리스트</h3><p>입고·출고 Sheet1 및 집계 결과 지원 · FAC+품명 합산 · 팔레트/수량 3쌍 · 줄바꿈 없음 · 행 높이 28 · A4 세로 흑백</p><p>모듈 이름: <code>modSupervisorStockList</code></p><div class="copyrow"><button data-copy="code-modSupervisorStockList">전체 코드 복사</button><a href="downloads/vba-20261008/modSupervisorStockList.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modSupervisorStockList">Option Explicit
 
 
 
@@ -3644,8 +3801,7 @@ Public Sub 반장님_재고리스트_만들기()
 
     If TypeName(ActiveSheet) &lt;&gt; &quot;Worksheet&quot; Then
 
-        MsgBox &quot;입고·출고 원본 또는 집계 결과 시트를 선택해주세요.&quot;, _
-               vbExclamation
+MsgBox &quot;입고·출고 원본 또는 집계 결과 시트를 선택해주세요.&quot;, vbExclamation
 
         Exit Sub
 
@@ -3731,28 +3887,19 @@ Public Sub 반장님_재고리스트_만들기()
 
 
 
-            facCol = RL_FindColumn(src, _
-                Array(&quot;FAC&quot;, &quot;공장&quot;, &quot;수주처&quot;))
+facCol = RL_FindColumn(src, Array(&quot;FAC&quot;, &quot;공장&quot;, &quot;수주처&quot;))
 
 
 
-            nameCol = RL_FindColumn(src, _
-                Array(&quot;품목명&quot;, &quot;품명&quot;, &quot;Part Name&quot;, _
-                      &quot;ITEM NM&quot;, &quot;ITEM NAME&quot;))
+nameCol = RL_FindColumn(src, Array(&quot;품목명&quot;, &quot;품명&quot;, &quot;Part Name&quot;, &quot;ITEM NM&quot;, &quot;ITEM NAME&quot;))
 
 
 
-            qtyCol = RL_FindColumn(src, _
-                Array(&quot;입고수량&quot;, &quot;입고수량 합계&quot;, _
-                      &quot;출고수량&quot;, &quot;출고수량 합계&quot;, _
-                      &quot;Shipped Q&#x27;ty&quot;, &quot;Shipped Qty&quot;, _
-                      &quot;수량&quot;, &quot;QTY&quot;))
+qtyCol = RL_FindColumn(src, Array(&quot;입고수량&quot;, &quot;입고수량 합계&quot;, &quot;출고수량&quot;, &quot;출고수량 합계&quot;, &quot;Shipped Q&#x27;ty&quot;, &quot;Shipped Qty&quot;, &quot;수량&quot;, &quot;QTY&quot;))
 
 
 
-            codeCol = RL_FindColumn(src, _
-                Array(&quot;ITEM CD&quot;, &quot;수주처 품목코드&quot;, _
-                      &quot;거래처 품목코드&quot;))
+codeCol = RL_FindColumn(src, Array(&quot;ITEM CD&quot;, &quot;수주처 품목코드&quot;, &quot;거래처 품목코드&quot;))
 
 
 
@@ -3760,8 +3907,7 @@ Public Sub 반장님_재고리스트_만들기()
 
 
 
-                If InStr(CStr(src.Cells(1, qtyCol).Value2), _
-                         &quot;입고&quot;) &gt; 0 Then
+If InStr(CStr(src.Cells(1, qtyCol).Value2), &quot;입고&quot;) &gt; 0 Then
 
 
 
@@ -3771,11 +3917,7 @@ Public Sub 반장님_재고리스트_만들기()
 
 
 
-                ElseIf InStr(CStr(src.Cells(1, qtyCol).Value2), _
-                             &quot;출고&quot;) &gt; 0 Or _
-                       InStr(UCase$(CStr( _
-                             src.Cells(1, qtyCol).Value2)), _
-                             &quot;SHIPPED&quot;) &gt; 0 Then
+ElseIf InStr(CStr(src.Cells(1, qtyCol).Value2), &quot;출고&quot;) &gt; 0 Or InStr(UCase$(CStr( src.Cells(1, qtyCol).Value2)), &quot;SHIPPED&quot;) &gt; 0 Then
 
 
 
@@ -3805,12 +3947,7 @@ Public Sub 반장님_재고리스트_만들기()
 
 
 
-        MsgBox &quot;첫 행에서 공장·품명·수량 열을 찾지 못했습니다.&quot; &amp; _
-               vbCrLf &amp; vbCrLf &amp; _
-               &quot;출고 원본: 출고처코드 / 품목명 / 출고수량&quot; &amp; vbCrLf &amp; _
-               &quot;입고 원본: 수주처 / 품목명 / 입고수량&quot; &amp; vbCrLf &amp; _
-               &quot;집계 결과: FAC 또는 공장 / 품명 / 수량&quot;, _
-               vbExclamation
+MsgBox &quot;첫 행에서 공장·품명·수량 열을 찾지 못했습니다.&quot; &amp; vbCrLf &amp; vbCrLf &amp; &quot;출고 원본: 출고처코드 / 품목명 / 출고수량&quot; &amp; vbCrLf &amp; &quot;입고 원본: 수주처 / 품목명 / 입고수량&quot; &amp; vbCrLf &amp; &quot;집계 결과: FAC 또는 공장 / 품명 / 수량&quot;, vbExclamation
 
 
 
@@ -3820,17 +3957,13 @@ Public Sub 반장님_재고리스트_만들기()
 
 
 
-    lastRow = Application.Max( _
-        src.Cells(src.Rows.Count, facCol).End(xlUp).Row, _
-        src.Cells(src.Rows.Count, nameCol).End(xlUp).Row, _
-        src.Cells(src.Rows.Count, qtyCol).End(xlUp).Row)
+lastRow = Application.Max( src.Cells(src.Rows.Count, facCol).End(xlUp).Row, src.Cells(src.Rows.Count, nameCol).End(xlUp).Row, src.Cells(src.Rows.Count, qtyCol).End(xlUp).Row)
 
 
 
     If codeCol &gt; 0 Then
 
-        lastRow = Application.Max(lastRow, _
-            src.Cells(src.Rows.Count, codeCol).End(xlUp).Row)
+lastRow = Application.Max(lastRow, src.Cells(src.Rows.Count, codeCol).End(xlUp).Row)
 
     End If
 
@@ -3852,14 +3985,11 @@ Public Sub 반장님_재고리스트_만들기()
 
 
 
-        If IsError(src.Cells(r, facCol).Value2) Or _
-           IsError(src.Cells(r, nameCol).Value2) Then
+If IsError(src.Cells(r, facCol).Value2) Or IsError(src.Cells(r, nameCol).Value2) Then
 
 
 
-            Err.Raise vbObjectError + 901, , _
-                &quot;공장 또는 품명에 오류가 있습니다.&quot; &amp; _
-                vbCrLf &amp; &quot;원본 행: &quot; &amp; r
+Err.Raise vbObjectError + 901, , &quot;공장 또는 품명에 오류가 있습니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; r
 
         End If
 
@@ -3879,9 +4009,7 @@ Public Sub 반장님_재고리스트_만들기()
 
             If IsError(src.Cells(r, codeCol).Value2) Then
 
-                Err.Raise vbObjectError + 902, , _
-                    &quot;품목코드에 오류가 있습니다.&quot; &amp; _
-                    vbCrLf &amp; &quot;원본 행: &quot; &amp; r
+Err.Raise vbObjectError + 902, , &quot;품목코드에 오류가 있습니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; r
 
             End If
 
@@ -3939,9 +4067,7 @@ Public Sub 반장님_재고리스트_만들기()
 
         If itemName = &quot;&quot; Then
 
-            Err.Raise vbObjectError + 903, , _
-                &quot;품명이 비어 있습니다.&quot; &amp; vbCrLf &amp; _
-                &quot;원본 행: &quot; &amp; r
+Err.Raise vbObjectError + 903, , &quot;품명이 비어 있습니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; r
 
         End If
 
@@ -3973,10 +4099,7 @@ Public Sub 반장님_재고리스트_만들기()
 
             Case Else
 
-                Err.Raise vbObjectError + 904, , _
-                    &quot;공장을 구분할 수 없습니다.&quot; &amp; vbCrLf &amp; _
-                    &quot;원본 행: &quot; &amp; r &amp; vbCrLf &amp; _
-                    &quot;공장 값: [&quot; &amp; fac &amp; &quot;]&quot;
+Err.Raise vbObjectError + 904, , &quot;공장을 구분할 수 없습니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; r &amp; vbCrLf &amp; &quot;공장 값: [&quot; &amp; fac &amp; &quot;]&quot;
 
 
 
@@ -3986,9 +4109,7 @@ Public Sub 반장님_재고리스트_만들기()
 
         If IsError(src.Cells(r, qtyCol).Value2) Then
 
-            Err.Raise vbObjectError + 905, , _
-                &quot;수량에 오류가 있습니다.&quot; &amp; vbCrLf &amp; _
-                &quot;원본 행: &quot; &amp; r
+Err.Raise vbObjectError + 905, , &quot;수량에 오류가 있습니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; r
 
         End If
 
@@ -3996,9 +4117,7 @@ Public Sub 반장님_재고리스트_만들기()
 
         If Not IsNumeric(src.Cells(r, qtyCol).Value2) Then
 
-            Err.Raise vbObjectError + 906, , _
-                &quot;수량이 숫자가 아닙니다.&quot; &amp; vbCrLf &amp; _
-                &quot;원본 행: &quot; &amp; r
+Err.Raise vbObjectError + 906, , &quot;수량이 숫자가 아닙니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; r
 
         End If
 
@@ -4100,11 +4219,7 @@ NextRow:
 
 
 
-        .Range(&quot;A2:I2&quot;).value = _
-            Array(&quot;FAC&quot;, &quot;품목명△&quot;, qtyTitle, _
-                  &quot;팔레트&quot;, &quot;수량&quot;, _
-                  &quot;팔레트&quot;, &quot;수량&quot;, _
-                  &quot;팔레트&quot;, &quot;수량&quot;)
+.Range(&quot;A2:I2&quot;).value = Array(&quot;FAC&quot;, &quot;품목명△&quot;, qtyTitle, &quot;팔레트&quot;, &quot;수량&quot;, &quot;팔레트&quot;, &quot;수량&quot;, &quot;팔레트&quot;, &quot;수량&quot;)
 
 
 
@@ -4168,19 +4283,11 @@ NextRow:
 
 
 
-            .SortFields.Add _
-                key:=dest.Range(&quot;A3:A&quot; &amp; lastOutputRow), _
-                SortOn:=xlSortOnValues, _
-                Order:=xlAscending, _
-                DataOption:=xlSortNormal
+.SortFields.Add key:=dest.Range(&quot;A3:A&quot; &amp; lastOutputRow), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
 
 
 
-            .SortFields.Add _
-                key:=dest.Range(&quot;B3:B&quot; &amp; lastOutputRow), _
-                SortOn:=xlSortOnValues, _
-                Order:=xlAscending, _
-                DataOption:=xlSortNormal
+.SortFields.Add key:=dest.Range(&quot;B3:B&quot; &amp; lastOutputRow), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
 
 
 
@@ -4420,12 +4527,7 @@ NextRow:
 
 
 
-    MsgBox &quot;반장님 재고리스트를 만들었습니다.&quot; &amp; vbCrLf &amp; _
-           &quot;원본 구분: &quot; &amp; kind &amp; vbCrLf &amp; _
-           &quot;FAC·품명별 집계: &quot; &amp; dict.Count &amp; &quot;건&quot; &amp; vbCrLf &amp; _
-           &quot;품명 한 줄 표시 · 행 높이 고정&quot; &amp; vbCrLf &amp; _
-           &quot;Ctrl+P에서 인쇄 모양을 확인해주세요.&quot;, _
-           vbInformation
+MsgBox &quot;반장님 재고리스트를 만들었습니다.&quot; &amp; vbCrLf &amp; &quot;원본 구분: &quot; &amp; kind &amp; vbCrLf &amp; &quot;FAC·품명별 집계: &quot; &amp; dict.Count &amp; &quot;건&quot; &amp; vbCrLf &amp; &quot;품명 한 줄 표시 · 행 높이 고정&quot; &amp; vbCrLf &amp; &quot;Ctrl+P에서 인쇄 모양을 확인해주세요.&quot;, vbInformation
 
 
 
@@ -4445,9 +4547,7 @@ Failed:
 
 
 
-        MsgBox &quot;출력 또는 인쇄 설정 중 오류가 발생했습니다.&quot; &amp; _
-               vbCrLf &amp; &quot;생성된 시트를 확인해주세요.&quot; &amp; _
-               vbCrLf &amp; Err.Description, vbExclamation
+MsgBox &quot;출력 또는 인쇄 설정 중 오류가 발생했습니다.&quot; &amp; vbCrLf &amp; &quot;생성된 시트를 확인해주세요.&quot; &amp; vbCrLf &amp; Err.Description, vbExclamation
 
 
 
@@ -4523,9 +4623,7 @@ End Function
 
 &#x27; 첫 행에서 해당 머리글 열 찾기
 
-Private Function RL_FindColumn( _
-    ByVal ws As Worksheet, _
-    ByVal aliases As Variant) As Long
+Private Function RL_FindColumn( ByVal ws As Worksheet, ByVal aliases As Variant) As Long
 
 
 
@@ -4581,9 +4679,7 @@ Private Function RL_FindColumn( _
 
                 If RL_FindColumn &lt;&gt; 0 Then
 
-                    Err.Raise vbObjectError + 920, , _
-                        &quot;같은 역할의 머리글이 여러 개 있습니다: &quot; &amp; _
-                        CStr(ws.Cells(1, c).Value2)
+Err.Raise vbObjectError + 920, , &quot;같은 역할의 머리글이 여러 개 있습니다: &quot; &amp; CStr(ws.Cells(1, c).Value2)
 
                 End If
 
@@ -4613,9 +4709,7 @@ End Function
 
 &#x27; 같은 이름의 시트 존재 여부
 
-Private Function RL_SheetExists( _
-    ByVal wb As Workbook, _
-    ByVal sheetName As String) As Boolean
+Private Function RL_SheetExists( ByVal wb As Workbook, ByVal sheetName As String) As Boolean
 
 
 
@@ -4641,7 +4735,8 @@ Private Function RL_SheetExists( _
 
 
 
-End Function</pre></details></article><article><h3>다른 사람도 쓰는 범용 코드</h3><a class="primary" href="downloads/vba-general-20261008.zip" download>다른 사람도 쓰는 범용 코드 전체 BAS 받기</a><p>특정 업체 코드가 필요하지 않습니다. 각 모듈의 입력 조건을 확인하세요. 범용 코드의 실제 실행은 미검증입니다.</p></article><article><h3>범용 재고리스트</h3><p>첫 행: FAC·공장·부서·구분 중 하나 + 품명 + 수량. 특정 업체나 공장코드 제한 없이 구분+품명 합산. 팔레트 기록 칸 포함</p><p>모듈 이름: <code>modGeneralStockList</code></p><div class="copyrow"><button data-copy="code-modGeneralStockList">전체 코드 복사</button><a href="downloads/vba-20261008/modGeneralStockList.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modGeneralStockList">Option Explicit
+End Function
+</pre></details></article><article><h3>다른 사람도 쓰는 범용 코드</h3><a class="primary" href="downloads/vba-general-20261008.zip" download>다른 사람도 쓰는 범용 코드 전체 BAS 받기</a><p>특정 업체 코드가 필요하지 않습니다. 각 모듈의 입력 조건을 확인하세요. 범용 코드의 실제 실행은 미검증입니다.</p></article><article><h3>범용 재고리스트</h3><p>첫 행: FAC·공장·부서·구분 중 하나 + 품명 + 수량. 특정 업체나 공장코드 제한 없이 구분+품명 합산. 팔레트 기록 칸 포함</p><p>모듈 이름: <code>modGeneralStockList</code></p><div class="copyrow"><button data-copy="code-modGeneralStockList">전체 코드 복사</button><a href="downloads/vba-20261008/modGeneralStockList.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modGeneralStockList">Option Explicit
 
 Public Sub 범용_재고리스트_만들기()
 
@@ -4668,8 +4763,7 @@ Public Sub 범용_재고리스트_만들기()
     On Error GoTo Failed
 
     If TypeName(ActiveSheet) &lt;&gt; &quot;Worksheet&quot; Then
-        MsgBox &quot;입고·출고 원본 또는 집계 결과 시트를 선택해주세요.&quot;, _
-               vbExclamation
+MsgBox &quot;입고·출고 원본 또는 집계 결과 시트를 선택해주세요.&quot;, vbExclamation
         Exit Sub
     End If
 
@@ -4691,14 +4785,10 @@ Public Sub 범용_재고리스트_만들기()
         Exit Sub
     End If
 
-    lastRow = Application.Max( _
-        src.Cells(src.Rows.Count, facCol).End(xlUp).Row, _
-        src.Cells(src.Rows.Count, nameCol).End(xlUp).Row, _
-        src.Cells(src.Rows.Count, qtyCol).End(xlUp).Row)
+lastRow = Application.Max( src.Cells(src.Rows.Count, facCol).End(xlUp).Row, src.Cells(src.Rows.Count, nameCol).End(xlUp).Row, src.Cells(src.Rows.Count, qtyCol).End(xlUp).Row)
 
     If codeCol &gt; 0 Then
-        lastRow = Application.Max(lastRow, _
-            src.Cells(src.Rows.Count, codeCol).End(xlUp).Row)
+lastRow = Application.Max(lastRow, src.Cells(src.Rows.Count, codeCol).End(xlUp).Row)
     End If
 
     Set dict = CreateObject(&quot;Scripting.Dictionary&quot;)
@@ -4709,12 +4799,9 @@ Public Sub 범용_재고리스트_만들기()
     &#x27;-----------------------------------
     For r = 2 To lastRow
 
-        If IsError(src.Cells(r, facCol).Value2) Or _
-           IsError(src.Cells(r, nameCol).Value2) Then
+If IsError(src.Cells(r, facCol).Value2) Or IsError(src.Cells(r, nameCol).Value2) Then
 
-            Err.Raise vbObjectError + 901, , _
-                &quot;공장 또는 품명에 오류가 있습니다.&quot; &amp; _
-                vbCrLf &amp; &quot;원본 행: &quot; &amp; r
+Err.Raise vbObjectError + 901, , &quot;공장 또는 품명에 오류가 있습니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; r
         End If
 
         fac = RL_Text(src.Cells(r, facCol).Value2)
@@ -4724,9 +4811,7 @@ Public Sub 범용_재고리스트_만들기()
         If codeCol &gt; 0 Then
 
             If IsError(src.Cells(r, codeCol).Value2) Then
-                Err.Raise vbObjectError + 902, , _
-                    &quot;품목코드에 오류가 있습니다.&quot; &amp; _
-                    vbCrLf &amp; &quot;원본 행: &quot; &amp; r
+Err.Raise vbObjectError + 902, , &quot;품목코드에 오류가 있습니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; r
             End If
 
             itemCode = RL_Text(src.Cells(r, codeCol).Value2)
@@ -4755,9 +4840,7 @@ Public Sub 범용_재고리스트_만들기()
         End If
 
         If itemName = &quot;&quot; Then
-            Err.Raise vbObjectError + 903, , _
-                &quot;품명이 비어 있습니다.&quot; &amp; vbCrLf &amp; _
-                &quot;원본 행: &quot; &amp; r
+Err.Raise vbObjectError + 903, , &quot;품명이 비어 있습니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; r
         End If
 
         &#x27; 공장코드를 FAC로 변환
@@ -4766,15 +4849,11 @@ Public Sub 범용_재고리스트_만들기()
         End If
 
         If IsError(src.Cells(r, qtyCol).Value2) Then
-            Err.Raise vbObjectError + 905, , _
-                &quot;수량에 오류가 있습니다.&quot; &amp; vbCrLf &amp; _
-                &quot;원본 행: &quot; &amp; r
+Err.Raise vbObjectError + 905, , &quot;수량에 오류가 있습니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; r
         End If
 
         If Not IsNumeric(src.Cells(r, qtyCol).Value2) Then
-            Err.Raise vbObjectError + 906, , _
-                &quot;수량이 숫자가 아닙니다.&quot; &amp; vbCrLf &amp; _
-                &quot;원본 행: &quot; &amp; r
+Err.Raise vbObjectError + 906, , &quot;수량이 숫자가 아닙니다.&quot; &amp; vbCrLf &amp; &quot;원본 행: &quot; &amp; r
         End If
 
         qty = CDbl(src.Cells(r, qtyCol).Value2)
@@ -4825,11 +4904,7 @@ NextRow:
         .Cells(1, 2).Value2 = &quot;재고리스트&quot;
         .Cells(1, 3).Value2 = &quot;(&quot; &amp; Format(Date, &quot;yy-mm-dd&quot;) &amp; &quot;)&quot;
 
-        .Range(&quot;A2:I2&quot;).Value = _
-            Array(&quot;FAC&quot;, &quot;품목명△&quot;, qtyTitle, _
-                  &quot;팔레트&quot;, &quot;수량&quot;, _
-                  &quot;팔레트&quot;, &quot;수량&quot;, _
-                  &quot;팔레트&quot;, &quot;수량&quot;)
+.Range(&quot;A2:I2&quot;).Value = Array(&quot;FAC&quot;, &quot;품목명△&quot;, qtyTitle, &quot;팔레트&quot;, &quot;수량&quot;, &quot;팔레트&quot;, &quot;수량&quot;, &quot;팔레트&quot;, &quot;수량&quot;)
 
         .Columns(&quot;A:B&quot;).NumberFormat = &quot;@&quot;
 
@@ -4861,17 +4936,9 @@ NextRow:
 
             .SortFields.Clear
 
-            .SortFields.Add _
-                Key:=dest.Range(&quot;A3:A&quot; &amp; lastOutputRow), _
-                SortOn:=xlSortOnValues, _
-                Order:=xlAscending, _
-                DataOption:=xlSortNormal
+.SortFields.Add Key:=dest.Range(&quot;A3:A&quot; &amp; lastOutputRow), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
 
-            .SortFields.Add _
-                Key:=dest.Range(&quot;B3:B&quot; &amp; lastOutputRow), _
-                SortOn:=xlSortOnValues, _
-                Order:=xlAscending, _
-                DataOption:=xlSortNormal
+.SortFields.Add Key:=dest.Range(&quot;B3:B&quot; &amp; lastOutputRow), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
 
             .SetRange dest.Range(&quot;A2:I&quot; &amp; lastOutputRow)
             .Header = xlYes
@@ -4991,12 +5058,7 @@ NextRow:
     Application.ScreenUpdating = oldScreen
     dest.Activate
 
-    MsgBox &quot;반장님 재고리스트를 만들었습니다.&quot; &amp; vbCrLf &amp; _
-           &quot;원본 구분: &quot; &amp; kind &amp; vbCrLf &amp; _
-           &quot;FAC·품명별 집계: &quot; &amp; dict.Count &amp; &quot;건&quot; &amp; vbCrLf &amp; _
-           &quot;품명 한 줄 표시 · 행 높이 고정&quot; &amp; vbCrLf &amp; _
-           &quot;Ctrl+P에서 인쇄 모양을 확인해주세요.&quot;, _
-           vbInformation
+MsgBox &quot;반장님 재고리스트를 만들었습니다.&quot; &amp; vbCrLf &amp; &quot;원본 구분: &quot; &amp; kind &amp; vbCrLf &amp; &quot;FAC·품명별 집계: &quot; &amp; dict.Count &amp; &quot;건&quot; &amp; vbCrLf &amp; &quot;품명 한 줄 표시 · 행 높이 고정&quot; &amp; vbCrLf &amp; &quot;Ctrl+P에서 인쇄 모양을 확인해주세요.&quot;, vbInformation
 
     Exit Sub
 
@@ -5006,9 +5068,7 @@ Failed:
 
     If outputCreated Then
 
-        MsgBox &quot;출력 또는 인쇄 설정 중 오류가 발생했습니다.&quot; &amp; _
-               vbCrLf &amp; &quot;생성된 시트를 확인해주세요.&quot; &amp; _
-               vbCrLf &amp; Err.Description, vbExclamation
+MsgBox &quot;출력 또는 인쇄 설정 중 오류가 발생했습니다.&quot; &amp; vbCrLf &amp; &quot;생성된 시트를 확인해주세요.&quot; &amp; vbCrLf &amp; Err.Description, vbExclamation
 
     Else
 
@@ -5046,9 +5106,7 @@ End Function
 
 
 &#x27; 첫 행에서 해당 머리글 열 찾기
-Private Function RL_FindColumn( _
-    ByVal ws As Worksheet, _
-    ByVal aliases As Variant) As Long
+Private Function RL_FindColumn( ByVal ws As Worksheet, ByVal aliases As Variant) As Long
 
     Dim c As Long, lastCol As Long
     Dim alias As Variant
@@ -5076,9 +5134,7 @@ Private Function RL_FindColumn( _
             If matched Then
 
                 If RL_FindColumn &lt;&gt; 0 Then
-                    Err.Raise vbObjectError + 920, , _
-                        &quot;같은 역할의 머리글이 여러 개 있습니다: &quot; &amp; _
-                        CStr(ws.Cells(1, c).Value2)
+Err.Raise vbObjectError + 920, , &quot;같은 역할의 머리글이 여러 개 있습니다: &quot; &amp; CStr(ws.Cells(1, c).Value2)
                 End If
 
                 RL_FindColumn = c
@@ -5093,9 +5149,7 @@ End Function
 
 
 &#x27; 같은 이름의 시트 존재 여부
-Private Function RL_SheetExists( _
-    ByVal wb As Workbook, _
-    ByVal sheetName As String) As Boolean
+Private Function RL_SheetExists( ByVal wb As Workbook, ByVal sheetName As String) As Boolean
 
     Dim sh As Object
 
@@ -5108,7 +5162,8 @@ Private Function RL_SheetExists( _
 
     Next sh
 
-End Function</pre></details></article><article><h3>범용 부분합</h3><p>머리글과 데이터를 포함한 연속 범위를 선택한 뒤 두 기준과 합계 열을 지정</p><p>모듈 이름: <code>modSubtotalTwoKeys</code></p><div class="copyrow"><button data-copy="code-modSubtotalTwoKeys">전체 코드 복사</button><a href="downloads/vba-20261008/modSubtotalTwoKeys.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modSubtotalTwoKeys">Sub 부분합()
+End Function
+</pre></details></article><article><h3>범용 부분합</h3><p>머리글과 데이터를 포함한 연속 범위를 선택한 뒤 두 기준과 합계 열을 지정</p><p>모듈 이름: <code>modSubtotalTwoKeys</code></p><div class="copyrow"><button data-copy="code-modSubtotalTwoKeys">전체 코드 복사</button><a href="downloads/vba-20261008/modSubtotalTwoKeys.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modSubtotalTwoKeys">Sub 부분합()
 
     Dim rng As Range
 
@@ -5138,7 +5193,7 @@ End Function</pre></details></article><article><h3>범용 부분합</h3><p>머�
 
     End If
 
-    
+
 
     Set rng = Selection
 
@@ -5184,7 +5239,7 @@ End Function</pre></details></article><article><h3>범용 부분합</h3><p>머�
 
     If valCol = False Or valCol &lt;= 0 Then Exit Sub
 
-    
+
 
     If keyCol1 &gt; UBound(arr, 2) Or keyCol2 &gt; UBound(arr, 2) Or valCol &gt; UBound(arr, 2) Then
 
@@ -5206,13 +5261,11 @@ End Function</pre></details></article><article><h3>범용 부분합</h3><p>머�
 
     Dim eCount As Long
 
-    
 
-    extraInput = Application.InputBox(&quot;추가로 함께 출력할 열 번호를 입력하세요.&quot; &amp; vbCrLf &amp; _
-                                      &quot;(예: 3,4 와 같이 쉼표로 구분 가능)&quot; &amp; vbCrLf &amp; _
-                                      &quot;없으면 빈칸으로 &#x27;확인&#x27; 클릭&quot;, &quot;4. 추가 정보 열 선택&quot;, Type:=2)
 
-    
+extraInput = Application.InputBox(&quot;추가로 함께 출력할 열 번호를 입력하세요.&quot; &amp; vbCrLf &amp; &quot;(예: 3,4 와 같이 쉼표로 구분 가능)&quot; &amp; vbCrLf &amp; &quot;없으면 빈칸으로 &#x27;확인&#x27; 클릭&quot;, &quot;4. 추가 정보 열 선택&quot;, Type:=2)
+
+
 
     hasExtra = False: eCount = 0
 
@@ -5256,7 +5309,7 @@ End Function</pre></details></article><article><h3>범용 부분합</h3><p>머�
 
     Set dict = CreateObject(&quot;Scripting.Dictionary&quot;)
 
-    
+
 
     headerKey1 = arr(1, keyCol1)
 
@@ -5282,7 +5335,7 @@ End Function</pre></details></article><article><h3>범용 부분합</h3><p>머�
 
         currentVal = Val(arr(i, valCol))
 
-        
+
 
         If dict.exists(combinedKey) Then
 
@@ -5336,7 +5389,7 @@ End Function</pre></details></article><article><h3>범용 부분합</h3><p>머�
 
     outWs.Cells(1, 3).value = headerVal &amp; &quot; 합계&quot;
 
-    
+
 
     If hasExtra Then
 
@@ -5348,7 +5401,7 @@ End Function</pre></details></article><article><h3>범용 부분합</h3><p>머�
 
     End If
 
-    
+
 
     &#x27; 데이터 출력
 
@@ -5364,13 +5417,13 @@ End Function</pre></details></article><article><h3>범용 부분합</h3><p>머�
 
         outWs.Cells(r, 2).value = splitKey(1) &#x27; 기준2
 
-        
+
 
         itemData = dict(k)
 
         outWs.Cells(r, 3).value = itemData(0) &#x27; 합계
 
-        
+
 
         If hasExtra Then
 
@@ -5486,7 +5539,8 @@ End Function</pre></details></article><article><h3>범용 부분합</h3><p>머�
 
     MsgBox &quot;부분합 완료! 새 시트에 서식과 A4 인쇄 설정을 적용했습니다.&quot;, vbInformation
 
-End Sub</pre></details></article><article><h3>범용 값조회</h3><p>원본 기준 열·값 열·조회 대상·결과 첫 셀 선택. 중복 기준과 미조회는 #N/A. 결과 덮어쓰기 전 확인</p><p>모듈 이름: <code>modGeneralLookup</code></p><div class="copyrow"><button data-copy="code-modGeneralLookup">전체 코드 복사</button><a href="downloads/vba-20261008/modGeneralLookup.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modGeneralLookup">Option Explicit
+End Sub
+</pre></details></article><article><h3>범용 값조회</h3><p>원본 기준 열·값 열·조회 대상·결과 첫 셀 선택. 중복 기준과 미조회는 #N/A. 결과 덮어쓰기 전 확인</p><p>모듈 이름: <code>modGeneralLookup</code></p><div class="copyrow"><button data-copy="code-modGeneralLookup">전체 코드 복사</button><a href="downloads/vba-20261008/modGeneralLookup.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modGeneralLookup">Option Explicit
 Public Sub 범용_값조회()
     Dim keys As Range, vals As Range, targets As Range, dest As Range
     Dim d As Object, dup As Object, result() As Variant
@@ -5542,7 +5596,8 @@ Public Sub 범용_값조회()
     Exit Sub
 Failed:
     MsgBox Err.Description, vbExclamation
-End Sub</pre></details></article><article><h3>에어리스트 만들기</h3><p>모듈 이름: <code>modAirArrange</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modAirArrange">전체 코드 복사</button><a href="downloads/vba-20261008/modAirArrange.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modAirArrange">Option Explicit
+End Sub
+</pre></details></article><article><h3>에어리스트 만들기</h3><p>모듈 이름: <code>modAirArrange</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modAirArrange">전체 코드 복사</button><a href="downloads/vba-20261008/modAirArrange.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modAirArrange">Option Explicit
 
 
 
@@ -5560,11 +5615,11 @@ Sub 에어리스트_만들기()
 
     Dim facList As Variant, fName As String, fNum As String
 
-    
+
 
     Set ws = ActiveSheet
 
-    
+
 
     Application.ScreenUpdating = False
 
@@ -5572,23 +5627,23 @@ Sub 에어리스트_만들기()
 
     Application.Calculation = xlCalculationManual
 
-    
+
 
     On Error GoTo EH
 
-    
+
 
     &#x27; 1. 이미지의 컬럼 순서로 재배치 (A~M열)
 
     Call RearrangeColumnsToTarget_Final(ws)
 
-    
+
 
     &#x27; 2. 재배치된 시트에서 핵심 헤더 위치 재확인
 
     If ws.AutoFilterMode Then ws.AutoFilterMode = False
 
-    
+
 
     facCol = FindHeaderColFlexible(ws, Array(&quot;FAC&quot;))
 
@@ -5606,7 +5661,7 @@ Sub 에어리스트_만들기()
 
     brCol = FindHeaderColFlexible(ws, Array(&quot;B-R&quot;))
 
-    
+
 
     If facCol = 0 Or itemCol = 0 Or reqCol = 0 Then
 
@@ -5616,13 +5671,13 @@ Sub 에어리스트_만들기()
 
     End If
 
-    
+
 
     lastRow = ws.Cells(ws.Rows.Count, itemCol).End(xlUp).Row
 
     If lastRow &lt; 2 Then GoTo SafeExit
 
-    
+
 
     &#x27; 3. 공장별 데이터 매칭
 
@@ -5636,7 +5691,7 @@ Sub 에어리스트_만들기()
 
     Next j
 
-    
+
 
     &#x27; 4. 최종 수식 계산 및 서식 (이미지 기준 H, I열)
 
@@ -5650,7 +5705,7 @@ Sub 에어리스트_만들기()
 
         ws.Cells(i, brCol).value = NzNum(ws.Cells(i, b1Col).value) - NzNum(ws.Cells(i, reqCol).value)
 
-        
+
 
         &#x27; 부족분(B-R &lt; 0)일 경우 빨간색 표시 (이미지처럼)
 
@@ -5662,7 +5717,7 @@ Sub 에어리스트_만들기()
 
     Next i
 
-    
+
 
     &#x27; 5. 날짜 및 URGENT 강조 서식
 
@@ -5672,7 +5727,7 @@ Sub 에어리스트_만들기()
 
     etdCol = FindHeaderColFlexible(ws, Array(&quot;NEED ETD&quot;))
 
-    
+
 
     If dCol &gt; 0 Then ws.Columns(dCol).NumberFormat = &quot;dd-mmm-yy&quot; &#x27; 17-Mar-26 형태
 
@@ -5696,7 +5751,7 @@ Sub 에어리스트_만들기()
 
     End If
 
-    
+
 
     &#x27; 부족분 필터 적용
 
@@ -5704,7 +5759,7 @@ Sub 에어리스트_만들기()
 
     ws.Columns.AutoFit
 
-    
+
 
     MsgBox &quot;이미지 순서대로 정리가 완료되었습니다!&quot;, vbInformation
 
@@ -5738,19 +5793,19 @@ Sub RearrangeColumnsToTarget_Final(ws As Worksheet)
 
     Dim tempWs As Worksheet
 
-    
+
 
     &#x27; 이미지에서 확인된 순서: A(FAC) ~ M(NEED ETD)
 
     targetHeaders = Array(&quot;FAC&quot;, &quot;Item cd&quot;, &quot;Maker&quot;, &quot;Part Name&quot;, &quot;Purchase request&quot;, &quot;BALANCE&quot;, &quot;STOCK&quot;, &quot;BALANCE 1&quot;, &quot;B-R&quot;, &quot;Pallet N&quot;, &quot;재고&quot;, &quot;Short Del.&quot;, &quot;NEED ETD&quot;)
 
-    
+
 
     lastRow = ws.Cells(ws.Rows.Count, 1).End(xlUp).Row
 
     If lastRow &lt; 2 Then lastRow = ws.UsedRange.Rows.Count
 
-    
+
 
     Set tempWs = Worksheets.Add
 
@@ -5768,7 +5823,7 @@ Sub RearrangeColumnsToTarget_Final(ws As Worksheet)
 
     Next i
 
-    
+
 
     ws.Cells.Clear
 
@@ -5950,7 +6005,8 @@ Function NzNum(v As Variant) As Double
 
     If IsError(v) Or v = &quot;&quot; Then NzNum = 0 Else NzNum = Val(Replace(CStr(v), &quot;,&quot;, &quot;&quot;))
 
-End Function</pre></details></article><article><h3>KET 이전 이후</h3><p>모듈 이름: <code>modKetInventoryCompare</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modKetInventoryCompare">전체 코드 복사</button><a href="downloads/vba-20261008/modKetInventoryCompare.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modKetInventoryCompare">Sub KET_이전_이후()
+End Function
+</pre></details></article><article><h3>KET 이전 이후</h3><p>모듈 이름: <code>modKetInventoryCompare</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modKetInventoryCompare">전체 코드 복사</button><a href="downloads/vba-20261008/modKetInventoryCompare.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modKetInventoryCompare">Sub KET_이전_이후()
 
     Dim wsPrev As Worksheet, wsAfter As Worksheet, wsRes As Worksheet
 
@@ -6134,12 +6190,10 @@ NextItem:
 
 
 
-    MsgBox &quot;완료되었습니다.&quot; &amp; vbCrLf &amp; _
-           &quot;· 같은 품목: 이후 값으로 교체&quot; &amp; vbCrLf &amp; _
-           &quot;· 신규 품목: 오름차순 위치에 삽입(파란색)&quot; &amp; vbCrLf &amp; _
-           &quot;· 이후에 없는 품목: 제외 → 전체합 = 이후 전체합&quot;, vbInformation
+MsgBox &quot;완료되었습니다.&quot; &amp; vbCrLf &amp; &quot;· 같은 품목: 이후 값으로 교체&quot; &amp; vbCrLf &amp; &quot;· 신규 품목: 오름차순 위치에 삽입(파란색)&quot; &amp; vbCrLf &amp; &quot;· 이후에 없는 품목: 제외 → 전체합 = 이후 전체합&quot;, vbInformation
 
-End Sub</pre></details></article><article><h3>파렛트 번호 정리</h3><p>모듈 이름: <code>modPalletLocations</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modPalletLocations">전체 코드 복사</button><a href="downloads/vba-20261008/modPalletLocations.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modPalletLocations">Sub 파렛트_번호_정리()
+End Sub
+</pre></details></article><article><h3>파렛트 번호 정리</h3><p>모듈 이름: <code>modPalletLocations</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modPalletLocations">전체 코드 복사</button><a href="downloads/vba-20261008/modPalletLocations.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modPalletLocations">Sub 파렛트_번호_정리()
 
     Dim ws As Worksheet
 
@@ -6153,11 +6207,11 @@ End Sub</pre></details></article><article><h3>파렛트 번호 정리</h3><p>모
 
     Dim palletList As String, itemName As String
 
-    
+
 
     Set ws = ActiveSheet
 
-    
+
 
     &#x27; 1. 키워드로 범위 찾기
 
@@ -6169,7 +6223,7 @@ End Sub</pre></details></article><article><h3>파렛트 번호 정리</h3><p>모
 
     endCol = sumCol - 1
 
-    
+
 
     &#x27; 결과 열 위치 (Sum 뒤 두 칸)
 
@@ -6179,7 +6233,7 @@ End Sub</pre></details></article><article><h3>파렛트 번호 정리</h3><p>모
 
     On Error GoTo 0
 
-    
+
 
     &#x27; 에러 체크
 
@@ -6191,13 +6245,13 @@ End Sub</pre></details></article><article><h3>파렛트 번호 정리</h3><p>모
 
     End If
 
-    
+
 
     &#x27; 2. 마지막 행 찾기
 
     lastRow = ws.Cells(ws.Rows.Count, 1).End(xlUp).Row
 
-    
+
 
     &#x27; 3. 메인 루프
 
@@ -6207,7 +6261,7 @@ End Sub</pre></details></article><article><h3>파렛트 번호 정리</h3><p>모
 
         itemName = ws.Cells(r, 1).value
 
-        
+
 
         &#x27; 파렛트 번호 수집 및 &quot;번&quot; 결합
 
@@ -6231,7 +6285,7 @@ End Sub</pre></details></article><article><h3>파렛트 번호 정리</h3><p>모
 
         Next c
 
-        
+
 
         &#x27; 4. 데이터 입력 및 왼쪽 정렬 설정
 
@@ -6243,7 +6297,7 @@ End Sub</pre></details></article><article><h3>파렛트 번호 정리</h3><p>모
 
         End With
 
-        
+
 
         With ws.Cells(r, resCol2)
 
@@ -6255,7 +6309,7 @@ End Sub</pre></details></article><article><h3>파렛트 번호 정리</h3><p>모
 
     Next r
 
-    
+
 
     &#x27; 결과 열 디자인 정리
 
@@ -6267,23 +6321,24 @@ End Sub</pre></details></article><article><h3>파렛트 번호 정리</h3><p>모
 
     End With
 
-    
+
 
     ws.Cells(1, resCol1).value = &quot;확인 품목&quot;
 
     ws.Cells(1, resCol2).value = &quot;해당 파렛트&quot;
 
-    
+
 
     ws.Columns(resCol1).AutoFit
 
     ws.Columns(resCol2).AutoFit
 
-    
+
 
     MsgBox &quot;정리가 완료되었습니다. 모든 결과는 왼쪽으로 정렬되었습니다!&quot;, vbInformation
 
-End Sub</pre></details></article><article><h3>선박리스트 만들기</h3><p>모듈 이름: <code>modSeaArrange</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modSeaArrange">전체 코드 복사</button><a href="downloads/vba-20261008/modSeaArrange.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modSeaArrange">Option Explicit
+End Sub
+</pre></details></article><article><h3>선박리스트 만들기</h3><p>모듈 이름: <code>modSeaArrange</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modSeaArrange">전체 코드 복사</button><a href="downloads/vba-20261008/modSeaArrange.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modSeaArrange">Option Explicit
 
 
 
@@ -7143,7 +7198,8 @@ Function MonthTokenOf(ByVal s As String) As String
 
     MonthTokenOf = &quot;&quot;
 
-End Function</pre></details></article><article><h3>연호 입고점검</h3><p>모듈 이름: <code>modYeonhoReconcile</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoReconcile">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoReconcile.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoReconcile">Option Explicit
+End Function
+</pre></details></article><article><h3>연호 입고점검</h3><p>모듈 이름: <code>modYeonhoReconcile</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoReconcile">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoReconcile.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoReconcile">Option Explicit
 
 
 
@@ -7161,7 +7217,7 @@ Sub 연호_입고점검()
 
     Dim qtyY As Double, qtyD As Double, diff As Double, k As Variant
 
-    
+
 
     &#x27; 1. 시트 설정
 
@@ -7171,7 +7227,7 @@ Sub 연호_입고점검()
 
     On Error GoTo 0
 
-    
+
 
     If wsY Is Nothing Or wsD Is Nothing Or wsM Is Nothing Then
 
@@ -7181,7 +7237,7 @@ Sub 연호_입고점검()
 
     End If
 
-    
+
 
     &#x27; 2. 데이터 로드 및 마스터 색상 저장
 
@@ -7193,7 +7249,7 @@ Sub 연호_입고점검()
 
     Set dictColor = CreateObject(&quot;Scripting.Dictionary&quot;)
 
-    
+
 
     For i = 2 To lastRow
 
@@ -7207,11 +7263,11 @@ Sub 연호_입고점검()
 
             Dim cleanY As String: cleanY = GetCleanKey(yName)
 
-            
+
 
             dictM(cleanD) = cleanY &#x27; 대아명을 연호명으로 매칭
 
-            
+
 
             &#x27; [핵심] B열(대아항목)에 색깔이 칠해져 있다면 연호명을 키로 색상 저장
 
@@ -7225,7 +7281,7 @@ Sub 연호_입고점검()
 
     Next i
 
-    
+
 
     &#x27; 연호 ERP 집계 (A:품명, B:수량, C:Fac)
 
@@ -7247,7 +7303,7 @@ Sub 연호_입고점검()
 
     Next i
 
-    
+
 
     &#x27; 대아 ERP 집계 (A:Fac, B:품명, C:수량)
 
@@ -7281,7 +7337,7 @@ Sub 연호_입고점검()
 
     Next i
 
-    
+
 
     &#x27; 3. 결과 시트 생성
 
@@ -7295,13 +7351,13 @@ Sub 연호_입고점검()
 
     On Error GoTo 0
 
-    
+
 
     wsR.Range(&quot;A1:F1&quot;).value = Array(&quot;Fac&quot;, &quot;품명(연호기준)&quot;, &quot;연호 수량&quot;, &quot;대아 수량&quot;, &quot;차이(연호-대아)&quot;, &quot;상태&quot;)
 
     outRow = 2
 
-    
+
 
     &#x27; 4. 대조 분석 및 색상 적용
 
@@ -7311,7 +7367,7 @@ Sub 연호_입고점검()
 
     For Each k In dictD.keys: allKeys(k) = True: Next
 
-    
+
 
     For Each k In allKeys.keys
 
@@ -7319,7 +7375,7 @@ Sub 연호_입고점검()
 
         Dim partKey As String: partKey = Split(CStr(k), &quot;|&quot;)(1)
 
-        
+
 
         qtyY = 0: If dictY.exists(k) Then qtyY = dictY(k)
 
@@ -7327,7 +7383,7 @@ Sub 연호_입고점검()
 
         diff = qtyY - qtyD
 
-        
+
 
         wsR.Cells(outRow, 1).value = fac
 
@@ -7337,7 +7393,7 @@ Sub 연호_입고점검()
 
         wsR.Cells(outRow, 4).value = qtyD
 
-        
+
 
         &#x27; 차이가 있으면 표시, 없으면 공란
 
@@ -7357,7 +7413,7 @@ Sub 연호_입고점검()
 
         End If
 
-        
+
 
         &#x27; [색상 동기화] 마스터에서 칠한 색상을 결과 시트 수량 칸에 그대로 적용
 
@@ -7373,13 +7429,13 @@ Sub 연호_입고점검()
 
         End If
 
-        
+
 
         outRow = outRow + 1
 
     Next k
 
-    
+
 
     wsR.Columns.AutoFit
 
@@ -7407,7 +7463,8 @@ Function GetCleanKey(ByVal v As Variant) As String
 
     GetCleanKey = s
 
-End Function</pre></details></article><article><h3>연호 거래명세서</h3><p>모듈 이름: <code>modYeonhoReceivingFill</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoReceivingFill">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoReceivingFill.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoReceivingFill">Sub 연호_거래명세서()
+End Function
+</pre></details></article><article><h3>연호 거래명세서</h3><p>모듈 이름: <code>modYeonhoReceivingFill</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoReceivingFill">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoReceivingFill.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoReceivingFill">Sub 연호_거래명세서()
 
     Dim wsSource As Worksheet, wsMatch As Worksheet, wsTarget As Worksheet
 
@@ -7419,7 +7476,7 @@ End Function</pre></details></article><article><h3>연호 거래명세서</h3><p
 
     Dim sourceSheetName As String
 
-    
+
 
     &#x27; ==========================================
 
@@ -7429,7 +7486,7 @@ End Function</pre></details></article><article><h3>연호 거래명세서</h3><p
 
     sourceSheetName = &quot;&quot;
 
-    
+
 
     &#x27; ActiveWorkbook(현재 보고 있는 창)의 모든 시트를 검사
 
@@ -7447,7 +7504,7 @@ End Function</pre></details></article><article><h3>연호 거래명세서</h3><p
 
     Next sht
 
-    
+
 
     &#x27; 만약 여전히 못 찾는다면 디버깅을 위해 메시지 표시
 
@@ -7457,18 +7514,17 @@ End Function</pre></details></article><article><h3>연호 거래명세서</h3><p
 
         For Each sht In ActiveWorkbook.Sheets: allNames = allNames &amp; vbCrLf &amp; &quot;- &quot; &amp; sht.Name: Next sht
 
-        MsgBox &quot;현재 파일에서 &#x27;거래명세서&#x27; 포함 시트를 찾을 수 없습니다.&quot; &amp; vbCrLf &amp; _
-               &quot;현재 시트 목록:&quot; &amp; allNames, vbCritical, &quot;시트 찾기 오류&quot;
+MsgBox &quot;현재 파일에서 &#x27;거래명세서&#x27; 포함 시트를 찾을 수 없습니다.&quot; &amp; vbCrLf &amp; &quot;현재 시트 목록:&quot; &amp; allNames, vbCritical, &quot;시트 찾기 오류&quot;
 
         Exit Sub
 
     End If
 
-    
+
 
     Set wsSource = ActiveWorkbook.Sheets(sourceSheetName)
 
-    
+
 
     &#x27; 매칭 시트는 코드가 있는 파일(ThisWorkbook)에 있을 확률이 높으므로 둘 다 체크
 
@@ -7480,7 +7536,7 @@ End Function</pre></details></article><article><h3>연호 거래명세서</h3><p
 
     On Error GoTo 0
 
-    
+
 
     If wsMatch Is Nothing Then
 
@@ -7490,7 +7546,7 @@ End Function</pre></details></article><article><h3>연호 거래명세서</h3><p
 
     End If
 
-    
+
 
     &#x27; 결과 시트 설정 (현재 보고 있는 파일에 생성)
 
@@ -7538,7 +7594,7 @@ End Function</pre></details></article><article><h3>연호 거래명세서</h3><p
 
     Set dictMatchNM = CreateObject(&quot;Scripting.Dictionary&quot;)
 
-    
+
 
     lastRowMatch = wsMatch.Cells(wsMatch.Rows.Count, &quot;B&quot;).End(xlUp).Row
 
@@ -7562,7 +7618,7 @@ End Function</pre></details></article><article><h3>연호 거래명세서</h3><p
 
     Next i
 
-    
+
 
     &#x27; 거래명세서 정제 &amp; 수량 합산
 
@@ -7570,13 +7626,13 @@ End Function</pre></details></article><article><h3>연호 거래명세서</h3><p
 
     Dim cleanB As String, rawG As String, facCode As String, qty As Double, dictKey As String
 
-    
+
 
     excludeList = Array(&quot;거 래 명 세 서&quot;, &quot;공&quot;, &quot;급&quot;, &quot;자&quot;, &quot;작 성 일 자&quot;, &quot;출고인:&quot;, &quot;특기사항&quot;)
 
     lastRowSource = wsSource.Cells(wsSource.Rows.Count, &quot;B&quot;).End(xlUp).Row
 
-    
+
 
     For i = 1 To lastRowSource
 
@@ -7584,7 +7640,7 @@ End Function</pre></details></article><article><h3>연호 거래명세서</h3><p
 
         isExclude = False
 
-        
+
 
         If Trim(CStr(checkVal)) = &quot;&quot; Or Trim(CStr(checkVal)) = &quot;No.&quot; Or IsDate(checkVal) Then
 
@@ -7606,7 +7662,7 @@ End Function</pre></details></article><article><h3>연호 거래명세서</h3><p
 
         End If
 
-        
+
 
         If Not isExclude Then
 
@@ -7616,7 +7672,7 @@ End Function</pre></details></article><article><h3>연호 거래명세서</h3><p
 
             rawG = UCase(Trim(Replace(Replace(CStr(wsSource.Cells(i, 7).value), ChrW(160), &quot; &quot;), ChrW(&amp;H3000), &quot; &quot;)))
 
-            
+
 
             facCode = &quot;&quot;
 
@@ -7632,7 +7688,7 @@ End Function</pre></details></article><article><h3>연호 거래명세서</h3><p
 
                     If InStr(temp, &quot;(&quot;) &gt; 0 Then temp = Trim(Left(temp, InStr(temp, &quot;(&quot;) - 1))
 
-                    
+
 
                     &#x27; 공장코드 변환 로직
 
@@ -7656,7 +7712,7 @@ End Function</pre></details></article><article><h3>연호 거래명세서</h3><p
 
             End If
 
-            
+
 
             If cleanB &lt;&gt; &quot;&quot; And qty &gt; 0 Then
 
@@ -7670,7 +7726,7 @@ End Function</pre></details></article><article><h3>연호 거래명세서</h3><p
 
     Next i
 
-    
+
 
     &#x27; 결과 출력
 
@@ -7710,7 +7766,7 @@ End Function</pre></details></article><article><h3>연호 거래명세서</h3><p
 
     Next key
 
-    
+
 
     &#x27; 정렬 및 스타일
 
@@ -7734,11 +7790,12 @@ End Function</pre></details></article><article><h3>연호 거래명세서</h3><p
 
     End If
 
-    
+
 
     MsgBox &quot;작업이 완료되었습니다!&quot;, vbInformation
 
-End Sub</pre></details></article><article><h3>업체명 조회</h3><p>모듈 이름: <code>modCompanyLookup</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modCompanyLookup">전체 코드 복사</button><a href="downloads/vba-20261008/modCompanyLookup.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modCompanyLookup">Option Explicit
+End Sub
+</pre></details></article><article><h3>업체명 조회</h3><p>모듈 이름: <code>modCompanyLookup</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modCompanyLookup">전체 코드 복사</button><a href="downloads/vba-20261008/modCompanyLookup.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modCompanyLookup">Option Explicit
 
 
 
@@ -7752,7 +7809,7 @@ Sub 업체명_조회()
 
     Dim lastRow As Long, vRow As Long, vLastRow As Long
 
-    
+
 
     Dim makerDict As Object, exDict As Object
 
@@ -7792,7 +7849,7 @@ Sub 업체명_조회()
 
     If Trim(makerColStr) = &quot;&quot; Then Exit Sub
 
-    
+
 
     itemColStr = InputBox(&quot;ITEM NM 열 알파벳을 입력하세요. (예: B 또는 F)&quot;, &quot;ITEM NM 열 입력&quot;)
 
@@ -7850,7 +7907,7 @@ Sub 업체명_조회()
 
         f_it = UCase(Trim(CStr(vendorWs.Cells(vRow, &quot;F&quot;).value)))
 
-        
+
 
         &#x27; 괄호 이전 품목코드만 추출 (&quot;PTSR-0402 (DONG-A)&quot; → &quot;PTSR-0402&quot;)
 
@@ -7862,7 +7919,7 @@ Sub 업체명_조회()
 
         End If
 
-        
+
 
         &#x27; 특수공백 및 일반공백 제거
 
@@ -7870,7 +7927,7 @@ Sub 업체명_조회()
 
         f_it = Replace(f_it, &quot; &quot;, &quot;&quot;)
 
-        
+
 
         f_vn = Trim(CStr(vendorWs.Cells(vRow, &quot;E&quot;).value))
 
@@ -7884,9 +7941,7 @@ Sub 업체명_조회()
 
     On Error Resume Next
 
-    outCol = ws.Cells.Find(What:=&quot;*&quot;, After:=ws.Range(&quot;A1&quot;), LookAt:=xlPart, _
-                            LookIn:=xlFormulas, SearchOrder:=xlByColumns, _
-                            SearchDirection:=xlPrevious, MatchCase:=False).Column + 1
+outCol = ws.Cells.Find(What:=&quot;*&quot;, After:=ws.Range(&quot;A1&quot;), LookAt:=xlPart, LookIn:=xlFormulas, SearchOrder:=xlByColumns, SearchDirection:=xlPrevious, MatchCase:=False).Column + 1
 
     On Error GoTo 0
 
@@ -7904,9 +7959,7 @@ Sub 업체명_조회()
 
     &#x27; 5. 매칭 로직
 
-    lastRow = Application.WorksheetFunction.Max( _
-        ws.Cells(ws.Rows.Count, makerCol).End(xlUp).Row, _
-        ws.Cells(ws.Rows.Count, itemCol).End(xlUp).Row)
+lastRow = Application.WorksheetFunction.Max( ws.Cells(ws.Rows.Count, makerCol).End(xlUp).Row, ws.Cells(ws.Rows.Count, itemCol).End(xlUp).Row)
 
 
 
@@ -7914,7 +7967,7 @@ Sub 업체명_조회()
 
         mkStr = UCase(Trim(CStr(ws.Cells(i, makerCol).value)))
 
-        
+
 
         &#x27; 작업시트 품목명도 괄호 제거 후 비교 (혹시 괄호가 포함된 경우 대비)
 
@@ -7928,7 +7981,7 @@ Sub 업체명_조회()
 
         itStr = Replace(itStr, &quot; &quot;, &quot;&quot;)
 
-        
+
 
         resultVal = &quot;&quot;
 
@@ -7968,7 +8021,7 @@ Sub 업체명_조회()
 
         End If
 
-        
+
 
         ws.Cells(i, outCol).value = resultVal
 
@@ -7984,7 +8037,8 @@ Sub 업체명_조회()
 
     MsgBox &quot;거래처 매칭이 완료되었습니다!&quot; &amp; vbCrLf &amp; &quot;데이터 맨 우측을 확인해 보세요.&quot;, vbInformation
 
-End Sub</pre></details></article><article><h3>VLOOKUP · VLOOKUP 버튼</h3><p>모듈 이름: <code>modItemLookupV9</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modItemLookupV9">전체 코드 복사</button><a href="downloads/vba-20261008/modItemLookupV9.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modItemLookupV9">Option Explicit
+End Sub
+</pre></details></article><article><h3>VLOOKUP · VLOOKUP 버튼</h3><p>모듈 이름: <code>modItemLookupV9</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modItemLookupV9">전체 코드 복사</button><a href="downloads/vba-20261008/modItemLookupV9.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modItemLookupV9">Option Explicit
 
 
 
@@ -8088,8 +8142,7 @@ Public Sub VLOOKUP()
 
         missingSources = Left$(missingSources, Len(missingSources) - 2)
 
-        MsgBox &quot;Source not found in this Excel instance: &quot; &amp; missingSources &amp; vbCrLf &amp; vbCrLf &amp; _
-               &quot;Open the target and source files from the same Excel window, then try again.&quot;, vbExclamation
+MsgBox &quot;Source not found in this Excel instance: &quot; &amp; missingSources &amp; vbCrLf &amp; vbCrLf &amp; &quot;Open the target and source files from the same Excel window, then try again.&quot;, vbExclamation
 
         GoTo CleanExit
 
@@ -8129,14 +8182,7 @@ Public Sub VLOOKUP()
 
 
 
-    MsgBox &quot;Auto fill completed.&quot; &amp; vbCrLf &amp; _
-           &quot;Balance: &quot; &amp; filledBalance &amp; &quot; filled / &quot; &amp; missingBalance &amp; &quot; not found&quot; &amp; vbCrLf &amp; _
-           &quot;Stock: &quot; &amp; filledStock &amp; &quot; filled / &quot; &amp; missingStock &amp; &quot; not found&quot; &amp; vbCrLf &amp; _
-           &quot;Inbound: &quot; &amp; filledInbound &amp; &quot; filled / &quot; &amp; missingInbound &amp; &quot; not found&quot; &amp; vbCrLf &amp; vbCrLf &amp; _
-           &quot;Source rows read: &quot; &amp; sourceBalance &amp; &quot; / &quot; &amp; sourceStock &amp; &quot; / &quot; &amp; sourceInbound &amp; vbCrLf &amp; vbCrLf &amp; _
-           &quot;BAL: &quot; &amp; CF_SourceDisplay(balanceSources) &amp; vbCrLf &amp; _
-           &quot;STO: &quot; &amp; CF_SourceDisplay(stockSources) &amp; vbCrLf &amp; _
-           &quot;IN: &quot; &amp; CF_SourceDisplay(inboundSources), vbInformation
+MsgBox &quot;Auto fill completed.&quot; &amp; vbCrLf &amp; &quot;Balance: &quot; &amp; filledBalance &amp; &quot; filled / &quot; &amp; missingBalance &amp; &quot; not found&quot; &amp; vbCrLf &amp; &quot;Stock: &quot; &amp; filledStock &amp; &quot; filled / &quot; &amp; missingStock &amp; &quot; not found&quot; &amp; vbCrLf &amp; &quot;Inbound: &quot; &amp; filledInbound &amp; &quot; filled / &quot; &amp; missingInbound &amp; &quot; not found&quot; &amp; vbCrLf &amp; vbCrLf &amp; &quot;Source rows read: &quot; &amp; sourceBalance &amp; &quot; / &quot; &amp; sourceStock &amp; &quot; / &quot; &amp; sourceInbound &amp; vbCrLf &amp; vbCrLf &amp; &quot;BAL: &quot; &amp; CF_SourceDisplay(balanceSources) &amp; vbCrLf &amp; &quot;STO: &quot; &amp; CF_SourceDisplay(stockSources) &amp; vbCrLf &amp; &quot;IN: &quot; &amp; CF_SourceDisplay(inboundSources), vbInformation
 
 
 
@@ -9124,7 +9170,8 @@ Private Function CF_W(ParamArray codes() As Variant) As String
 
     CF_W = result
 
-End Function</pre></details></article><article><h3>연호발주</h3><p>모듈 이름: <code>modYeonhoInboundBasic</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoInboundBasic">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoInboundBasic.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoInboundBasic">Option Explicit
+End Function
+</pre></details></article><article><h3>연호발주</h3><p>모듈 이름: <code>modYeonhoInboundBasic</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoInboundBasic">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoInboundBasic.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoInboundBasic">Option Explicit
 
 
 
@@ -9146,7 +9193,7 @@ Sub 연호발주()
 
     Dim dictDemandKeys As Object, shipKeys As Object, airOnlyKeys As Object
 
-    
+
 
     Dim i As Long, outRow As Long, lastRow As Long
 
@@ -9160,7 +9207,7 @@ Sub 연호발주()
 
     Dim dIdx As Integer, combinedKeys As Variant, remainNeed As Double, appliedUrgent As Double, uStock As Double
 
-    
+
 
     &#x27; 1. 시트 설정
 
@@ -9170,7 +9217,7 @@ Sub 연호발주()
 
     On Error GoTo 0
 
-    
+
 
     If wsMaster Is Nothing Or wsERP Is Nothing Or wsShip Is Nothing Or wsAir Is Nothing Then
 
@@ -9180,7 +9227,7 @@ Sub 연호발주()
 
     End If
 
-    
+
 
     &#x27; Dictionary 객체 초기화
 
@@ -9212,7 +9259,7 @@ Sub 연호발주()
 
     Set airOnlyKeys = CreateObject(&quot;Scripting.Dictionary&quot;)
 
-    
+
 
     &#x27; 2. [마스터] 로드
 
@@ -9244,7 +9291,7 @@ Sub 연호발주()
 
     End If
 
-    
+
 
     &#x27; 3. [연호 ERP] 재고 로드
 
@@ -9276,7 +9323,7 @@ Sub 연호발주()
 
     End If
 
-    
+
 
     &#x27; 4. [선박] 로드 (BALANCE: F열)
 
@@ -9314,7 +9361,7 @@ Sub 연호발주()
 
                 dictIncoming(keyStr) = dictIncoming(keyStr) + Val(Replace(CStr(vShip(i, 5)), &quot;,&quot;, &quot;&quot;))
 
-                
+
 
                 &#x27; BALANCE 통합 저장 (선박 시트 우선)
 
@@ -9326,7 +9373,7 @@ Sub 연호발주()
 
                 End If
 
-                
+
 
                 shipKeys(keyStr) = True: dictDemandKeys(keyStr) = True
 
@@ -9342,7 +9389,7 @@ Sub 연호발주()
 
     End If
 
-    
+
 
     &#x27; 5. [Air] 로드 (BALANCE: E열)
 
@@ -9378,7 +9425,7 @@ Sub 연호발주()
 
                 dictAirDemand(keyStr) = dictAirDemand(keyStr) + Val(Replace(CStr(vAir(i, 4)), &quot;,&quot;, &quot;&quot;))
 
-                
+
 
                 &#x27; BALANCE 통합 저장 (선박에 없었을 경우 보완)
 
@@ -9390,7 +9437,7 @@ Sub 연호발주()
 
                 End If
 
-                
+
 
                 If Not shipKeys.exists(keyStr) Then airOnlyKeys(keyStr) = True
 
@@ -9408,7 +9455,7 @@ Sub 연호발주()
 
     End If
 
-    
+
 
     &#x27; 6. 결과 시트 생성 (A~I열 구조)
 
@@ -9418,7 +9465,7 @@ Sub 연호발주()
 
     wsFinal.Cells.Clear: On Error GoTo 0
 
-    
+
 
     &#x27; [전체 서식 1] 시트 전체 글꼴, 크기, 검정색 적용
 
@@ -9432,13 +9479,13 @@ Sub 연호발주()
 
     End With
 
-    
+
 
     wsFinal.Range(&quot;A1:I1&quot;).value = Array(&quot;FAC&quot;, &quot;품명&quot;, &quot;선박&quot;, &quot;AIR&quot;, &quot;필요합&quot;, &quot;본사대기&quot;, &quot;연호대기&quot;, &quot;발주필요량&quot;, &quot;발란스&quot;)
 
     outRow = 2
 
-    
+
 
     &#x27; 7. 최종 출력
 
@@ -9454,11 +9501,11 @@ Sub 연호발주()
 
             totalDemand = shipNeed + airNeed: incomingQty = dictIncoming(k): arrears = dictERP(k)
 
-            
+
 
             remainNeed = totalDemand - incomingQty - arrears: If remainNeed &lt; 0 Then remainNeed = 0
 
-            
+
 
             &#x27; 긴급 차감 블록
 
@@ -9488,11 +9535,11 @@ Sub 연호발주()
 
             End If
 
-            
+
 
             finalOrderQty = remainNeed - appliedUrgent: If finalOrderQty &lt; 0 Then finalOrderQty = 0
 
-            
+
 
             &#x27; 값 입력
 
@@ -9514,7 +9561,7 @@ Sub 연호발주()
 
             wsFinal.Cells(outRow, 9).value = dictBalance(k)   &#x27; I열: 발란스
 
-            
+
 
             &#x27; [수정] 터미널(마스터에서 색상이 있던 품목) 서식: 배경색 주황색(#FFA500), 흰색 폰트 제거(검정유지)
 
@@ -9530,7 +9577,7 @@ Sub 연호발주()
 
             End If
 
-            
+
 
             &#x27; 본사대기 + 연호대기가 AIR 수량보다 작으면 발주필요량(H열)의 폰트를 빨간색(#FF0000) 및 볼드체로 덮어쓰기
 
@@ -9546,7 +9593,7 @@ Sub 연호발주()
 
             End If
 
-            
+
 
             outRow = outRow + 1
 
@@ -9554,7 +9601,7 @@ Sub 연호발주()
 
     Next dIdx
 
-    
+
 
     &#x27; [전체 서식 2] C열~I열 1,000단위 콤마 적용
 
@@ -9564,7 +9611,7 @@ Sub 연호발주()
 
     End If
 
-    
+
 
     wsFinal.Columns.AutoFit
 
@@ -9622,7 +9669,8 @@ Function GetFacCodeFinal(ByVal v As String) As String
 
     End If
 
-End Function</pre></details></article><article><h3>연호거래명세서</h3><p>모듈 이름: <code>modYeonhoStatement</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoStatement">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoStatement.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoStatement">Sub 연호거래명세서()
+End Function
+</pre></details></article><article><h3>연호거래명세서</h3><p>모듈 이름: <code>modYeonhoStatement</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoStatement">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoStatement.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoStatement">Sub 연호거래명세서()
 
     Dim wsSource As Worksheet, wsTarget As Worksheet
 
@@ -9638,7 +9686,7 @@ End Function</pre></details></article><article><h3>연호거래명세서</h3><p>
 
     Dim tbl As ListObject
 
-    
+
 
     &#x27; 변환 관련 변수
 
@@ -9654,7 +9702,7 @@ End Function</pre></details></article><article><h3>연호거래명세서</h3><p>
 
     Set wsSource = ActiveSheet
 
-    
+
 
     &#x27; 2. 새 시트 생성 및 이름 설정
 
@@ -9662,7 +9710,7 @@ End Function</pre></details></article><article><h3>연호거래명세서</h3><p>
 
     wsTarget.Name = &quot;연호_정제_&quot; &amp; Format(Now, &quot;hhmm&quot;)
 
-    
+
 
     &#x27; 3. 19행을 머릿말(Header)로 새 시트의 1행에 복사
 
@@ -9670,24 +9718,23 @@ End Function</pre></details></article><article><h3>연호거래명세서</h3><p>
 
     targetRow = 2
 
-    
+
 
     &#x27; 4. 제외할 문구 리스트
 
-    excludeList = Array(&quot;거 래 명 세 서&quot;, &quot;공&quot;, &quot;급&quot;, &quot;자&quot;, &quot;작 성 일 자&quot;, _
-                        &quot;출고인:&quot;, &quot;특기사항&quot;, &quot;본 거래명세서는&quot;, &quot;사용하는 계산서이며&quot;)
+excludeList = Array(&quot;거 래 명 세 서&quot;, &quot;공&quot;, &quot;급&quot;, &quot;자&quot;, &quot;작 성 일 자&quot;, &quot;출고인:&quot;, &quot;특기사항&quot;, &quot;본 거래명세서는&quot;, &quot;사용하는 계산서이며&quot;)
 
-    
+
 
     &#x27; 데이터 끝 확인 (B열 기준)
 
     lastRow = wsSource.Cells(wsSource.Rows.Count, 2).End(xlUp).Row
 
-    
+
 
     Application.ScreenUpdating = False
 
-    
+
 
     &#x27; 5. 20행부터 끝까지 데이터 검사 및 복사
 
@@ -9697,7 +9744,7 @@ End Function</pre></details></article><article><h3>연호거래명세서</h3><p>
 
         isExclude = False
 
-        
+
 
         &#x27; 빈 칸, 제목줄, 날짜, 제외문구 걸러내기
 
@@ -9725,7 +9772,7 @@ End Function</pre></details></article><article><h3>연호거래명세서</h3><p>
 
         End If
 
-        
+
 
         &#x27; 필터에 걸리지 않은 알맹이 데이터 처리 및 복사
 
@@ -9735,7 +9782,7 @@ End Function</pre></details></article><article><h3>연호거래명세서</h3><p>
 
             wsSource.Rows(i).Copy destination:=wsTarget.Rows(targetRow)
 
-            
+
 
             &#x27; ----------------------------------------------------
 
@@ -9751,7 +9798,7 @@ End Function</pre></details></article><article><h3>연호거래명세서</h3><p>
 
             wsTarget.Cells(targetRow, 2).value = Trim(cleanB)
 
-            
+
 
             &#x27; ----------------------------------------------------
 
@@ -9767,7 +9814,7 @@ End Function</pre></details></article><article><h3>연호거래명세서</h3><p>
 
             rawG = Trim(rawG)
 
-            
+
 
             If rawG &lt;&gt; &quot;&quot; Then
 
@@ -9777,7 +9824,7 @@ End Function</pre></details></article><article><h3>연호거래명세서</h3><p>
 
                 ReDim arrG(UBound(partsG))
 
-                
+
 
                 For Each p In partsG
 
@@ -9787,7 +9834,7 @@ End Function</pre></details></article><article><h3>연호거래명세서</h3><p>
 
                     temp = Trim(temp)
 
-                    
+
 
                     &#x27; 날짜 부분 (04/13) 제거
 
@@ -9797,7 +9844,7 @@ End Function</pre></details></article><article><h3>연호거래명세서</h3><p>
 
                     End If
 
-                    
+
 
                     If temp &lt;&gt; &quot;&quot; Then
 
@@ -9809,7 +9856,7 @@ End Function</pre></details></article><article><h3>연호거래명세서</h3><p>
 
                 Next p
 
-                
+
 
                 &#x27; 오름차순 정렬 (F1, F2 순서대로)
 
@@ -9835,7 +9882,7 @@ End Function</pre></details></article><article><h3>연호거래명세서</h3><p>
 
                 End If
 
-                
+
 
                 &#x27; 결과 다시 합치기
 
@@ -9853,7 +9900,7 @@ End Function</pre></details></article><article><h3>연호거래명세서</h3><p>
 
             &#x27; ----------------------------------------------------
 
-            
+
 
             targetRow = targetRow + 1
 
@@ -9861,7 +9908,7 @@ End Function</pre></details></article><article><h3>연호거래명세서</h3><p>
 
     Next i
 
-    
+
 
     &#x27; 6. 데이터를 엑셀 &#x27;표&#x27; 스타일로 변환
 
@@ -9873,7 +9920,7 @@ End Function</pre></details></article><article><h3>연호거래명세서</h3><p>
 
     End If
 
-    
+
 
     &#x27; 열 너비 자동 맞춤
 
@@ -9881,11 +9928,12 @@ End Function</pre></details></article><article><h3>연호거래명세서</h3><p>
 
     Application.ScreenUpdating = True
 
-    
+
 
     MsgBox &quot;악성 들여쓰기 공백 및 G열 정리가 완벽하게 완료되었습니다!&quot;, vbInformation
 
-End Sub</pre></details></article><article><h3>에어리스트 Add</h3><p>모듈 이름: <code>modAirExtra</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modAirExtra">전체 코드 복사</button><a href="downloads/vba-20261008/modAirExtra.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modAirExtra">Option Explicit
+End Sub
+</pre></details></article><article><h3>에어리스트 Add</h3><p>모듈 이름: <code>modAirExtra</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modAirExtra">전체 코드 복사</button><a href="downloads/vba-20261008/modAirExtra.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modAirExtra">Option Explicit
 
 
 
@@ -9907,11 +9955,11 @@ Sub 에어리스트_Add()
 
     Dim reqVal As String, parts() As String
 
-    
+
 
     Set ws = ActiveSheet
 
-    
+
 
     &#x27; 속도 향상 및 화면 깜빡임 방지
 
@@ -9921,23 +9969,23 @@ Sub 에어리스트_Add()
 
     Application.Calculation = xlCalculationManual
 
-    
+
 
     On Error GoTo EH
 
-    
+
 
     &#x27; 1. 이미지 컬럼 순서대로 타겟 시트 재배치 (REMARK 추가)
 
     Call RearrangeColumnsToTarget_Final(ws)
 
-    
+
 
     &#x27; 필터 해제
 
     If ws.AutoFilterMode Then ws.AutoFilterMode = False
 
-    
+
 
     &#x27; 2. 핵심 헤더 위치 찾기
 
@@ -9963,7 +10011,7 @@ Sub 에어리스트_Add()
 
     jaegoCol = FindHeaderColFlexible(ws, Array(&quot;재고&quot;))
 
-    
+
 
     If facCol = 0 Or itemCol = 0 Or reqCol = 0 Then
 
@@ -9973,13 +10021,13 @@ Sub 에어리스트_Add()
 
     End If
 
-    
+
 
     lastRow = ws.Cells(ws.Rows.Count, itemCol).End(xlUp).Row
 
     If lastRow &lt; 2 Then GoTo SafeExit
 
-    
+
 
     &#x27; 3. 공장별 데이터 매칭 (다른 시트에서 VLOOKUP)
 
@@ -9995,7 +10043,7 @@ Sub 에어리스트_Add()
 
     Next j
 
-    
+
 
     &#x27; 4. 최종 수식 계산, 수요일 수량 업데이트 및 조건부 서식
 
@@ -10035,7 +10083,7 @@ Sub 에어리스트_Add()
 
         End If
 
-    
+
 
         &#x27; 계산식: BALANCE 1 = BALANCE + STOCK
 
@@ -10045,7 +10093,7 @@ Sub 에어리스트_Add()
 
         ws.Cells(i, brCol).value = NzNum(ws.Cells(i, b1Col).value) - NzNum(ws.Cells(i, reqCol).value)
 
-        
+
 
         &#x27; 부족분(B-R &lt; 0) 빨간색 글꼴 표시
 
@@ -10059,7 +10107,7 @@ Sub 에어리스트_Add()
 
         End If
 
-        
+
 
         &#x27; [ADD 강조] REMARK에 &quot;ADD&quot;가 있으면 Part Name 빨간색, Purchase Request 빨간색+볼드체
 
@@ -10095,7 +10143,7 @@ Sub 에어리스트_Add()
 
     Next i
 
-    
+
 
     &#x27; 5. 날짜 포맷 및 URGENT 서식
 
@@ -10105,7 +10153,7 @@ Sub 에어리스트_Add()
 
     etdCol = FindHeaderColFlexible(ws, Array(&quot;NEED ETD&quot;))
 
-    
+
 
     If dCol &gt; 0 Then ws.Columns(dCol).NumberFormat = &quot;dd-mmm-yy&quot;
 
@@ -10127,7 +10175,7 @@ Sub 에어리스트_Add()
 
     End If
 
-    
+
 
     &#x27; 6. 데이터 정렬 (1순위: A열 오름차순, 2순위: C열 오름차순, 3순위: D열 오름차순)
 
@@ -10153,13 +10201,13 @@ Sub 에어리스트_Add()
 
     End With
 
-    
+
 
     &#x27; 7. 전체 테두리 및 숫자(1,000단위 쉼표) 서식 적용
 
     ws.Range(&quot;A1&quot;).CurrentRegion.Borders.LineStyle = xlContinuous
 
-    
+
 
     Dim numCols As Variant, colIdx As Variant
 
@@ -10171,7 +10219,7 @@ Sub 에어리스트_Add()
 
     Next colIdx
 
-    
+
 
     &#x27; 부족분 필터 자동 적용 및 열 너비 자동 맞춤
 
@@ -10179,7 +10227,7 @@ Sub 에어리스트_Add()
 
     ws.Columns.AutoFit
 
-    
+
 
     MsgBox &quot;모든 데이터 정리, 서식 지정 및 정렬이 완료되었습니다!&quot;, vbInformation
 
@@ -10213,17 +10261,17 @@ Sub RearrangeColumnsToTarget_Final(ws As Worksheet)
 
     Dim tempWs As Worksheet
 
-    
+
 
     targetHeaders = Array(&quot;FAC&quot;, &quot;Item cd&quot;, &quot;Maker&quot;, &quot;Part Name&quot;, &quot;Purchase request&quot;, &quot;BALANCE&quot;, &quot;STOCK&quot;, &quot;BALANCE 1&quot;, &quot;B-R&quot;, &quot;Pallet N&quot;, &quot;재고&quot;, &quot;Short Del.&quot;, &quot;NEED ETD&quot;, &quot;REMARK&quot;)
 
-    
+
 
     lastRow = ws.Cells(ws.Rows.Count, 1).End(xlUp).Row
 
     If lastRow &lt; 2 Then lastRow = ws.UsedRange.Rows.Count
 
-    
+
 
     Set tempWs = Worksheets.Add
 
@@ -10241,7 +10289,7 @@ Sub RearrangeColumnsToTarget_Final(ws As Worksheet)
 
     Next i
 
-    
+
 
     ws.Cells.Clear
 
@@ -10299,7 +10347,7 @@ Sub ApplyValueLookupByFac(ws As Worksheet, lastRow As Long, facCol As Long, item
 
     Dim itemCd As String, makerVal As String, resultVal As Variant, lookupRng As Range
 
-    
+
 
     codeCol = 0
 
@@ -10323,15 +10371,15 @@ Sub ApplyValueLookupByFac(ws As Worksheet, lastRow As Long, facCol As Long, item
 
     Next r
 
-    
+
 
     If codeCol = 0 Then Exit Sub
 
-    
+
 
     Set lookupRng = tWs.Range(tWs.Cells(1, codeCol), tWs.Cells(tWs.Rows.Count, codeCol + 2))
 
-    
+
 
     For rr = 2 To lastRow
 
@@ -10341,13 +10389,13 @@ Sub ApplyValueLookupByFac(ws As Worksheet, lastRow As Long, facCol As Long, item
 
             makerVal = NormalizeHeader(ws.Cells(rr, makerCol).value)
 
-            
+
 
             If itemCd &lt;&gt; &quot;&quot; Then
 
                 If isJST And makerVal &lt;&gt; &quot;JST&quot; Then GoTo SkipRow
 
-                
+
 
                 resultVal = SafeVLookup(itemCd, lookupRng)
 
@@ -10479,7 +10527,8 @@ Function NzNum(v As Variant) As Double
 
     End If
 
-End Function</pre></details></article><article><h3>연호 대아 이름 변환</h3><p>모듈 이름: <code>modMasterConvert</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modMasterConvert">전체 코드 복사</button><a href="downloads/vba-20261008/modMasterConvert.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modMasterConvert">Option Explicit
+End Function
+</pre></details></article><article><h3>연호 대아 이름 변환</h3><p>모듈 이름: <code>modMasterConvert</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modMasterConvert">전체 코드 복사</button><a href="downloads/vba-20261008/modMasterConvert.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modMasterConvert">Option Explicit
 
 
 
@@ -10493,7 +10542,7 @@ Sub 연호_대아_이름_변환()
 
     Dim targetColStr As String, targetCol As Long
 
-    
+
 
     Dim dictMaster As Object
 
@@ -10505,7 +10554,7 @@ Sub 연호_대아_이름_변환()
 
     Dim matchedArr As Variant
 
-    
+
 
     &#x27; 1. 시트 설정
 
@@ -10517,7 +10566,7 @@ Sub 연호_대아_이름_변환()
 
     On Error GoTo 0
 
-    
+
 
     If wsMaster Is Nothing Then
 
@@ -10527,7 +10576,7 @@ Sub 연호_대아_이름_변환()
 
     End If
 
-    
+
 
     &#x27; 2. 기준 열 입력
 
@@ -10535,7 +10584,7 @@ Sub 연호_대아_이름_변환()
 
     If Trim(targetColStr) = &quot;&quot; Then Exit Sub
 
-    
+
 
     On Error Resume Next
 
@@ -10543,7 +10592,7 @@ Sub 연호_대아_이름_변환()
 
     On Error GoTo 0
 
-    
+
 
     If targetCol = 0 Then
 
@@ -10553,17 +10602,17 @@ Sub 연호_대아_이름_변환()
 
     End If
 
-    
+
 
     Application.ScreenUpdating = False
 
-    
+
 
     &#x27; 3. 마스터 시트 데이터 메모리에 저장 (핵심: 마스터 원본 그대로 저장)
 
     Set dictMaster = CreateObject(&quot;Scripting.Dictionary&quot;)
 
-    
+
 
     mRow = wsMaster.Cells(wsMaster.Rows.Count, &quot;A&quot;).End(xlUp).Row
 
@@ -10577,13 +10626,13 @@ Sub 연호_대아_이름_변환()
 
             dName = Trim(CStr(vMaster(i, 2))) &#x27; B열: 대아명 원본
 
-            
+
 
             cleanY = GetPerfectCleanKey(yName)
 
             cleanD = GetPerfectCleanKey(dName)
 
-            
+
 
             &#x27; 입력값이 연호든 대아든, 무조건 [마스터 A열, 마스터 B열]을 뱉어내도록 배열로 저장
 
@@ -10595,21 +10644,19 @@ Sub 연호_대아_이름_변환()
 
     End If
 
-    
+
 
     &#x27; 4. 마지막 열 찾기
 
     On Error Resume Next
 
-    lastCol = ws.Cells.Find(What:=&quot;*&quot;, After:=ws.Range(&quot;A1&quot;), LookAt:=xlPart, _
-                            LookIn:=xlFormulas, SearchOrder:=xlByColumns, _
-                            SearchDirection:=xlPrevious, MatchCase:=False).Column
+lastCol = ws.Cells.Find(What:=&quot;*&quot;, After:=ws.Range(&quot;A1&quot;), LookAt:=xlPart, LookIn:=xlFormulas, SearchOrder:=xlByColumns, SearchDirection:=xlPrevious, MatchCase:=False).Column
 
     On Error GoTo 0
 
     If lastCol = 0 Then lastCol = 1
 
-    
+
 
     &#x27; 5. 헤더 만들기
 
@@ -10619,7 +10666,7 @@ Sub 연호_대아_이름_변환()
 
     outDCol = lastCol + 2
 
-    
+
 
     With ws
 
@@ -10635,11 +10682,11 @@ Sub 연호_대아_이름_변환()
 
         .Cells(1, outDCol).Font.Bold = True
 
-        
+
 
         lastRow = .Cells(.Rows.Count, targetCol).End(xlUp).Row
 
-        
+
 
         &#x27; 6. 본격적인 매칭 로직
 
@@ -10647,13 +10694,13 @@ Sub 연호_대아_이름_변환()
 
             targetVal = CStr(.Cells(i, targetCol).value)
 
-            
+
 
             If Trim(targetVal) &lt;&gt; &quot;&quot; Then
 
                 cleanTarget = GetPerfectCleanKey(targetVal)
 
-                
+
 
                 &#x27; 마스터에 데이터가 존재하면
 
@@ -10677,7 +10724,7 @@ Sub 연호_대아_이름_변환()
 
         Next i
 
-        
+
 
         .Columns(outYCol).AutoFit
 
@@ -10685,7 +10732,7 @@ Sub 연호_대아_이름_변환()
 
     End With
 
-    
+
 
     Application.ScreenUpdating = True
 
@@ -10703,7 +10750,7 @@ Function GetPerfectCleanKey(ByVal v As Variant) As String
 
     s = UCase(Trim(CStr(v)))
 
-    
+
 
     &#x27; 모든 종류의 공백 완벽 제거
 
@@ -10719,13 +10766,13 @@ Function GetPerfectCleanKey(ByVal v As Variant) As String
 
     s = Replace(s, vbLf, &quot;&quot;)
 
-    
+
 
     &#x27; 회사명 제거
 
     s = Replace(s, &quot;(YEONHO)&quot;, &quot;&quot;): s = Replace(s, &quot;YEONHO&quot;, &quot;&quot;)
 
-    
+
 
     &#x27; 컬러 약어 매칭
 
@@ -10735,7 +10782,7 @@ Function GetPerfectCleanKey(ByVal v As Variant) As String
 
     s = Replace(s, &quot;WHT&quot;, &quot;&quot;): s = Replace(s, &quot;WH&quot;, &quot;&quot;)
 
-    
+
 
     &#x27; 특수문자 제거
 
@@ -10743,7 +10790,8 @@ Function GetPerfectCleanKey(ByVal v As Variant) As String
 
     GetPerfectCleanKey = s
 
-End Function</pre></details></article><article><h3>연호 반장님 재고리스트</h3><p>모듈 이름: <code>modYeonhoInventoryPrint</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoInventoryPrint">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoInventoryPrint.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoInventoryPrint">Sub 연호_반장님_재고리스트()
+End Function
+</pre></details></article><article><h3>연호 반장님 재고리스트</h3><p>모듈 이름: <code>modYeonhoInventoryPrint</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoInventoryPrint">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoInventoryPrint.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoInventoryPrint">Sub 연호_반장님_재고리스트()
 
     Dim srcSheet As Worksheet, destSheet As Worksheet
 
@@ -10755,7 +10803,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
     Dim invoiceDate As String, rawDate As String
 
-    
+
 
     &#x27; 속도 향상, 화면 깜빡임 차단, 파일 과부하 방지 설정
 
@@ -10765,7 +10813,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
     Application.EnableEvents = False
 
-    
+
 
     &#x27; 1. 소스 시트 지정 (거래명세서 19 시트 우선 탐색)
 
@@ -10777,7 +10825,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
     If srcSheet Is Nothing Then Set srcSheet = ActiveSheet
 
-    
+
 
     &#x27; 2. 거래명세서 내부에서 작성일자 자동 추출 및 변환 (YYYY-MM-DD -&gt; YY/MM/DD)
 
@@ -10809,7 +10857,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
     If invoiceDate = &quot;&quot; Then invoiceDate = Format(Date, &quot;yy/mm/dd&quot;)
 
-    
+
 
     &#x27; 3. 메모리 내 딕셔너리를 사용하여 품명별 수량 초고속 부분합 계산
 
@@ -10817,10 +10865,9 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
     For i = 1 To lastRow
 
-        If IsNumeric(srcSheet.Cells(i, 1).value) And srcSheet.Cells(i, 1).value &lt;&gt; &quot;&quot; And _
-           IsNumeric(srcSheet.Cells(i, 3).value) And srcSheet.Cells(i, 3).value &lt;&gt; &quot;&quot; Then
+If IsNumeric(srcSheet.Cells(i, 1).value) And srcSheet.Cells(i, 1).value &lt;&gt; &quot;&quot; And IsNumeric(srcSheet.Cells(i, 3).value) And srcSheet.Cells(i, 3).value &lt;&gt; &quot;&quot; Then
 
-           
+
 
             &#x27; 유령 공백 제거 및 텍스트 정제
 
@@ -10828,7 +10875,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
             itemQty = srcSheet.Cells(i, 3).value
 
-            
+
 
             If itemKey &lt;&gt; &quot;&quot; Then
 
@@ -10848,7 +10895,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
     Next i
 
-    
+
 
     &#x27; 4. &quot;재고 리스트&quot; 출력 시트 초기화 (용량 누적 방지를 위해 완전 삭제 후 재생성)
 
@@ -10860,13 +10907,13 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
     If Not destSheet Is Nothing Then destSheet.Delete
 
-    
+
 
     Set destSheet = Sheets.Add(After:=srcSheet)
 
     destSheet.Name = &quot;재고 리스트&quot;
 
-    
+
 
     &#x27; 5. [오리지널 양식] 상단 뼈대 구조 작성 (A열부터 H열까지)
 
@@ -10878,7 +10925,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
         .Cells(1, 2).value = &quot;(&quot; &amp; invoiceDate &amp; &quot;)&quot;
 
-        
+
 
         &#x27; 2행: 헤더명 지정 (원본 파일과 100% 일치)
 
@@ -10900,7 +10947,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
     End With
 
-    
+
 
     &#x27; 6. 정제된 데이터를 행 순서대로 일괄 기입
 
@@ -10916,13 +10963,13 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
     Next k
 
-    
+
 
     Dim dataLastRow As Long
 
     dataLastRow = r - 1
 
-    
+
 
     &#x27; 7. 품목명 오름차순(가나다 순) 자동 정렬
 
@@ -10932,8 +10979,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
             .SortFields.Clear
 
-            .SortFields.Add key:=destSheet.Range(&quot;A3:A&quot; &amp; dataLastRow), _
-                SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
+.SortFields.Add key:=destSheet.Range(&quot;A3:A&quot; &amp; dataLastRow), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
 
             .SetRange destSheet.Range(&quot;A2:H&quot; &amp; dataLastRow)
 
@@ -10945,7 +10991,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
     End If
 
-    
+
 
     &#x27; 8. [서식 극대화 지정] 글자 크기 대폭 확대, 행 높이 증대, 반복 서식 적용
 
@@ -10957,7 +11003,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
         Set tableRange = .Range(&quot;A2:H&quot; &amp; dataLastRow)
 
-        
+
 
         &#x27; 폰트 및 글자 크기 눈에 띄게 대폭 확대 (14pt로 전면 확대)
 
@@ -10965,7 +11011,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
         tableRange.Font.Size = 14
 
-        
+
 
         &#x27; 타이틀행 글자 크기 조정 (16pt, Bold)
 
@@ -10975,7 +11021,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
         .Range(&quot;A1:B1&quot;).Font.Bold = True
 
-        
+
 
         &#x27; 행 높이 설정 (현장에서 아주 시원시원하게 보이도록 넓힘)
 
@@ -10985,7 +11031,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
         .Range(&quot;3:&quot; &amp; dataLastRow).RowHeight = 28 &#x27; 데이터 행 높이
 
-        
+
 
         &#x27; 2행 헤더 스타일 (글자 굵게, 가운데 정렬)
 
@@ -10997,7 +11043,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
         End With
 
-        
+
 
         &#x27; 각 열별 데이터 정렬 및 숫자 포맷 (2번째 열 출고수량 쉼표 처리)
 
@@ -11007,7 +11053,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
         .Range(&quot;B3:B&quot; &amp; dataLastRow).NumberFormat = &quot;#,##0&quot;        &#x27; 천 단위 콤마
 
-        
+
 
         &#x27; [반복 서식] 3~8번째(C~H열) 빈 칸 서식도 완전히 동일하게 우측 정렬 및 천 단위 포맷 바인딩
 
@@ -11015,7 +11061,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
         .Range(&quot;C3:H&quot; &amp; dataLastRow).NumberFormat = &quot;#,##0&quot;
 
-        
+
 
         &#x27; 전 영역에 오리지널 느낌의 깨끗하고 선명한 격자 테두리선(Thin) 부여
 
@@ -11029,7 +11075,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
         End With
 
-        
+
 
         &#x27; 열 너비 균형 조정 (글자가 크기 때문에 넉넉하게 확장)
 
@@ -11037,7 +11083,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
         .Columns(&quot;B&quot;).ColumnWidth = 15 &#x27; 출고수량 칸
 
-        
+
 
         &#x27; C열부터 H열까지 반복되는 팔레트/수량 열 너비 인쇄 밸런스에 맞춰 고정
 
@@ -11049,7 +11095,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
         Next colIdx
 
-        
+
 
         &#x27; 9. 인쇄 페이지 맞춤 및 [★매 페이지 제목행 반복★] 설정
 
@@ -11059,7 +11105,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
             .PrintTitleRows = &quot;$1:$2&quot;
 
-            
+
 
             .Orientation = xlPortrait          &#x27; 세로 인쇄
 
@@ -11085,7 +11131,7 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
     End With
 
-    
+
 
     &#x27; 기능 정상 복구
 
@@ -11095,11 +11141,12 @@ End Function</pre></details></article><article><h3>연호 반장님 재고리스
 
     Application.EnableEvents = True
 
-    
+
 
     MsgBox &quot;모든 페이지 제목 반복 설정이 반영된 재고 리스트가 완성되었습니다!&quot;, vbInformation, &quot;완료&quot;
 
-End Sub</pre></details></article><article><h3>파렛트 박스정리</h3><p>모듈 이름: <code>modPalletBoxSummary</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modPalletBoxSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modPalletBoxSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modPalletBoxSummary">Sub 파렛트_박스정리()
+End Sub
+</pre></details></article><article><h3>파렛트 박스정리</h3><p>모듈 이름: <code>modPalletBoxSummary</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modPalletBoxSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modPalletBoxSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modPalletBoxSummary">Sub 파렛트_박스정리()
 
     Dim wsSrc As Worksheet, wsOut As Worksheet, wbTarget As Workbook
 
@@ -11127,8 +11174,7 @@ End Sub</pre></details></article><article><h3>파렛트 박스정리</h3><p>모�
 
     Dim moqPath As String
 
-    moqPath = Environ(&quot;USERPROFILE&quot;) &amp; _
-        &quot;\OneDrive - Dae-A Electronics (Thailand) Company Limited\바탕 화면\한국단자 MOQ(20250522).xlsx&quot;
+moqPath = Environ(&quot;USERPROFILE&quot;) &amp; &quot;\OneDrive - Dae-A Electronics (Thailand) Company Limited\바탕 화면\한국단자 MOQ(20250522).xlsx&quot;
 
 
 
@@ -11450,8 +11496,7 @@ NextRow:
 
     If outRow &gt; 0 Then
 
-        wsOut.Range(wsOut.Cells(2, 1), wsOut.Cells(outRow + 1, 4)).Sort _
-            Key1:=wsOut.Cells(2, 1), Order1:=xlAscending, header:=xlNo
+wsOut.Range(wsOut.Cells(2, 1), wsOut.Cells(outRow + 1, 4)).Sort Key1:=wsOut.Cells(2, 1), Order1:=xlAscending, header:=xlNo
 
         wsOut.Range(wsOut.Cells(2, 1), wsOut.Cells(outRow + 1, 1)).Font.Bold = True
 
@@ -11537,7 +11582,8 @@ CleanExit:
 
     Application.Calculation = xlCalculationAutomatic
 
-End Sub</pre></details></article><article><h3>연호 발주 재고포함</h3><p>모듈 이름: <code>modYeonhoStockByCode</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoStockByCode">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoStockByCode.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoStockByCode">Option Explicit
+End Sub
+</pre></details></article><article><h3>연호 발주 재고포함</h3><p>모듈 이름: <code>modYeonhoStockByCode</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoStockByCode">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoStockByCode.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoStockByCode">Option Explicit
 
 
 
@@ -11815,8 +11861,7 @@ Sub 연호_발주_재고포함()
 
                 If Trim(CStr(vAir(i, 2))) &lt;&gt; &quot;&quot; Then
 
-                    If Not dictCode.exists(GetPerfectCleanKey(CStr(vAir(i, 2)))) Then _
-                        dictCode(GetPerfectCleanKey(CStr(vAir(i, 2)))) = cleanYName
+If Not dictCode.exists(GetPerfectCleanKey(CStr(vAir(i, 2)))) Then dictCode(GetPerfectCleanKey(CStr(vAir(i, 2)))) = cleanYName
 
                 End If
 
@@ -12078,8 +12123,7 @@ Sub 연호_발주_재고포함()
 
     wsFinal.Columns.AutoFit
 
-    MsgBox &quot;서식 변경 및 조건부 글꼴 색상 적용이 완료되었습니다!&quot; &amp; _
-           IIf(wsStock Is Nothing, &quot;&quot;, vbCrLf &amp; &quot;(&#x27;재고&#x27; 시트를 반영해 본사대기를 공장별로 채웠습니다.)&quot;), vbInformation
+MsgBox &quot;서식 변경 및 조건부 글꼴 색상 적용이 완료되었습니다!&quot; &amp; IIf(wsStock Is Nothing, &quot;&quot;, vbCrLf &amp; &quot;(&#x27;재고&#x27; 시트를 반영해 본사대기를 공장별로 채웠습니다.)&quot;), vbInformation
 
 End Sub
 
@@ -12133,7 +12177,8 @@ Function GetFacCodeFinal(ByVal v As String) As String
 
     End If
 
-End Function</pre></details></article><article><h3>Air up 생성</h3><p>모듈 이름: <code>modAirRemaining</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modAirRemaining">전체 코드 복사</button><a href="downloads/vba-20261008/modAirRemaining.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modAirRemaining">Option Explicit
+End Function
+</pre></details></article><article><h3>Air up 생성</h3><p>모듈 이름: <code>modAirRemaining</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modAirRemaining">전체 코드 복사</button><a href="downloads/vba-20261008/modAirRemaining.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modAirRemaining">Option Explicit
 
 
 
@@ -12203,8 +12248,7 @@ Sub Air_up_생성()
 
     If facCol = 0 Or itemCol = 0 Or prCol = 0 Or stoCol = 0 Then
 
-        MsgBox &quot;필요한 헤더(FAC / Item cd / Purchase request / STOCK)를 찾지 못했습니다.&quot; &amp; vbCrLf &amp; _
-               &quot;Air 시트의 헤더명을 확인해주세요.&quot;, vbExclamation
+MsgBox &quot;필요한 헤더(FAC / Item cd / Purchase request / STOCK)를 찾지 못했습니다.&quot; &amp; vbCrLf &amp; &quot;Air 시트의 헤더명을 확인해주세요.&quot;, vbExclamation
 
         GoTo CleanExit
 
@@ -12308,11 +12352,7 @@ NextR:
 
     wsOut.Range(&quot;A1&quot;).Select
 
-    MsgBox &quot;&#x27;Air up&#x27; 생성 완료!&quot; &amp; vbCrLf &amp; vbCrLf &amp; _
-           &quot;· Remain(E열) = Purchase request ? 기존 Stock&quot; &amp; vbCrLf &amp; _
-           &quot;· 남은 행 STOCK 자리 = Sto up 값(없으면 0)&quot; &amp; vbCrLf &amp; _
-           &quot;· 기존 재고로 충족되어 삭제된 행 : &quot; &amp; delCnt &amp; &quot;건&quot; &amp; vbCrLf &amp; _
-           &quot;· 남은(발주 필요) 행 : &quot; &amp; keepCnt &amp; &quot;건&quot;, vbInformation
+MsgBox &quot;&#x27;Air up&#x27; 생성 완료!&quot; &amp; vbCrLf &amp; vbCrLf &amp; &quot;· Remain(E열) = Purchase request ? 기존 Stock&quot; &amp; vbCrLf &amp; &quot;· 남은 행 STOCK 자리 = Sto up 값(없으면 0)&quot; &amp; vbCrLf &amp; &quot;· 기존 재고로 충족되어 삭제된 행 : &quot; &amp; delCnt &amp; &quot;건&quot; &amp; vbCrLf &amp; &quot;· 남은(발주 필요) 행 : &quot; &amp; keepCnt &amp; &quot;건&quot;, vbInformation
 
 
 
@@ -12514,7 +12554,8 @@ Private Function NzNum_(v As Variant) As Double
 
     End If
 
-End Function</pre></details></article><article><h3>에어 서식 정리</h3><p>모듈 이름: <code>modAirFormat</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modAirFormat">전체 코드 복사</button><a href="downloads/vba-20261008/modAirFormat.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modAirFormat">&#x27;============================================================
+End Function
+</pre></details></article><article><h3>에어 서식 정리</h3><p>모듈 이름: <code>modAirFormat</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modAirFormat">전체 코드 복사</button><a href="downloads/vba-20261008/modAirFormat.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modAirFormat">&#x27;============================================================
 
 &#x27; Air 시트에 &#x27;선박 느낌&#x27; 서식 입히기
 
@@ -12628,8 +12669,7 @@ Sub 에어_서식_정리()
 
     Application.ScreenUpdating = True
 
-    MsgBox &quot;Air 시트 서식을 선박 느낌으로 맞췄습니다.&quot; &amp; vbCrLf &amp; _
-           &quot;(URGENT·날짜 색은 그대로 유지)&quot;, vbInformation
+MsgBox &quot;Air 시트 서식을 선박 느낌으로 맞췄습니다.&quot; &amp; vbCrLf &amp; &quot;(URGENT·날짜 색은 그대로 유지)&quot;, vbInformation
 
 End Sub
 
@@ -12659,7 +12699,8 @@ Private Function FindHdrA_(ws As Worksheet, nameWanted As String) As Long
 
     FindHdrA_ = 0
 
-End Function</pre></details></article><article><h3>에어 반장님 인쇄</h3><p>모듈 이름: <code>modAirGrayscale</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modAirGrayscale">전체 코드 복사</button><a href="downloads/vba-20261008/modAirGrayscale.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modAirGrayscale">Option Explicit
+End Function
+</pre></details></article><article><h3>에어 반장님 인쇄</h3><p>모듈 이름: <code>modAirGrayscale</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modAirGrayscale">전체 코드 복사</button><a href="downloads/vba-20261008/modAirGrayscale.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modAirGrayscale">Option Explicit
 
 
 
@@ -12761,9 +12802,7 @@ Public Sub 에어_반장님_인쇄()
 
 
 
-    Set headerCell = ws.Range(ws.Cells(1, 1), ws.Cells(HEADER_SEARCH_ROWS, 50)).Find( _
-        What:=&quot;Maker&quot;, After:=ws.Cells(1, 1), LookIn:=xlValues, LookAt:=xlWhole, _
-        SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:=False)
+Set headerCell = ws.Range(ws.Cells(1, 1), ws.Cells(HEADER_SEARCH_ROWS, 50)).Find( What:=&quot;Maker&quot;, After:=ws.Cells(1, 1), LookIn:=xlValues, LookAt:=xlWhole, SearchOrder:=xlByRows, SearchDirection:=xlNext, MatchCase:=False)
 
 
 
@@ -12793,9 +12832,7 @@ Public Sub 에어_반장님_인쇄()
 
 
 
-    Set lastCell = ws.Range(ws.Cells(dataFirstRow, 1), ws.Cells(ws.Rows.Count, lastTableCol)).Find( _
-        What:=&quot;*&quot;, After:=ws.Cells(dataFirstRow, 1), LookIn:=xlFormulas, LookAt:=xlPart, _
-        SearchOrder:=xlByRows, SearchDirection:=xlPrevious, MatchCase:=False)
+Set lastCell = ws.Range(ws.Cells(dataFirstRow, 1), ws.Cells(ws.Rows.Count, lastTableCol)).Find( What:=&quot;*&quot;, After:=ws.Cells(dataFirstRow, 1), LookIn:=xlFormulas, LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlPrevious, MatchCase:=False)
 
 
 
@@ -13049,10 +13086,7 @@ CleanExit:
 
     If completed And Environ$(&quot;AIR_PRINT_SILENT&quot;) &lt;&gt; &quot;1&quot; Then
 
-        MsgBox &quot;AIR black-and-white print formatting is complete.&quot; &amp; vbCrLf &amp; _
-               &quot;Sheet: &quot; &amp; ws.Name &amp; vbCrLf &amp; _
-               &quot;Rows: &quot; &amp; headerRow &amp; &quot;-&quot; &amp; lastRow &amp; vbCrLf &amp; _
-               &quot;Print area: &quot; &amp; ws.PageSetup.PrintArea, vbInformation, &quot;AIR Print Format&quot;
+MsgBox &quot;AIR black-and-white print formatting is complete.&quot; &amp; vbCrLf &amp; &quot;Sheet: &quot; &amp; ws.Name &amp; vbCrLf &amp; &quot;Rows: &quot; &amp; headerRow &amp; &quot;-&quot; &amp; lastRow &amp; vbCrLf &amp; &quot;Print area: &quot; &amp; ws.PageSetup.PrintArea, vbInformation, &quot;AIR Print Format&quot;
 
     End If
 
@@ -13250,8 +13284,7 @@ Private Function IsMatchingHelperHeader(ByVal headerText As String) As Boolean
 
     koreanMatching = ChrW(&amp;HB9E4) &amp; ChrW(&amp;HCE6D)
 
-    IsMatchingHelperHeader = (InStr(1, headerText, &quot;MATCHING&quot;, vbTextCompare) &gt; 0) Or _
-                             (InStr(1, headerText, koreanMatching, vbTextCompare) &gt; 0)
+IsMatchingHelperHeader = (InStr(1, headerText, &quot;MATCHING&quot;, vbTextCompare) &gt; 0) Or (InStr(1, headerText, koreanMatching, vbTextCompare) &gt; 0)
 
 End Function
 
@@ -13263,12 +13296,13 @@ Private Function KoreanStockHeader() As String
 
     KoreanStockHeader = ChrW(&amp;HC7AC) &amp; ChrW(&amp;HACE0)
 
-End Function</pre></details></article></section><footer>2026.10.07 제공 파일 기준 정적 점검 · 실제 설치와 메뉴 연결은 각 PC에서 진행하세요.</footer></main><div id="notice" role="status" hidden></div><script>const key='daea-xlam-guide-v1';let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}')}catch{}const checks=[...document.querySelectorAll('[data-check]')];function progress(){const n=checks.filter(x=>x.checked).length;document.getElementById('progressText').textContent=n+' / '+checks.length+' 확인';document.getElementById('progressBar').style.width=(100*n/checks.length)+'%'}checks.forEach(x=>{x.checked=!!saved[x.dataset.check];x.addEventListener('change',()=>{saved[x.dataset.check]=x.checked;try{localStorage.setItem(key,JSON.stringify(saved))}catch{}progress()})});progress();function show(id,focus=false){if(!document.getElementById(id)?.classList.contains('panel'))id='start';document.querySelectorAll('.panel').forEach(x=>x.hidden=x.id!==id);document.querySelectorAll('.tab').forEach(b=>{b.classList.toggle('active',b.dataset.go===id);b.setAttribute('aria-current',b.dataset.go===id?'step':'false')});history.replaceState(null,'','#'+id);window.scrollTo(0,0);if(focus)document.getElementById('title-'+id).focus({preventScroll:true})}document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>show(b.dataset.go,true));window.addEventListener('hashchange',()=>show(location.hash.slice(1)));show(location.hash.slice(1)||'start');function note(t){const n=document.getElementById('notice');n.textContent=t;n.hidden=false;setTimeout(()=>n.hidden=true,2400)}document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{const t=document.getElementById(b.dataset.copy).textContent;try{await navigator.clipboard.writeText(t);note('복사했습니다')}catch{note('복사할 내용을 선택해 Ctrl+C를 눌러주세요')}});document.getElementById('reset').onclick=()=>{if(!confirm('이 안내의 체크 기록을 초기화할까요?'))return;saved={};try{localStorage.removeItem(key)}catch{}checks.forEach(x=>x.checked=false);progress()};</script><dialog id="moduleDialog" class="code-modal" aria-labelledby="moduleDialogTitle"><h2 id="moduleDialogTitle"></h2><p id="moduleDialogName"></p><textarea id="moduleCode" readonly spellcheck="false" aria-label="복사용 전체 VBA 코드"></textarea><div class="actions"><button id="copyModule">전체 코드 복사</button><button id="selectModule">전체 선택</button><button id="closeModule">닫기</button></div><p id="moduleCopyStatus" role="status"></p></dialog><script>
+End Function
+</pre></details></article></section><footer>2026.10.07 제공 파일 기준 정적 점검 · 실제 설치와 메뉴 연결은 각 PC에서 진행하세요.</footer></main><div id="notice" role="status" hidden></div><script>function vbaClipboardText(text){return text.replace(/\r\n?/g,'\n').replace(/\n/g,'\r\n');}const key='daea-xlam-guide-v1';let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}')}catch{}const checks=[...document.querySelectorAll('[data-check]')];function progress(){const n=checks.filter(x=>x.checked).length;document.getElementById('progressText').textContent=n+' / '+checks.length+' 확인';document.getElementById('progressBar').style.width=(100*n/checks.length)+'%'}checks.forEach(x=>{x.checked=!!saved[x.dataset.check];x.addEventListener('change',()=>{saved[x.dataset.check]=x.checked;try{localStorage.setItem(key,JSON.stringify(saved))}catch{}progress()})});progress();function show(id,focus=false){if(!document.getElementById(id)?.classList.contains('panel'))id='start';document.querySelectorAll('.panel').forEach(x=>x.hidden=x.id!==id);document.querySelectorAll('.tab').forEach(b=>{b.classList.toggle('active',b.dataset.go===id);b.setAttribute('aria-current',b.dataset.go===id?'step':'false')});history.replaceState(null,'','#'+id);window.scrollTo(0,0);if(focus)document.getElementById('title-'+id).focus({preventScroll:true})}document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>show(b.dataset.go,true));window.addEventListener('hashchange',()=>show(location.hash.slice(1)));show(location.hash.slice(1)||'start');function note(t){const n=document.getElementById('notice');n.textContent=t;n.hidden=false;setTimeout(()=>n.hidden=true,2400)}document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{const t=document.getElementById(b.dataset.copy).textContent;try{await navigator.clipboard.writeText(vbaClipboardText(t));note('복사했습니다')}catch{note('복사할 내용을 선택해 Ctrl+C를 눌러주세요')}});document.getElementById('reset').onclick=()=>{if(!confirm('이 안내의 체크 기록을 초기화할까요?'))return;saved={};try{localStorage.removeItem(key)}catch{}checks.forEach(x=>x.checked=false);progress()};</script><dialog id="moduleDialog" class="code-modal" aria-labelledby="moduleDialogTitle"><h2 id="moduleDialogTitle"></h2><p id="moduleDialogName"></p><textarea id="moduleCode" readonly spellcheck="false" aria-label="복사용 전체 VBA 코드"></textarea><div class="actions"><button id="copyModule">전체 코드 복사</button><button id="selectModule">전체 선택</button><button id="closeModule">닫기</button></div><p id="moduleCopyStatus" role="status"></p></dialog><script>
 const moduleSelect=document.getElementById('moduleSelect'),moduleDialog=document.getElementById('moduleDialog'),moduleCode=document.getElementById('moduleCode');
 function openModuleCode(id){const pre=document.getElementById(id),article=pre.closest('article');document.getElementById('moduleDialogTitle').textContent=article.querySelector('h3').textContent;document.getElementById('moduleDialogName').textContent='모듈 이름: '+id.replace('code-','');moduleCode.value=pre.textContent;document.getElementById('moduleCopyStatus').textContent='';moduleDialog.showModal();}
 document.querySelectorAll('#latest-code pre[id^="code-"]').forEach(pre=>{const article=pre.closest('article'),title=article.querySelector('h3').textContent;moduleSelect.add(new Option(title+' — '+pre.id.replace('code-',''),pre.id));const button=document.createElement('button');button.textContent='코드 창 열기';button.onclick=()=>openModuleCode(pre.id);article.querySelector('.copyrow').prepend(button);});
 document.getElementById('openModule').onclick=()=>openModuleCode(moduleSelect.value);
 document.getElementById('closeModule').onclick=()=>moduleDialog.close();
 document.getElementById('selectModule').onclick=()=>{moduleCode.focus();moduleCode.select();};
-document.getElementById('copyModule').onclick=async()=>{try{await navigator.clipboard.writeText(moduleCode.value);document.getElementById('moduleCopyStatus').textContent='전체 코드를 복사했습니다. VBA 편집기에 붙여넣으세요.';}catch{moduleCode.focus();moduleCode.select();document.getElementById('moduleCopyStatus').textContent='자동 복사가 차단되어 전체 선택했습니다. Ctrl+C로 복사하세요.';}};
+document.getElementById('copyModule').onclick=async()=>{try{await navigator.clipboard.writeText(vbaClipboardText(moduleCode.value));document.getElementById('moduleCopyStatus').textContent='전체 코드를 복사했습니다. VBA 편집기에 붙여넣으세요.';}catch{moduleCode.focus();moduleCode.select();document.getElementById('moduleCopyStatus').textContent='자동 복사가 차단되어 전체 선택했습니다. Ctrl+C로 복사하세요.';}};
 </script></body></html>

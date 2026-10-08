@@ -26,8 +26,7 @@ Public Sub 범용_재고리스트_만들기()
     On Error GoTo Failed
 
     If TypeName(ActiveSheet) <> "Worksheet" Then
-        MsgBox "입고·출고 원본 또는 집계 결과 시트를 선택해주세요.", _
-               vbExclamation
+MsgBox "입고·출고 원본 또는 집계 결과 시트를 선택해주세요.", vbExclamation
         Exit Sub
     End If
 
@@ -49,14 +48,10 @@ Public Sub 범용_재고리스트_만들기()
         Exit Sub
     End If
 
-    lastRow = Application.Max( _
-        src.Cells(src.Rows.Count, facCol).End(xlUp).Row, _
-        src.Cells(src.Rows.Count, nameCol).End(xlUp).Row, _
-        src.Cells(src.Rows.Count, qtyCol).End(xlUp).Row)
+lastRow = Application.Max( src.Cells(src.Rows.Count, facCol).End(xlUp).Row, src.Cells(src.Rows.Count, nameCol).End(xlUp).Row, src.Cells(src.Rows.Count, qtyCol).End(xlUp).Row)
 
     If codeCol > 0 Then
-        lastRow = Application.Max(lastRow, _
-            src.Cells(src.Rows.Count, codeCol).End(xlUp).Row)
+lastRow = Application.Max(lastRow, src.Cells(src.Rows.Count, codeCol).End(xlUp).Row)
     End If
 
     Set dict = CreateObject("Scripting.Dictionary")
@@ -67,12 +62,9 @@ Public Sub 범용_재고리스트_만들기()
     '-----------------------------------
     For r = 2 To lastRow
 
-        If IsError(src.Cells(r, facCol).Value2) Or _
-           IsError(src.Cells(r, nameCol).Value2) Then
+If IsError(src.Cells(r, facCol).Value2) Or IsError(src.Cells(r, nameCol).Value2) Then
 
-            Err.Raise vbObjectError + 901, , _
-                "공장 또는 품명에 오류가 있습니다." & _
-                vbCrLf & "원본 행: " & r
+Err.Raise vbObjectError + 901, , "공장 또는 품명에 오류가 있습니다." & vbCrLf & "원본 행: " & r
         End If
 
         fac = RL_Text(src.Cells(r, facCol).Value2)
@@ -82,9 +74,7 @@ Public Sub 범용_재고리스트_만들기()
         If codeCol > 0 Then
 
             If IsError(src.Cells(r, codeCol).Value2) Then
-                Err.Raise vbObjectError + 902, , _
-                    "품목코드에 오류가 있습니다." & _
-                    vbCrLf & "원본 행: " & r
+Err.Raise vbObjectError + 902, , "품목코드에 오류가 있습니다." & vbCrLf & "원본 행: " & r
             End If
 
             itemCode = RL_Text(src.Cells(r, codeCol).Value2)
@@ -113,9 +103,7 @@ Public Sub 범용_재고리스트_만들기()
         End If
 
         If itemName = "" Then
-            Err.Raise vbObjectError + 903, , _
-                "품명이 비어 있습니다." & vbCrLf & _
-                "원본 행: " & r
+Err.Raise vbObjectError + 903, , "품명이 비어 있습니다." & vbCrLf & "원본 행: " & r
         End If
 
         ' 공장코드를 FAC로 변환
@@ -124,15 +112,11 @@ Public Sub 범용_재고리스트_만들기()
         End If
 
         If IsError(src.Cells(r, qtyCol).Value2) Then
-            Err.Raise vbObjectError + 905, , _
-                "수량에 오류가 있습니다." & vbCrLf & _
-                "원본 행: " & r
+Err.Raise vbObjectError + 905, , "수량에 오류가 있습니다." & vbCrLf & "원본 행: " & r
         End If
 
         If Not IsNumeric(src.Cells(r, qtyCol).Value2) Then
-            Err.Raise vbObjectError + 906, , _
-                "수량이 숫자가 아닙니다." & vbCrLf & _
-                "원본 행: " & r
+Err.Raise vbObjectError + 906, , "수량이 숫자가 아닙니다." & vbCrLf & "원본 행: " & r
         End If
 
         qty = CDbl(src.Cells(r, qtyCol).Value2)
@@ -183,11 +167,7 @@ NextRow:
         .Cells(1, 2).Value2 = "재고리스트"
         .Cells(1, 3).Value2 = "(" & Format(Date, "yy-mm-dd") & ")"
 
-        .Range("A2:I2").Value = _
-            Array("FAC", "품목명△", qtyTitle, _
-                  "팔레트", "수량", _
-                  "팔레트", "수량", _
-                  "팔레트", "수량")
+.Range("A2:I2").Value = Array("FAC", "품목명△", qtyTitle, "팔레트", "수량", "팔레트", "수량", "팔레트", "수량")
 
         .Columns("A:B").NumberFormat = "@"
 
@@ -219,17 +199,9 @@ NextRow:
 
             .SortFields.Clear
 
-            .SortFields.Add _
-                Key:=dest.Range("A3:A" & lastOutputRow), _
-                SortOn:=xlSortOnValues, _
-                Order:=xlAscending, _
-                DataOption:=xlSortNormal
+.SortFields.Add Key:=dest.Range("A3:A" & lastOutputRow), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
 
-            .SortFields.Add _
-                Key:=dest.Range("B3:B" & lastOutputRow), _
-                SortOn:=xlSortOnValues, _
-                Order:=xlAscending, _
-                DataOption:=xlSortNormal
+.SortFields.Add Key:=dest.Range("B3:B" & lastOutputRow), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:=xlSortNormal
 
             .SetRange dest.Range("A2:I" & lastOutputRow)
             .Header = xlYes
@@ -349,12 +321,7 @@ NextRow:
     Application.ScreenUpdating = oldScreen
     dest.Activate
 
-    MsgBox "반장님 재고리스트를 만들었습니다." & vbCrLf & _
-           "원본 구분: " & kind & vbCrLf & _
-           "FAC·품명별 집계: " & dict.Count & "건" & vbCrLf & _
-           "품명 한 줄 표시 · 행 높이 고정" & vbCrLf & _
-           "Ctrl+P에서 인쇄 모양을 확인해주세요.", _
-           vbInformation
+MsgBox "반장님 재고리스트를 만들었습니다." & vbCrLf & "원본 구분: " & kind & vbCrLf & "FAC·품명별 집계: " & dict.Count & "건" & vbCrLf & "품명 한 줄 표시 · 행 높이 고정" & vbCrLf & "Ctrl+P에서 인쇄 모양을 확인해주세요.", vbInformation
 
     Exit Sub
 
@@ -364,9 +331,7 @@ Failed:
 
     If outputCreated Then
 
-        MsgBox "출력 또는 인쇄 설정 중 오류가 발생했습니다." & _
-               vbCrLf & "생성된 시트를 확인해주세요." & _
-               vbCrLf & Err.Description, vbExclamation
+MsgBox "출력 또는 인쇄 설정 중 오류가 발생했습니다." & vbCrLf & "생성된 시트를 확인해주세요." & vbCrLf & Err.Description, vbExclamation
 
     Else
 
@@ -404,9 +369,7 @@ End Function
 
 
 ' 첫 행에서 해당 머리글 열 찾기
-Private Function RL_FindColumn( _
-    ByVal ws As Worksheet, _
-    ByVal aliases As Variant) As Long
+Private Function RL_FindColumn( ByVal ws As Worksheet, ByVal aliases As Variant) As Long
 
     Dim c As Long, lastCol As Long
     Dim alias As Variant
@@ -434,9 +397,7 @@ Private Function RL_FindColumn( _
             If matched Then
 
                 If RL_FindColumn <> 0 Then
-                    Err.Raise vbObjectError + 920, , _
-                        "같은 역할의 머리글이 여러 개 있습니다: " & _
-                        CStr(ws.Cells(1, c).Value2)
+Err.Raise vbObjectError + 920, , "같은 역할의 머리글이 여러 개 있습니다: " & CStr(ws.Cells(1, c).Value2)
                 End If
 
                 RL_FindColumn = c
@@ -451,9 +412,7 @@ End Function
 
 
 ' 같은 이름의 시트 존재 여부
-Private Function RL_SheetExists( _
-    ByVal wb As Workbook, _
-    ByVal sheetName As String) As Boolean
+Private Function RL_SheetExists( ByVal wb As Workbook, ByVal sheetName As String) As Boolean
 
     Dim sh As Object
 
