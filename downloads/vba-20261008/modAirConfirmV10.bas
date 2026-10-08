@@ -5,16 +5,33 @@ Private Const SH_THU As String = "THU_CONFIRM"
 Private Const SH_F12 As String = "THAI_F1F2"
 Private Const SH_F5 As String = "THAI_F5"
 Private Const SH_CHECK As String = "CHECK"
+Private mTuesday As Boolean
 Public Sub BuildAirConfirm()
     에어_컨펌_만들기
 End Sub
 Public Sub BuildTuesdayConfirm()
-    에어_컨펌_만들기
+    에어_컨펌_화요일
 End Sub
 Public Sub BuildThursdayConfirm()
-    에어_컨펌_만들기
+    에어_컨펌_금요일
+End Sub
+Public Sub BuildFridayConfirm()
+    에어_컨펌_금요일
+End Sub
+Public Sub 에어_컨펌_화요일()
+    BuildAirMode True
+End Sub
+Public Sub 에어_컨펌_금요일()
+    BuildAirMode False
 End Sub
 Public Sub 에어_컨펌_만들기()
+    Dim choice As VbMsgBoxResult
+    choice = MsgBox("예: 화요일 KET 또는 URGENT / 아니오: 금요일 REMAIN 전체", vbYesNoCancel + vbQuestion)
+    If choice = vbCancel Then Exit Sub
+    BuildAirMode (choice = vbYes)
+End Sub
+Private Sub BuildAirMode(ByVal tuesday As Boolean)
+    mTuesday = tuesday
     Dim wb As Workbook
     Dim wsHyoju As Worksheet, wsKyungjin As Worksheet, wsMinji As Worksheet, wsBase As Worksheet
     Dim wsOut As Worksheet, wsF12 As Worksheet, wsF5 As Worksheet
@@ -32,31 +49,30 @@ Public Sub 에어_컨펌_만들기()
     currentStep = "Open workbook sheets"
     Set wb = ActiveWorkbook
     If wb Is Nothing Then Err.Raise vbObjectError + 109, , "No active workbook. Open the AIR confirmation workbook first."
-    Set wsHyoju = FindInputSheet(wb, "HYOJU")
-    Set wsKyungjin = FindInputSheet(wb, "KYUNGJIN")
-    Set wsMinji = FindInputSheet(wb, "MINJI")
+    Set wsHyoju = OptionalPersonSheet(wb, "HYOJU")
+    Set wsKyungjin = OptionalPersonSheet(wb, "KYUNGJIN")
+    Set wsMinji = OptionalPersonSheet(wb, "MINJI")
     If TypeName(ActiveSheet) <> "Worksheet" Then Err.Raise vbObjectError + 112, , "요청 목록을 선택하세요."
+    If wsHyoju Is Nothing And wsKyungjin Is Nothing And wsMinji Is Nothing Then Err.Raise vbObjectError + 115, , "효주·경진·민지 중 하나 이상의 담당자 시트가 필요합니다."
     Set wsBase = ActiveSheet
     If wsBase Is wsHyoju Or wsBase Is wsKyungjin Or wsBase Is wsMinji Then Err.Raise vbObjectError + 113, , "담당자 시트가 아닌 요청 목록을 선택하세요."
     Select Case UCase$(wsBase.Name)
         Case "AIR_CONFIRM", "TUE_CONFIRM", "THU_CONFIRM", "THAI_F1F2", "THAI_F5", "CHECK"
             Err.Raise vbObjectError + 114, , "결과 시트가 아닌 원본 요청 목록을 선택하세요."
     End Select
-    qtyHeader = "Request Qty"
+    qtyHeader = IIf(tuesday, "Purchase request", "Remain")
     baseLabel = wsBase.Name
     calcMode = Application.Calculation
     Application.ScreenUpdating = False
     Application.EnableEvents = False
     Application.Calculation = xlCalculationManual
     currentStep = "Read headers"
-    Set hyojuHdr = GetHeaderMap(wsHyoju)
-    Set kyungjinHdr = GetHeaderMap(wsKyungjin)
-    Set minjiHdr = GetHeaderMap(wsMinji)
+    Set hyojuHdr = OptionalPersonHeaders(wsHyoju)
+    Set kyungjinHdr = OptionalPersonHeaders(wsKyungjin)
+    Set minjiHdr = OptionalPersonHeaders(wsMinji)
     Set baseHdr = GetHeaderMap(wsBase)
-    ValidateHeaders hyojuHdr, wsHyoju.Name, Array("FAC", "ITEMCD")
-    ValidateHeaders kyungjinHdr, wsKyungjin.Name, Array("FAC", "ITEMCD")
-    ValidateHeaders minjiHdr, wsMinji.Name, Array("FAC", "ITEMCD")
     ValidateHeaders baseHdr, wsBase.Name, Array("FAC", "ITEMCD", "QTY")
+    If tuesday Then ValidateHeaders baseHdr, wsBase.Name, Array("MAKER", "NEEDETD")
     currentStep = "Prepare output sheets"
     Set wsOut = EnsureSheet(wb, "AIR_CONFIRM")
     Set wsF12 = EnsureSheet(wb, SH_F12)
@@ -94,7 +110,11 @@ Public Sub 에어_컨펌_만들기()
     Application.Calculation = calcMode
     Application.EnableEvents = oldEvents
     Application.ScreenUpdating = oldScreen
-MsgBox "컨펌 생성 완료: AIR_CONFIRM / THAI_F1F2 / THAI_F5. 확인사항은 비고 열에 표시했습니다.", vbInformation
+Dim missingNames As String
+    If wsHyoju Is Nothing Then missingNames = missingNames & "효주 "
+    If wsKyungjin Is Nothing Then missingNames = missingNames & "경진 "
+    If wsMinji Is Nothing Then missingNames = missingNames & "민지 "
+    MsgBox IIf(tuesday, "화요일 KET + URGENT", "금요일 REMAIN 전체") & " 컨펌 생성 완료" & vbCrLf & "AIR_CONFIRM: " & (outRow - 2) & "행 / THAI_F1F2: " & (f12Row - 2) & "행 / THAI_F5: " & (f5Row - 2) & "행" & vbCrLf & "없는 담당자 시트: " & IIf(missingNames = "", "없음", missingNames) & vbCrLf & "확인사항은 AIR_CONFIRM 비고 열에 표시했습니다.", vbInformation
     Exit Sub
 CleanFail:
     Application.Calculation = calcMode
@@ -185,6 +205,7 @@ Private Function KoreanWednesdayRemain() As String
 End Function
 Private Sub IndexConfirmationSource(ByVal ws As Worksheet, ByVal hdr As Object, ByVal sourceId As String, ByVal exactIndex As Object, ByVal itemIndex As Object)
     Dim r As Long, lastRow As Long, fac As String, itemCd As String, exactKey As String, token As String
+    If ws Is Nothing Then Exit Sub
     lastRow = LastDataRow(ws, hdr("ITEMCD"))
     For r = hdr("HEADERROW") + 1 To lastRow
         itemCd = NormalizeCode(CellValue(ws, r, hdr, "ITEMCD"))
@@ -261,13 +282,16 @@ Private Sub ProcessBaseList(ByVal wsBase As Worksheet, ByVal baseHdr As Object, 
             Else
                 sourceName = baseLabel
             End If
+            If mTuesday Then
+                If UCase$(Trim$(CStr(makerVal))) <> "KET" And InStr(1, CStr(needVal), "URGENT", vbTextCompare) = 0 Then GoTo NextBaseRow
+            End If
             If Not hasOwner And issueText = "" Then issueText = "담당자 자료에 FAC + Item cd 일치 항목 없음"
             If fac <> "F1" And fac <> "F2" And fac <> "F5" Then issueText = issueText & " / 공장 확인 필요: " & fac
             If issueText <> "" Then remarkVal = CStr(remarkVal) & " / " & issueText
             statusText = EvaluateStatus(qtyVal, stockVal, confirmVal, needVal)
             If issueText <> "" Then statusText = "REVIEW"
             WriteConfirmRow wsOut, outRow, fac, itemCd, makerVal, partVal, qtyVal, stockVal, confirmVal, shortVal, needVal, remarkVal, statusText
-            If statusText = "CHECKING" Then
+            If True Then
                 If UCase$(Trim$(CStr(fac))) = "F5" Then
                     WriteThaiRow wsF5, f5Row, fac, itemCd, makerVal, partVal, qtyVal, stockVal, confirmVal, shortVal, needVal, outRow
                     f5Row = f5Row + 1
@@ -277,11 +301,11 @@ Private Sub ProcessBaseList(ByVal wsBase As Worksheet, ByVal baseHdr As Object, 
                 Else
                 wsOut.Cells(outRow, 10).Value = CStr(remarkVal) & " / 확인 필요"
                 End If
-            ElseIf statusText = "REVIEW" Then
-                wsOut.Cells(outRow, 10).Value = CStr(remarkVal) & " / 확인 필요"
+
             End If
             outRow = outRow + 1
         End If
+NextBaseRow:
     Next r
 End Sub
 Private Sub ApplyConfirmHeaderFormats(ByVal wsBase As Worksheet, ByVal baseHdr As Object, ByVal wsOwner As Worksheet, ByVal ownerHdr As Object, ByVal wsOut As Worksheet)
@@ -291,7 +315,7 @@ Private Sub ApplyConfirmHeaderFormats(ByVal wsBase As Worksheet, ByVal baseHdr A
     CopyFormatByKey wsBase, CLng(baseHdr("HEADERROW")), baseHdr, "PARTNAME", wsOut.Cells(1, 4)
     CopyFormatByKey wsBase, CLng(baseHdr("HEADERROW")), baseHdr, "QTY", wsOut.Cells(1, 5)
     CopyFormatByKey wsBase, CLng(baseHdr("HEADERROW")), baseHdr, "STOCK", wsOut.Cells(1, 6)
-    CopyFormatByKey wsOwner, CLng(ownerHdr("HEADERROW")), ownerHdr, "CONFIRM", wsOut.Cells(1, 7)
+    If Not wsOwner Is Nothing Then CopyFormatByKey wsOwner, CLng(ownerHdr("HEADERROW")), ownerHdr, "CONFIRM", wsOut.Cells(1, 7)
     CopyFormatByKey wsBase, CLng(baseHdr("HEADERROW")), baseHdr, "SHORTDEL", wsOut.Cells(1, 8)
     CopyFormatByKey wsBase, CLng(baseHdr("HEADERROW")), baseHdr, "NEEDETD", wsOut.Cells(1, 9)
     CopyFormatByKey wsBase, CLng(baseHdr("HEADERROW")), baseHdr, "REMARK", wsOut.Cells(1, 10)
@@ -694,3 +718,19 @@ Private Sub SortOutput(ByVal ws As Worksheet, ByVal lastRow As Long, ByVal lastC
         .Apply
     End With
 End Sub
+
+Private Function OptionalPersonSheet(ByVal wb As Workbook, ByVal role As String) As Worksheet
+    On Error Resume Next
+    Set OptionalPersonSheet = FindInputSheet(wb, role)
+    On Error GoTo 0
+End Function
+Private Function OptionalPersonHeaders(ByVal ws As Worksheet) As Object
+    Dim hdr As Object
+    If ws Is Nothing Then
+        Set OptionalPersonHeaders = CreateObject("Scripting.Dictionary")
+    Else
+        Set hdr = GetHeaderMap(ws)
+        ValidateHeaders hdr, ws.Name, Array("FAC", "ITEMCD")
+        Set OptionalPersonHeaders = hdr
+    End If
+End Function
