@@ -107,7 +107,7 @@ NextRow:
     End With
     With outWs.Range("A1:E1")
         .Font.Bold = True
-        .Interior.Color = 14524132
+        .Interior.Pattern = xlNone
         .HorizontalAlignment = xlCenter
         .RowHeight = 30
     End With
@@ -123,12 +123,27 @@ NextRow:
     outWs.Range("D2:E" & r).NumberFormat = "#,##0.########;-#,##0.########;0"
     outWs.Range("A2:C" & (r - 1)).HorizontalAlignment = xlCenter
     outWs.Range("D2:E" & r).HorizontalAlignment = xlRight
-    If r > 3 Then
-        With outWs.Range("A3:A" & (r - 1)).FormatConditions.Add(Type:=xlExpression, Formula1:="=$A3=$A2")
-            .Font.Color = vbWhite
-        End With
-    End If
-    outWs.Range("A1:E" & (r - 1)).AutoFilter
+    ' 같은 품목명이 연속된 행의 품목명 셀을 병합
+    Dim groupStart As Long, groupEnd As Long, nextRow As Long, itemLabel As String
+    groupStart = 2
+    Do While groupStart < r
+        itemLabel = CStr(outWs.Cells(groupStart, 1).Value2)
+        groupEnd = groupStart
+        Do While groupEnd + 1 < r
+            If CStr(outWs.Cells(groupEnd + 1, 1).Value2) <> itemLabel Then Exit Do
+            groupEnd = groupEnd + 1
+        Loop
+        If groupEnd > groupStart Then
+            ' 동일한 값만 병합하므로 첫 셀 외의 중복 표시를 먼저 비움
+            outWs.Range(outWs.Cells(groupStart + 1, 1), outWs.Cells(groupEnd, 1)).ClearContents
+            With outWs.Range(outWs.Cells(groupStart, 1), outWs.Cells(groupEnd, 1))
+                .Merge
+                .HorizontalAlignment = xlCenter
+                .VerticalAlignment = xlCenter
+            End With
+        End If
+        groupStart = groupEnd + 1
+    Loop
     With outWs.PageSetup
         .PaperSize = xlPaperA4
         .Orientation = xlPortrait

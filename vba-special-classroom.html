@@ -53,7 +53,7 @@ End Sub</pre><p>처음 시험할 때는 편집기에서 <b>새업무_대상확�
 <article><h3>앞으로 업데이트할 때</h3><p>이번 파일에는 modPalletLabelBasic.파렛트_라벨_기본와 modPalletLabelExpanded.파렛트_라벨_확대가 함께 있습니다. 이름이 같아도 내용이 동일하지 않습니다. 삭제하거나 이름만으로 연결하지 말고 모듈 이름까지 지정해 구별하세요. 새 기능은 modNewWork 같은 고유한 모듈·실행 이름을 사용합니다.</p><ol class="steps"><li>기능을 수정하기 전 XLAM을 날짜별로 백업하고, 리본 설정도 내보냅니다.</li><li>배포 파일로 교체할 때는 Excel을 모두 닫고 기존 설치 위치의 파일을 교체합니다. 새 버전 번호는 백업 폴더나 변경 기록에 적고, 등록된 파일명·경로는 유지하는 편이 편합니다.</li><li>Excel을 다시 열어 추가 기능 등록 상태를 확인합니다. 기존 모듈·실행 이름이 같으면 버튼 연결을 유지할 수 있습니다. 이름·경로가 바뀌었다면 다시 연결합니다.</li><li>새 기능을 더한 경우 기존 기능 하나와 새 기능을 각각 시험합니다. 문제가 생기면 Excel을 종료하고 백업 XLAM과 메뉴 설정으로 되돌립니다.</li></ol></article>
 <table><thead><tr><th>증상</th><th>먼저 확인할 것</th></tr></thead><tbody><tr><td>XLAM을 열었는데 아무 시트도 안 보임</td><td>추가 기능은 숨겨진 상태로 로드될 수 있습니다. 추가 기능 체크 상태와 리본 실행을 확인합니다.</td></tr><tr><td>‘매크로를 실행할 수 없습니다’</td><td>XLAM 등록·파일 경로·매크로 허용 여부와 버튼의 모듈/실행 이름을 확인합니다.</td></tr><tr><td>버튼은 있는데 다른 파일을 처리함</td><td>업무 파일과 대상 시트를 다시 선택합니다. 코드의 ActiveWorkbook/ThisWorkbook 사용도 확인합니다.</td></tr><tr><td>새 코드를 넣었는데 버튼이 없음</td><td>코드 추가와 메뉴 추가는 별도입니다. 기존 리본 설정에 새 실행 이름을 연결합니다.</td></tr><tr><td>예전 기능이나 중복된 이름이 보임</td><td>구버전 XLAM을 함께 등록했는지, 동일 BAS를 여러 번 가져왔는지 확인합니다. 사용 중인 파일은 확인 없이 지우지 않습니다.</td></tr><tr><td>저장 후 재시작하니 새 코드가 사라짐</td><td>다른 프로젝트를 편집했거나 XLAM이 읽기 전용인지 확인합니다. 설치된 XLAM을 선택해 저장합니다.</td></tr><tr><td>‘이름이 분명하지 않습니다’ 또는 컴파일 오류</td><td>같은 공개 Sub/Function 중복, 누락된 보조 함수, 표준 모듈에 들어간 시트 이벤트 코드를 확인합니다.</td></tr><tr><td>V9 원본을 못 찾음</td><td>대상과 원본을 같은 Excel 실행 창에서 열고 파일명·헤더·공장 정보를 확인합니다.</td></tr></tbody></table>
 <div class="grid"><article><h3>처음 설치할 때</h3><p>XLAM 복사 → 추가 기능 등록 → 메뉴 가져오기 → 복사본 실행 확인</p></article><article><h3>새 기능을 만들 때</h3><p>백업 → 기존 XLAM에 새 모듈 → 컴파일·저장 → 새 버튼 연결 → 결과 확인</p></article></div>
-<label class="check"><input type="checkbox" data-check="ready"><span>XLAM과 리본 설정을 함께 백업하고 업데이트할 수 있다</span></label><article><h3>이전 실습 자료도 필요하다면</h3><p>기존 ITEM AUTO FILL·AIR CONFIRM 예제와 실습 키트는 별도 실습 페이지에 보관했습니다. 학습용 코드 버전과 이번 점검 파일은 서로 다릅니다. <a href="downloads/daea-macros-24-20260923.zip">9월 23일 이전 통합본 ZIP</a>도 참고용으로 보관합니다. 이번 파일 대신 설치하지 마세요.</p><a class="secondary" href="vba-practice-legacy.html">이전 VBA 예제 실습 열기 →</a></article></section><section class="panel" id="latest-code" aria-labelledby="title-latest-code" hidden><header class="sectionhead"><span class="eyebrow">2026.10.08 · 최신 코드</span><h2 id="title-latest-code" tabindex="-1">업무용 · 범용 VBA 코드</h2><p>모듈별 전체 코드 복사와 BAS 다운로드. 아래 자료가 최근 대화에서 수정한 최신 버전입니다.</p></header><p class="note">기존 XLAM을 백업하고 해당 모듈을 교체하세요. BAS 가져오기와 코드 붙여넣기는 둘 중 하나만 사용합니다. STOCK 이름을 바꾼 경우 리본도 다시 연결합니다. 아래 ZIP은 코드 모듈 자료이며 XLAM 완성본은 아닙니다.</p><p class="note">복사 오류 수정판: 모든 모듈에서 줄 연결 기호를 제거하고 Windows VBA용 줄바꿈으로 복사합니다. 이전에 붙인 코드는 해당 모듈에서 전체 선택 후 아래 코드로 교체하세요.</p><div class="module-picker"><label for="moduleSelect">복사할 모듈</label><select id="moduleSelect"></select><button id="openModule">코드 창 열기</button></div><p>Alt+F11 → 기존 모듈 선택 → 코드 전체를 교체하세요. 새 기능은 삽입 → 모듈에서 추가하고 표시된 모듈 이름을 지정하세요. 같은 실행 이름이 중복되지 않도록 기존 모듈에 덧붙이지 마세요. 아래 코드는 현재 배포 XLAM과 일치하며, 범용 도구는 별도 자료입니다.</p><article><h3>발주잔량 수주별 정리</h3><p>김해반도 예시 형식: 품목명 → 수주번호 → 주문서 번호(발주번호 끝 5자리) → 발주수량 → 미납수량. 품목명·수주번호·주문서 번호 순으로 정렬합니다. 반복 품목명은 첫 행에만 보이지만 셀 값은 유지합니다. Arial 11pt, 예시 머리글 색상, A4 세로 인쇄를 적용했습니다. ERP 원본 또는 백데이터 시트에서 실행하세요.</p><p>모듈 이름: <code>modPurchaseOrderSummary</code> · 실행 이름: <code>발주잔량_수주별_정리</code></p><div class="copyrow"><button data-copy="code-modPurchaseOrderSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modPurchaseOrderSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modPurchaseOrderSummary">Option Explicit
+<label class="check"><input type="checkbox" data-check="ready"><span>XLAM과 리본 설정을 함께 백업하고 업데이트할 수 있다</span></label><article><h3>이전 실습 자료도 필요하다면</h3><p>기존 ITEM AUTO FILL·AIR CONFIRM 예제와 실습 키트는 별도 실습 페이지에 보관했습니다. 학습용 코드 버전과 이번 점검 파일은 서로 다릅니다. <a href="downloads/daea-macros-24-20260923.zip">9월 23일 이전 통합본 ZIP</a>도 참고용으로 보관합니다. 이번 파일 대신 설치하지 마세요.</p><a class="secondary" href="vba-practice-legacy.html">이전 VBA 예제 실습 열기 →</a></article></section><section class="panel" id="latest-code" aria-labelledby="title-latest-code" hidden><header class="sectionhead"><span class="eyebrow">2026.10.08 · 최신 코드</span><h2 id="title-latest-code" tabindex="-1">업무용 · 범용 VBA 코드</h2><p>모듈별 전체 코드 복사와 BAS 다운로드. 아래 자료가 최근 대화에서 수정한 최신 버전입니다.</p></header><p class="note">기존 XLAM을 백업하고 해당 모듈을 교체하세요. BAS 가져오기와 코드 붙여넣기는 둘 중 하나만 사용합니다. STOCK 이름을 바꾼 경우 리본도 다시 연결합니다. 아래 ZIP은 코드 모듈 자료이며 XLAM 완성본은 아닙니다.</p><p class="note">복사 오류 수정판: 모든 모듈에서 줄 연결 기호를 제거하고 Windows VBA용 줄바꿈으로 복사합니다. 이전에 붙인 코드는 해당 모듈에서 전체 선택 후 아래 코드로 교체하세요.</p><div class="module-picker"><label for="moduleSelect">복사할 모듈</label><select id="moduleSelect"></select><button id="openModule">코드 창 열기</button></div><p>Alt+F11 → 기존 모듈 선택 → 코드 전체를 교체하세요. 새 기능은 삽입 → 모듈에서 추가하고 표시된 모듈 이름을 지정하세요. 같은 실행 이름이 중복되지 않도록 기존 모듈에 덧붙이지 마세요. 아래 코드는 현재 배포 XLAM과 일치하며, 범용 도구는 별도 자료입니다.</p><article><h3>발주잔량 수주별 정리</h3><p>김해반도 예시 형식: 품목명 → 수주번호 → 주문서 번호(발주번호 끝 5자리) → 발주수량 → 미납수량. 품목명·수주번호·주문서 번호 순으로 정렬합니다. 같은 품목명은 세로로 셀 병합합니다. Arial 11pt, 머리글 배경색 없음, A4 세로 인쇄를 적용했습니다. ERP 원본 또는 백데이터 시트에서 실행하세요.</p><p>모듈 이름: <code>modPurchaseOrderSummary</code> · 실행 이름: <code>발주잔량_수주별_정리</code></p><div class="copyrow"><button data-copy="code-modPurchaseOrderSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modPurchaseOrderSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modPurchaseOrderSummary">Option Explicit
 
 Public Sub 발주잔량_수주별_정리()
     Dim ws As Worksheet, wb As Workbook, outWs As Worksheet
@@ -161,7 +161,7 @@ NextRow:
     End With
     With outWs.Range(&quot;A1:E1&quot;)
         .Font.Bold = True
-        .Interior.Color = 14524132
+        .Interior.Pattern = xlNone
         .HorizontalAlignment = xlCenter
         .RowHeight = 30
     End With
@@ -177,12 +177,27 @@ NextRow:
     outWs.Range(&quot;D2:E&quot; &amp; r).NumberFormat = &quot;#,##0.########;-#,##0.########;0&quot;
     outWs.Range(&quot;A2:C&quot; &amp; (r - 1)).HorizontalAlignment = xlCenter
     outWs.Range(&quot;D2:E&quot; &amp; r).HorizontalAlignment = xlRight
-    If r &gt; 3 Then
-        With outWs.Range(&quot;A3:A&quot; &amp; (r - 1)).FormatConditions.Add(Type:=xlExpression, Formula1:=&quot;=$A3=$A2&quot;)
-            .Font.Color = vbWhite
-        End With
-    End If
-    outWs.Range(&quot;A1:E&quot; &amp; (r - 1)).AutoFilter
+    &#x27; 같은 품목명이 연속된 행의 품목명 셀을 병합
+    Dim groupStart As Long, groupEnd As Long, nextRow As Long, itemLabel As String
+    groupStart = 2
+    Do While groupStart &lt; r
+        itemLabel = CStr(outWs.Cells(groupStart, 1).Value2)
+        groupEnd = groupStart
+        Do While groupEnd + 1 &lt; r
+            If CStr(outWs.Cells(groupEnd + 1, 1).Value2) &lt;&gt; itemLabel Then Exit Do
+            groupEnd = groupEnd + 1
+        Loop
+        If groupEnd &gt; groupStart Then
+            &#x27; 동일한 값만 병합하므로 첫 셀 외의 중복 표시를 먼저 비움
+            outWs.Range(outWs.Cells(groupStart + 1, 1), outWs.Cells(groupEnd, 1)).ClearContents
+            With outWs.Range(outWs.Cells(groupStart, 1), outWs.Cells(groupEnd, 1))
+                .Merge
+                .HorizontalAlignment = xlCenter
+                .VerticalAlignment = xlCenter
+            End With
+        End If
+        groupStart = groupEnd + 1
+    Loop
     With outWs.PageSetup
         .PaperSize = xlPaperA4
         .Orientation = xlPortrait
