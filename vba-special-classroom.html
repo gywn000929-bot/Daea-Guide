@@ -10474,443 +10474,240 @@ If IsNumeric(srcSheet.Cells(i, 1).value) And srcSheet.Cells(i, 1).value &lt;&gt;
     MsgBox &quot;모든 페이지 제목 반복 설정이 반영된 재고 리스트가 완성되었습니다!&quot;, vbInformation, &quot;완료&quot;
 
 End Sub
-</pre></details></article><article><h3>파렛트 박스정리</h3><p>모듈 이름: <code>modPalletBoxSummary</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modPalletBoxSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modPalletBoxSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modPalletBoxSummary">Sub 파렛트_박스정리()
-
+</pre></details></article><article><h3>파렛트 박스정리</h3><p>파렛트별 별도 시트·새 페이지 출력. 품명/박스당 수량/파렛트 수량/박스·낱개를 표시합니다. 대기도 별도로 출력하며 A4 세로 흑백, 큰 글씨로 인쇄합니다. 품목이 많으면 다음 장으로 이어지고 기존 결과는 보존합니다.</p><p>모듈 이름: <code>modPalletBoxSummary</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modPalletBoxSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modPalletBoxSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modPalletBoxSummary">Sub 파렛트_박스정리()
     Dim wsSrc As Worksheet, wsOut As Worksheet, wbTarget As Workbook
-
     Dim lastRow As Long, lastCol As Long
-
     Dim i As Long, j As Long, outRow As Long
-
     Dim palletCols() As Long, palletNames() As String, nPallet As Long
 
-
-
+    Dim oldCalc As XlCalculation, oldScreen As Boolean, oldLinks As Boolean
+    oldCalc = Application.Calculation: oldScreen = Application.ScreenUpdating: oldLinks = Application.AskToUpdateLinks
+    On Error GoTo Failed
+    If TypeName(ActiveSheet) &lt;&gt; &quot;Worksheet&quot; Then Err.Raise vbObjectError + 800, , &quot;원본 파렛트 시트를 선택하세요.&quot;
     Application.ScreenUpdating = False
-
     Application.Calculation = xlCalculationManual
 
-
-
     Set wsSrc = ActiveSheet              &#x27; 원본(파렛트) 시트를 선택한 상태에서 실행
-
     Set wbTarget = wsSrc.Parent          &#x27; 결과를 만들 실제 작업 파일 (XLAM 아님)
 
-
-
     &#x27; ===== MOQ 외부 파일 경로 =====
-
     Dim moqPath As String
-
-moqPath = Environ(&quot;USERPROFILE&quot;) &amp; &quot;\OneDrive - Dae-A Electronics (Thailand) Company Limited\바탕 화면\한국단자 MOQ(20250522).xlsx&quot;
-
-
+    moqPath = Environ(&quot;USERPROFILE&quot;) &amp; &quot;\OneDrive - Dae-A Electronics (Thailand) Company Limited\바탕 화면\한국단자 MOQ(20250522).xlsx&quot;
 
     If Dir(moqPath) = &quot;&quot; Then
-
         MsgBox &quot;MOQ 파일을 찾을 수 없습니다:&quot; &amp; vbCrLf &amp; moqPath, vbExclamation
-
         GoTo CleanExit
-
     End If
-
-
 
     &#x27; ===== MOQ 파일 열기 (이미 열려 있으면 그걸 사용) =====
-
     Dim wbMOQ As Workbook, wsMOQ As Worksheet
-
-    Dim alreadyOpen As Boolean
-
-    alreadyOpen = False
-
+    Dim AlreadyOpen As Boolean
+    AlreadyOpen = False
     On Error Resume Next
-
     Set wbMOQ = Workbooks(&quot;한국단자 MOQ(20250522).xlsx&quot;)
-
-    On Error GoTo 0
-
+    On Error GoTo Failed
     If Not wbMOQ Is Nothing Then
-
-        alreadyOpen = True
-
+        AlreadyOpen = True
     Else
-
         Application.AskToUpdateLinks = False
-
         Set wbMOQ = Workbooks.Open(Filename:=moqPath, ReadOnly:=True, UpdateLinks:=0)
-
     End If
-
-
 
     &#x27; MOQ 시트 잡기 (대아_MOQ 우선, 없으면 첫 시트)
-
     On Error Resume Next
-
     Set wsMOQ = wbMOQ.Worksheets(&quot;대아_MOQ&quot;)
-
-    On Error GoTo 0
-
+    On Error GoTo Failed
     If wsMOQ Is Nothing Then Set wsMOQ = wbMOQ.Worksheets(1)
 
-
-
     &#x27; ===== MOQ 헤더에서 ITEM NM / BOX 열 자동 인식 =====
-
     Dim moqNameCol As Long, moqBoxCol As Long, moqLastCol As Long, c As Long
-
     moqLastCol = wsMOQ.Cells(1, wsMOQ.Columns.Count).End(xlToLeft).Column
-
     For c = 1 To moqLastCol
-
         Dim hh As String
-
         hh = UCase(Replace(Trim(CStr(wsMOQ.Cells(1, c).value)), &quot; &quot;, &quot;&quot;))
-
         If hh = &quot;ITEMNM&quot; Then moqNameCol = c
-
         If hh = &quot;BOX&quot; Then moqBoxCol = c
-
     Next c
-
     If moqNameCol = 0 Or moqBoxCol = 0 Then
-
         MsgBox &quot;MOQ 파일에서 &#x27;ITEM NM&#x27; / &#x27;BOX&#x27; 헤더를 못 찾음.&quot;, vbExclamation
-
-        If Not alreadyOpen Then wbMOQ.Close SaveChanges:=False
-
+        If Not AlreadyOpen Then wbMOQ.Close SaveChanges:=False
         GoTo CleanExit
-
     End If
-
-
 
     &#x27; ===== MOQ를 Dictionary에 적재 =====
-
     Dim dict As Object
-
     Set dict = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Dim moqLast As Long, mArr As Variant
-
     moqLast = wsMOQ.Cells(wsMOQ.Rows.Count, moqNameCol).End(xlUp).Row
-
-    mArr = wsMOQ.Range(wsMOQ.Cells(2, 1), wsMOQ.Cells(moqLast, moqBoxCol)).value
-
+    If moqLast &lt; 2 Then Err.Raise vbObjectError + 801, , &quot;MOQ 상세 데이터가 없습니다.&quot;
+    mArr = wsMOQ.Range(wsMOQ.Cells(2, 1), wsMOQ.Cells(moqLast, Application.Max(moqBoxCol, moqNameCol))).value
     For i = 1 To UBound(mArr, 1)
-
         Dim key As String
-
         key = UCase(Replace(Trim(CStr(mArr(i, moqNameCol))), &quot; &quot;, &quot;&quot;))
-
         If key &lt;&gt; &quot;&quot; And Not dict.exists(key) Then
-
             If IsNumeric(mArr(i, moqBoxCol)) Then dict(key) = CDbl(mArr(i, moqBoxCol))
-
         End If
-
     Next i
-
-
 
     &#x27; MOQ 파일 닫기 (원래 안 열려 있었을 때만)
-
-    If Not alreadyOpen Then wbMOQ.Close SaveChanges:=False
-
+    If Not AlreadyOpen Then wbMOQ.Close SaveChanges:=False
     Set wsMOQ = Nothing: Set wbMOQ = Nothing
 
-
-
     &#x27; ===== 원본 파렛트 열 파악 (1열=품번, 2열=출고수량, sum 전까지 파렛트) =====
-
     lastRow = wsSrc.Cells(wsSrc.Rows.Count, 1).End(xlUp).Row
-
     lastCol = wsSrc.Cells(1, wsSrc.Columns.Count).End(xlToLeft).Column
-
-    ReDim palletCols(1 To 60)
-
-    ReDim palletNames(1 To 60)
-
+    ReDim palletCols(1 To Application.Max(1, lastCol))
+    ReDim palletNames(1 To Application.Max(1, lastCol))
     nPallet = 0
-
     For j = 3 To lastCol
-
         Dim hdr As String
-
         hdr = Trim(CStr(wsSrc.Cells(1, j).value))
-
-        If hdr = &quot;sum&quot; Then Exit For
-
+        If LCase$(hdr) = &quot;sum&quot; Then Exit For
         If hdr &lt;&gt; &quot;&quot; Then
-
             nPallet = nPallet + 1
-
             palletCols(nPallet) = j
-
             If hdr = &quot;대기&quot; Then palletNames(nPallet) = &quot;대기&quot; Else palletNames(nPallet) = hdr &amp; &quot;번&quot;
-
         End If
-
     Next j
 
-
-
     &#x27; ===== 원본 데이터 배열로 읽기 =====
-
     Dim sArr As Variant
-
     sArr = wsSrc.Range(wsSrc.Cells(1, 1), wsSrc.Cells(lastRow, lastCol)).value
 
-
-
-    &#x27; ===== 출력 시트 생성 (XLAM 아니라 작업 파일에 만들기) =====
-
-    On Error Resume Next
-
-    Application.DisplayAlerts = False
-
-    wbTarget.Worksheets(&quot;파렛트정리&quot;).Delete
-
-    Application.DisplayAlerts = True
-
-    On Error GoTo 0
-
-    Set wsOut = wbTarget.Worksheets.Add(After:=wsSrc)
-
-    wsOut.Name = &quot;파렛트정리&quot;
-
-    wsOut.Range(&quot;A1:D1&quot;).value = Array(&quot;품명&quot;, &quot;박스당&quot;, &quot;총 수량&quot;, &quot;파렛트별 위치 / 수량&quot;)
-
-
-
-    &#x27; ===== 결과 계산 → 배열에 담기 =====
-
-    Dim res() As Variant
-
-    ReDim res(1 To lastRow, 1 To 4)
-
-    outRow = 0
-
-    For i = 2 To lastRow
-
-        Dim nm As String, pb As Double, total As Double, detail As String, pbFound As Boolean
-
-        nm = Trim(CStr(sArr(i, 1)))
-
-        If nm = &quot;&quot; Then GoTo NextRow
-
-
-
-        Dim lk As String
-
-        lk = UCase(Replace(nm, &quot; &quot;, &quot;&quot;))
-
-        If dict.exists(lk) Then
-
-            pb = dict(lk): pbFound = True
-
-        Else
-
-            pb = 0: pbFound = False
-
-        End If
-
-
-
-        If IsNumeric(sArr(i, 2)) Then total = sArr(i, 2) Else total = 0   &#x27; B열 = 총 수량
-
-
-
-        detail = &quot;&quot;
-
-        For j = 1 To nPallet
-
-            Dim qty As Double
-
-            If IsNumeric(sArr(i, palletCols(j))) Then qty = sArr(i, palletCols(j)) Else qty = 0
-
-            If qty &lt;&gt; 0 Then
-
-                Dim seg As String: seg = &quot;&quot;
-
-                If pbFound And pb &gt; 0 Then
-
-                    Dim boxes As Long, remQty As Long
-
-                    boxes = Int(qty / pb): remQty = qty - boxes * pb
-
-                    If boxes &gt; 0 Then seg = boxes &amp; &quot;박스&quot;
-
-                    If remQty &gt; 0 Then
-
-                        If seg &lt;&gt; &quot;&quot; Then seg = seg &amp; &quot; + &quot;
-
-                        seg = seg &amp; &quot;낱개&quot; &amp; remQty
-
-                    End If
-
-                    If seg = &quot;&quot; Then seg = qty &amp; &quot;개&quot;
-
-                Else
-
-                    seg = qty &amp; &quot;개&quot;
-
-                End If
-
-                If detail &lt;&gt; &quot;&quot; Then detail = detail &amp; &quot;   &quot;
-
-                detail = detail &amp; &quot;[&quot; &amp; palletNames(j) &amp; &quot;] &quot; &amp; seg
-
+    &#x27; 파렛트마다 별도 시트: 서로 다른 파렛트가 한 장에 섞이지 않음
+    Dim qty As Double, nm As String, pb As Double, seg As String
+    Dim boxes As Double, remQty As Double, created As Long, sumQty As Double
+    Dim firstOut As Worksheet, sheetName As String, baseName As String, suffix As Long
+    Dim existing As Object, exists As Boolean, nonzero As Boolean
+    For j = 1 To nPallet
+        nonzero = False
+        For i = 2 To lastRow
+            If IsNumeric(sArr(i, palletCols(j))) Then
+                If CDbl(sArr(i, palletCols(j))) &lt;&gt; 0 And Trim$(CStr(sArr(i, 1))) &lt;&gt; &quot;&quot; Then nonzero = True: Exit For
             End If
-
-        Next j
-
-
-
-        outRow = outRow + 1
-
-        res(outRow, 1) = nm
-
-        If pbFound Then res(outRow, 2) = pb Else res(outRow, 2) = &quot;MOQ없음&quot;
-
-        res(outRow, 3) = total
-
-        res(outRow, 4) = detail
-
-NextRow:
-
-    Next i
-
-
-
-    If outRow &gt; 0 Then wsOut.Range(wsOut.Cells(2, 1), wsOut.Cells(outRow + 1, 4)).value = res
-
-
-
-    &#x27; ===== 서식 =====
-
-    With wsOut.Range(wsOut.Cells(1, 1), wsOut.Cells(outRow + 1, 4))
-
-        .Font.Name = &quot;Arial&quot;
-
-        .Borders.LineStyle = xlContinuous
-
-        .Borders.Weight = xlThin
-
-        .VerticalAlignment = xlCenter
-
-    End With
-
-    With wsOut.Range(&quot;A1:D1&quot;)
-
-        .Interior.Color = RGB(0, 0, 0)
-
-        .Font.Color = RGB(255, 255, 255)
-
-        .Font.Bold = True
-
-        .Font.Size = 12
-
-        .HorizontalAlignment = xlCenter
-
-        .Borders.Weight = xlMedium
-
-    End With
-
-    wsOut.Rows(1).RowHeight = 24
-
-
-
-    If outRow &gt; 0 Then
-
-wsOut.Range(wsOut.Cells(2, 1), wsOut.Cells(outRow + 1, 4)).Sort Key1:=wsOut.Cells(2, 1), Order1:=xlAscending, header:=xlNo
-
-        wsOut.Range(wsOut.Cells(2, 1), wsOut.Cells(outRow + 1, 1)).Font.Bold = True
-
-        wsOut.Range(wsOut.Cells(2, 1), wsOut.Cells(outRow + 1, 1)).Font.Size = 12
-
-        wsOut.Range(wsOut.Cells(2, 2), wsOut.Cells(outRow + 1, 3)).Font.Size = 11
-
-        wsOut.Range(wsOut.Cells(2, 2), wsOut.Cells(outRow + 1, 3)).HorizontalAlignment = xlCenter
-
-        wsOut.Range(wsOut.Cells(2, 2), wsOut.Cells(outRow + 1, 2)).NumberFormat = &quot;#,##0&quot;
-
-        wsOut.Range(wsOut.Cells(2, 3), wsOut.Cells(outRow + 1, 3)).NumberFormat = &quot;#,##0&quot;
-
-        wsOut.Range(wsOut.Cells(2, 4), wsOut.Cells(outRow + 1, 4)).Font.Size = 11
-
-        Dim r As Long
-
-        For r = 2 To outRow + 1
-
-            If r Mod 2 = 0 Then wsOut.Range(wsOut.Cells(r, 1), wsOut.Cells(r, 4)).Interior.Color = RGB(232, 232, 232)
-
-            wsOut.Rows(r).RowHeight = 18
-
-        Next r
-
-    End If
-
-
-
-    &#x27; ===== 열 너비 / 틀 고정 =====
-
-    wsOut.Columns(&quot;A&quot;).ColumnWidth = 20
-
-    wsOut.Columns(&quot;B&quot;).ColumnWidth = 10
-
-    wsOut.Columns(&quot;C&quot;).ColumnWidth = 12
-
-    wsOut.Columns(&quot;D&quot;).ColumnWidth = 90
-
-    wsOut.Activate
-
-    wsOut.Range(&quot;A2&quot;).Select
-
-    ActiveWindow.FreezePanes = True
-
-
-
-    &#x27; ===== 인쇄 설정 =====
-
-    With wsOut.PageSetup
-
-        .Orientation = xlLandscape
-
-        .PaperSize = xlPaperA4
-
-        .Zoom = False
-
-        .FitToPagesWide = 1
-
-        .FitToPagesTall = False
-
-        .PrintTitleRows = &quot;$1:$1&quot;
-
-        .LeftMargin = Application.InchesToPoints(0.3)
-
-        .RightMargin = Application.InchesToPoints(0.3)
-
-        .TopMargin = Application.InchesToPoints(0.4)
-
-        .BottomMargin = Application.InchesToPoints(0.4)
-
-    End With
-
-
-
-    MsgBox &quot;완료! &quot; &amp; outRow &amp; &quot;개 품목 정리됨&quot;, vbInformation
-
-
-
+        Next i
+        If Not nonzero Then GoTo NextPallet
+        baseName = &quot;파렛트_&quot; &amp; palletNames(j)
+        baseName = Replace(Replace(Replace(Replace(Replace(Replace(Replace(baseName, &quot;/&quot;, &quot;_&quot;), &quot;\&quot;, &quot;_&quot;), &quot;:&quot;, &quot;_&quot;), &quot;*&quot;, &quot;_&quot;), &quot;?&quot;, &quot;_&quot;), &quot;[&quot;, &quot;(&quot;), &quot;]&quot;, &quot;)&quot;)
+        baseName = Left$(baseName, 25): sheetName = baseName: suffix = 0
+        Do
+            exists = False
+            For Each existing In wbTarget.Sheets
+                If StrComp(existing.Name, sheetName, vbTextCompare) = 0 Then exists = True: Exit For
+            Next existing
+            If Not exists Then Exit Do
+            suffix = suffix + 1: sheetName = baseName &amp; &quot;_&quot; &amp; suffix
+        Loop
+        Set wsOut = wbTarget.Worksheets.Add(After:=wbTarget.Sheets(wbTarget.Sheets.Count))
+        wsOut.Name = sheetName
+        If firstOut Is Nothing Then Set firstOut = wsOut
+        wsOut.Range(&quot;A1:D1&quot;).Merge
+        wsOut.Range(&quot;A1&quot;).Value = &quot;파렛트 &quot; &amp; palletNames(j)
+        wsOut.Range(&quot;A2:D2&quot;).Value = Array(&quot;품명&quot;, &quot;박스당 수량&quot;, &quot;파렛트 수량&quot;, &quot;박스 / 낱개&quot;)
+        wsOut.Columns(&quot;A&quot;).NumberFormat = &quot;@&quot;
+        outRow = 3: sumQty = 0
+        For i = 2 To lastRow
+            nm = Trim$(CStr(sArr(i, 1)))
+            If nm = &quot;&quot; Then GoTo NextItem
+            If Not IsNumeric(sArr(i, palletCols(j))) Then GoTo NextItem
+            qty = CDbl(sArr(i, palletCols(j)))
+            If qty = 0 Then GoTo NextItem
+            pb = 0
+            key = UCase$(Replace(nm, &quot; &quot;, &quot;&quot;))
+            If dict.Exists(key) Then pb = dict(key)
+            seg = PalletQtyText(qty) &amp; &quot;개&quot;
+            If pb &gt; 0 And qty &gt; 0 Then
+                boxes = Fix(qty / pb): remQty = qty - boxes * pb
+                seg = &quot;&quot;
+                If boxes &gt; 0 Then seg = Format(boxes, &quot;#,##0&quot;) &amp; &quot;박스&quot;
+                If remQty &gt; 0 Then
+                    If seg &lt;&gt; &quot;&quot; Then seg = seg &amp; &quot; + &quot;
+                    seg = seg &amp; &quot;낱개 &quot; &amp; PalletQtyText(remQty)
+                End If
+            End If
+            wsOut.Cells(outRow, 1).Value2 = nm
+            If pb &gt; 0 Then wsOut.Cells(outRow, 2).Value2 = pb Else wsOut.Cells(outRow, 2).Value2 = &quot;MOQ없음&quot;
+            wsOut.Cells(outRow, 3).Value2 = qty
+            wsOut.Cells(outRow, 4).Value2 = seg
+            outRow = outRow + 1: sumQty = sumQty + qty
+NextItem:
+        Next i
+        If outRow &gt; 4 Then wsOut.Range(&quot;A2:D&quot; &amp; (outRow - 1)).Sort Key1:=wsOut.Range(&quot;A3&quot;), Order1:=xlAscending, Header:=xlYes
+        wsOut.Cells(outRow, 1).Value2 = &quot;합계&quot;
+        wsOut.Cells(outRow, 3).Value2 = sumQty
+        With wsOut.Range(&quot;A1:D&quot; &amp; outRow)
+            .Font.Name = &quot;맑은 고딕&quot;
+            .Font.Size = 13
+            .Font.Color = vbBlack
+            .Interior.Pattern = xlNone
+            .VerticalAlignment = xlCenter
+            .WrapText = False
+            .RowHeight = 30
+            .Borders.LineStyle = xlContinuous
+            .Borders.Weight = xlThin
+        End With
+        With wsOut.Range(&quot;A1:D1&quot;)
+            .Font.Bold = True
+            .Font.Size = 22
+            .RowHeight = 44
+            .HorizontalAlignment = xlCenter
+        End With
+        With wsOut.Range(&quot;A2:D2&quot;)
+            .Font.Bold = True
+            .HorizontalAlignment = xlCenter
+            .RowHeight = 34
+        End With
+        wsOut.Rows(outRow).Font.Bold = True
+        wsOut.Columns(&quot;A&quot;).ColumnWidth = 32
+        wsOut.Columns(&quot;B&quot;).ColumnWidth = 14
+        wsOut.Columns(&quot;C&quot;).ColumnWidth = 15
+        wsOut.Columns(&quot;D&quot;).ColumnWidth = 28
+        wsOut.Range(&quot;A3:A&quot; &amp; outRow).ShrinkToFit = True
+        wsOut.Range(&quot;D3:D&quot; &amp; outRow).ShrinkToFit = True
+        wsOut.Range(&quot;B3:C&quot; &amp; outRow).NumberFormat = &quot;#,##0.########&quot;
+        wsOut.Range(&quot;B3:D&quot; &amp; outRow).HorizontalAlignment = xlCenter
+        With wsOut.PageSetup
+            .Orientation = xlPortrait
+            .PaperSize = xlPaperA4
+            .Zoom = False
+            .FitToPagesWide = 1
+            .FitToPagesTall = False
+            .BlackAndWhite = True
+            .PrintTitleRows = &quot;$1:$2&quot;
+            .PrintArea = wsOut.Range(&quot;A1:D&quot; &amp; outRow).Address
+            .LeftMargin = Application.CentimetersToPoints(1)
+            .RightMargin = Application.CentimetersToPoints(1)
+            .TopMargin = Application.CentimetersToPoints(1.2)
+            .BottomMargin = Application.CentimetersToPoints(1.2)
+            .CenterHorizontally = True
+            .CenterFooter = &quot;&amp;A  &amp;P / &amp;N&quot;
+        End With
+        created = created + 1
+NextPallet:
+    Next j
+    If Not firstOut Is Nothing Then firstOut.Activate
+    MsgBox &quot;완료! &quot; &amp; created &amp; &quot;개 파렛트를 각각 별도 시트로 만들었습니다. 파렛트별로 새 페이지에서 인쇄되며, 품목이 많으면 다음 장으로 이어집니다.&quot;, vbInformation
 CleanExit:
-
-    Application.ScreenUpdating = True
-
-    Application.Calculation = xlCalculationAutomatic
-
+    On Error Resume Next
+    If Not wbMOQ Is Nothing Then
+        If Not AlreadyOpen Then wbMOQ.Close SaveChanges:=False
+    End If
+    Application.ScreenUpdating = oldScreen
+    Application.Calculation = oldCalc
+    Application.AskToUpdateLinks = oldLinks
+    Exit Sub
+Failed:
+    MsgBox &quot;파렛트 정리 오류: &quot; &amp; Err.Description, vbExclamation
+    Resume CleanExit
 End Sub
+
+Private Function PalletQtyText(ByVal value As Double) As String
+    If value = Fix(value) Then
+        PalletQtyText = Format(value, &quot;#,##0&quot;)
+    Else
+        PalletQtyText = Format(value, &quot;#,##0.########&quot;)
+    End If
+End Function
 </pre></details></article><article><h3>연호 발주 재고포함</h3><p>모듈 이름: <code>modYeonhoStockByCode</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoStockByCode">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoStockByCode.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoStockByCode">Option Explicit
 
 
