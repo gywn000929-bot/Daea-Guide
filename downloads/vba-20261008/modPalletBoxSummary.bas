@@ -99,51 +99,53 @@ Sub 파렛트_박스정리()
     Dim sArr As Variant
     sArr = wsSrc.Range(wsSrc.Cells(1, 1), wsSrc.Cells(lastRow, lastCol)).value
 
-    ' 파렛트마다 별도 시트: 서로 다른 파렛트가 한 장에 섞이지 않음
+    ' 한 결과 시트 안에서 파렛트마다 A4 한 페이지
     Dim qty As Double, nm As String, pb As Double, seg As String
     Dim boxes As Double, remQty As Double, created As Long, sumQty As Double
-    Dim firstOut As Worksheet, sheetName As String, baseName As String, suffix As Long
-    Dim existing As Object, exists As Boolean, nonzero As Boolean
+    Dim sheetName As String, suffix As Long, existing As Object, exists As Boolean
+    Dim topRow As Long, firstData As Long, nItems As Long, bodyHeight As Double
+    sheetName = "파렛트정리"
+    Do
+        exists = False
+        For Each existing In wbTarget.Sheets
+            If StrComp(existing.Name, sheetName, vbTextCompare) = 0 Then exists = True: Exit For
+        Next existing
+        If Not exists Then Exit Do
+        suffix = suffix + 1: sheetName = "파렛트정리_" & suffix
+    Loop
+    Set wsOut = wbTarget.Worksheets.Add(After:=wbTarget.Sheets(wbTarget.Sheets.Count))
+    wsOut.Name = sheetName
+    wsOut.Columns("A").ColumnWidth = 26
+    wsOut.Columns("B").ColumnWidth = 12
+    wsOut.Columns("C").ColumnWidth = 13
+    wsOut.Columns("D").ColumnWidth = 22
+    wsOut.Columns("A").NumberFormat = "@"
+    outRow = 1
     For j = 1 To nPallet
-        nonzero = False
+        nItems = 0
         For i = 2 To lastRow
             If IsNumeric(sArr(i, palletCols(j))) Then
-                If CDbl(sArr(i, palletCols(j))) <> 0 And Trim$(CStr(sArr(i, 1))) <> "" Then nonzero = True: Exit For
+                If CDbl(sArr(i, palletCols(j))) <> 0 And Trim$(CStr(sArr(i, 1))) <> "" Then nItems = nItems + 1
             End If
         Next i
-        If Not nonzero Then GoTo NextPallet
-        baseName = "파렛트_" & palletNames(j)
-        baseName = Replace(Replace(Replace(Replace(Replace(Replace(Replace(baseName, "/", "_"), "\", "_"), ":", "_"), "*", "_"), "?", "_"), "[", "("), "]", ")")
-        baseName = Left$(baseName, 25): sheetName = baseName: suffix = 0
-        Do
-            exists = False
-            For Each existing In wbTarget.Sheets
-                If StrComp(existing.Name, sheetName, vbTextCompare) = 0 Then exists = True: Exit For
-            Next existing
-            If Not exists Then Exit Do
-            suffix = suffix + 1: sheetName = baseName & "_" & suffix
-        Loop
-        Set wsOut = wbTarget.Worksheets.Add(After:=wbTarget.Sheets(wbTarget.Sheets.Count))
-        wsOut.Name = sheetName
-        If firstOut Is Nothing Then Set firstOut = wsOut
-        wsOut.Range("A1:D1").Merge
-        wsOut.Range("A1").Value = "파렛트 " & palletNames(j)
-        wsOut.Range("A2:D2").Value = Array("품명", "박스당 수량", "파렛트 수량", "박스 / 낱개")
-        wsOut.Columns("A").NumberFormat = "@"
-        outRow = 3: sumQty = 0
+        If nItems = 0 Then GoTo NextPallet
+        topRow = outRow
+        If created > 0 Then wsOut.HPageBreaks.Add Before:=wsOut.Cells(topRow, 1)
+        wsOut.Range(wsOut.Cells(topRow, 1), wsOut.Cells(topRow, 4)).Merge
+        wsOut.Cells(topRow, 1).Value2 = "파렛트 " & palletNames(j)
+        wsOut.Range(wsOut.Cells(topRow + 1, 1), wsOut.Cells(topRow + 1, 4)).Value = Array("품명", "박스당 수량", "파렛트 수량", "박스 / 낱개")
+        outRow = topRow + 2: firstData = outRow: sumQty = 0
         For i = 2 To lastRow
             nm = Trim$(CStr(sArr(i, 1)))
             If nm = "" Then GoTo NextItem
             If Not IsNumeric(sArr(i, palletCols(j))) Then GoTo NextItem
             qty = CDbl(sArr(i, palletCols(j)))
             If qty = 0 Then GoTo NextItem
-            pb = 0
-            key = UCase$(Replace(nm, " ", ""))
+            pb = 0: key = UCase$(Replace(nm, " ", ""))
             If dict.Exists(key) Then pb = dict(key)
             seg = PalletQtyText(qty) & "개"
             If pb > 0 And qty > 0 Then
-                boxes = Fix(qty / pb): remQty = qty - boxes * pb
-                seg = ""
+                boxes = Fix(qty / pb): remQty = qty - boxes * pb: seg = ""
                 If boxes > 0 Then seg = Format(boxes, "#,##0") & "박스"
                 If remQty > 0 Then
                     If seg <> "" Then seg = seg & " + "
@@ -157,61 +159,60 @@ Sub 파렛트_박스정리()
             outRow = outRow + 1: sumQty = sumQty + qty
 NextItem:
         Next i
-        If outRow > 4 Then wsOut.Range("A2:D" & (outRow - 1)).Sort Key1:=wsOut.Range("A3"), Order1:=xlAscending, Header:=xlYes
+        If nItems > 1 Then wsOut.Range(wsOut.Cells(firstData, 1), wsOut.Cells(outRow - 1, 4)).Sort Key1:=wsOut.Cells(firstData, 1), Order1:=xlAscending, Header:=xlNo
         wsOut.Cells(outRow, 1).Value2 = "합계"
         wsOut.Cells(outRow, 3).Value2 = sumQty
-        With wsOut.Range("A1:D" & outRow)
+        ' 각 블록 높이를 제한하여 수동 페이지 구분 사이에 한 장으로 맞춤
+        bodyHeight = Application.Min(30, 650 / (nItems + 1))
+        With wsOut.Range(wsOut.Cells(topRow, 1), wsOut.Cells(outRow, 4))
             .Font.Name = "맑은 고딕"
-            .Font.Size = 13
+            .Font.Size = Application.Min(13, Application.Max(1, bodyHeight * 0.52))
             .Font.Color = vbBlack
             .Interior.Pattern = xlNone
             .VerticalAlignment = xlCenter
             .WrapText = False
-            .RowHeight = 30
+            .RowHeight = bodyHeight
             .Borders.LineStyle = xlContinuous
             .Borders.Weight = xlThin
         End With
-        With wsOut.Range("A1:D1")
+        With wsOut.Range(wsOut.Cells(topRow, 1), wsOut.Cells(topRow, 4))
             .Font.Bold = True
             .Font.Size = 22
             .RowHeight = 44
             .HorizontalAlignment = xlCenter
         End With
-        With wsOut.Range("A2:D2")
+        With wsOut.Range(wsOut.Cells(topRow + 1, 1), wsOut.Cells(topRow + 1, 4))
             .Font.Bold = True
+            .Font.Size = 12
             .HorizontalAlignment = xlCenter
             .RowHeight = 34
         End With
         wsOut.Rows(outRow).Font.Bold = True
-        wsOut.Columns("A").ColumnWidth = 32
-        wsOut.Columns("B").ColumnWidth = 14
-        wsOut.Columns("C").ColumnWidth = 15
-        wsOut.Columns("D").ColumnWidth = 28
-        wsOut.Range("A3:A" & outRow).ShrinkToFit = True
-        wsOut.Range("D3:D" & outRow).ShrinkToFit = True
-        wsOut.Range("B3:C" & outRow).NumberFormat = "#,##0.########"
-        wsOut.Range("B3:D" & outRow).HorizontalAlignment = xlCenter
-        With wsOut.PageSetup
-            .Orientation = xlPortrait
-            .PaperSize = xlPaperA4
-            .Zoom = False
-            .FitToPagesWide = 1
-            .FitToPagesTall = False
-            .BlackAndWhite = True
-            .PrintTitleRows = "$1:$2"
-            .PrintArea = wsOut.Range("A1:D" & outRow).Address
-            .LeftMargin = Application.CentimetersToPoints(1)
-            .RightMargin = Application.CentimetersToPoints(1)
-            .TopMargin = Application.CentimetersToPoints(1.2)
-            .BottomMargin = Application.CentimetersToPoints(1.2)
-            .CenterHorizontally = True
-            .CenterFooter = "&A  &P / &N"
-        End With
+        wsOut.Range(wsOut.Cells(firstData, 1), wsOut.Cells(outRow, 4)).ShrinkToFit = True
+        wsOut.Range(wsOut.Cells(firstData, 2), wsOut.Cells(outRow, 3)).NumberFormat = "#,##0.########"
+        wsOut.Range(wsOut.Cells(firstData, 2), wsOut.Cells(outRow, 4)).HorizontalAlignment = xlCenter
         created = created + 1
+        outRow = outRow + 1
 NextPallet:
     Next j
-    If Not firstOut Is Nothing Then firstOut.Activate
-    MsgBox "완료! " & created & "개 파렛트를 각각 별도 시트로 만들었습니다. 파렛트별로 새 페이지에서 인쇄되며, 품목이 많으면 다음 장으로 이어집니다.", vbInformation
+    If created = 0 Then MsgBox "출력할 파렛트 수량이 없습니다.", vbInformation: GoTo CleanExit
+    With wsOut.PageSetup
+        .Orientation = xlPortrait
+        .PaperSize = xlPaperA4
+        .Zoom = 90
+        .BlackAndWhite = True
+        .PrintTitleRows = ""
+        .PrintTitleColumns = ""
+        .PrintArea = wsOut.Range(wsOut.Cells(1, 1), wsOut.Cells(outRow - 1, 4)).Address
+        .LeftMargin = Application.CentimetersToPoints(1)
+        .RightMargin = Application.CentimetersToPoints(1)
+        .TopMargin = Application.CentimetersToPoints(1.2)
+        .BottomMargin = Application.CentimetersToPoints(1.2)
+        .CenterHorizontally = True
+        .CenterFooter = "&P / &N"
+    End With
+    wsOut.Activate
+    MsgBox "완료! 결과 시트 하나에 " & created & "개 파렛트를 정리했습니다. 파렛트마다 A4 한 장씩 인쇄됩니다.", vbInformation
 CleanExit:
     On Error Resume Next
     If Not wbMOQ Is Nothing Then
@@ -225,7 +226,6 @@ Failed:
     MsgBox "파렛트 정리 오류: " & Err.Description, vbExclamation
     Resume CleanExit
 End Sub
-
 Private Function PalletQtyText(ByVal value As Double) As String
     If value = Fix(value) Then
         PalletQtyText = Format(value, "#,##0")
