@@ -10474,7 +10474,7 @@ If IsNumeric(srcSheet.Cells(i, 1).value) And srcSheet.Cells(i, 1).value &lt;&gt;
     MsgBox &quot;모든 페이지 제목 반복 설정이 반영된 재고 리스트가 완성되었습니다!&quot;, vbInformation, &quot;완료&quot;
 
 End Sub
-</pre></details></article><article><h3>파렛트 박스정리</h3><p>결과는 한 시트에 모으고, 파렛트마다 페이지를 구분하여 A4 한 장씩 출력합니다. 대기도 한 장으로 구분합니다. 품목이 많으면 해당 파렛트의 행 높이와 글자를 줄여 한 장에 맞춥니다. 기존 결과 시트는 보존합니다.</p><p>모듈 이름: <code>modPalletBoxSummary</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modPalletBoxSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modPalletBoxSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modPalletBoxSummary">Sub 파렛트_박스정리()
+</pre></details></article><article><h3>파렛트 박스정리</h3><p>결과는 한 시트에 모으고, 파렛트마다 페이지를 구분하여 A4 한 장씩 출력합니다. Arial·검정 머리글·회색 줄무늬의 원래 스타일을 사용하며 수량은 소수점 없이 표시합니다. 대기도 한 장으로 구분합니다. 품목이 많으면 해당 파렛트의 행 높이와 글자를 줄여 한 장에 맞춥니다. 기존 결과 시트는 보존합니다.</p><p>모듈 이름: <code>modPalletBoxSummary</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modPalletBoxSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modPalletBoxSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modPalletBoxSummary">Sub 파렛트_박스정리()
     Dim wsSrc As Worksheet, wsOut As Worksheet, wbTarget As Workbook
     Dim lastRow As Long, lastCol As Long
     Dim i As Long, j As Long, outRow As Long
@@ -10640,7 +10640,7 @@ NextItem:
         &#x27; 각 블록 높이를 제한하여 수동 페이지 구분 사이에 한 장으로 맞춤
         bodyHeight = Application.Min(30, 650 / (nItems + 1))
         With wsOut.Range(wsOut.Cells(topRow, 1), wsOut.Cells(outRow, 4))
-            .Font.Name = &quot;맑은 고딕&quot;
+            .Font.Name = &quot;Arial&quot;
             .Font.Size = Application.Min(13, Application.Max(1, bodyHeight * 0.52))
             .Font.Color = vbBlack
             .Interior.Pattern = xlNone
@@ -10659,12 +10659,20 @@ NextItem:
         With wsOut.Range(wsOut.Cells(topRow + 1, 1), wsOut.Cells(topRow + 1, 4))
             .Font.Bold = True
             .Font.Size = 12
+            .Font.Color = vbWhite
+            .Interior.Color = vbBlack
+            .Borders.Weight = xlMedium
             .HorizontalAlignment = xlCenter
             .RowHeight = 34
         End With
+        Dim formatRow As Long
+        For formatRow = firstData To outRow - 1
+            If (formatRow - firstData) Mod 2 = 0 Then wsOut.Range(wsOut.Cells(formatRow, 1), wsOut.Cells(formatRow, 4)).Interior.Color = RGB(232, 232, 232)
+        Next formatRow
+        wsOut.Range(wsOut.Cells(firstData, 1), wsOut.Cells(outRow - 1, 1)).Font.Bold = True
         wsOut.Rows(outRow).Font.Bold = True
         wsOut.Range(wsOut.Cells(firstData, 1), wsOut.Cells(outRow, 4)).ShrinkToFit = True
-        wsOut.Range(wsOut.Cells(firstData, 2), wsOut.Cells(outRow, 3)).NumberFormat = &quot;#,##0.########&quot;
+        wsOut.Range(wsOut.Cells(firstData, 2), wsOut.Cells(outRow, 3)).NumberFormat = &quot;#,##0&quot;
         wsOut.Range(wsOut.Cells(firstData, 2), wsOut.Cells(outRow, 4)).HorizontalAlignment = xlCenter
         created = created + 1
         outRow = outRow + 1

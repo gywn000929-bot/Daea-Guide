@@ -165,7 +165,7 @@ NextItem:
         ' 각 블록 높이를 제한하여 수동 페이지 구분 사이에 한 장으로 맞춤
         bodyHeight = Application.Min(30, 650 / (nItems + 1))
         With wsOut.Range(wsOut.Cells(topRow, 1), wsOut.Cells(outRow, 4))
-            .Font.Name = "맑은 고딕"
+            .Font.Name = "Arial"
             .Font.Size = Application.Min(13, Application.Max(1, bodyHeight * 0.52))
             .Font.Color = vbBlack
             .Interior.Pattern = xlNone
@@ -184,12 +184,20 @@ NextItem:
         With wsOut.Range(wsOut.Cells(topRow + 1, 1), wsOut.Cells(topRow + 1, 4))
             .Font.Bold = True
             .Font.Size = 12
+            .Font.Color = vbWhite
+            .Interior.Color = vbBlack
+            .Borders.Weight = xlMedium
             .HorizontalAlignment = xlCenter
             .RowHeight = 34
         End With
+        Dim formatRow As Long
+        For formatRow = firstData To outRow - 1
+            If (formatRow - firstData) Mod 2 = 0 Then wsOut.Range(wsOut.Cells(formatRow, 1), wsOut.Cells(formatRow, 4)).Interior.Color = RGB(232, 232, 232)
+        Next formatRow
+        wsOut.Range(wsOut.Cells(firstData, 1), wsOut.Cells(outRow - 1, 1)).Font.Bold = True
         wsOut.Rows(outRow).Font.Bold = True
         wsOut.Range(wsOut.Cells(firstData, 1), wsOut.Cells(outRow, 4)).ShrinkToFit = True
-        wsOut.Range(wsOut.Cells(firstData, 2), wsOut.Cells(outRow, 3)).NumberFormat = "#,##0.########"
+        wsOut.Range(wsOut.Cells(firstData, 2), wsOut.Cells(outRow, 3)).NumberFormat = "#,##0"
         wsOut.Range(wsOut.Cells(firstData, 2), wsOut.Cells(outRow, 4)).HorizontalAlignment = xlCenter
         created = created + 1
         outRow = outRow + 1
