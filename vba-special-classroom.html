@@ -10687,6 +10687,23 @@ NextItem:
         wsTemplate.Range(&quot;A16:E16&quot;).Copy
         wsOut.Cells(outRow, 1).PasteSpecial Paste:=xlPasteFormats
         wsOut.Rows(outRow).RowHeight = wsTemplate.Rows(16).RowHeight
+        &#x27; 병합 셀 서식 복사 뒤 합계 3구역의 표시를 명시적으로 복원
+        With wsOut.Range(wsOut.Cells(outRow, 1), wsOut.Cells(outRow, 5))
+            .Font.Name = wsTemplate.Range(&quot;A16&quot;).Font.Name
+            .Font.Size = 13
+            .Font.Bold = True
+            .Font.Color = vbBlack
+            .Interior.Color = RGB(189, 215, 238)
+            .HorizontalAlignment = xlCenter
+            .VerticalAlignment = xlCenter
+            .WrapText = False
+            .ShrinkToFit = False
+            .RowHeight = 24
+        End With
+        wsOut.Range(wsOut.Cells(outRow, 1), wsOut.Cells(outRow, 2)).Borders.LineStyle = xlContinuous
+        wsOut.Cells(outRow, 3).Borders.LineStyle = xlContinuous
+        wsOut.Range(wsOut.Cells(outRow, 4), wsOut.Cells(outRow, 5)).Borders.LineStyle = xlContinuous
+
         Application.CutCopyMode = False
         &#x27; 많은 품목만 한 장 안에 맞추고 보통은 원본 행 높이/글자 유지
         maxBodyHeight = (690 - wsOut.Rows(topRow).RowHeight - wsOut.Rows(topRow + 1).RowHeight - wsOut.Rows(topRow + 2).RowHeight - wsOut.Rows(outRow).RowHeight) / nItems
