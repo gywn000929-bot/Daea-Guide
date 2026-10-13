@@ -10474,7 +10474,7 @@ If IsNumeric(srcSheet.Cells(i, 1).value) And srcSheet.Cells(i, 1).value &lt;&gt;
     MsgBox &quot;모든 페이지 제목 반복 설정이 반영된 재고 리스트가 완성되었습니다!&quot;, vbInformation, &quot;완료&quot;
 
 End Sub
-</pre></details></article><article><h3>파렛트 박스정리</h3><p>결과는 한 시트에 모으고, 파렛트마다 페이지를 구분하여 A4 한 장씩 출력합니다. Arial·검정 머리글·회색 줄무늬의 원래 스타일을 사용하며 수량은 소수점 없이 표시합니다. 대기도 한 장으로 구분합니다. 품목이 많으면 해당 파렛트의 행 높이와 글자를 줄여 한 장에 맞춥니다. 기존 결과 시트는 보존합니다.</p><p>모듈 이름: <code>modPalletBoxSummary</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modPalletBoxSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modPalletBoxSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modPalletBoxSummary">Sub 파렛트_박스정리()
+</pre></details></article><article><h3>파렛트 박스정리</h3><p>결과는 한 시트에 모으고, 파렛트마다 페이지를 구분하여 A4 한 장씩 출력합니다. 제공된 파레트 예시 형식: 파란 PALLET 제목, 공장/KET·실행일·Hyoju, No./ITEM NM/Pallet Q’ty/Box Q’ty/Box·EA와 합계. 수량은 소수점 없이 표시하며 결과 이름은 F5_파레트 정리처럼 원본 이름을 붙입니다. 대기도 한 장으로 구분합니다. 품목이 많으면 해당 파렛트의 행 높이와 글자를 줄여 한 장에 맞춥니다. 기존 결과 시트는 보존합니다.</p><p>모듈 이름: <code>modPalletBoxSummary</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modPalletBoxSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modPalletBoxSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modPalletBoxSummary">Sub 파렛트_박스정리()
     Dim wsSrc As Worksheet, wsOut As Worksheet, wbTarget As Workbook
     Dim lastRow As Long, lastCol As Long
     Dim i As Long, j As Long, outRow As Long
@@ -10579,22 +10579,30 @@ End Sub
     Dim boxes As Double, remQty As Double, created As Long, sumQty As Double
     Dim sheetName As String, suffix As Long, existing As Object, exists As Boolean
     Dim topRow As Long, firstData As Long, nItems As Long, bodyHeight As Double
-    sheetName = &quot;파렛트정리&quot;
+    Dim sourceLabel As String, resultBase As String, totalBoxes As Double, totalEA As Double
+    sourceLabel = wsSrc.Name
+    If LCase$(Left$(sourceLabel, 5)) = &quot;sheet&quot; Then
+        sourceLabel = wbTarget.Name
+        If InStrRev(sourceLabel, &quot;.&quot;) &gt; 0 Then sourceLabel = Left$(sourceLabel, InStrRev(sourceLabel, &quot;.&quot;) - 1)
+    End If
+    resultBase = Left$(sourceLabel, 20) &amp; &quot;_파레트 정리&quot;
+    sheetName = resultBase
     Do
         exists = False
         For Each existing In wbTarget.Sheets
             If StrComp(existing.Name, sheetName, vbTextCompare) = 0 Then exists = True: Exit For
         Next existing
         If Not exists Then Exit Do
-        suffix = suffix + 1: sheetName = &quot;파렛트정리_&quot; &amp; suffix
+        suffix = suffix + 1: sheetName = Left$(resultBase, 27) &amp; &quot;_&quot; &amp; suffix
     Loop
     Set wsOut = wbTarget.Worksheets.Add(After:=wbTarget.Sheets(wbTarget.Sheets.Count))
     wsOut.Name = sheetName
-    wsOut.Columns(&quot;A&quot;).ColumnWidth = 26
-    wsOut.Columns(&quot;B&quot;).ColumnWidth = 12
-    wsOut.Columns(&quot;C&quot;).ColumnWidth = 13
-    wsOut.Columns(&quot;D&quot;).ColumnWidth = 22
-    wsOut.Columns(&quot;A&quot;).NumberFormat = &quot;@&quot;
+    wsOut.Columns(&quot;A&quot;).ColumnWidth = 6.7
+    wsOut.Columns(&quot;B&quot;).ColumnWidth = 26.7
+    wsOut.Columns(&quot;C&quot;).ColumnWidth = 14.7
+    wsOut.Columns(&quot;D&quot;).ColumnWidth = 13
+    wsOut.Columns(&quot;E&quot;).ColumnWidth = 18.7
+    wsOut.Columns(&quot;B&quot;).NumberFormat = &quot;@&quot;
     outRow = 1
     For j = 1 To nPallet
         nItems = 0
@@ -10606,10 +10614,12 @@ End Sub
         If nItems = 0 Then GoTo NextPallet
         topRow = outRow
         If created &gt; 0 Then wsOut.HPageBreaks.Add Before:=wsOut.Cells(topRow, 1)
-        wsOut.Range(wsOut.Cells(topRow, 1), wsOut.Cells(topRow, 4)).Merge
-        wsOut.Cells(topRow, 1).Value2 = &quot;파렛트 &quot; &amp; palletNames(j)
-        wsOut.Range(wsOut.Cells(topRow + 1, 1), wsOut.Cells(topRow + 1, 4)).Value = Array(&quot;품명&quot;, &quot;박스당 수량&quot;, &quot;파렛트 수량&quot;, &quot;박스 / 낱개&quot;)
-        outRow = topRow + 2: firstData = outRow: sumQty = 0
+        wsOut.Range(wsOut.Cells(topRow, 1), wsOut.Cells(topRow, 5)).Merge
+        wsOut.Cells(topRow, 1).Value2 = &quot;PALLET &quot; &amp; Replace(palletNames(j), &quot;번&quot;, &quot;&quot;)
+        wsOut.Range(wsOut.Cells(topRow + 1, 1), wsOut.Cells(topRow + 1, 5)).Merge
+        wsOut.Cells(topRow + 1, 1).Value2 = sourceLabel &amp; &quot; / KET        &quot; &amp; Format(Date, &quot;dd-mmm-yyyy&quot;) &amp; &quot;        Hyoju&quot;
+        wsOut.Range(wsOut.Cells(topRow + 2, 1), wsOut.Cells(topRow + 2, 5)).Value = Array(&quot;No.&quot;, &quot;ITEM NM&quot;, &quot;Pallet Q&#x27;ty&quot;, &quot;Box Q&#x27;ty&quot;, &quot;Box / EA&quot;)
+        outRow = topRow + 3: firstData = outRow: sumQty = 0: totalBoxes = 0: totalEA = 0
         For i = 2 To lastRow
             nm = Trim$(CStr(sArr(i, 1)))
             If nm = &quot;&quot; Then GoTo NextItem
@@ -10618,28 +10628,38 @@ End Sub
             If qty = 0 Then GoTo NextItem
             pb = 0: key = UCase$(Replace(nm, &quot; &quot;, &quot;&quot;))
             If dict.Exists(key) Then pb = dict(key)
-            seg = PalletQtyText(qty) &amp; &quot;개&quot;
+            seg = PalletQtyText(qty) &amp; &quot;EA&quot;
+            boxes = 0: remQty = qty
             If pb &gt; 0 And qty &gt; 0 Then
                 boxes = Fix(qty / pb): remQty = qty - boxes * pb: seg = &quot;&quot;
-                If boxes &gt; 0 Then seg = Format(boxes, &quot;#,##0&quot;) &amp; &quot;박스&quot;
+                If boxes &gt; 0 Then seg = Format(boxes, &quot;#,##0&quot;) &amp; &quot;B&quot;
                 If remQty &gt; 0 Then
                     If seg &lt;&gt; &quot;&quot; Then seg = seg &amp; &quot; + &quot;
-                    seg = seg &amp; &quot;낱개 &quot; &amp; PalletQtyText(remQty)
+                    seg = seg &amp; PalletQtyText(remQty) &amp; &quot;EA&quot;
                 End If
             End If
-            wsOut.Cells(outRow, 1).Value2 = nm
-            If pb &gt; 0 Then wsOut.Cells(outRow, 2).Value2 = pb Else wsOut.Cells(outRow, 2).Value2 = &quot;MOQ없음&quot;
+            wsOut.Cells(outRow, 1).Value2 = outRow - firstData + 1
+            wsOut.Cells(outRow, 2).Value2 = nm
+            If pb &gt; 0 Then wsOut.Cells(outRow, 4).Value2 = pb Else wsOut.Cells(outRow, 4).Value2 = &quot;MOQ없음&quot;
             wsOut.Cells(outRow, 3).Value2 = qty
-            wsOut.Cells(outRow, 4).Value2 = seg
+            wsOut.Cells(outRow, 5).Value2 = seg
             outRow = outRow + 1: sumQty = sumQty + qty
+            totalBoxes = totalBoxes + boxes: totalEA = totalEA + remQty
 NextItem:
         Next i
-        If nItems &gt; 1 Then wsOut.Range(wsOut.Cells(firstData, 1), wsOut.Cells(outRow - 1, 4)).Sort Key1:=wsOut.Cells(firstData, 1), Order1:=xlAscending, Header:=xlNo
-        wsOut.Cells(outRow, 1).Value2 = &quot;합계&quot;
+        If nItems &gt; 1 Then wsOut.Range(wsOut.Cells(firstData, 1), wsOut.Cells(outRow - 1, 5)).Sort Key1:=wsOut.Cells(firstData, 2), Order1:=xlAscending, Header:=xlNo
+        Dim nr As Long
+        For nr = firstData To outRow - 1
+            wsOut.Cells(nr, 1).Value2 = nr - firstData + 1
+        Next nr
+        wsOut.Range(wsOut.Cells(outRow, 1), wsOut.Cells(outRow, 2)).Merge
+        wsOut.Cells(outRow, 1).Value2 = &quot;Total (&quot; &amp; nItems &amp; &quot; items)&quot;
+        wsOut.Range(wsOut.Cells(outRow, 4), wsOut.Cells(outRow, 5)).Merge
+        wsOut.Cells(outRow, 4).Value2 = Format(totalBoxes, &quot;#,##0&quot;) &amp; &quot;B&quot; &amp; IIf(totalEA &lt;&gt; 0, &quot; + &quot; &amp; PalletQtyText(totalEA) &amp; &quot;EA&quot;, &quot;&quot;)
         wsOut.Cells(outRow, 3).Value2 = sumQty
         &#x27; 각 블록 높이를 제한하여 수동 페이지 구분 사이에 한 장으로 맞춤
-        bodyHeight = Application.Min(30, 650 / (nItems + 1))
-        With wsOut.Range(wsOut.Cells(topRow, 1), wsOut.Cells(outRow, 4))
+        bodyHeight = Application.Min(30, 600 / (nItems + 1))
+        With wsOut.Range(wsOut.Cells(topRow, 1), wsOut.Cells(outRow, 5))
             .Font.Name = &quot;Arial&quot;
             .Font.Size = Application.Min(13, Application.Max(1, bodyHeight * 0.52))
             .Font.Color = vbBlack
@@ -10650,30 +10670,30 @@ NextItem:
             .Borders.LineStyle = xlContinuous
             .Borders.Weight = xlThin
         End With
-        With wsOut.Range(wsOut.Cells(topRow, 1), wsOut.Cells(topRow, 4))
+        With wsOut.Range(wsOut.Cells(topRow, 1), wsOut.Cells(topRow, 5))
             .Font.Bold = True
-            .Font.Size = 22
+            .Font.Size = 28
+            .Interior.Color = RGB(46, 92, 138)
+            .Font.Color = vbWhite
             .RowHeight = 44
             .HorizontalAlignment = xlCenter
         End With
-        With wsOut.Range(wsOut.Cells(topRow + 1, 1), wsOut.Cells(topRow + 1, 4))
-            .Font.Bold = True
-            .Font.Size = 12
-            .Font.Color = vbWhite
-            .Interior.Color = vbBlack
-            .Borders.Weight = xlMedium
+        With wsOut.Range(wsOut.Cells(topRow + 1, 1), wsOut.Cells(topRow + 1, 5))
+            .Font.Size = 13
             .HorizontalAlignment = xlCenter
-            .RowHeight = 34
+            .RowHeight = 24
         End With
-        Dim formatRow As Long
-        For formatRow = firstData To outRow - 1
-            If (formatRow - firstData) Mod 2 = 0 Then wsOut.Range(wsOut.Cells(formatRow, 1), wsOut.Cells(formatRow, 4)).Interior.Color = RGB(232, 232, 232)
-        Next formatRow
-        wsOut.Range(wsOut.Cells(firstData, 1), wsOut.Cells(outRow - 1, 1)).Font.Bold = True
+        With wsOut.Range(wsOut.Cells(topRow + 2, 1), wsOut.Cells(topRow + 2, 5))
+            .Font.Size = 13
+            .Font.Bold = True
+            .Interior.Color = RGB(217, 217, 217)
+            .HorizontalAlignment = xlCenter
+            .RowHeight = 24
+        End With
         wsOut.Rows(outRow).Font.Bold = True
-        wsOut.Range(wsOut.Cells(firstData, 1), wsOut.Cells(outRow, 4)).ShrinkToFit = True
-        wsOut.Range(wsOut.Cells(firstData, 2), wsOut.Cells(outRow, 3)).NumberFormat = &quot;#,##0&quot;
-        wsOut.Range(wsOut.Cells(firstData, 2), wsOut.Cells(outRow, 4)).HorizontalAlignment = xlCenter
+        wsOut.Range(wsOut.Cells(firstData, 1), wsOut.Cells(outRow, 5)).ShrinkToFit = True
+        wsOut.Range(wsOut.Cells(firstData, 3), wsOut.Cells(outRow, 4)).NumberFormat = &quot;#,##0&quot;
+        wsOut.Range(wsOut.Cells(firstData, 3), wsOut.Cells(outRow, 5)).HorizontalAlignment = xlCenter
         created = created + 1
         outRow = outRow + 1
 NextPallet:
@@ -10686,7 +10706,7 @@ NextPallet:
         .BlackAndWhite = True
         .PrintTitleRows = &quot;&quot;
         .PrintTitleColumns = &quot;&quot;
-        .PrintArea = wsOut.Range(wsOut.Cells(1, 1), wsOut.Cells(outRow - 1, 4)).Address
+        .PrintArea = wsOut.Range(wsOut.Cells(1, 1), wsOut.Cells(outRow - 1, 5)).Address
         .LeftMargin = Application.CentimetersToPoints(1)
         .RightMargin = Application.CentimetersToPoints(1)
         .TopMargin = Application.CentimetersToPoints(1.2)
