@@ -10474,7 +10474,7 @@ If IsNumeric(srcSheet.Cells(i, 1).value) And srcSheet.Cells(i, 1).value &lt;&gt;
     MsgBox &quot;모든 페이지 제목 반복 설정이 반영된 재고 리스트가 완성되었습니다!&quot;, vbInformation, &quot;완료&quot;
 
 End Sub
-</pre></details></article><article><h3>파렛트 박스정리</h3><p>결과는 한 시트에 모으고, 파렛트마다 페이지를 구분하여 A4 한 장씩 출력합니다. 제공된 파레트 예시 형식: 파란 PALLET 제목, 공장/KET·실행일·Hyoju, No./ITEM NM/Pallet Q’ty/Box Q’ty/Box·EA와 합계. 수량은 소수점 없이 표시하며 결과 이름은 F5_파레트 정리처럼 원본 이름을 붙입니다. 대기도 한 장으로 구분합니다. 품목이 많으면 해당 파렛트의 행 높이와 글자를 줄여 한 장에 맞춥니다. 기존 결과 시트는 보존합니다.</p><p>모듈 이름: <code>modPalletBoxSummary</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modPalletBoxSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modPalletBoxSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modPalletBoxSummary">Sub 파렛트_박스정리()
+</pre></details></article><article><h3>파렛트 박스정리</h3><p>예시 서식 직접 복사판: 파레트 예시.xlsx의 제목·머리글·본문·합계 서식을 그대로 읽습니다. 파일이 없으면 선택 창이 뜹니다. 한 결과 시트에서 파렛트당 A4 한 장, 원본이 F5이면 F5_파레트 정리로 생성합니다.</p><p>결과는 한 시트에 모으고, 파렛트마다 페이지를 구분하여 A4 한 장씩 출력합니다. 제공된 파레트 예시 형식: 파란 PALLET 제목, 공장/KET·실행일·Hyoju, No./ITEM NM/Pallet Q’ty/Box Q’ty/Box·EA와 합계. 수량은 소수점 없이 표시하며 결과 이름은 F5_파레트 정리처럼 원본 이름을 붙입니다. 대기도 한 장으로 구분합니다. 품목이 많으면 해당 파렛트의 행 높이와 글자를 줄여 한 장에 맞춥니다. 기존 결과 시트는 보존합니다.</p><p>모듈 이름: <code>modPalletBoxSummary</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modPalletBoxSummary">전체 코드 복사</button><a href="downloads/vba-20261008/modPalletBoxSummary.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modPalletBoxSummary">Sub 파렛트_박스정리()
     Dim wsSrc As Worksheet, wsOut As Worksheet, wbTarget As Workbook
     Dim lastRow As Long, lastCol As Long
     Dim i As Long, j As Long, outRow As Long
@@ -10574,6 +10574,22 @@ End Sub
     Dim sArr As Variant
     sArr = wsSrc.Range(wsSrc.Cells(1, 1), wsSrc.Cells(lastRow, lastCol)).value
 
+    &#x27; 제공된 예시 파일을 읽기 전용으로 열어 실제 서식 복사
+    Dim wbTemplate As Workbook, wsTemplate As Worksheet, templatePath As String
+    Dim templateWasOpen As Boolean, selectedTemplate As Variant, openedBook As Workbook
+    templatePath = Environ(&quot;USERPROFILE&quot;) &amp; &quot;\OneDrive - Dae-A Electronics (Thailand) Company Limited\문서_드라이브\2610 셋째주\파레트 예시.xlsx&quot;
+    If Dir(templatePath) = &quot;&quot; Then
+        selectedTemplate = Application.GetOpenFilename(&quot;Excel Files (*.xlsx;*.xls),*.xlsx;*.xls&quot;, , &quot;원래 서식의 파레트 예시 파일을 선택하세요&quot;)
+        If VarType(selectedTemplate) = vbBoolean Then GoTo CleanExit
+        templatePath = CStr(selectedTemplate)
+    End If
+    For Each openedBook In Application.Workbooks
+        If StrComp(openedBook.FullName, templatePath, vbTextCompare) = 0 Then
+            Set wbTemplate = openedBook: templateWasOpen = True: Exit For
+        End If
+    Next openedBook
+    If wbTemplate Is Nothing Then Set wbTemplate = Workbooks.Open(Filename:=templatePath, ReadOnly:=True, UpdateLinks:=0)
+    Set wsTemplate = wbTemplate.Worksheets(1)
     &#x27; 한 결과 시트 안에서 파렛트마다 A4 한 페이지
     Dim qty As Double, nm As String, pb As Double, seg As String
     Dim boxes As Double, remQty As Double, created As Long, sumQty As Double
@@ -10597,11 +10613,10 @@ End Sub
     Loop
     Set wsOut = wbTarget.Worksheets.Add(After:=wbTarget.Sheets(wbTarget.Sheets.Count))
     wsOut.Name = sheetName
-    wsOut.Columns(&quot;A&quot;).ColumnWidth = 6.7
-    wsOut.Columns(&quot;B&quot;).ColumnWidth = 26.7
-    wsOut.Columns(&quot;C&quot;).ColumnWidth = 14.7
-    wsOut.Columns(&quot;D&quot;).ColumnWidth = 13
-    wsOut.Columns(&quot;E&quot;).ColumnWidth = 18.7
+    Dim templateCol As Long
+    For templateCol = 1 To 5
+        wsOut.Columns(templateCol).ColumnWidth = wsTemplate.Columns(templateCol).ColumnWidth
+    Next templateCol
     wsOut.Columns(&quot;B&quot;).NumberFormat = &quot;@&quot;
     outRow = 1
     For j = 1 To nPallet
@@ -10657,43 +10672,32 @@ NextItem:
         wsOut.Range(wsOut.Cells(outRow, 4), wsOut.Cells(outRow, 5)).Merge
         wsOut.Cells(outRow, 4).Value2 = Format(totalBoxes, &quot;#,##0&quot;) &amp; &quot;B&quot; &amp; IIf(totalEA &lt;&gt; 0, &quot; + &quot; &amp; PalletQtyText(totalEA) &amp; &quot;EA&quot;, &quot;&quot;)
         wsOut.Cells(outRow, 3).Value2 = sumQty
-        &#x27; 각 블록 높이를 제한하여 수동 페이지 구분 사이에 한 장으로 맞춤
-        bodyHeight = Application.Min(30, 600 / (nItems + 1))
-        With wsOut.Range(wsOut.Cells(topRow, 1), wsOut.Cells(outRow, 5))
-            .Font.Name = &quot;Arial&quot;
-            .Font.Size = Application.Min(13, Application.Max(1, bodyHeight * 0.52))
-            .Font.Color = vbBlack
-            .Interior.Pattern = xlNone
-            .VerticalAlignment = xlCenter
-            .WrapText = False
-            .RowHeight = bodyHeight
-            .Borders.LineStyle = xlContinuous
-            .Borders.Weight = xlThin
-        End With
-        With wsOut.Range(wsOut.Cells(topRow, 1), wsOut.Cells(topRow, 5))
-            .Font.Bold = True
-            .Font.Size = 28
-            .Interior.Color = RGB(46, 92, 138)
-            .Font.Color = vbWhite
-            .RowHeight = 44
-            .HorizontalAlignment = xlCenter
-        End With
-        With wsOut.Range(wsOut.Cells(topRow + 1, 1), wsOut.Cells(topRow + 1, 5))
-            .Font.Size = 13
-            .HorizontalAlignment = xlCenter
-            .RowHeight = 24
-        End With
-        With wsOut.Range(wsOut.Cells(topRow + 2, 1), wsOut.Cells(topRow + 2, 5))
-            .Font.Size = 13
-            .Font.Bold = True
-            .Interior.Color = RGB(217, 217, 217)
-            .HorizontalAlignment = xlCenter
-            .RowHeight = 24
-        End With
-        wsOut.Rows(outRow).Font.Bold = True
-        wsOut.Range(wsOut.Cells(firstData, 1), wsOut.Cells(outRow, 5)).ShrinkToFit = True
-        wsOut.Range(wsOut.Cells(firstData, 3), wsOut.Cells(outRow, 4)).NumberFormat = &quot;#,##0&quot;
-        wsOut.Range(wsOut.Cells(firstData, 3), wsOut.Cells(outRow, 5)).HorizontalAlignment = xlCenter
+        &#x27; 제목/부제/머리글/본문/합계의 서식을 예시에서 그대로 복사
+        Dim styleRow As Long, formatDest As Range, maxBodyHeight As Double
+        For styleRow = 1 To 3
+            wsTemplate.Range(wsTemplate.Cells(styleRow, 1), wsTemplate.Cells(styleRow, 5)).Copy
+            wsOut.Cells(topRow + styleRow - 1, 1).PasteSpecial Paste:=xlPasteFormats
+            wsOut.Rows(topRow + styleRow - 1).RowHeight = wsTemplate.Rows(styleRow).RowHeight
+        Next styleRow
+        For styleRow = firstData To outRow - 1
+            wsTemplate.Range(&quot;A4:E4&quot;).Copy
+            wsOut.Cells(styleRow, 1).PasteSpecial Paste:=xlPasteFormats
+            wsOut.Rows(styleRow).RowHeight = wsTemplate.Rows(4).RowHeight
+        Next styleRow
+        wsTemplate.Range(&quot;A16:E16&quot;).Copy
+        wsOut.Cells(outRow, 1).PasteSpecial Paste:=xlPasteFormats
+        wsOut.Rows(outRow).RowHeight = wsTemplate.Rows(16).RowHeight
+        Application.CutCopyMode = False
+        &#x27; 많은 품목만 한 장 안에 맞추고 보통은 원본 행 높이/글자 유지
+        maxBodyHeight = (690 - wsOut.Rows(topRow).RowHeight - wsOut.Rows(topRow + 1).RowHeight - wsOut.Rows(topRow + 2).RowHeight - wsOut.Rows(outRow).RowHeight) / nItems
+        If wsTemplate.Rows(4).RowHeight &gt; maxBodyHeight Then
+            With wsOut.Range(wsOut.Cells(firstData, 1), wsOut.Cells(outRow - 1, 5))
+                .RowHeight = maxBodyHeight
+                .Font.Size = Application.Max(1, Application.Min(13, maxBodyHeight * 0.6))
+            End With
+        End If
+        wsOut.Range(wsOut.Cells(firstData, 3), wsOut.Cells(outRow - 1, 4)).NumberFormat = &quot;#,##0&quot;
+        wsOut.Cells(outRow, 3).NumberFormat = &quot;#,##0&quot;
         created = created + 1
         outRow = outRow + 1
 NextPallet:
@@ -10721,6 +10725,10 @@ CleanExit:
     If Not wbMOQ Is Nothing Then
         If Not AlreadyOpen Then wbMOQ.Close SaveChanges:=False
     End If
+    If Not wbTemplate Is Nothing Then
+        If Not templateWasOpen Then wbTemplate.Close SaveChanges:=False
+    End If
+    Application.CutCopyMode = False
     Application.ScreenUpdating = oldScreen
     Application.Calculation = oldCalc
     Application.AskToUpdateLinks = oldLinks

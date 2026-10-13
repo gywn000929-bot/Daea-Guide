@@ -99,6 +99,22 @@ Sub 파렛트_박스정리()
     Dim sArr As Variant
     sArr = wsSrc.Range(wsSrc.Cells(1, 1), wsSrc.Cells(lastRow, lastCol)).value
 
+    ' 제공된 예시 파일을 읽기 전용으로 열어 실제 서식 복사
+    Dim wbTemplate As Workbook, wsTemplate As Worksheet, templatePath As String
+    Dim templateWasOpen As Boolean, selectedTemplate As Variant, openedBook As Workbook
+    templatePath = Environ("USERPROFILE") & "\OneDrive - Dae-A Electronics (Thailand) Company Limited\문서_드라이브\2610 셋째주\파레트 예시.xlsx"
+    If Dir(templatePath) = "" Then
+        selectedTemplate = Application.GetOpenFilename("Excel Files (*.xlsx;*.xls),*.xlsx;*.xls", , "원래 서식의 파레트 예시 파일을 선택하세요")
+        If VarType(selectedTemplate) = vbBoolean Then GoTo CleanExit
+        templatePath = CStr(selectedTemplate)
+    End If
+    For Each openedBook In Application.Workbooks
+        If StrComp(openedBook.FullName, templatePath, vbTextCompare) = 0 Then
+            Set wbTemplate = openedBook: templateWasOpen = True: Exit For
+        End If
+    Next openedBook
+    If wbTemplate Is Nothing Then Set wbTemplate = Workbooks.Open(Filename:=templatePath, ReadOnly:=True, UpdateLinks:=0)
+    Set wsTemplate = wbTemplate.Worksheets(1)
     ' 한 결과 시트 안에서 파렛트마다 A4 한 페이지
     Dim qty As Double, nm As String, pb As Double, seg As String
     Dim boxes As Double, remQty As Double, created As Long, sumQty As Double
@@ -122,11 +138,10 @@ Sub 파렛트_박스정리()
     Loop
     Set wsOut = wbTarget.Worksheets.Add(After:=wbTarget.Sheets(wbTarget.Sheets.Count))
     wsOut.Name = sheetName
-    wsOut.Columns("A").ColumnWidth = 6.7
-    wsOut.Columns("B").ColumnWidth = 26.7
-    wsOut.Columns("C").ColumnWidth = 14.7
-    wsOut.Columns("D").ColumnWidth = 13
-    wsOut.Columns("E").ColumnWidth = 18.7
+    Dim templateCol As Long
+    For templateCol = 1 To 5
+        wsOut.Columns(templateCol).ColumnWidth = wsTemplate.Columns(templateCol).ColumnWidth
+    Next templateCol
     wsOut.Columns("B").NumberFormat = "@"
     outRow = 1
     For j = 1 To nPallet
@@ -182,43 +197,32 @@ NextItem:
         wsOut.Range(wsOut.Cells(outRow, 4), wsOut.Cells(outRow, 5)).Merge
         wsOut.Cells(outRow, 4).Value2 = Format(totalBoxes, "#,##0") & "B" & IIf(totalEA <> 0, " + " & PalletQtyText(totalEA) & "EA", "")
         wsOut.Cells(outRow, 3).Value2 = sumQty
-        ' 각 블록 높이를 제한하여 수동 페이지 구분 사이에 한 장으로 맞춤
-        bodyHeight = Application.Min(30, 600 / (nItems + 1))
-        With wsOut.Range(wsOut.Cells(topRow, 1), wsOut.Cells(outRow, 5))
-            .Font.Name = "Arial"
-            .Font.Size = Application.Min(13, Application.Max(1, bodyHeight * 0.52))
-            .Font.Color = vbBlack
-            .Interior.Pattern = xlNone
-            .VerticalAlignment = xlCenter
-            .WrapText = False
-            .RowHeight = bodyHeight
-            .Borders.LineStyle = xlContinuous
-            .Borders.Weight = xlThin
-        End With
-        With wsOut.Range(wsOut.Cells(topRow, 1), wsOut.Cells(topRow, 5))
-            .Font.Bold = True
-            .Font.Size = 28
-            .Interior.Color = RGB(46, 92, 138)
-            .Font.Color = vbWhite
-            .RowHeight = 44
-            .HorizontalAlignment = xlCenter
-        End With
-        With wsOut.Range(wsOut.Cells(topRow + 1, 1), wsOut.Cells(topRow + 1, 5))
-            .Font.Size = 13
-            .HorizontalAlignment = xlCenter
-            .RowHeight = 24
-        End With
-        With wsOut.Range(wsOut.Cells(topRow + 2, 1), wsOut.Cells(topRow + 2, 5))
-            .Font.Size = 13
-            .Font.Bold = True
-            .Interior.Color = RGB(217, 217, 217)
-            .HorizontalAlignment = xlCenter
-            .RowHeight = 24
-        End With
-        wsOut.Rows(outRow).Font.Bold = True
-        wsOut.Range(wsOut.Cells(firstData, 1), wsOut.Cells(outRow, 5)).ShrinkToFit = True
-        wsOut.Range(wsOut.Cells(firstData, 3), wsOut.Cells(outRow, 4)).NumberFormat = "#,##0"
-        wsOut.Range(wsOut.Cells(firstData, 3), wsOut.Cells(outRow, 5)).HorizontalAlignment = xlCenter
+        ' 제목/부제/머리글/본문/합계의 서식을 예시에서 그대로 복사
+        Dim styleRow As Long, formatDest As Range, maxBodyHeight As Double
+        For styleRow = 1 To 3
+            wsTemplate.Range(wsTemplate.Cells(styleRow, 1), wsTemplate.Cells(styleRow, 5)).Copy
+            wsOut.Cells(topRow + styleRow - 1, 1).PasteSpecial Paste:=xlPasteFormats
+            wsOut.Rows(topRow + styleRow - 1).RowHeight = wsTemplate.Rows(styleRow).RowHeight
+        Next styleRow
+        For styleRow = firstData To outRow - 1
+            wsTemplate.Range("A4:E4").Copy
+            wsOut.Cells(styleRow, 1).PasteSpecial Paste:=xlPasteFormats
+            wsOut.Rows(styleRow).RowHeight = wsTemplate.Rows(4).RowHeight
+        Next styleRow
+        wsTemplate.Range("A16:E16").Copy
+        wsOut.Cells(outRow, 1).PasteSpecial Paste:=xlPasteFormats
+        wsOut.Rows(outRow).RowHeight = wsTemplate.Rows(16).RowHeight
+        Application.CutCopyMode = False
+        ' 많은 품목만 한 장 안에 맞추고 보통은 원본 행 높이/글자 유지
+        maxBodyHeight = (690 - wsOut.Rows(topRow).RowHeight - wsOut.Rows(topRow + 1).RowHeight - wsOut.Rows(topRow + 2).RowHeight - wsOut.Rows(outRow).RowHeight) / nItems
+        If wsTemplate.Rows(4).RowHeight > maxBodyHeight Then
+            With wsOut.Range(wsOut.Cells(firstData, 1), wsOut.Cells(outRow - 1, 5))
+                .RowHeight = maxBodyHeight
+                .Font.Size = Application.Max(1, Application.Min(13, maxBodyHeight * 0.6))
+            End With
+        End If
+        wsOut.Range(wsOut.Cells(firstData, 3), wsOut.Cells(outRow - 1, 4)).NumberFormat = "#,##0"
+        wsOut.Cells(outRow, 3).NumberFormat = "#,##0"
         created = created + 1
         outRow = outRow + 1
 NextPallet:
@@ -246,6 +250,10 @@ CleanExit:
     If Not wbMOQ Is Nothing Then
         If Not AlreadyOpen Then wbMOQ.Close SaveChanges:=False
     End If
+    If Not wbTemplate Is Nothing Then
+        If Not templateWasOpen Then wbTemplate.Close SaveChanges:=False
+    End If
+    Application.CutCopyMode = False
     Application.ScreenUpdating = oldScreen
     Application.Calculation = oldCalc
     Application.AskToUpdateLinks = oldLinks
