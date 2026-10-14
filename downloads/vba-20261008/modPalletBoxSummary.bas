@@ -143,6 +143,8 @@ Sub 파렛트_박스정리()
         wsOut.Columns(templateCol).ColumnWidth = wsTemplate.Columns(templateCol).ColumnWidth
     Next templateCol
     wsOut.Columns("B").NumberFormat = "@"
+    Dim printZoom As Long
+    printZoom = Application.Max(10, Application.Min(150, Int(535 / wsOut.Range("A:E").Width * 100)))
     outRow = 1
     For j = 1 To nPallet
         nItems = 0
@@ -229,9 +231,20 @@ NextItem:
         wsOut.Cells(outRow, 3).Borders.LineStyle = xlContinuous
         wsOut.Range(wsOut.Cells(outRow, 4), wsOut.Cells(outRow, 5)).Borders.LineStyle = xlContinuous
 
+        ' 배경색에 의존하지 않고 모든 구역에 실제 검정 테두리를 넣음
+        Dim borderIndex As Variant
+        For Each borderIndex In Array(xlEdgeLeft, xlEdgeTop, xlEdgeBottom, xlEdgeRight, xlInsideVertical, xlInsideHorizontal)
+            With wsOut.Range(wsOut.Cells(topRow, 1), wsOut.Cells(outRow, 5)).Borders(borderIndex)
+                .LineStyle = xlContinuous
+                .Color = vbBlack
+                .Weight = xlThin
+            End With
+        Next borderIndex
+        wsOut.Range(wsOut.Cells(topRow, 1), wsOut.Cells(outRow, 5)).Font.Color = vbBlack
+        wsOut.Range(wsOut.Cells(topRow, 1), wsOut.Cells(topRow, 5)).Interior.Pattern = xlNone
         Application.CutCopyMode = False
         ' 많은 품목만 한 장 안에 맞추고 보통은 원본 행 높이/글자 유지
-        maxBodyHeight = (690 - wsOut.Rows(topRow).RowHeight - wsOut.Rows(topRow + 1).RowHeight - wsOut.Rows(topRow + 2).RowHeight - wsOut.Rows(outRow).RowHeight) / nItems
+        maxBodyHeight = (730 / (printZoom / 100) - wsOut.Rows(topRow).RowHeight - wsOut.Rows(topRow + 1).RowHeight - wsOut.Rows(topRow + 2).RowHeight - wsOut.Rows(outRow).RowHeight) / nItems
         If wsTemplate.Rows(4).RowHeight > maxBodyHeight Then
             With wsOut.Range(wsOut.Cells(firstData, 1), wsOut.Cells(outRow - 1, 5))
                 .RowHeight = maxBodyHeight
@@ -248,7 +261,7 @@ NextPallet:
     With wsOut.PageSetup
         .Orientation = xlPortrait
         .PaperSize = xlPaperA4
-        .Zoom = 90
+        .Zoom = printZoom
         .BlackAndWhite = True
         .PrintTitleRows = ""
         .PrintTitleColumns = ""

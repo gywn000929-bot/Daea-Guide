@@ -6527,270 +6527,164 @@ Function MonthTokenOf(ByVal s As String) As String
     MonthTokenOf = &quot;&quot;
 
 End Function
-</pre></details></article><article><h3>연호 입고점검</h3><p>모듈 이름: <code>modYeonhoReconcile</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoReconcile">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoReconcile.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoReconcile">Option Explicit
-
-
-
+</pre></details></article><article><h3>연호 입고점검</h3><p>2026-10-14: 연호 마스터 시트 NEW.xlsx의 마스터 시트를 직접 참조합니다. 기본 위치는 OneDrive 회사 폴더의 바탕 화면이며, 없으면 파일을 선택합니다. 작업 파일의 기존 마스터는 사용하지 않습니다. 새 파일을 읽기 전용으로 열어 두며, 이미 열려 있다면 그 내용을 사용합니다. 기존 중복 품명 처리 방식은 유지됩니다.</p><p>모듈 이름: <code>modYeonhoReconcile</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoReconcile">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoReconcile.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoReconcile">Option Explicit
 Sub 연호_입고점검()
-
     Dim wsY As Worksheet, wsD As Worksheet, wsM As Worksheet, wsR As Worksheet
-
     Dim vY As Variant, vD As Variant, vM As Variant
-
     Dim dictY As Object, dictD As Object, dictM As Object, dictColor As Object
-
     Dim i As Long, outRow As Long, lastRow As Long
-
     Dim fac As String, dName As String, yName As String, keyStr As String
-
     Dim qtyY As Double, qtyD As Double, diff As Double, k As Variant
-
-
-
     &#x27; 1. 시트 설정
-
     On Error Resume Next
-
-    Set wsY = Sheets(&quot;연호 ERP&quot;): Set wsD = Sheets(&quot;대아 ERP&quot;): Set wsM = Sheets(&quot;마스터&quot;)
-
+    Set wsY = Sheets(&quot;연호 ERP&quot;): Set wsD = Sheets(&quot;대아 ERP&quot;): Set wsM = LoadYeonhoNewMaster()
     On Error GoTo 0
-
-
-
     If wsY Is Nothing Or wsD Is Nothing Or wsM Is Nothing Then
-
-        MsgBox &quot;시트 이름을 확인하세요: [연호 ERP, 대아 ERP, 마스터]&quot;, vbCritical
-
+        MsgBox &quot;시트 이름을 확인하세요: [연호 ERP, 대아 ERP] 및 외부 NEW 마스터&quot;, vbCritical
         Exit Sub
-
     End If
-
-
-
     &#x27; 2. 데이터 로드 및 마스터 색상 저장
-
     &#x27; 마스터 시트 (A:연호명, B:대아명)
-
     lastRow = wsM.Cells(wsM.Rows.Count, &quot;B&quot;).End(-4162).Row
-
     Set dictM = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictColor = CreateObject(&quot;Scripting.Dictionary&quot;)
-
-
-
     For i = 2 To lastRow
-
         dName = Trim(CStr(wsM.Cells(i, 2).value))
-
         yName = Trim(CStr(wsM.Cells(i, 1).value))
-
         If dName &lt;&gt; &quot;&quot; Then
-
             Dim cleanD As String: cleanD = GetCleanKey(dName)
-
             Dim cleanY As String: cleanY = GetCleanKey(yName)
-
-
-
             dictM(cleanD) = cleanY &#x27; 대아명을 연호명으로 매칭
-
-
-
             &#x27; [핵심] B열(대아항목)에 색깔이 칠해져 있다면 연호명을 키로 색상 저장
-
             If wsM.Cells(i, 2).Interior.ColorIndex &lt;&gt; -4142 Then
-
                 dictColor(cleanY) = wsM.Cells(i, 2).Interior.Color
-
             End If
-
         End If
-
     Next i
-
-
-
     &#x27; 연호 ERP 집계 (A:품명, B:수량, C:Fac)
-
     lastRow = wsY.Cells(wsY.Rows.Count, &quot;A&quot;).End(-4162).Row
-
     vY = wsY.Range(&quot;A1:C&quot; &amp; lastRow).value
-
     Set dictY = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     For i = 2 To UBound(vY, 1)
-
         fac = Trim(CStr(vY(i, 3)))
-
         cleanY = GetCleanKey(vY(i, 1))
-
         keyStr = fac &amp; &quot;|&quot; &amp; cleanY
-
         dictY(keyStr) = dictY(keyStr) + Val(vY(i, 2))
-
     Next i
-
-
-
     &#x27; 대아 ERP 집계 (A:Fac, B:품명, C:수량)
-
     lastRow = wsD.Cells(wsD.Rows.Count, &quot;B&quot;).End(-4162).Row
-
     vD = wsD.Range(&quot;A1:C&quot; &amp; lastRow).value
-
     Set dictD = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     For i = 2 To UBound(vD, 1)
-
         fac = Trim(CStr(vD(i, 1)))
-
         cleanD = GetCleanKey(vD(i, 2))
-
         &#x27; 마스터 번역
-
         If dictM.exists(cleanD) Then
-
             yName = dictM(cleanD)
-
         Else
-
             yName = cleanD
-
         End If
-
         keyStr = fac &amp; &quot;|&quot; &amp; yName
-
         dictD(keyStr) = dictD(keyStr) + Val(vD(i, 3))
-
     Next i
-
-
-
     &#x27; 3. 결과 시트 생성
-
     On Error Resume Next
-
     Set wsR = Sheets(&quot;최종수량대조_결과&quot;)
-
     If wsR Is Nothing Then Set wsR = Sheets.Add(After:=Sheets(Sheets.Count)): wsR.Name = &quot;최종수량대조_결과&quot;
-
     wsR.Cells.Clear
-
     On Error GoTo 0
-
-
-
     wsR.Range(&quot;A1:F1&quot;).value = Array(&quot;Fac&quot;, &quot;품명(연호기준)&quot;, &quot;연호 수량&quot;, &quot;대아 수량&quot;, &quot;차이(연호-대아)&quot;, &quot;상태&quot;)
-
     outRow = 2
-
-
-
     &#x27; 4. 대조 분석 및 색상 적용
-
     Dim allKeys As Object: Set allKeys = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     For Each k In dictY.keys: allKeys(k) = True: Next
-
     For Each k In dictD.keys: allKeys(k) = True: Next
-
-
-
     For Each k In allKeys.keys
-
         fac = Split(CStr(k), &quot;|&quot;)(0)
-
         Dim partKey As String: partKey = Split(CStr(k), &quot;|&quot;)(1)
-
-
-
         qtyY = 0: If dictY.exists(k) Then qtyY = dictY(k)
-
         qtyD = 0: If dictD.exists(k) Then qtyD = dictD(k)
-
         diff = qtyY - qtyD
-
-
-
         wsR.Cells(outRow, 1).value = fac
-
         wsR.Cells(outRow, 2).value = partKey
-
         wsR.Cells(outRow, 3).value = qtyY
-
         wsR.Cells(outRow, 4).value = qtyD
-
-
-
         &#x27; 차이가 있으면 표시, 없으면 공란
-
         If Abs(diff) &gt; 0.0001 Then
-
             wsR.Cells(outRow, 5).value = diff
-
             wsR.Cells(outRow, 6).value = &quot;불일치&quot;
-
             wsR.Range(&quot;A&quot; &amp; outRow &amp; &quot;:F&quot; &amp; outRow).Font.Color = RGB(200, 0, 0)
-
         Else
-
             wsR.Cells(outRow, 5).value = &quot;&quot;
-
             wsR.Cells(outRow, 6).value = &quot;&quot;
-
         End If
-
-
-
         &#x27; [색상 동기화] 마스터에서 칠한 색상을 결과 시트 수량 칸에 그대로 적용
-
         If dictColor.exists(partKey) Then
-
             With wsR.Cells(outRow, 3).Resize(1, 3) &#x27; 연호수량, 대아수량, 차이 칸 색칠
-
                 .Interior.Color = dictColor(partKey)
-
                 If dictColor(partKey) &lt; 8000000 Then .Font.Color = RGB(255, 255, 255) &#x27; 어두운 색이면 글자 흰색
-
             End With
-
         End If
-
-
-
         outRow = outRow + 1
-
     Next k
-
-
-
     wsR.Columns.AutoFit
-
     MsgBox &quot;최종 수량 대조가 완료되었습니다! 주황색 관리 품목을 확인하세요.&quot;, vbInformation
-
 End Sub
-
-
-
 &#x27; 이름 세척 함수 (YEONHO, WHT, 공백 제거)
-
 Function GetCleanKey(ByVal v As Variant) As String
-
     Dim s As String: s = UCase(Trim(CStr(v)))
-
     s = Replace(s, &quot;(YEONHO)&quot;, &quot;&quot;)
-
     s = Replace(s, &quot;YEONHO&quot;, &quot;&quot;)
-
     s = Replace(s, &quot;WHT&quot;, &quot;&quot;)
-
     s = Replace(s, &quot; &quot;, &quot;&quot;)
-
     s = Replace(s, &quot;-&quot;, &quot;&quot;)
-
     GetCleanKey = s
+End Function
 
+Private Function LoadYeonhoNewMaster() As Worksheet
+    Dim targetBook As Workbook, targetSheet As Object, book As Workbook, masterBook As Workbook
+    Dim sourcePath As String, picked As Variant, openedHere As Boolean, oldEvents As Boolean
+    Dim result As Worksheet, message As String
+    On Error GoTo Failed
+    Set targetBook = ActiveWorkbook
+    Set targetSheet = ActiveSheet
+    oldEvents = Application.EnableEvents
+    sourcePath = Environ(&quot;USERPROFILE&quot;) &amp; &quot;\OneDrive - Dae-A Electronics (Thailand) Company Limited\바탕 화면\연호 마스터 시트 NEW.xlsx&quot;
+    For Each book In Application.Workbooks
+        If StrComp(book.FullName, sourcePath, vbTextCompare) = 0 Then Set masterBook = book: Exit For
+    Next book
+    If masterBook Is Nothing Then
+        If Dir(sourcePath) = &quot;&quot; Then
+            picked = Application.GetOpenFilename(&quot;Excel Workbook (*.xlsx),*.xlsx&quot;, , &quot;연호 마스터 시트 NEW.xlsx를 선택하세요&quot;)
+            If VarType(picked) = vbBoolean Then GoTo RestoreTarget
+            sourcePath = CStr(picked)
+            For Each book In Application.Workbooks
+                If StrComp(book.FullName, sourcePath, vbTextCompare) = 0 Then Set masterBook = book: Exit For
+            Next book
+        End If
+        If masterBook Is Nothing Then
+            Application.EnableEvents = False
+            Set masterBook = Application.Workbooks.Open(Filename:=sourcePath, UpdateLinks:=0, ReadOnly:=True)
+            openedHere = True
+        End If
+    End If
+    Set result = masterBook.Worksheets(&quot;마스터&quot;)
+    If result.Cells(result.Rows.Count, 1).End(xlUp).Row &lt; 2 Then Err.Raise vbObjectError + 910, , &quot;마스터 A열에 품명 데이터가 없습니다.&quot;
+    If result.Cells(result.Rows.Count, 2).End(xlUp).Row &lt; 2 Then Err.Raise vbObjectError + 911, , &quot;마스터 B열에 품명 데이터가 없습니다.&quot;
+    Set LoadYeonhoNewMaster = result
+RestoreTarget:
+    On Error Resume Next
+    Application.EnableEvents = False
+    If Not targetBook Is Nothing Then targetBook.Activate
+    If Not targetSheet Is Nothing Then targetSheet.Activate
+    Application.EnableEvents = oldEvents
+    Exit Function
+Failed:
+    message = &quot;새 연호 마스터를 읽지 못했습니다: &quot; &amp; sourcePath &amp; vbCrLf &amp; Err.Description
+    On Error Resume Next
+    If openedHere Then masterBook.Close SaveChanges:=False
+    MsgBox message, vbExclamation
+    GoTo RestoreTarget
 End Function
 </pre></details></article><article><h3>연호 거래명세서</h3><p>모듈 이름: <code>modYeonhoReceivingFill</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoReceivingFill">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoReceivingFill.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoReceivingFill">Sub 연호_거래명세서()
 
@@ -8499,504 +8393,273 @@ Private Function CF_W(ParamArray codes() As Variant) As String
     CF_W = result
 
 End Function
-</pre></details></article><article><h3>연호발주</h3><p>모듈 이름: <code>modYeonhoInboundBasic</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoInboundBasic">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoInboundBasic.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoInboundBasic">Option Explicit
-
-
-
+</pre></details></article><article><h3>연호발주</h3><p>2026-10-14: 연호 마스터 시트 NEW.xlsx의 마스터 시트를 직접 참조합니다. 기본 위치는 OneDrive 회사 폴더의 바탕 화면이며, 없으면 파일을 선택합니다. 작업 파일의 기존 마스터는 사용하지 않습니다. 새 파일을 읽기 전용으로 열어 두며, 이미 열려 있다면 그 내용을 사용합니다. 기존 중복 품명 처리 방식은 유지됩니다.</p><p>모듈 이름: <code>modYeonhoInboundBasic</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoInboundBasic">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoInboundBasic.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoInboundBasic">Option Explicit
 Sub 연호발주()
-
     &#x27; --- 모든 변수 선언 (Option Explicit 대응) ---
-
     Dim wsERP As Worksheet, wsShip As Worksheet, wsAir As Worksheet, wsMaster As Worksheet, wsFinal As Worksheet
-
     Dim vERP As Variant, vShip As Variant, vAir As Variant, vMaster As Variant
-
     Dim dictMaster As Object, dictERP As Object, dictUrgent As Object, dictColor As Object
-
     Dim dictShipDemand As Object, dictAirDemand As Object, dictIncoming As Object
-
     Dim dictStatus As Object, dictPrettyName As Object, dictRawDaea As Object
-
     Dim dictBalance As Object &#x27; 통합 BALANCE 주머니
-
     Dim dictDemandKeys As Object, shipKeys As Object, airOnlyKeys As Object
-
-
-
     Dim i As Long, outRow As Long, lastRow As Long
-
     Dim fac As String, rawName As String, cleanKey As String, yName As String, keyStr As String
-
     Dim arrears As Double, incomingQty As Double, totalDemand As Double
-
     Dim shipNeed As Double, airNeed As Double, finalOrderQty As Double, k As Variant
-
     Dim cleanYName As String, cleanERPName As String, statusVal As String, qVal As Double
-
     Dim dIdx As Integer, combinedKeys As Variant, remainNeed As Double, appliedUrgent As Double, uStock As Double
-
-
-
     &#x27; 1. 시트 설정
-
     On Error Resume Next
-
-    Set wsERP = Sheets(&quot;연호 ERP&quot;): Set wsShip = Sheets(&quot;선박&quot;): Set wsAir = Sheets(&quot;Air&quot;): Set wsMaster = Sheets(&quot;마스터&quot;)
-
+    Set wsERP = Sheets(&quot;연호 ERP&quot;): Set wsShip = Sheets(&quot;선박&quot;): Set wsAir = Sheets(&quot;Air&quot;): Set wsMaster = LoadYeonhoNewMaster()
     On Error GoTo 0
-
-
-
     If wsMaster Is Nothing Or wsERP Is Nothing Or wsShip Is Nothing Or wsAir Is Nothing Then
-
-        MsgBox &quot;시트 이름을 확인해주세요. (연호 ERP, 선박, Air, 마스터 필수)&quot;, vbCritical
-
+        MsgBox &quot;시트 이름을 확인해주세요. (연호 ERP, 선박, Air 및 외부 NEW 마스터 필요)&quot;, vbCritical
         Exit Sub
-
     End If
-
-
-
     &#x27; Dictionary 객체 초기화
-
     Set dictMaster = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictERP = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictUrgent = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictShipDemand = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictAirDemand = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictDemandKeys = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictIncoming = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictColor = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictStatus = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictPrettyName = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictRawDaea = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictBalance = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set shipKeys = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set airOnlyKeys = CreateObject(&quot;Scripting.Dictionary&quot;)
-
-
-
     &#x27; 2. [마스터] 로드
-
     lastRow = wsMaster.Cells(wsMaster.Rows.Count, &quot;B&quot;).End(-4162).Row
-
     If lastRow &gt;= 2 Then
-
         vMaster = wsMaster.Range(&quot;A1:B&quot; &amp; lastRow).value
-
         For i = 2 To UBound(vMaster, 1)
-
             rawName = CStr(vMaster(i, 2))
-
             If Trim(rawName) &lt;&gt; &quot;&quot; Then
-
                 cleanKey = GetPerfectCleanKey(rawName)
-
                 dictMaster(cleanKey) = Trim(CStr(vMaster(i, 1)))
-
                 If wsMaster.Cells(i, 2).Interior.ColorIndex &lt;&gt; -4142 Then
-
                     dictColor(GetPerfectCleanKey(dictMaster(cleanKey))) = wsMaster.Cells(i, 2).Interior.Color
-
                 End If
-
             End If
-
         Next i
-
     End If
-
-
-
     &#x27; 3. [연호 ERP] 재고 로드
-
     lastRow = wsERP.Cells(wsERP.Rows.Count, &quot;A&quot;).End(-4162).Row
-
     If lastRow &gt;= 2 Then
-
         vERP = wsERP.Range(&quot;A1:C&quot; &amp; lastRow).value
-
         For i = 2 To UBound(vERP, 1)
-
             cleanERPName = GetPerfectCleanKey(CStr(vERP(i, 1)))
-
             fac = &quot;&quot;: If UBound(vERP, 2) &gt;= 3 Then fac = GetFacCodeFinal(CStr(vERP(i, 3)))
-
             qVal = 0: If UBound(vERP, 2) &gt;= 2 Then qVal = Val(Replace(CStr(vERP(i, 2)), &quot;,&quot;, &quot;&quot;))
-
             If fac = &quot;긴급&quot; Then
-
                 dictUrgent(cleanERPName) = dictUrgent(cleanERPName) + qVal
-
             ElseIf fac &lt;&gt; &quot;&quot; Then
-
                 dictERP(fac &amp; &quot;|&quot; &amp; cleanERPName) = dictERP(fac &amp; &quot;|&quot; &amp; cleanERPName) + qVal
-
             End If
-
         Next i
-
     End If
-
-
-
     &#x27; 4. [선박] 로드 (BALANCE: F열)
-
     lastRow = wsShip.Cells(wsShip.Rows.Count, &quot;C&quot;).End(-4162).Row
-
     If lastRow &gt;= 2 Then
-
         vShip = wsShip.Range(&quot;A1:F&quot; &amp; lastRow).value
-
         For i = 2 To UBound(vShip, 1)
-
             rawName = CStr(vShip(i, 3))
-
             If Trim(rawName) &lt;&gt; &quot;&quot; Then
-
                 fac = GetFacCodeFinal(CStr(vShip(i, 1)))
-
                 cleanKey = GetPerfectCleanKey(rawName)
-
                 If dictMaster.exists(cleanKey) Then
-
                     yName = dictMaster(cleanKey): statusVal = &quot;매칭완료&quot;
-
                 Else
-
                     yName = rawName: statusVal = &quot;미등록&quot;
-
                 End If
-
                 cleanYName = GetPerfectCleanKey(yName)
-
                 keyStr = fac &amp; &quot;|&quot; &amp; cleanYName
-
                 dictShipDemand(keyStr) = dictShipDemand(keyStr) + Val(Replace(CStr(vShip(i, 4)), &quot;,&quot;, &quot;&quot;))
-
                 dictIncoming(keyStr) = dictIncoming(keyStr) + Val(Replace(CStr(vShip(i, 5)), &quot;,&quot;, &quot;&quot;))
-
-
-
                 &#x27; BALANCE 통합 저장 (선박 시트 우선)
-
                 If UBound(vShip, 2) &gt;= 6 Then
-
                     qVal = Val(Replace(CStr(vShip(i, 6)), &quot;,&quot;, &quot;&quot;))
-
                     If qVal &lt;&gt; 0 Then dictBalance(keyStr) = qVal
-
                 End If
-
-
-
                 shipKeys(keyStr) = True: dictDemandKeys(keyStr) = True
-
                 dictStatus(keyStr) = statusVal
-
                 dictPrettyName(keyStr) = Trim(Replace(Replace(yName, &quot;(YEONHO)&quot;, &quot;&quot;), &quot;YEONHO&quot;, &quot;&quot;))
-
                 If Not dictRawDaea.exists(keyStr) Then dictRawDaea(keyStr) = rawName
-
             End If
-
         Next i
-
     End If
-
-
-
     &#x27; 5. [Air] 로드 (BALANCE: E열)
-
     lastRow = wsAir.Cells(wsAir.Rows.Count, &quot;C&quot;).End(-4162).Row
-
     If lastRow &gt;= 2 Then
-
         vAir = wsAir.Range(&quot;A1:E&quot; &amp; lastRow).value
-
         For i = 2 To UBound(vAir, 1)
-
             rawName = CStr(vAir(i, 3))
-
             If Trim(rawName) &lt;&gt; &quot;&quot; Then
-
                 fac = GetFacCodeFinal(CStr(vAir(i, 1)))
-
                 cleanKey = GetPerfectCleanKey(rawName)
-
                 If dictMaster.exists(cleanKey) Then
-
                     yName = dictMaster(cleanKey): statusVal = &quot;매칭완료&quot;
-
                 Else
-
                     yName = rawName: statusVal = &quot;미등록&quot;
-
                 End If
-
                 cleanYName = GetPerfectCleanKey(yName)
-
                 keyStr = fac &amp; &quot;|&quot; &amp; cleanYName
-
                 dictAirDemand(keyStr) = dictAirDemand(keyStr) + Val(Replace(CStr(vAir(i, 4)), &quot;,&quot;, &quot;&quot;))
-
-
-
                 &#x27; BALANCE 통합 저장 (선박에 없었을 경우 보완)
-
                 If UBound(vAir, 2) &gt;= 5 Then
-
                     qVal = Val(Replace(CStr(vAir(i, 5)), &quot;,&quot;, &quot;&quot;))
-
                     If qVal &lt;&gt; 0 Then dictBalance(keyStr) = qVal
-
                 End If
-
-
-
                 If Not shipKeys.exists(keyStr) Then airOnlyKeys(keyStr) = True
-
                 dictDemandKeys(keyStr) = True
-
                 If Not dictStatus.exists(keyStr) Then dictStatus(keyStr) = statusVal
-
                 If Not dictPrettyName.exists(keyStr) Then dictPrettyName(keyStr) = Trim(Replace(Replace(yName, &quot;(YEONHO)&quot;, &quot;&quot;), &quot;YEONHO&quot;, &quot;&quot;))
-
                 If Not dictRawDaea.exists(keyStr) Then dictRawDaea(keyStr) = rawName
-
             End If
-
         Next i
-
     End If
-
-
-
     &#x27; 6. 결과 시트 생성 (A~I열 구조)
-
     On Error Resume Next
-
     Set wsFinal = Sheets(&quot;최종발주&quot;): If wsFinal Is Nothing Then Set wsFinal = Sheets.Add(After:=Sheets(Sheets.Count)): wsFinal.Name = &quot;최종발주&quot;
-
     wsFinal.Cells.Clear: On Error GoTo 0
-
-
-
     &#x27; [전체 서식 1] 시트 전체 글꼴, 크기, 검정색 적용
-
     With wsFinal.Cells.Font
-
         .Name = &quot;Calibri&quot;
-
         .Size = 11
-
         .Color = RGB(0, 0, 0)
-
     End With
-
-
-
     wsFinal.Range(&quot;A1:I1&quot;).value = Array(&quot;FAC&quot;, &quot;품명&quot;, &quot;선박&quot;, &quot;AIR&quot;, &quot;필요합&quot;, &quot;본사대기&quot;, &quot;연호대기&quot;, &quot;발주필요량&quot;, &quot;발란스&quot;)
-
     outRow = 2
-
-
-
     &#x27; 7. 최종 출력
-
     combinedKeys = Array(shipKeys, airOnlyKeys)
-
     For dIdx = 0 To 1
-
         For Each k In combinedKeys(dIdx).keys
-
             fac = Split(CStr(k), &quot;|&quot;)(0): cleanYName = Split(CStr(k), &quot;|&quot;)(1)
-
             shipNeed = dictShipDemand(k): airNeed = dictAirDemand(k)
-
             totalDemand = shipNeed + airNeed: incomingQty = dictIncoming(k): arrears = dictERP(k)
-
-
-
             remainNeed = totalDemand - incomingQty - arrears: If remainNeed &lt; 0 Then remainNeed = 0
-
-
-
             &#x27; 긴급 차감 블록
-
             appliedUrgent = 0
-
             If remainNeed &gt; 0 Then
-
                 If dictUrgent.exists(cleanYName) Then
-
                     uStock = dictUrgent(cleanYName)
-
                     If uStock &gt;= remainNeed Then
-
                         appliedUrgent = remainNeed
-
                         dictUrgent(cleanYName) = uStock - remainNeed
-
                     Else
-
                         appliedUrgent = uStock
-
                         dictUrgent(cleanYName) = 0
-
                     End If
-
                 End If
-
             End If
-
-
-
             finalOrderQty = remainNeed - appliedUrgent: If finalOrderQty &lt; 0 Then finalOrderQty = 0
-
-
-
             &#x27; 값 입력
-
             wsFinal.Cells(outRow, 1).value = fac              &#x27; A열: FAC
-
             wsFinal.Cells(outRow, 2).value = dictRawDaea(k)   &#x27; B열: 품명(원형)
-
             wsFinal.Cells(outRow, 3).value = shipNeed         &#x27; C열: 선박
-
             wsFinal.Cells(outRow, 4).value = airNeed          &#x27; D열: AIR
-
             wsFinal.Cells(outRow, 5).value = totalDemand      &#x27; E열: 필요합
-
             wsFinal.Cells(outRow, 6).value = incomingQty      &#x27; F열: 본사대기
-
             wsFinal.Cells(outRow, 7).value = arrears          &#x27; G열: 연호대기
-
             wsFinal.Cells(outRow, 8).value = finalOrderQty    &#x27; H열: 발주필요량
-
             wsFinal.Cells(outRow, 9).value = dictBalance(k)   &#x27; I열: 발란스
-
-
-
             &#x27; [수정] 터미널(마스터에서 색상이 있던 품목) 서식: 배경색 주황색(#FFA500), 흰색 폰트 제거(검정유지)
-
             If dictColor.exists(cleanYName) Then
-
                 With wsFinal.Cells(outRow, 8)
-
                     .Interior.Color = RGB(255, 165, 0)
-
                     .Font.Bold = True
-
                 End With
-
             End If
-
-
-
             &#x27; 본사대기 + 연호대기가 AIR 수량보다 작으면 발주필요량(H열)의 폰트를 빨간색(#FF0000) 및 볼드체로 덮어쓰기
-
             If (incomingQty + arrears) &lt; airNeed Then
-
                 With wsFinal.Cells(outRow, 8)
-
                     .Font.Color = RGB(255, 0, 0)
-
                     .Font.Bold = True
-
                 End With
-
             End If
-
-
-
             outRow = outRow + 1
-
         Next k
-
     Next dIdx
-
-
-
     &#x27; [전체 서식 2] C열~I열 1,000단위 콤마 적용
-
     If outRow &gt; 2 Then
-
         wsFinal.Range(&quot;C2:I&quot; &amp; outRow - 1).NumberFormat = &quot;#,##0&quot;
-
     End If
-
-
-
     wsFinal.Columns.AutoFit
-
     MsgBox &quot;서식 변경 및 조건부 글꼴 색상 적용이 완료되었습니다!&quot;, vbInformation
-
 End Sub
-
-
-
 &#x27; --- 보조 함수: 세척 ---
-
 Function GetPerfectCleanKey(ByVal v As Variant) As String
-
     Dim s As String: s = UCase(Trim(CStr(v)))
-
     s = Replace(s, &quot;(YEONHO)&quot;, &quot;&quot;): s = Replace(s, &quot;YEONHO&quot;, &quot;&quot;)
-
     s = Replace(s, &quot;RED&quot;, &quot;RE&quot;): s = Replace(s, &quot;GRN&quot;, &quot;GN&quot;): s = Replace(s, &quot;BLU&quot;, &quot;BL&quot;): s = Replace(s, &quot;YEL&quot;, &quot;YE&quot;)
-
     s = Replace(s, &quot;WHT&quot;, &quot;&quot;): s = Replace(s, &quot;WH&quot;, &quot;&quot;)
-
     s = Replace(s, &quot; &quot;, &quot;&quot;): s = Replace(s, &quot;-&quot;, &quot;&quot;): s = Replace(s, &quot;(&quot;, &quot;&quot;): s = Replace(s, &quot;)&quot;, &quot;&quot;): s = Replace(s, &quot;[&quot;, &quot;&quot;): s = Replace(s, &quot;]&quot;, &quot;&quot;): s = Replace(s, &quot;/&quot;, &quot;&quot;): s = Replace(s, &quot;.&quot;, &quot;&quot;)
-
     GetPerfectCleanKey = s
-
+End Function
+&#x27; --- 보조 함수: 공장 추출 ---
+Function GetFacCodeFinal(ByVal v As String) As String
+    Dim s As String: s = UCase(Trim(v))
+    If InStr(s, &quot;긴급&quot;) &gt; 0 Then
+        GetFacCodeFinal = &quot;긴급&quot;
+    ElseIf InStr(s, &quot;F1&quot;) &gt; 0 Then
+        GetFacCodeFinal = &quot;F1&quot;
+    ElseIf InStr(s, &quot;F2&quot;) &gt; 0 Then
+        GetFacCodeFinal = &quot;F2&quot;
+    ElseIf InStr(s, &quot;F5&quot;) &gt; 0 Then
+        GetFacCodeFinal = &quot;F5&quot;
+    Else
+        GetFacCodeFinal = s
+    End If
 End Function
 
-
-
-&#x27; --- 보조 함수: 공장 추출 ---
-
-Function GetFacCodeFinal(ByVal v As String) As String
-
-    Dim s As String: s = UCase(Trim(v))
-
-    If InStr(s, &quot;긴급&quot;) &gt; 0 Then
-
-        GetFacCodeFinal = &quot;긴급&quot;
-
-    ElseIf InStr(s, &quot;F1&quot;) &gt; 0 Then
-
-        GetFacCodeFinal = &quot;F1&quot;
-
-    ElseIf InStr(s, &quot;F2&quot;) &gt; 0 Then
-
-        GetFacCodeFinal = &quot;F2&quot;
-
-    ElseIf InStr(s, &quot;F5&quot;) &gt; 0 Then
-
-        GetFacCodeFinal = &quot;F5&quot;
-
-    Else
-
-        GetFacCodeFinal = s
-
+Private Function LoadYeonhoNewMaster() As Worksheet
+    Dim targetBook As Workbook, targetSheet As Object, book As Workbook, masterBook As Workbook
+    Dim sourcePath As String, picked As Variant, openedHere As Boolean, oldEvents As Boolean
+    Dim result As Worksheet, message As String
+    On Error GoTo Failed
+    Set targetBook = ActiveWorkbook
+    Set targetSheet = ActiveSheet
+    oldEvents = Application.EnableEvents
+    sourcePath = Environ(&quot;USERPROFILE&quot;) &amp; &quot;\OneDrive - Dae-A Electronics (Thailand) Company Limited\바탕 화면\연호 마스터 시트 NEW.xlsx&quot;
+    For Each book In Application.Workbooks
+        If StrComp(book.FullName, sourcePath, vbTextCompare) = 0 Then Set masterBook = book: Exit For
+    Next book
+    If masterBook Is Nothing Then
+        If Dir(sourcePath) = &quot;&quot; Then
+            picked = Application.GetOpenFilename(&quot;Excel Workbook (*.xlsx),*.xlsx&quot;, , &quot;연호 마스터 시트 NEW.xlsx를 선택하세요&quot;)
+            If VarType(picked) = vbBoolean Then GoTo RestoreTarget
+            sourcePath = CStr(picked)
+            For Each book In Application.Workbooks
+                If StrComp(book.FullName, sourcePath, vbTextCompare) = 0 Then Set masterBook = book: Exit For
+            Next book
+        End If
+        If masterBook Is Nothing Then
+            Application.EnableEvents = False
+            Set masterBook = Application.Workbooks.Open(Filename:=sourcePath, UpdateLinks:=0, ReadOnly:=True)
+            openedHere = True
+        End If
     End If
-
+    Set result = masterBook.Worksheets(&quot;마스터&quot;)
+    If result.Cells(result.Rows.Count, 1).End(xlUp).Row &lt; 2 Then Err.Raise vbObjectError + 910, , &quot;마스터 A열에 품명 데이터가 없습니다.&quot;
+    If result.Cells(result.Rows.Count, 2).End(xlUp).Row &lt; 2 Then Err.Raise vbObjectError + 911, , &quot;마스터 B열에 품명 데이터가 없습니다.&quot;
+    Set LoadYeonhoNewMaster = result
+RestoreTarget:
+    On Error Resume Next
+    Application.EnableEvents = False
+    If Not targetBook Is Nothing Then targetBook.Activate
+    If Not targetSheet Is Nothing Then targetSheet.Activate
+    Application.EnableEvents = oldEvents
+    Exit Function
+Failed:
+    message = &quot;새 연호 마스터를 읽지 못했습니다: &quot; &amp; sourcePath &amp; vbCrLf &amp; Err.Description
+    On Error Resume Next
+    If openedHere Then masterBook.Close SaveChanges:=False
+    MsgBox message, vbExclamation
+    GoTo RestoreTarget
 End Function
 </pre></details></article><article><h3>연호거래명세서</h3><p>모듈 이름: <code>modYeonhoStatement</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoStatement">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoStatement.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoStatement">Sub 연호거래명세서()
 
@@ -9856,268 +9519,157 @@ Function NzNum(v As Variant) As Double
     End If
 
 End Function
-</pre></details></article><article><h3>연호 대아 이름 변환</h3><p>모듈 이름: <code>modMasterConvert</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modMasterConvert">전체 코드 복사</button><a href="downloads/vba-20261008/modMasterConvert.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modMasterConvert">Option Explicit
-
-
-
+</pre></details></article><article><h3>연호 대아 이름 변환</h3><p>2026-10-14: 연호 마스터 시트 NEW.xlsx의 마스터 시트를 직접 참조합니다. 기본 위치는 OneDrive 회사 폴더의 바탕 화면이며, 없으면 파일을 선택합니다. 작업 파일의 기존 마스터는 사용하지 않습니다. 새 파일을 읽기 전용으로 열어 두며, 이미 열려 있다면 그 내용을 사용합니다. 기존 중복 품명 처리 방식은 유지됩니다.</p><p>모듈 이름: <code>modMasterConvert</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modMasterConvert">전체 코드 복사</button><a href="downloads/vba-20261008/modMasterConvert.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modMasterConvert">Option Explicit
 Sub 연호_대아_이름_변환()
-
     Dim ws As Worksheet, wsMaster As Worksheet
-
     Dim lastRow As Long, lastCol As Long, mRow As Long
-
     Dim i As Long
-
     Dim targetColStr As String, targetCol As Long
-
-
-
     Dim dictMaster As Object
-
     Dim vMaster As Variant
-
     Dim yName As String, dName As String
-
     Dim cleanY As String, cleanD As String, cleanTarget As String, targetVal As String
-
     Dim matchedArr As Variant
-
-
-
     &#x27; 1. 시트 설정
-
     Set ws = ActiveSheet
-
     On Error Resume Next
-
-    Set wsMaster = Sheets(&quot;마스터&quot;)
-
+    Set wsMaster = LoadYeonhoNewMaster()
     On Error GoTo 0
-
-
-
     If wsMaster Is Nothing Then
-
-        MsgBox &quot;&#x27;마스터&#x27; 시트를 찾을 수 없습니다. 현재 통합 문서에 마스터 시트가 있는지 확인해 주세요.&quot;, vbCritical
-
+        MsgBox &quot;연호 마스터 시트 NEW.xlsx의 마스터를 불러오지 못했습니다.&quot;, vbCritical
         Exit Sub
-
     End If
-
-
-
     &#x27; 2. 기준 열 입력
-
     targetColStr = InputBox(&quot;품목명이 적힌 열의 알파벳을 입력하세요.&quot; &amp; vbCrLf &amp; &quot;(예: C, F, G 등)&quot;, &quot;기준 열 입력&quot;)
-
     If Trim(targetColStr) = &quot;&quot; Then Exit Sub
-
-
-
     On Error Resume Next
-
     targetCol = ws.Columns(targetColStr).Column
-
     On Error GoTo 0
-
-
-
     If targetCol = 0 Then
-
         MsgBox &quot;올바른 열 알파벳을 입력해 주세요.&quot;, vbExclamation
-
         Exit Sub
-
     End If
-
-
-
     Application.ScreenUpdating = False
-
-
-
     &#x27; 3. 마스터 시트 데이터 메모리에 저장 (핵심: 마스터 원본 그대로 저장)
-
     Set dictMaster = CreateObject(&quot;Scripting.Dictionary&quot;)
-
-
-
     mRow = wsMaster.Cells(wsMaster.Rows.Count, &quot;A&quot;).End(xlUp).Row
-
     If mRow &gt;= 2 Then
-
         vMaster = wsMaster.Range(&quot;A1:B&quot; &amp; mRow).value
-
         For i = 2 To UBound(vMaster, 1)
-
             yName = Trim(CStr(vMaster(i, 1))) &#x27; A열: 연호명 원본
-
             dName = Trim(CStr(vMaster(i, 2))) &#x27; B열: 대아명 원본
-
-
-
             cleanY = GetPerfectCleanKey(yName)
-
             cleanD = GetPerfectCleanKey(dName)
-
-
-
             &#x27; 입력값이 연호든 대아든, 무조건 [마스터 A열, 마스터 B열]을 뱉어내도록 배열로 저장
-
             If cleanY &lt;&gt; &quot;&quot; Then dictMaster(cleanY) = Array(yName, dName)
-
             If cleanD &lt;&gt; &quot;&quot; Then dictMaster(cleanD) = Array(yName, dName)
-
         Next i
-
     End If
-
-
-
     &#x27; 4. 마지막 열 찾기
-
     On Error Resume Next
-
 lastCol = ws.Cells.Find(What:=&quot;*&quot;, After:=ws.Range(&quot;A1&quot;), LookAt:=xlPart, LookIn:=xlFormulas, SearchOrder:=xlByColumns, SearchDirection:=xlPrevious, MatchCase:=False).Column
-
     On Error GoTo 0
-
     If lastCol = 0 Then lastCol = 1
-
-
-
     &#x27; 5. 헤더 만들기
-
     Dim outYCol As Long, outDCol As Long
-
     outYCol = lastCol + 1
-
     outDCol = lastCol + 2
-
-
-
     With ws
-
         .Cells(1, outYCol).value = &quot;마스터: 연호명&quot;
-
         .Cells(1, outDCol).value = &quot;마스터: 대아명&quot;
-
         .Cells(1, outYCol).Interior.Color = RGB(220, 230, 241)
-
         .Cells(1, outDCol).Interior.Color = RGB(228, 223, 236)
-
         .Cells(1, outYCol).Font.Bold = True
-
         .Cells(1, outDCol).Font.Bold = True
-
-
-
         lastRow = .Cells(.Rows.Count, targetCol).End(xlUp).Row
-
-
-
         &#x27; 6. 본격적인 매칭 로직
-
         For i = 2 To lastRow
-
             targetVal = CStr(.Cells(i, targetCol).value)
-
-
-
             If Trim(targetVal) &lt;&gt; &quot;&quot; Then
-
                 cleanTarget = GetPerfectCleanKey(targetVal)
-
-
-
                 &#x27; 마스터에 데이터가 존재하면
-
                 If dictMaster.exists(cleanTarget) Then
-
                     matchedArr = dictMaster(cleanTarget)
-
                     .Cells(i, outYCol).value = matchedArr(0) &#x27; 무조건 마스터 A열(연호) 출력
-
                     .Cells(i, outDCol).value = matchedArr(1) &#x27; 무조건 마스터 B열(대아) 출력
-
                 Else
-
                     .Cells(i, outYCol).value = &quot;미등록&quot;
-
                     .Cells(i, outDCol).value = &quot;미등록&quot;
-
                 End If
-
             End If
-
         Next i
-
-
-
         .Columns(outYCol).AutoFit
-
         .Columns(outDCol).AutoFit
-
     End With
-
-
-
     Application.ScreenUpdating = True
-
     MsgBox &quot;마스터 기준 매칭 완료! 데이터 맨 우측을 확인해 보세요.&quot;, vbInformation
-
 End Sub
-
-
-
 &#x27; --- 보조 함수: 세척 (어떤 공백/특수문자가 와도 완벽히 파괴) ---
-
 Function GetPerfectCleanKey(ByVal v As Variant) As String
-
     Dim s As String
-
     s = UCase(Trim(CStr(v)))
-
-
-
     &#x27; 모든 종류의 공백 완벽 제거
-
     s = Replace(s, &quot; &quot;, &quot;&quot;)
-
     s = Replace(s, ChrW(160), &quot;&quot;)   &#x27; 웹/ERP 논브레이킹 스페이스
-
     s = Replace(s, ChrW(12288), &quot;&quot;) &#x27; 전각 공백
-
     s = Replace(s, vbTab, &quot;&quot;)
-
     s = Replace(s, vbCr, &quot;&quot;)
-
     s = Replace(s, vbLf, &quot;&quot;)
-
-
-
     &#x27; 회사명 제거
-
     s = Replace(s, &quot;(YEONHO)&quot;, &quot;&quot;): s = Replace(s, &quot;YEONHO&quot;, &quot;&quot;)
-
-
-
     &#x27; 컬러 약어 매칭
-
     s = Replace(s, &quot;RED&quot;, &quot;RE&quot;): s = Replace(s, &quot;GRN&quot;, &quot;GN&quot;): s = Replace(s, &quot;BLU&quot;, &quot;BL&quot;): s = Replace(s, &quot;YEL&quot;, &quot;YE&quot;)
-
     s = Replace(s, &quot;BLK&quot;, &quot;BK&quot;): s = Replace(s, &quot;VIO&quot;, &quot;VI&quot;): s = Replace(s, &quot;ORG&quot;, &quot;OR&quot;): s = Replace(s, &quot;BRN&quot;, &quot;BR&quot;)
-
     s = Replace(s, &quot;WHT&quot;, &quot;&quot;): s = Replace(s, &quot;WH&quot;, &quot;&quot;)
-
-
-
     &#x27; 특수문자 제거
-
     s = Replace(s, &quot;-&quot;, &quot;&quot;): s = Replace(s, &quot;(&quot;, &quot;&quot;): s = Replace(s, &quot;)&quot;, &quot;&quot;): s = Replace(s, &quot;[&quot;, &quot;&quot;): s = Replace(s, &quot;]&quot;, &quot;&quot;): s = Replace(s, &quot;/&quot;, &quot;&quot;): s = Replace(s, &quot;.&quot;, &quot;&quot;): s = Replace(s, &quot;_&quot;, &quot;&quot;): s = Replace(s, &quot;,&quot;, &quot;&quot;)
-
     GetPerfectCleanKey = s
+End Function
 
+Private Function LoadYeonhoNewMaster() As Worksheet
+    Dim targetBook As Workbook, targetSheet As Object, book As Workbook, masterBook As Workbook
+    Dim sourcePath As String, picked As Variant, openedHere As Boolean, oldEvents As Boolean
+    Dim result As Worksheet, message As String
+    On Error GoTo Failed
+    Set targetBook = ActiveWorkbook
+    Set targetSheet = ActiveSheet
+    oldEvents = Application.EnableEvents
+    sourcePath = Environ(&quot;USERPROFILE&quot;) &amp; &quot;\OneDrive - Dae-A Electronics (Thailand) Company Limited\바탕 화면\연호 마스터 시트 NEW.xlsx&quot;
+    For Each book In Application.Workbooks
+        If StrComp(book.FullName, sourcePath, vbTextCompare) = 0 Then Set masterBook = book: Exit For
+    Next book
+    If masterBook Is Nothing Then
+        If Dir(sourcePath) = &quot;&quot; Then
+            picked = Application.GetOpenFilename(&quot;Excel Workbook (*.xlsx),*.xlsx&quot;, , &quot;연호 마스터 시트 NEW.xlsx를 선택하세요&quot;)
+            If VarType(picked) = vbBoolean Then GoTo RestoreTarget
+            sourcePath = CStr(picked)
+            For Each book In Application.Workbooks
+                If StrComp(book.FullName, sourcePath, vbTextCompare) = 0 Then Set masterBook = book: Exit For
+            Next book
+        End If
+        If masterBook Is Nothing Then
+            Application.EnableEvents = False
+            Set masterBook = Application.Workbooks.Open(Filename:=sourcePath, UpdateLinks:=0, ReadOnly:=True)
+            openedHere = True
+        End If
+    End If
+    Set result = masterBook.Worksheets(&quot;마스터&quot;)
+    If result.Cells(result.Rows.Count, 1).End(xlUp).Row &lt; 2 Then Err.Raise vbObjectError + 910, , &quot;마스터 A열에 품명 데이터가 없습니다.&quot;
+    If result.Cells(result.Rows.Count, 2).End(xlUp).Row &lt; 2 Then Err.Raise vbObjectError + 911, , &quot;마스터 B열에 품명 데이터가 없습니다.&quot;
+    Set LoadYeonhoNewMaster = result
+RestoreTarget:
+    On Error Resume Next
+    Application.EnableEvents = False
+    If Not targetBook Is Nothing Then targetBook.Activate
+    If Not targetSheet Is Nothing Then targetSheet.Activate
+    Application.EnableEvents = oldEvents
+    Exit Function
+Failed:
+    message = &quot;새 연호 마스터를 읽지 못했습니다: &quot; &amp; sourcePath &amp; vbCrLf &amp; Err.Description
+    On Error Resume Next
+    If openedHere Then masterBook.Close SaveChanges:=False
+    MsgBox message, vbExclamation
+    GoTo RestoreTarget
 End Function
 </pre></details></article><article><h3>연호 반장님 재고리스트</h3><p>모듈 이름: <code>modYeonhoInventoryPrint</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoInventoryPrint">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoInventoryPrint.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoInventoryPrint">Sub 연호_반장님_재고리스트()
 
@@ -10761,600 +10313,317 @@ Private Function PalletQtyText(ByVal value As Double) As String
         PalletQtyText = Format(value, &quot;#,##0.########&quot;)
     End If
 End Function
-</pre></details></article><article><h3>연호 발주 재고포함</h3><p>모듈 이름: <code>modYeonhoStockByCode</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoStockByCode">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoStockByCode.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoStockByCode">Option Explicit
-
-
-
+</pre></details></article><article><h3>연호 발주 재고포함</h3><p>2026-10-14: 연호 마스터 시트 NEW.xlsx의 마스터 시트를 직접 참조합니다. 기본 위치는 OneDrive 회사 폴더의 바탕 화면이며, 없으면 파일을 선택합니다. 작업 파일의 기존 마스터는 사용하지 않습니다. 새 파일을 읽기 전용으로 열어 두며, 이미 열려 있다면 그 내용을 사용합니다. 기존 중복 품명 처리 방식은 유지됩니다.</p><p>모듈 이름: <code>modYeonhoStockByCode</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modYeonhoStockByCode">전체 코드 복사</button><a href="downloads/vba-20261008/modYeonhoStockByCode.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modYeonhoStockByCode">Option Explicit
 Sub 연호_발주_재고포함()
-
     &#x27; --- 모든 변수 선언 (Option Explicit 대응) ---
-
     Dim wsERP As Worksheet, wsShip As Worksheet, wsAir As Worksheet, wsMaster As Worksheet, wsFinal As Worksheet
-
     Dim wsStock As Worksheet                              &#x27; [추가] &#x27;재고&#x27; 시트 (선택)
-
     Dim vERP As Variant, vShip As Variant, vAir As Variant, vMaster As Variant, vStock As Variant
-
     Dim dictMaster As Object, dictERP As Object, dictUrgent As Object, dictColor As Object
-
     Dim dictShipDemand As Object, dictAirDemand As Object, dictIncoming As Object
-
     Dim dictStatus As Object, dictPrettyName As Object, dictRawDaea As Object
-
     Dim dictBalance As Object &#x27; 통합 BALANCE 주머니
-
     Dim dictStock As Object, dictCode As Object          &#x27; [추가] 공장별 본사재고 / 거래처코드→품명 매핑
-
     Dim dictDemandKeys As Object, shipKeys As Object, airOnlyKeys As Object
-
-
-
     Dim i As Long, outRow As Long, lastRow As Long
-
     Dim fac As String, rawName As String, cleanKey As String, yName As String, keyStr As String
-
     Dim arrears As Double, incomingQty As Double, totalDemand As Double
-
     Dim shipNeed As Double, airNeed As Double, finalOrderQty As Double, k As Variant
-
     Dim cleanYName As String, cleanERPName As String, statusVal As String, qVal As Double
-
     Dim dIdx As Integer, combinedKeys As Variant, remainNeed As Double, appliedUrgent As Double, uStock As Double
-
     Dim scode As String                                  &#x27; [추가] 재고 거래처 품목코드(정규화)
-
-
-
     &#x27; 1. 시트 설정
-
     On Error Resume Next
-
-    Set wsERP = Sheets(&quot;연호 ERP&quot;): Set wsShip = Sheets(&quot;선박&quot;): Set wsAir = Sheets(&quot;Air&quot;): Set wsMaster = Sheets(&quot;마스터&quot;)
-
+    Set wsERP = Sheets(&quot;연호 ERP&quot;): Set wsShip = Sheets(&quot;선박&quot;): Set wsAir = Sheets(&quot;Air&quot;): Set wsMaster = LoadYeonhoNewMaster()
     Set wsStock = Sheets(&quot;재고&quot;)                          &#x27; [추가] 있으면 사용, 없으면 Nothing (선택)
-
     On Error GoTo 0
-
-
-
     If wsMaster Is Nothing Or wsERP Is Nothing Or wsShip Is Nothing Or wsAir Is Nothing Then
-
-        MsgBox &quot;시트 이름을 확인해주세요. (연호 ERP, 선박, Air, 마스터 필수)&quot;, vbCritical
-
+        MsgBox &quot;시트 이름을 확인해주세요. (연호 ERP, 선박, Air 및 외부 NEW 마스터 필요)&quot;, vbCritical
         Exit Sub
-
     End If
-
-
-
     &#x27; Dictionary 객체 초기화
-
     Set dictMaster = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictERP = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictUrgent = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictShipDemand = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictAirDemand = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictDemandKeys = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictIncoming = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictColor = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictStatus = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictPrettyName = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictRawDaea = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictBalance = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set dictStock = CreateObject(&quot;Scripting.Dictionary&quot;)   &#x27; [추가]
-
     Set dictCode = CreateObject(&quot;Scripting.Dictionary&quot;)    &#x27; [추가]
-
     Set shipKeys = CreateObject(&quot;Scripting.Dictionary&quot;)
-
     Set airOnlyKeys = CreateObject(&quot;Scripting.Dictionary&quot;)
-
-
-
     &#x27; 2. [마스터] 로드
-
     lastRow = wsMaster.Cells(wsMaster.Rows.Count, &quot;B&quot;).End(-4162).Row
-
     If lastRow &gt;= 2 Then
-
         vMaster = wsMaster.Range(&quot;A1:B&quot; &amp; lastRow).value
-
         For i = 2 To UBound(vMaster, 1)
-
             rawName = CStr(vMaster(i, 2))
-
             If Trim(rawName) &lt;&gt; &quot;&quot; Then
-
                 cleanKey = GetPerfectCleanKey(rawName)
-
                 dictMaster(cleanKey) = Trim(CStr(vMaster(i, 1)))
-
                 If wsMaster.Cells(i, 2).Interior.ColorIndex &lt;&gt; -4142 Then
-
                     dictColor(GetPerfectCleanKey(dictMaster(cleanKey))) = wsMaster.Cells(i, 2).Interior.Color
-
                 End If
-
             End If
-
         Next i
-
     End If
-
-
-
     &#x27; 3. [연호 ERP] 재고 로드
-
     lastRow = wsERP.Cells(wsERP.Rows.Count, &quot;A&quot;).End(-4162).Row
-
     If lastRow &gt;= 2 Then
-
         vERP = wsERP.Range(&quot;A1:C&quot; &amp; lastRow).value
-
         For i = 2 To UBound(vERP, 1)
-
             cleanERPName = GetPerfectCleanKey(CStr(vERP(i, 1)))
-
             fac = &quot;&quot;: If UBound(vERP, 2) &gt;= 3 Then fac = GetFacCodeFinal(CStr(vERP(i, 3)))
-
             qVal = 0: If UBound(vERP, 2) &gt;= 2 Then qVal = Val(Replace(CStr(vERP(i, 2)), &quot;,&quot;, &quot;&quot;))
-
             If fac = &quot;긴급&quot; Then
-
                 dictUrgent(cleanERPName) = dictUrgent(cleanERPName) + qVal
-
             ElseIf fac &lt;&gt; &quot;&quot; Then
-
                 dictERP(fac &amp; &quot;|&quot; &amp; cleanERPName) = dictERP(fac &amp; &quot;|&quot; &amp; cleanERPName) + qVal
-
             End If
-
         Next i
-
     End If
-
-
-
     &#x27; 4. [선박] 로드 (BALANCE: F열)
-
     lastRow = wsShip.Cells(wsShip.Rows.Count, &quot;C&quot;).End(-4162).Row
-
     If lastRow &gt;= 2 Then
-
         vShip = wsShip.Range(&quot;A1:F&quot; &amp; lastRow).value
-
         For i = 2 To UBound(vShip, 1)
-
             rawName = CStr(vShip(i, 3))
-
             If Trim(rawName) &lt;&gt; &quot;&quot; Then
-
                 fac = GetFacCodeFinal(CStr(vShip(i, 1)))
-
                 cleanKey = GetPerfectCleanKey(rawName)
-
                 If dictMaster.exists(cleanKey) Then
-
                     yName = dictMaster(cleanKey): statusVal = &quot;매칭완료&quot;
-
                 Else
-
                     yName = rawName: statusVal = &quot;미등록&quot;
-
                 End If
-
                 cleanYName = GetPerfectCleanKey(yName)
-
                 keyStr = fac &amp; &quot;|&quot; &amp; cleanYName
-
                 dictShipDemand(keyStr) = dictShipDemand(keyStr) + Val(Replace(CStr(vShip(i, 4)), &quot;,&quot;, &quot;&quot;))
-
                 dictIncoming(keyStr) = dictIncoming(keyStr) + Val(Replace(CStr(vShip(i, 5)), &quot;,&quot;, &quot;&quot;))
-
-
-
                 &#x27; [추가] 거래처 품목코드(B열) → 품명(cleanYName) 매핑 (재고 매칭용)
-
                 If Trim(CStr(vShip(i, 2))) &lt;&gt; &quot;&quot; Then dictCode(GetPerfectCleanKey(CStr(vShip(i, 2)))) = cleanYName
-
-
-
                 &#x27; BALANCE 통합 저장 (선박 시트 우선)
-
                 If UBound(vShip, 2) &gt;= 6 Then
-
                     qVal = Val(Replace(CStr(vShip(i, 6)), &quot;,&quot;, &quot;&quot;))
-
                     If qVal &lt;&gt; 0 Then dictBalance(keyStr) = qVal
-
                 End If
-
-
-
                 shipKeys(keyStr) = True: dictDemandKeys(keyStr) = True
-
                 dictStatus(keyStr) = statusVal
-
                 dictPrettyName(keyStr) = Trim(Replace(Replace(yName, &quot;(YEONHO)&quot;, &quot;&quot;), &quot;YEONHO&quot;, &quot;&quot;))
-
                 If Not dictRawDaea.exists(keyStr) Then dictRawDaea(keyStr) = rawName
-
             End If
-
         Next i
-
     End If
-
-
-
     &#x27; 5. [Air] 로드 (BALANCE: E열)
-
     lastRow = wsAir.Cells(wsAir.Rows.Count, &quot;C&quot;).End(-4162).Row
-
     If lastRow &gt;= 2 Then
-
         vAir = wsAir.Range(&quot;A1:E&quot; &amp; lastRow).value
-
         For i = 2 To UBound(vAir, 1)
-
             rawName = CStr(vAir(i, 3))
-
             If Trim(rawName) &lt;&gt; &quot;&quot; Then
-
                 fac = GetFacCodeFinal(CStr(vAir(i, 1)))
-
                 cleanKey = GetPerfectCleanKey(rawName)
-
                 If dictMaster.exists(cleanKey) Then
-
                     yName = dictMaster(cleanKey): statusVal = &quot;매칭완료&quot;
-
                 Else
-
                     yName = rawName: statusVal = &quot;미등록&quot;
-
                 End If
-
                 cleanYName = GetPerfectCleanKey(yName)
-
                 keyStr = fac &amp; &quot;|&quot; &amp; cleanYName
-
                 dictAirDemand(keyStr) = dictAirDemand(keyStr) + Val(Replace(CStr(vAir(i, 4)), &quot;,&quot;, &quot;&quot;))
-
-
-
                 &#x27; [추가] 거래처 품목코드(B열) → 품명 매핑 (선박에 없던 것 보완)
-
                 If Trim(CStr(vAir(i, 2))) &lt;&gt; &quot;&quot; Then
-
 If Not dictCode.exists(GetPerfectCleanKey(CStr(vAir(i, 2)))) Then dictCode(GetPerfectCleanKey(CStr(vAir(i, 2)))) = cleanYName
-
                 End If
-
-
-
                 &#x27; BALANCE 통합 저장 (선박에 없었을 경우 보완)
-
                 If UBound(vAir, 2) &gt;= 5 Then
-
                     qVal = Val(Replace(CStr(vAir(i, 5)), &quot;,&quot;, &quot;&quot;))
-
                     If qVal &lt;&gt; 0 Then dictBalance(keyStr) = qVal
-
                 End If
-
-
-
                 If Not shipKeys.exists(keyStr) Then airOnlyKeys(keyStr) = True
-
                 dictDemandKeys(keyStr) = True
-
                 If Not dictStatus.exists(keyStr) Then dictStatus(keyStr) = statusVal
-
                 If Not dictPrettyName.exists(keyStr) Then dictPrettyName(keyStr) = Trim(Replace(Replace(yName, &quot;(YEONHO)&quot;, &quot;&quot;), &quot;YEONHO&quot;, &quot;&quot;))
-
                 If Not dictRawDaea.exists(keyStr) Then dictRawDaea(keyStr) = rawName
-
             End If
-
         Next i
-
     End If
-
-
-
     &#x27; 5.5 [재고] 로드 (선택 시트) ? A:공장, B:거래처 품목코드, C:품목명, D:재고수량(출고수량 합계)
-
     &#x27;     공장별 본사재고를 fac|품명 키로 담아, 최종발주 &#x27;본사대기(F열)&#x27; 를 공장별로 정확히 채운다.
-
     If Not wsStock Is Nothing Then
-
         lastRow = wsStock.Cells(wsStock.Rows.Count, &quot;C&quot;).End(-4162).Row
-
         If lastRow &gt;= 2 Then
-
             vStock = wsStock.Range(&quot;A1:D&quot; &amp; lastRow).value
-
             For i = 2 To UBound(vStock, 1)
-
                 rawName = CStr(vStock(i, 3))
-
                 If Trim(rawName) &lt;&gt; &quot;&quot; Then
-
                     fac = GetFacCodeFinal(CStr(vStock(i, 1)))
-
                     &#x27; 매칭: 거래처 품목코드(B) 우선 → 없으면 마스터(품명) → 그래도 없으면 품명 그대로
-
                     scode = GetPerfectCleanKey(CStr(vStock(i, 2)))
-
                     If dictCode.exists(scode) Then
-
                         cleanYName = dictCode(scode)
-
                     ElseIf dictMaster.exists(GetPerfectCleanKey(rawName)) Then
-
                         cleanYName = GetPerfectCleanKey(dictMaster(GetPerfectCleanKey(rawName)))
-
                     Else
-
                         cleanYName = GetPerfectCleanKey(rawName)
-
                     End If
-
                     keyStr = fac &amp; &quot;|&quot; &amp; cleanYName
-
                     dictStock(keyStr) = dictStock(keyStr) + Val(Replace(CStr(vStock(i, 4)), &quot;,&quot;, &quot;&quot;))
-
                 End If
-
             Next i
-
         End If
-
     End If
-
-
-
     &#x27; 6. 결과 시트 생성 (A~I열 구조)
-
     On Error Resume Next
-
     Set wsFinal = Sheets(&quot;최종발주&quot;): If wsFinal Is Nothing Then Set wsFinal = Sheets.Add(After:=Sheets(Sheets.Count)): wsFinal.Name = &quot;최종발주&quot;
-
     wsFinal.Cells.Clear: On Error GoTo 0
-
-
-
     &#x27; [전체 서식 1] 시트 전체 글꼴, 크기, 검정색 적용
-
     With wsFinal.Cells.Font
-
         .Name = &quot;Calibri&quot;
-
         .Size = 11
-
         .Color = RGB(0, 0, 0)
-
     End With
-
-
-
     wsFinal.Range(&quot;A1:I1&quot;).value = Array(&quot;FAC&quot;, &quot;품명&quot;, &quot;선박&quot;, &quot;AIR&quot;, &quot;필요합&quot;, &quot;본사대기&quot;, &quot;연호대기&quot;, &quot;발주필요량&quot;, &quot;발란스&quot;)
-
     outRow = 2
-
-
-
     &#x27; 7. 최종 출력
-
     combinedKeys = Array(shipKeys, airOnlyKeys)
-
     For dIdx = 0 To 1
-
         For Each k In combinedKeys(dIdx).keys
-
             fac = Split(CStr(k), &quot;|&quot;)(0): cleanYName = Split(CStr(k), &quot;|&quot;)(1)
-
             shipNeed = dictShipDemand(k): airNeed = dictAirDemand(k)
-
             totalDemand = shipNeed + airNeed
-
-
-
             &#x27; [수정] 본사대기(본사재고): &#x27;재고&#x27; 시트가 있으면 공장별 재고 사용, 없으면 기존(선박 E열)
-
             If Not wsStock Is Nothing Then
-
                 incomingQty = dictStock(k)
-
             Else
-
                 incomingQty = dictIncoming(k)
-
             End If
-
             arrears = dictERP(k)
-
-
-
             remainNeed = totalDemand - incomingQty - arrears: If remainNeed &lt; 0 Then remainNeed = 0
-
-
-
             &#x27; 긴급 차감 블록
-
             appliedUrgent = 0
-
             If remainNeed &gt; 0 Then
-
                 If dictUrgent.exists(cleanYName) Then
-
                     uStock = dictUrgent(cleanYName)
-
                     If uStock &gt;= remainNeed Then
-
                         appliedUrgent = remainNeed
-
                         dictUrgent(cleanYName) = uStock - remainNeed
-
                     Else
-
                         appliedUrgent = uStock
-
                         dictUrgent(cleanYName) = 0
-
                     End If
-
                 End If
-
             End If
-
-
-
             finalOrderQty = remainNeed - appliedUrgent: If finalOrderQty &lt; 0 Then finalOrderQty = 0
-
-
-
             &#x27; 값 입력
-
             wsFinal.Cells(outRow, 1).value = fac              &#x27; A열: FAC
-
             wsFinal.Cells(outRow, 2).value = dictRawDaea(k)   &#x27; B열: 품명(원형)
-
             wsFinal.Cells(outRow, 3).value = shipNeed         &#x27; C열: 선박
-
             wsFinal.Cells(outRow, 4).value = airNeed          &#x27; D열: AIR
-
             wsFinal.Cells(outRow, 5).value = totalDemand      &#x27; E열: 필요합
-
             wsFinal.Cells(outRow, 6).value = incomingQty      &#x27; F열: 본사대기(=본사재고, 공장별)
-
             wsFinal.Cells(outRow, 7).value = arrears          &#x27; G열: 연호대기
-
             wsFinal.Cells(outRow, 8).value = finalOrderQty    &#x27; H열: 발주필요량
-
             wsFinal.Cells(outRow, 9).value = dictBalance(k)   &#x27; I열: 발란스
-
-
-
             &#x27; [수정] 터미널(마스터에서 색상이 있던 품목) 서식: 배경색 주황색(#FFA500), 흰색 폰트 제거(검정유지)
-
             If dictColor.exists(cleanYName) Then
-
                 With wsFinal.Cells(outRow, 8)
-
                     .Interior.Color = RGB(255, 165, 0)
-
                     .Font.Bold = True
-
                 End With
-
             End If
-
-
-
             &#x27; 본사대기 + 연호대기가 AIR 수량보다 작으면 발주필요량(H열)의 폰트를 빨간색(#FF0000) 및 볼드체로 덮어쓰기
-
             If (incomingQty + arrears) &lt; airNeed Then
-
                 With wsFinal.Cells(outRow, 8)
-
                     .Font.Color = RGB(255, 0, 0)
-
                     .Font.Bold = True
-
                 End With
-
             End If
-
-
-
             outRow = outRow + 1
-
         Next k
-
     Next dIdx
-
-
-
     &#x27; [전체 서식 2] C열~I열 1,000단위 콤마 적용
-
     If outRow &gt; 2 Then
-
         wsFinal.Range(&quot;C2:I&quot; &amp; outRow - 1).NumberFormat = &quot;#,##0&quot;
-
     End If
-
-
-
     wsFinal.Columns.AutoFit
-
 MsgBox &quot;서식 변경 및 조건부 글꼴 색상 적용이 완료되었습니다!&quot; &amp; IIf(wsStock Is Nothing, &quot;&quot;, vbCrLf &amp; &quot;(&#x27;재고&#x27; 시트를 반영해 본사대기를 공장별로 채웠습니다.)&quot;), vbInformation
-
 End Sub
-
-
-
 &#x27; --- 보조 함수: 세척 ---
-
 Function GetPerfectCleanKey(ByVal v As Variant) As String
-
     Dim s As String: s = UCase(Trim(CStr(v)))
-
     s = Replace(s, &quot;(YEONHO)&quot;, &quot;&quot;): s = Replace(s, &quot;YEONHO&quot;, &quot;&quot;)
-
     s = Replace(s, &quot;RED&quot;, &quot;RE&quot;): s = Replace(s, &quot;GRN&quot;, &quot;GN&quot;): s = Replace(s, &quot;BLU&quot;, &quot;BL&quot;): s = Replace(s, &quot;YEL&quot;, &quot;YE&quot;)
-
     s = Replace(s, &quot;WHT&quot;, &quot;&quot;): s = Replace(s, &quot;WH&quot;, &quot;&quot;)
-
     s = Replace(s, &quot; &quot;, &quot;&quot;): s = Replace(s, &quot;-&quot;, &quot;&quot;): s = Replace(s, &quot;(&quot;, &quot;&quot;): s = Replace(s, &quot;)&quot;, &quot;&quot;): s = Replace(s, &quot;[&quot;, &quot;&quot;): s = Replace(s, &quot;]&quot;, &quot;&quot;): s = Replace(s, &quot;/&quot;, &quot;&quot;): s = Replace(s, &quot;.&quot;, &quot;&quot;)
-
     GetPerfectCleanKey = s
-
+End Function
+&#x27; --- 보조 함수: 공장 추출 ---
+Function GetFacCodeFinal(ByVal v As String) As String
+    Dim s As String: s = UCase(Trim(v))
+    If InStr(s, &quot;긴급&quot;) &gt; 0 Then
+        GetFacCodeFinal = &quot;긴급&quot;
+    ElseIf InStr(s, &quot;F1&quot;) &gt; 0 Then
+        GetFacCodeFinal = &quot;F1&quot;
+    ElseIf InStr(s, &quot;F2&quot;) &gt; 0 Then
+        GetFacCodeFinal = &quot;F2&quot;
+    ElseIf InStr(s, &quot;F5&quot;) &gt; 0 Then
+        GetFacCodeFinal = &quot;F5&quot;
+    Else
+        GetFacCodeFinal = s
+    End If
 End Function
 
-
-
-&#x27; --- 보조 함수: 공장 추출 ---
-
-Function GetFacCodeFinal(ByVal v As String) As String
-
-    Dim s As String: s = UCase(Trim(v))
-
-    If InStr(s, &quot;긴급&quot;) &gt; 0 Then
-
-        GetFacCodeFinal = &quot;긴급&quot;
-
-    ElseIf InStr(s, &quot;F1&quot;) &gt; 0 Then
-
-        GetFacCodeFinal = &quot;F1&quot;
-
-    ElseIf InStr(s, &quot;F2&quot;) &gt; 0 Then
-
-        GetFacCodeFinal = &quot;F2&quot;
-
-    ElseIf InStr(s, &quot;F5&quot;) &gt; 0 Then
-
-        GetFacCodeFinal = &quot;F5&quot;
-
-    Else
-
-        GetFacCodeFinal = s
-
+Private Function LoadYeonhoNewMaster() As Worksheet
+    Dim targetBook As Workbook, targetSheet As Object, book As Workbook, masterBook As Workbook
+    Dim sourcePath As String, picked As Variant, openedHere As Boolean, oldEvents As Boolean
+    Dim result As Worksheet, message As String
+    On Error GoTo Failed
+    Set targetBook = ActiveWorkbook
+    Set targetSheet = ActiveSheet
+    oldEvents = Application.EnableEvents
+    sourcePath = Environ(&quot;USERPROFILE&quot;) &amp; &quot;\OneDrive - Dae-A Electronics (Thailand) Company Limited\바탕 화면\연호 마스터 시트 NEW.xlsx&quot;
+    For Each book In Application.Workbooks
+        If StrComp(book.FullName, sourcePath, vbTextCompare) = 0 Then Set masterBook = book: Exit For
+    Next book
+    If masterBook Is Nothing Then
+        If Dir(sourcePath) = &quot;&quot; Then
+            picked = Application.GetOpenFilename(&quot;Excel Workbook (*.xlsx),*.xlsx&quot;, , &quot;연호 마스터 시트 NEW.xlsx를 선택하세요&quot;)
+            If VarType(picked) = vbBoolean Then GoTo RestoreTarget
+            sourcePath = CStr(picked)
+            For Each book In Application.Workbooks
+                If StrComp(book.FullName, sourcePath, vbTextCompare) = 0 Then Set masterBook = book: Exit For
+            Next book
+        End If
+        If masterBook Is Nothing Then
+            Application.EnableEvents = False
+            Set masterBook = Application.Workbooks.Open(Filename:=sourcePath, UpdateLinks:=0, ReadOnly:=True)
+            openedHere = True
+        End If
     End If
-
+    Set result = masterBook.Worksheets(&quot;마스터&quot;)
+    If result.Cells(result.Rows.Count, 1).End(xlUp).Row &lt; 2 Then Err.Raise vbObjectError + 910, , &quot;마스터 A열에 품명 데이터가 없습니다.&quot;
+    If result.Cells(result.Rows.Count, 2).End(xlUp).Row &lt; 2 Then Err.Raise vbObjectError + 911, , &quot;마스터 B열에 품명 데이터가 없습니다.&quot;
+    Set LoadYeonhoNewMaster = result
+RestoreTarget:
+    On Error Resume Next
+    Application.EnableEvents = False
+    If Not targetBook Is Nothing Then targetBook.Activate
+    If Not targetSheet Is Nothing Then targetSheet.Activate
+    Application.EnableEvents = oldEvents
+    Exit Function
+Failed:
+    message = &quot;새 연호 마스터를 읽지 못했습니다: &quot; &amp; sourcePath &amp; vbCrLf &amp; Err.Description
+    On Error Resume Next
+    If openedHere Then masterBook.Close SaveChanges:=False
+    MsgBox message, vbExclamation
+    GoTo RestoreTarget
 End Function
 </pre></details></article><article><h3>Air up 생성</h3><p>모듈 이름: <code>modAirRemaining</code> · 배포 XLAM 수록 코드</p><div class="copyrow"><button data-copy="code-modAirRemaining">전체 코드 복사</button><a href="downloads/vba-20261008/modAirRemaining.bas" download>BAS 다운로드</a></div><details><summary>전체 VBA 코드 보기</summary><pre id="code-modAirRemaining">Option Explicit
 
